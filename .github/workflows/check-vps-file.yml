@@ -1,0 +1,16 @@
+name: Check VPS File
+on: workflow_dispatch
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check File
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            cat /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx | grep -i "admin_order_sequence"
+            ls -la /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx

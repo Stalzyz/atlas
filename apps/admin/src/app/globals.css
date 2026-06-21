@@ -1,0 +1,166 @@
+/* ─── Raaghas Admin — Global CSS ──────────────────────────────────────────
+   Mirrors the storefront CSS variable system so both apps share
+   the same brand tokens. Admin is always light-mode (no toggle),
+   but variables make future dark-mode adoption trivial.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─── Light Mode (Default) ────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --wine:       #6D0F1B;
+  --wine-light: #8C1C2A;
+  --wine-dark:  #4D0A13;
+
+  /* Semantic (matches storefront layout.tsx injection) */
+  --primary:        #6D0F1B;
+  --bg:             #F8F7F6;
+  --surface:        #FFFFFF;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #666666;
+  --border:         #EEEEEE;
+  --glass-bg:       rgba(255, 255, 255, 0.8);
+  --glass-border:   rgba(109, 15, 27, 0.1);
+
+  /* Button */
+  --btn-radius: 0.75rem;
+}
+
+/* ─── Dark Mode (opt-in, class-based) ─────────────────────────────────── */
+.dark {
+  --wine:       #8C1C2A;
+  --wine-light: #A3293B;
+  --wine-dark:  #6D0F1B;
+
+  --primary:        #8C1C2A;
+  --bg:             #111112;
+  --surface:        #1C1C1E;
+  --text-primary:   #F5F5F5;
+  --text-secondary: #A0A0A0;
+  --border:         #2C2C2E;
+  --glass-bg:       rgba(255, 255, 255, 0.05);
+  --glass-border:   rgba(255, 255, 255, 0.1);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Reset ───────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text-primary)] antialiased min-h-screen;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+/* ─── Admin Reusable Components ────────────────────────────────────────── */
+@layer components {
+  /* Card */
+  .admin-card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm;
+    border-color: var(--border);
+  }
+
+  /* Primary Action Button */
+  .admin-btn-primary {
+    @apply px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all active:scale-[0.98];
+    background-color: var(--primary);
+    color: var(--surface);
+  }
+  .admin-btn-primary:hover {
+    filter: brightness(1.1);
+  }
+  .admin-btn-primary:disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  /* Ghost Button */
+  .admin-btn-ghost {
+    @apply px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all active:scale-[0.98] border;
+    border-color: var(--border);
+    color: var(--text-primary);
+  }
+  .admin-btn-ghost:hover {
+    background-color: var(--bg);
+  }
+
+  /* Data Table Row */
+  .admin-table-row {
+    @apply border-b transition-colors;
+    border-color: var(--border);
+  }
+  .admin-table-row:hover {
+    background-color: color-mix(in srgb, var(--primary) 3%, var(--surface));
+  }
+
+  /* Input */
+  .admin-input {
+    @apply w-full rounded-xl px-4 py-3 text-sm outline-none transition-all shadow-inner;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .admin-input:focus {
+    border-color: var(--wine);
+    background-color: var(--surface);
+  }
+
+  /* Badge Pill */
+  .admin-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest;
+  }
+}
+
+/* ─── Branded Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wine);
+  opacity: 0.3;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-light);
+}
+
+/* ─── Print Styles ─────────────────────────────────────────────────────── */
+@media print {
+  aside,
+  header,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  main {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body {
+    background: white !important;
+    overflow: visible !important;
+    color: #000 !important;
+  }
+
+  .custom-scrollbar {
+    overflow: visible !important;
+  }
+}

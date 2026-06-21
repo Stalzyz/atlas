@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Decorative top rule -->
+  <line x1="20" y1="14" x2="260" y2="14" stroke="white" stroke-width="0.5" opacity="0.4"/>
+  <!-- Brand Name -->
+  <text x="140" y="46" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" fill="white" text-anchor="middle" letter-spacing="8">RAAGHAS</text>
+  <!-- Decorative diamond separator -->
+  <text x="140" y="60" font-family="Georgia, serif" font-size="7" fill="white" text-anchor="middle" letter-spacing="2" opacity="0.7">◆ Est. 2022 ◆</text>
+  <!-- Decorative bottom rule -->
+  <line x1="20" y1="68" x2="260" y2="68" stroke="white" stroke-width="0.5" opacity="0.4"/>
+</svg>

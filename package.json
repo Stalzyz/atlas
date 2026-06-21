@@ -1,0 +1,36 @@
+{
+  "name": "raaghas-ecommerce",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test:prod": "playwright test",
+    "test:prod:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "prettier": "^3.0.0",
+    "prisma": "^6.7.0",
+    "turbo": "latest"
+  },
+  "prisma": {
+    "seed": "ts-node packages/database/prisma/seed.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.9.3",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "lodash": "^4.18.1",
+    "puppeteer": "^24.43.1",
+    "zeptomatch": "^1.2.2"
+  }
+}

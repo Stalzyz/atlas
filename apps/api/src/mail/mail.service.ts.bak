@@ -1,0 +1,562 @@
+import { Injectable, Logger } from '@nestjs/common';
+import * as nodemailer from 'nodemailer';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class MailService {
+  private readonly logger = new Logger(MailService.name);
+  private readonly apiKey = process.env.RESEND_API_KEY;
+  private readonly fromEmail = process.env.EMAIL_FROM || 'noreply@raaghas.in';
+
+  constructor(private prisma: PrismaService) {}
+
+  private compileTemplate(template: string, variables: Record<string, any>): string {
+    if (!template) return '';
+    return template.replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g, (match, key) => {
+      return variables[key] !== undefined ? String(variables[key]) : match;
+    });
+  }
+
+  private async getTransporter() {
+    const settings = await (this.prisma as any).storeSettings.findUnique({
+      where: { id: 'global' }
+    });
+
+    if (settings?.smtpHost && settings?.smtpUser && settings?.smtpPass) {
+      const port = settings.smtpPort || 587;
+      let isSecure = settings.smtpSecure !== null ? settings.smtpSecure : (port === 465);
+      
+      // Port 587 uses STARTTLS which requires secure: false in NodeMailer
+      if (port === 587) {
+        isSecure = false;
+      }
+      
+      return nodemailer.createTransport({
+        host: settings.smtpHost,
+        port: port,
+        secure: isSecure,
+        auth: {
+          user: settings.smtpUser,
+          pass: settings.smtpPass,
+        },
+      });
+    }
+    return null;
+  }
+
+  async sendInvoiceEmail(to: string, buyerName: string, invoiceNumber: string, amount: number) {
+    const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'INVOICE' } });
+
+    let subject = `Tax Invoice ${invoiceNumber} from Raaghas Heritage`;
+    let html = `
+      <div style="font-family: serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #eee; border-radius: 20px;">
+        <h1 style="color: #611c34; text-align: center;">RAAGHAS</h1>
+        <p>Dear ${buyerName},</p>
+        <p>Thank you for choosing Raaghas Heritage for your wholesale requirements.</p>
+        <p>Your tax invoice <strong>${invoiceNumber}</strong> has been generated for the amount of <strong>₹${amount.toLocaleString()}</strong>.</p>
+        <p>Please find the formal PDF invoice attached to this email (or available via your dashboard).</p>
+        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; text-align: center; color: #888; font-size: 12px;">
+          Raaghas Heritage Pvt Ltd | Banjara Hills, Hyderabad
+        </div>
+      </div>
+    `;
+
+    if (dbTemplate?.isActive) {
+      const vars = { buyerName, invoiceNumber, amount: amount.toLocaleString() };
+      subject = this.compileTemplate(dbTemplate.subject, vars);
+      html = this.compileTemplate(dbTemplate.body, vars);
+    }
+
+    const transporter = await this.getTransporter();
+
+    try {
+      if (transporter) {
+        this.logger.log(`Sending invoice email via SMTP to ${to}`);
+        await transporter.sendMail({
+          from: `"Raaghas Wholesale" <${this.fromEmail}>`,
+          to,
+          subject,
+          html,
+        });
+        return { success: true };
+      }
+
+      if (!this.apiKey) {
+        this.logger.warn(`Email not configured (No SMTP & No Resend). Mocking to ${to}`);
+        return { id: 'mock-email-id' };
+      }
+
+      this.logger.log(`Sending invoice email via Resend to ${to}`);
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          from: `Raaghas Wholesale <${this.fromEmail}>`,
+          to: [to],
+          subject,
+          html,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send email via Resend');
+      }
+
+      this.logger.log(`Invoice email sent to ${to} (ID: ${data.id})`);
+      return data;
+    } catch (error: any) {
+      this.logger.error(`Failed to send invoice email to ${to}`, error?.stack || error);
+      return null;
+    }
+  }
+
+  async sendOrderConfirmationEmail(
+    to: string, 
+    buyerName: string, 
+    orderId: string, 
+    amount: number, 
+    items: any[],
+    attachmentBuffer?: Buffer
+  ) {
+    let itemsHtml = items.map(item => `
+      <tr>
+        <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.productName || item.variant?.product?.title || 'Product'}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">₹${Number(item.price).toLocaleString('en-IN')}</td>
+      </tr>
+    `).join('');
+
+    const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'ORDER_PLACED' } });
+
+    let subject = `Order Confirmed: #${orderId.slice(-6)} - Raaghas Heritage`;
+    let html = `
+      <div style="font-family: 'Playfair Display', serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #701A31; border-radius: 12px; background: #FDFBF7;">
+        <h1 style="color: #701A31; text-align: center; letter-spacing: 2px;">RAAGHAS</h1>
+        <p style="text-align: center; color: #666; text-transform: uppercase; font-size: 12px;">Order Confirmed</p>
+        
+        <p style="color: #333; margin-top: 30px;">Dear ${buyerName},</p>
+        <p style="color: #333;">Thank you for shopping with Raaghas Heritage. We have received your payment and your order <strong>#${orderId.slice(-6)}</strong> is confirmed.</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 30px; font-family: Helvetica, sans-serif; font-size: 14px;">
+          <thead>
+            <tr style="background: #F9F9F9;">
+              <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Item</th>
+              <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">Qty</th>
+              <th style="padding: 10px; text-align: right; border-bottom: 2px solid #ddd;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="2" style="padding: 10px; text-align: right;">Total Paid</th>
+              <th style="padding: 10px; text-align: right; font-weight: bold; color: #701A31;">₹${amount.toLocaleString('en-IN')}</th>
+            </tr>
+          </tfoot>
+        </table>
+        
+        <div style="margin-top: 40px; border-top: 1px solid #701A31/20; padding-top: 20px; text-align: center; color: #888; font-size: 12px;">
+          Raaghas Heritage Pvt Ltd | Banjara Hills, Hyderabad
+        </div>
+      </div>
+    `;
+
+    if (dbTemplate?.isActive) {
+      const vars = { buyerName, orderId, shortOrderId: orderId.slice(-6), amount: amount.toLocaleString('en-IN'), itemsHtml };
+      subject = this.compileTemplate(dbTemplate.subject, vars);
+      html = this.compileTemplate(dbTemplate.body, vars);
+    }
+
+    const transporter = await this.getTransporter();
+
+    try {
+      if (transporter) {
+        this.logger.log(`Sending order confirmation email via SMTP to ${to}`);
+        await transporter.sendMail({
+          from: `"Raaghas Heritage" <${this.fromEmail}>`,
+          to,
+          subject,
+          html,
+          attachments: attachmentBuffer ? [
+            {
+              filename: `Invoice-${orderId.slice(-6)}.pdf`,
+              content: attachmentBuffer,
+              contentType: 'application/pdf'
+            }
+          ] : [],
+        });
+        return { success: true };
+      }
+
+      if (this.apiKey) {
+        this.logger.log(`Sending order confirmation via Resend to ${to}`);
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            from: `Raaghas Heritage <${this.fromEmail}>`,
+            to: [to],
+            subject,
+            html,
+            attachments: attachmentBuffer ? [
+              {
+                filename: `Invoice-${orderId.slice(-6)}.pdf`,
+                content: attachmentBuffer.toString('base64'),
+              }
+            ] : [],
+          }),
+        });
+        return { success: true };
+      }
+
+      return null;
+    } catch (error: any) {
+      this.logger.error(`Failed to send order confirmation to ${to}`, error?.stack || error);
+      return null;
+    }
+  }  async sendOtpEmail(to: string, code: string) {
+    const subject = `${code} is your Raaghas verification code`;
+    const html = `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 40px; border: 1px solid #f0f0f0; border-radius: 24px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h1 style="color: #611C34; font-size: 28px; margin-bottom: 8px; letter-spacing: 2px;">RAAGHAS</h1>
+        <p style="color: #666; font-size: 16px; margin-bottom: 32px;">Heritage & Elegance</p>
+        
+        <div style="background-color: #fcf8f9; border-radius: 16px; padding: 32px; margin-bottom: 32px;">
+          <p style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Your verification code</p>
+          <h2 style="color: #611C34; font-size: 48px; margin: 0; letter-spacing: 8px; font-weight: 300;">${code}</h2>
+        </div>
+        
+        <p style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 32px;">
+          To ensure your account's security, please enter this code to complete your login. This code will expire in 10 minutes.
+        </p>
+        
+        <div style="border-top: 1px solid #eee; padding-top: 24px; color: #aaa; font-size: 12px;">
+          If you didn't request this, you can safely ignore this email.<br>
+          &copy; 2026 Raaghas Heritage Pvt Ltd. All rights reserved.
+        </div>
+      </div>
+    `;
+
+    const transporter = await this.getTransporter();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout for OTPs
+
+    try {
+      if (transporter) {
+        this.logger.log(`Sending OTP email via SMTP to ${to}`);
+        // Wrap SMTP in a timeout race
+        await Promise.race([
+          transporter.sendMail({
+            from: `"Raaghas Heritage" <${this.fromEmail}>`,
+            to,
+            subject,
+            html,
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('SMTP Timeout')), 8000))
+        ]);
+        return { success: true };
+      }
+
+      if (!this.apiKey) {
+        this.logger.warn(`Email not configured (No SMTP & No Resend). Mocking to ${to}`);
+        return { id: 'mock-otp-id' };
+      }
+
+      this.logger.log(`Sending OTP email via Resend to ${to}`);
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          from: `Raaghas Heritage <${this.fromEmail}>`,
+          to: [to],
+          subject,
+          html,
+        }),
+        signal: controller.signal,
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send email via Resend');
+      }
+
+      return data;
+    } catch (error: any) {
+      this.logger.error(`Failed to send OTP email to ${to}: ${error.name === 'AbortError' ? 'TIMEOUT' : error.message}`);
+      return null;
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  async sendPasswordResetEmail(to: string, token: string) {
+    const resetUrl = `https://admin.raaghas.in/reset-password?token=${token}`;
+    const subject = `Reset your Raaghas Admin Password`;
+    const html = `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 40px; border: 1px solid #f0f0f0; border-radius: 24px; text-align: center; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h1 style="color: #611C34; font-size: 28px; margin-bottom: 8px; letter-spacing: 2px;">RAAGHAS</h1>
+        <p style="color: #666; font-size: 16px; margin-bottom: 32px;">Heritage & Elegance</p>
+        
+        <div style="background-color: #fcf8f9; border-radius: 16px; padding: 32px; margin-bottom: 32px;">
+          <p style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+            You requested to reset your password. Click the button below to set a new password. This link will expire in 1 hour.
+          </p>
+          <a href="${resetUrl}" style="display: inline-block; background-color: #611C34; color: #ffffff; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Reset Password</a>
+        </div>
+        
+        <p style="color: #888; font-size: 12px;">If you did not request this reset, please ignore this email.</p>
+        
+        <div style="border-top: 1px solid #eee; padding-top: 24px; color: #aaa; font-size: 12px; margin-top: 32px;">
+          &copy; 2026 Raaghas Heritage Pvt Ltd. All rights reserved.
+        </div>
+      </div>
+    `;
+
+    const transporter = await this.getTransporter();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+    try {
+      if (transporter) {
+        await Promise.race([
+          transporter.sendMail({
+            from: `"Raaghas Admin" <${this.fromEmail}>`,
+            to,
+            subject,
+            html,
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('SMTP Timeout')), 10000))
+        ]);
+        return { success: true };
+      }
+
+      if (this.apiKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            from: `Raaghas Admin <${this.fromEmail}>`,
+            to: [to],
+            subject,
+            html,
+          }),
+          signal: controller.signal,
+        });
+      }
+      return { success: true };
+    } catch (error: any) {
+      this.logger.error(`Failed to send password reset email to ${to}`, error.message);
+      return null;
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+  async sendCustomEmail(to: string, subject: string, html: string) {
+    const transporter = await this.getTransporter();
+
+    try {
+      if (transporter) {
+        await transporter.sendMail({
+          from: `"Raaghas Heritage" <${this.fromEmail}>`,
+          to,
+          subject,
+          html,
+        });
+        return { success: true };
+      }
+
+      if (this.apiKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            from: `Raaghas Heritage <${this.fromEmail}>`,
+            to: [to],
+            subject,
+            html,
+          }),
+        });
+      }
+      return { success: true };
+    } catch (error: any) {
+      this.logger.error(`Failed to send custom email to ${to}`, error?.stack || error);
+      return null;
+    }
+  }
+
+  async sendTrackingEmail(to: string, buyerName: string, orderId: string, trackingId: string, carrierName: string) {
+    const subject = `Your Raaghas Heritage order #${orderId.slice(-6).toUpperCase()} has shipped!`;
+    const html = `
+      <div style="font-family: 'Playfair Display', serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #701A31; border-radius: 12px; background: #FDFBF7;">
+        <h1 style="color: #701A31; text-align: center; letter-spacing: 2px;">RAAGHAS</h1>
+        <p style="text-align: center; color: #666; text-transform: uppercase; font-size: 12px;">Order Shipped</p>
+        
+        <p style="color: #333; margin-top: 30px;">Dear ${buyerName},</p>
+        <p style="color: #333;">Great news! Your order <strong>#${orderId.slice(-6).toUpperCase()}</strong> has been fulfilled and is on its way.</p>
+        
+        <div style="background-color: #fff; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #eee;">
+          <p><strong>Carrier:</strong> ${carrierName}</p>
+          <p><strong>Tracking Number:</strong> ${trackingId}</p>
+        </div>
+        
+        <p style="color: #333; margin-top: 30px;">You can use the tracking number to check the delivery status of your order.</p>
+        
+        <div style="margin-top: 40px; border-top: 1px solid #701A31/20; padding-top: 20px; text-align: center; color: #888; font-size: 12px;">
+          Raaghas Heritage Pvt Ltd | Banjara Hills, Hyderabad
+        </div>
+      </div>
+    `;
+    return this.sendCustomEmail(to, subject, html);
+  }
+
+  async sendEmailWithAttachment(to: string, subject: string, html: string, filename: string, content: Buffer) {
+    const transporter = await this.getTransporter();
+    const from = this.fromEmail;
+
+    try {
+      if (transporter) {
+        await transporter.sendMail({
+          from: `"Raaghas Heritage" <${from}>`,
+          to,
+          subject,
+          html,
+          attachments: [{ filename, content }]
+        });
+        return { success: true };
+      }
+      
+      // If no SMTP, we can't easily send attachments via standard Resend fetch without more complex multi-part
+      this.logger.error('SMTP not configured, cannot send attachment');
+      return { success: false, error: 'SMTP_NOT_CONFIGURED' };
+    } catch (error) {
+      this.logger.error('Failed to send email with attachment', error);
+      return { success: false, error };
+    }
+  }
+
+  async sendLedgerEmail(to: string, subject: string, body: string, signature: string, attachments: any[] = []) {
+    const transporter = await this.getTransporter();
+    const html = `
+      <div style="font-family: 'Playfair Display', serif; color: #1A1A1A; max-width: 650px; margin: 0 auto; padding: 40px; border: 1px solid #701A31; border-radius: 12px; background: #FDFBF7;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #701A31; margin: 0; letter-spacing: 4px; font-weight: 300;">RAAGHAS</h1>
+          <p style="text-transform: uppercase; font-size: 10px; letter-spacing: 2px; margin-top: 5px; color: #666;">Heritage & Elegance</p>
+        </div>
+        
+        <div style="font-size: 14px; line-height: 1.8; color: #333;">
+          ${body.replace(/\n/g, '<br/>')}
+        </div>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #701A31/10; font-size: 13px; color: #666;">
+          ${signature.replace(/\n/g, '<br/>')}
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center; font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px;">
+          Raaghas Heritage Pvt Ltd | Banjara Hills, Hyderabad
+        </div>
+      </div>
+    `;
+
+    try {
+      if (transporter) {
+        await transporter.sendMail({
+          from: `"Raaghas Accounts" <${this.fromEmail}>`,
+          to,
+          subject,
+          html,
+          attachments
+        });
+        return { success: true };
+      }
+      return { success: false, error: 'SMTP_NOT_CONFIGURED' };
+    } catch (error) {
+      this.logger.error('Failed to send ledger email', error);
+      return { success: false, error };
+    }
+  }
+
+  async sendPaymentFailedEmail(to: string, buyerName: string, orderId: string, amount: number) {
+    const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'PAYMENT_FAILED' } });
+
+    let subject = `Action Required: Payment Failed for Order #${orderId.slice(-6).toUpperCase()}`;
+    let html = `
+      <div style="font-family: 'Playfair Display', serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #701A31; border-radius: 12px; background: #FDFBF7;">
+        <h1 style="color: #701A31; text-align: center; letter-spacing: 2px;">RAAGHAS</h1>
+        <p style="text-align: center; color: #d9534f; text-transform: uppercase; font-size: 12px; font-weight: bold;">Payment Failed</p>
+        
+        <p style="color: #333; margin-top: 30px;">Dear ${buyerName},</p>
+        <p style="color: #333;">We noticed that your recent payment attempt for order <strong>#${orderId.slice(-6).toUpperCase()}</strong> (Amount: ₹${amount.toLocaleString('en-IN')}) was unsuccessful.</p>
+        <p style="color: #333;">Don't worry, your items are still waiting for you. You can try completing your purchase again using a different payment method.</p>
+        
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="https://raaghas.in/checkout" style="display: inline-block; background-color: #701A31; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-family: Helvetica, sans-serif; font-size: 14px; letter-spacing: 1px;">RETRY PAYMENT</a>
+        </div>
+        
+        <div style="margin-top: 40px; border-top: 1px solid #701A31/20; padding-top: 20px; text-align: center; color: #888; font-size: 12px; font-family: Helvetica, sans-serif;">
+          If you need any assistance, please reply to this email.<br>
+          Raaghas Heritage Pvt Ltd | Banjara Hills, Hyderabad
+        </div>
+      </div>
+    `;
+
+    if (dbTemplate?.isActive) {
+      const vars = { buyerName, orderId, shortOrderId: orderId.slice(-6).toUpperCase(), amount: amount.toLocaleString('en-IN') };
+      subject = this.compileTemplate(dbTemplate.subject, vars);
+      html = this.compileTemplate(dbTemplate.body, vars);
+    }
+
+    const transporter = await this.getTransporter();
+
+    try {
+      if (transporter) {
+        this.logger.log(`Sending failed payment email via SMTP to ${to}`);
+        await transporter.sendMail({
+          from: `"Raaghas Heritage" <${this.fromEmail}>`,
+          to,
+          subject,
+          html,
+        });
+        return { success: true };
+      }
+
+      if (this.apiKey) {
+        this.logger.log(`Sending failed payment via Resend to ${to}`);
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            from: `Raaghas Heritage <${this.fromEmail}>`,
+            to: [to],
+            subject,
+            html,
+          }),
+        });
+        return { success: true };
+      }
+      return null;
+    } catch (error: any) {
+      this.logger.error(`Failed to send payment failure email to ${to}`, error?.stack || error);
+      return null;
+    }
+  }
+}

@@ -581,4 +581,82 @@ export class MarketingService {
   async deleteOfferRule(id: string) {
     return (this.prisma as any).offerRule.delete({ where: { id } });
   }
+
+  // ─── META / FACEBOOK COMMERCE FEED ────────────────────────────────────────
+
+  async generateFacebookXmlFeed(): Promise<string> {
+    const products = await this.prisma.product.findMany({
+      where: { status: 'PUBLISHED' },
+      include: {
+        variants: true,
+        media: { orderBy: { order: 'asc' }, take: 1 }
+      }
+    });
+
+    let itemsXml = '';
+
+    for (const p of products) {
+      if (!p.variants || p.variants.length === 0) continue;
+
+      const title = this.escapeXml(p.title);
+      const description = this.escapeXml(p.description || p.title);
+      const link = `https://raaghas.in/products/${p.handle}`;
+      const imageLink = p.media && p.media.length > 0 ? this.escapeXml(p.media[0].url) : 'https://raaghas.in/logo-dark.svg';
+      const brand = 'Raaghas';
+
+      for (const variant of p.variants) {
+        // Facebook requires unique IDs per variant if you sell variations
+        const variantId = variant.id;
+        const variantTitle = this.escapeXml(`${p.title} - ${variant.title}`);
+        const price = variant.price;
+        const inventory = variant.inventoryQuantity > 0 ? 'in stock' : 'out of stock';
+        const salePrice = variant.compareAtPrice && variant.compareAtPrice > variant.price 
+          ? `<g:sale_price>${variant.price} INR</g:sale_price>` 
+          : '';
+
+        // If there's a specific price to show, we show the highest as standard, and sale as the current.
+        const basePrice = variant.compareAtPrice || variant.price;
+
+        itemsXml += `
+    <item>
+      <g:id>${variantId}</g:id>
+      <g:title>${variantTitle}</g:title>
+      <g:description>${description}</g:description>
+      <g:link>${link}</g:link>
+      <g:image_link>${imageLink}</g:image_link>
+      <g:brand>${brand}</g:brand>
+      <g:condition>new</g:condition>
+      <g:availability>${inventory}</g:availability>
+      <g:price>${basePrice} INR</g:price>
+      ${salePrice}
+      <g:item_group_id>${p.id}</g:item_group_id>
+    </item>`;
+      }
+    }
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>Raaghas</title>
+    <link>https://raaghas.in</link>
+    <description>Raaghas Exclusive Product Catalogue</description>
+    ${itemsXml}
+  </channel>
+</rss>`;
+
+    return xml;
+  }
+
+  private escapeXml(unsafe: string): string {
+    return unsafe.replace(/[<>&'"]/g, (c) => {
+      switch (c) {
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '&': return '&amp;';
+        case '\\'': return '&apos;';
+        case '"': return '&quot;';
+        default: return c;
+      }
+    });
+  }
 }

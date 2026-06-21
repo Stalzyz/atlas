@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, Query, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param, Query, BadRequestException, Header } from '@nestjs/common';
 import { MarketingService } from './marketing.service';
 import { LeadStatus } from '@raaghas/database';
 import { Public } from '../auth/public.decorator';
@@ -108,5 +108,14 @@ export class MarketingController {
   @Post('offer-rules/:id/delete')
   async deleteOfferRule(@Param('id') id: string) {
     return this.marketingService.deleteOfferRule(id);
+  }
+
+  // ─── META / FACEBOOK COMMERCE FEED ────────────────────────────────────────
+
+  @Public()
+  @Get('facebook-feed.xml')
+  @Header('Content-Type', 'application/xml')
+  async getFacebookFeed() {
+    return this.marketingService.generateFacebookXmlFeed();
   }
 }

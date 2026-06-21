@@ -1,0 +1,25 @@
+name: Auto Check VPS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check file paths on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            echo "=== ROOT LS ==="
+            ls -la /var/www/raaghas_new/current/
+            echo "=== APPS LS ==="
+            ls -la /var/www/raaghas_new/current/apps/
+            echo "=== ADMIN COMPONENTS LS ==="
+            ls -la /var/www/raaghas_new/current/apps/admin/src/components/orders/
+            echo "=== CHECKING OrderDetailView ==="
+            grep -i "orderIds" /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx || echo "Not found in normal path"

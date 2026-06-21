@@ -11,23 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build all apps
-        run: npm run build
-        env:
-          NODE_ENV: production
-
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -35,7 +18,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
-          timeout: 300s
+          timeout: 600s
           script: |
             set -e
             echo "========================================="
@@ -46,20 +29,17 @@ jobs:
             APP_DIR="/var/www/raaghas_new/current"
             cd $APP_DIR
 
-            echo "[1/5] Pulling latest code from GitHub..."
-            git pull origin main
+            echo "[1/4] Pulling latest code from GitHub..."
+            git fetch origin main
+            git reset --hard origin/main
 
-            echo "[2/5] Installing dependencies..."
-            npm ci --prefer-offline
+            echo "[2/4] Installing dependencies..."
+            npm install --legacy-peer-deps
 
-            echo "[3/5] Building apps..."
+            echo "[3/4] Building apps..."
             npm run build
 
-            echo "[4/5] Running Prisma migrations (if any)..."
-            cd apps/api && npx prisma migrate deploy --schema=prisma/schema.prisma 2>/dev/null || true
-            cd $APP_DIR
-
-            echo "[5/5] Reloading PM2 processes..."
+            echo "[4/4] Reloading PM2 processes..."
             pm2 reload all --update-env
 
             echo "========================================="
@@ -74,3 +54,4 @@ jobs:
       - name: Notify failure
         if: failure()
         run: echo "❌ Deployment failed. Check GitHub Actions logs."
+

@@ -1,0 +1,67 @@
+name: Deep Dive Database
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deep-dive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Deep Dive
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            cat << 'SCRIPT' > /tmp/deep_dive.sh
+            #!/bin/bash
+            echo "--- DATABASE URL ---" > /tmp/deep_dive_result.txt
+            grep DATABASE_URL /var/www/raaghas_new/shared/.env >> /tmp/deep_dive_result.txt || true
+            
+            # Extract DB credentials
+            DB_URL=$(grep DATABASE_URL /var/www/raaghas_new/shared/.env | cut -d '=' -f2)
+            
+            echo "--- ALL DATABASES ---" >> /tmp/deep_dive_result.txt
+            sudo -u postgres psql -c "\l" >> /tmp/deep_dive_result.txt 2>&1
+            
+            echo "--- ALL SCHEMAS IN CURRENT DB ---" >> /tmp/deep_dive_result.txt
+            sudo -u postgres psql -d raaghas_cert -c "\dn" >> /tmp/deep_dive_result.txt 2>&1
+            
+            echo "--- TABLES IN CURRENT DB ---" >> /tmp/deep_dive_result.txt
+            sudo -u postgres psql -d raaghas_cert -c "\dt" >> /tmp/deep_dive_result.txt 2>&1
+            
+            echo "--- COUNT ROWS ---" >> /tmp/deep_dive_result.txt
+            sudo -u postgres psql -d raaghas_cert -c "SELECT relname, n_live_tup FROM pg_stat_user_tables ORDER BY n_live_tup DESC;" >> /tmp/deep_dive_result.txt 2>&1
+            SCRIPT
+            
+            chmod +x /tmp/deep_dive.sh
+            /tmp/deep_dive.sh
+
+      - name: Fetch Result
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          source: "/tmp/deep_dive_result.txt"
+          target: "./"
+          strip_components: 1
+
+      - name: Commit Result
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add deep_dive_result.txt
+          git commit -m "chore: deep dive result [skip ci]" || echo "No changes"
+          git push origin main

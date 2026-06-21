@@ -6,18 +6,58 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: Build & Deploy
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Package files
-        run: tar -czf deploy.tar.gz apps packages package.json package-lock.json turbo.json .gitignore || echo "Tar completed with warnings"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
 
-      - name: Copy tarball to VPS
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Prisma Generate
+        run: cd packages/database && npx prisma generate
+
+      - name: Build Next.js & API Apps
+        run: |
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          npm run build
+          
+      - name: Prepare Standalone Artifacts
+        run: |
+          mkdir -p .deploy_temp/apps/admin .deploy_temp/apps/storefront .deploy_temp/apps/api
+          
+          # Move Admin Standalone
+          cp -R apps/admin/.next/standalone/* .deploy_temp/ 2>/dev/null || true
+          mkdir -p .deploy_temp/apps/admin/.next/static
+          cp -R apps/admin/.next/static/* .deploy_temp/apps/admin/.next/static/ 2>/dev/null || true
+          cp -R apps/admin/public .deploy_temp/apps/admin/ 2>/dev/null || true
+          
+          # Move Storefront Standalone
+          cp -R apps/storefront/.next/standalone/* .deploy_temp/ 2>/dev/null || true
+          mkdir -p .deploy_temp/apps/storefront/.next/static
+          cp -R apps/storefront/.next/static/* .deploy_temp/apps/storefront/.next/static/ 2>/dev/null || true
+          cp -R apps/storefront/public .deploy_temp/apps/storefront/ 2>/dev/null || true
+
+          # Move API
+          cp -R apps/api/dist .deploy_temp/apps/api/ 2>/dev/null || true
+          cp apps/api/package.json .deploy_temp/apps/api/ 2>/dev/null || true
+          cp -R apps/api/node_modules .deploy_temp/apps/api/ 2>/dev/null || true
+
+          # Move Database
+          cp -R packages/database .deploy_temp/packages/ 2>/dev/null || true
+
+          # Create Deploy Tarball
+          cd .deploy_temp
+          tar -czf ../deploy.tar.gz .
+
+      - name: Copy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -26,58 +66,19 @@ jobs:
           port: 22
           source: "deploy.tar.gz"
           target: "/var/www/raaghas_new/current/"
-          overwrite: true
-          timeout: 120s
 
-      - name: Extract, Build, and Restart on VPS
+      - name: Restart Server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
-          timeout: 600s
           script: |
-            set -e
-            echo "========================================="
-            echo "  Raaghas Build & Deploy via Tarball"
-            echo "  $(date)"
-            echo "========================================="
-
             cd /var/www/raaghas_new/current
-
-            echo "[1/4] Extracting files..."
             tar -xzf deploy.tar.gz
             rm deploy.tar.gz
-
-            echo "[2/4] Installing dependencies..."
-            npm install --legacy-peer-deps
-
-            echo "[3/4] Building apps (clearing Next.js cache)..."
-            rm -rf apps/admin/.next apps/storefront/.next
-            npm run build
-
-            echo "[3.5/4] Preparing Standalone Artifacts..."
-            # Move standalone files to the correct location so PM2 can find apps/admin/server.js
-            cp -R apps/admin/.next/standalone/* ./ || true
-            cp -R apps/storefront/.next/standalone/* ./ || true
-            
-            # Ensure static assets are copied to standalone structure
-            mkdir -p apps/admin/.next/static apps/storefront/.next/static
-            cp -R apps/admin/.next/static/* apps/admin/.next/standalone/apps/admin/.next/static/ 2>/dev/null || true
-            cp -R apps/storefront/.next/static/* apps/storefront/.next/standalone/apps/storefront/.next/static/ 2>/dev/null || true
-            
-            # Copy again since we just injected static files
-            cp -R apps/admin/.next/standalone/* ./ || true
-            cp -R apps/storefront/.next/standalone/* ./ || true
-
-            echo "[4/4] Restarting PM2..."
             pm2 restart all --update-env
-
-            echo "========================================="
-            echo "  Deploy Successful! ✅"
-            echo "  $(date)"
-            echo "========================================="
 
       - name: Notify success
         if: success()

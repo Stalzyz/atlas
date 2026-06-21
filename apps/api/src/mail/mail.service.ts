@@ -691,6 +691,30 @@ export class MailService {
     html = this.wrapEmailHtml(html);
     return this.sendCustomEmail(to, subject, html);
   }
+
+  async sendRefundInitiatedEmail(to: string, customerName: string, orderId: string, refundAmount: number) {
+    const subject = `Refund Initiated: Order #${orderId.slice(-6).toUpperCase()} | Raaghas`;
+    let html = `
+          <div style="text-align: center;">
+            <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Refund Notice</p>
+            <h1 style="font-size: 32px; margin: 0 0 30px 0;">Refund Processed</h1>
+            
+            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">Dear ${customerName},<br/><br/>A refund has been successfully initiated for your order <strong>#${orderId.slice(-6).toUpperCase()}</strong>.</p>
+            
+            <div style="border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; padding: 40px 0; margin: 50px 0;">
+              <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #888888;">Refund Amount</p>
+              <h2 style="margin: 15px 0 0; font-size: 36px;">₹${refundAmount.toLocaleString('en-IN')}</h2>
+            </div>
+            
+            <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Please allow 5-7 business days for the amount to reflect in your original payment method.</p>
+            
+            <a href="https://raaghas.in/account" class="button-premium">View Account</a>
+          </div>
+    `;
+
+    html = this.wrapEmailHtml(html);
+    return this.sendCustomEmail(to, subject, html);
+  }
 }
 
 

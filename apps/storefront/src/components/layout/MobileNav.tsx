@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { X, ChevronRight } from "lucide-react";
@@ -14,6 +15,8 @@ interface MobileNavProps {
 
 export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps) {
   const { isAuthenticated, logout } = useAuth();
+  const [openItem, setOpenItem] = useState<string | null>(null);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,7 +45,7 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
               </button>
             </div>
 
-            <nav className="flex-1 space-y-8">
+            <nav className="flex-1 space-y-8 overflow-y-auto">
               {menuItems.filter((item: any) => item.label.toLowerCase() !== 'wholesale' && item.label.toLowerCase() !== 'our story').map((item, i) => (
                 <motion.div
                   key={item.id}
@@ -50,16 +53,55 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <MagneticLink>
-                    <Link 
-                      href={item.url} 
-                      onClick={onClose}
-                      className="group flex justify-between items-center text-2xl font-serif text-theme-text hover:text-wine transition-colors"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                    </Link>
-                  </MagneticLink>
+                  {item.children?.length > 0 ? (
+                    <div>
+                      <button
+                        onClick={() => setOpenItem(openItem === item.id ? null : item.id)}
+                        className="w-full flex justify-between items-center text-2xl font-serif text-theme-text hover:text-wine transition-colors"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronRight
+                          size={18}
+                          className={`transition-transform duration-300 ${openItem === item.id ? 'rotate-90' : ''}`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {openItem === item.id && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pl-4 border-l border-theme-border mt-3 space-y-3">
+                              {item.children.map((child: any) => (
+                                <Link
+                                  key={child.id || child.url}
+                                  href={child.url}
+                                  onClick={onClose}
+                                  className="block text-base font-serif text-theme-text-muted hover:text-wine transition-colors"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <MagneticLink>
+                      <Link
+                        href={item.url}
+                        onClick={onClose}
+                        className="group flex justify-between items-center text-2xl font-serif text-theme-text hover:text-wine transition-colors"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                      </Link>
+                    </MagneticLink>
+                  )}
                 </motion.div>
               ))}
             </nav>

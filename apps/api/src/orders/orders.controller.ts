@@ -34,6 +34,7 @@ export class OrdersController {
   @UseGuards(AuthGuard)
   async getAdminOrders(@Query() query: {
     status?: string;
+    excludeStatus?: string;
     financialStatus?: string;
     fulfillmentStatus?: string;
     source?: string;

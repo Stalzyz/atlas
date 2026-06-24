@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
+import {
   ShoppingCart, Users, MessageSquare, BarChart3, MessageCircle,
   Truck, ClipboardList, Sparkles, LayoutDashboard, Package, Image, Settings, Zap,
-  LogOut, Wallet, FileText, Landmark, RefreshCw, LayoutGrid, Mail
+  LogOut, Wallet, FileText, Landmark, RefreshCw, LayoutGrid, Mail, HardDrive
 } from "lucide-react";
 import { useAdminAuth } from "@/components/providers/AuthProvider";
 
@@ -122,6 +122,7 @@ export function Sidebar() {
         <SidebarLink href="/roles" icon={<Users size={18} />} label="Team Access" permission="module:roles" roles={['SUPER_ADMIN']} />
         <SidebarLink href="/settings" icon={<Settings size={18} />} label="Store Settings" permission="module:settings" />
         <SidebarLink href="/settings/email-templates" icon={<Mail size={18} />} label="Email Templates" permission="module:settings" />
+        <SidebarLink href="/settings/backups" icon={<HardDrive size={18} />} label="Backups" roles={['SUPER_ADMIN', 'ADMIN']} />
       </nav>
 
       <div className="p-4 border-t border-gray-100 space-y-2">

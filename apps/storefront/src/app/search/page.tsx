@@ -1,33 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Search as SearchIcon, X, Filter, SlidersHorizontal, ArrowRight, Loader2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Suspense, useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { Search as SearchIcon, X, SlidersHorizontal, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { API_URL } from "@/lib/api";
 
-export default function SearchPage() {
-  const [query, setQuery] = useState("");
+function SearchPageContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Query is persisted in URL so back button restores it
+  const urlQuery = searchParams.get("q") || "";
+  const [query, setQuery] = useState(urlQuery);
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Sync input → URL (debounced)
   useEffect(() => {
-    if (!query) {
-      setResults([]);
-      return;
-    }
-
     const timer = setTimeout(() => {
-      searchProducts();
-    }, 500);
-
+      const params = new URLSearchParams(searchParams.toString());
+      if (query) params.set("q", query);
+      else params.delete("q");
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }, 300);
     return () => clearTimeout(timer);
   }, [query]);
 
-  const searchProducts = async () => {
+  // Fetch when URL query changes
+  useEffect(() => {
+    if (!urlQuery) { setResults([]); return; }
+    const timer = setTimeout(() => { searchProducts(urlQuery); }, 200);
+    return () => clearTimeout(timer);
+  }, [urlQuery]);
+
+  const searchProducts = async (q: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/v1/products?search=${query}`);
+      const res = await fetch(`${API_URL}/api/v1/products?search=${encodeURIComponent(q)}`);
       const data = await res.json();
       setResults(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -37,6 +48,12 @@ export default function SearchPage() {
     }
   };
 
+  const clearQuery = () => {
+    setQuery("");
+    setResults([]);
+    router.replace(pathname, { scroll: false });
+  };
+
   return (
     <div className="min-h-screen bg-theme-bg pb-32 pt-32 md:pt-44">
       {/* Search Header */}
@@ -44,7 +61,7 @@ export default function SearchPage() {
         <div className="max-w-7xl mx-auto px-6 py-6 md:py-12">
           <div className="relative max-w-2xl mx-auto">
             <SearchIcon className="absolute left-6 top-1/2 -translate-y-1/2 text-theme-text-muted" size={24} />
-            <input 
+            <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -52,8 +69,8 @@ export default function SearchPage() {
               className="w-full pl-16 pr-20 py-6 bg-theme-bg border border-theme-border rounded-[2.5rem] text-xl font-serif text-theme-text outline-none focus:ring-4 focus:ring-wine/5 transition-all placeholder:text-theme-text-muted"
             />
             {query && (
-              <button 
-                onClick={() => setQuery("")}
+              <button
+                onClick={clearQuery}
                 className="absolute right-6 top-1/2 -translate-y-1/2 p-2 bg-theme-bg rounded-full text-theme-text-muted shadow-sm"
               >
                 <X size={18} />
@@ -82,15 +99,15 @@ export default function SearchPage() {
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
               {results.map((product) => (
-                <Link 
-                  key={product.id} 
+                <Link
+                  key={product.id}
                   href={`/products/${product.handle}`}
                   className="group space-y-4"
                 >
                   <div className="aspect-[3/4] bg-theme-surface rounded-[2rem] overflow-hidden border border-theme-border relative shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2">
-                    <img 
-                      src={product.images?.[0]?.url || 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800'} 
-                      alt={product.title} 
+                    <img
+                      src={product.images?.[0]?.url || 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800'}
+                      alt={product.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
                     <div className="absolute top-4 right-4 px-3 py-1 bg-theme-surface/90 backdrop-blur-md rounded-full text-[9px] font-bold uppercase tracking-widest text-wine opacity-0 group-hover:opacity-100 transition-opacity">
@@ -120,12 +137,11 @@ export default function SearchPage() {
           </div>
         ) : (
           <div className="space-y-16 py-12">
-            {/* Trending Suggestions */}
             <div className="space-y-8">
               <h3 className="text-[10px] uppercase font-bold tracking-widest text-theme-text-muted text-center">Trending Searches</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {["Kurti", "Salwar", "Under 500", "Combo", "Office Wear", "Kalamkari"].map(tag => (
-                  <button 
+                  <button
                     key={tag}
                     onClick={() => setQuery(tag)}
                     className="px-6 py-3 bg-theme-surface border border-theme-border rounded-full text-xs font-bold text-theme-text hover:bg-wine hover:text-white hover:border-wine transition-all shadow-sm"
@@ -136,7 +152,6 @@ export default function SearchPage() {
               </div>
             </div>
 
-            {/* Visual Suggestions */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                <Link href="/collections/silk-edit" className="group relative aspect-video rounded-3xl overflow-hidden shadow-lg">
                   <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
@@ -155,5 +170,13 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense>
+      <SearchPageContent />
+    </Suspense>
   );
 }

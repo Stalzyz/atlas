@@ -81,7 +81,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     // Track Meta AddToCart Event
     import("@/components/analytics/MetaPixel").then((m) => {
       m.trackMetaEvent("AddToCart", {
-        content_ids: [newItem.id],
+        content_ids: [newItem.variantId],
         content_name: newItem.title,
         currency: "INR",
         value: newItem.price,

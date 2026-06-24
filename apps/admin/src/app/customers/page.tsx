@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { 
   Users, 
   Search, 
@@ -22,11 +23,21 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'de
 
 export default function CustomersPage() {
   const { token } = useAdminAuth();
-  const [activeTab, setActiveTab] = useState<'ALL' | 'PROSPECTS'>('ALL');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const activeTab = (searchParams.get("tab") || "ALL") as 'ALL' | 'PROSPECTS';
+  const setActiveTab = (tab: 'ALL' | 'PROSPECTS') => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tab);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   const [customers, setCustomers] = useState<any[]>([]);
   const [prospects, setProspects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("q") || "");
 
   useEffect(() => {
     if (token) fetchData();
@@ -74,7 +85,13 @@ export default function CustomersPage() {
               type="text"
               placeholder="Search by name or email..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                const params = new URLSearchParams(searchParams.toString());
+                if (e.target.value) params.set("q", e.target.value);
+                else params.delete("q");
+                router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+              }}
               className="pl-10 pr-4 py-2 bg-white border border-gray-100 rounded-xl text-sm focus:border-wine outline-none w-64 transition-all"
             />
           </div>

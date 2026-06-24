@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { 
   Search, 
@@ -24,6 +25,8 @@ import { useRouter } from "next/navigation";
 export default function ProductManagement() {
   const { token } = useAdminAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [showImportModal, setShowImportModal] = useState(false);
   const [importFile, setImportFile] = useState<File | null>(null);
   const [isImporting, setIsImporting] = useState(false);
@@ -44,7 +47,12 @@ export default function ProductManagement() {
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest' | 'price_asc' | 'price_desc'>('newest');
   const [selectAllInventory, setSelectAllInventory] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = Number(searchParams.get("page") || "1");
+  const setCurrentPage = (p: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(p));
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const itemsPerPage = 50;
 
   useEffect(() => {
@@ -655,14 +663,14 @@ export default function ProductManagement() {
            <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Showing {paginatedProducts.length} of {totalProductsCount} Products (Page {currentPage} of {totalPages})</p>
            <div className="flex gap-2">
               <button 
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-20"
               >
                 <ChevronLeft size={16} />
               </button>
               <button 
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-20"
               >

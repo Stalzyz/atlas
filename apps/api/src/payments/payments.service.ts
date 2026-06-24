@@ -548,11 +548,12 @@ export class PaymentsService implements OnModuleInit {
 
       // 3. Emit Async Success Events
       setImmediate(() => {
-        this.eventEmitter.emit('order.placed', { 
-          orderId: order.id, 
-          phone: order.customerPhone, 
-          name: order.customerName, 
-          amount: Number(order.totalAmount) 
+        this.eventEmitter.emit('order.placed', {
+          orderId: order.id,
+          phone: order.customerPhone,
+          name: order.customerName,
+          amount: Number(order.totalAmount),
+          metaEventId: (data as any).metaEventId,
         });
         
         // Send email confirmation
@@ -757,6 +758,7 @@ export class PaymentsService implements OnModuleInit {
           phone: order.customerPhone,
           name: order.customerName,
           amount: Number(order.totalAmount),
+          metaEventId: undefined,
         });
         if (order.userId) {
           this.growthService.processReferralReward(order.userId, order.id)

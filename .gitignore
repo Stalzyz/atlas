@@ -33,5 +33,8 @@ load-test.yml
 # Product uploads - stored on VPS, not in git
 apps/api/uploads/
 
+# Backup secrets — never commit
+scripts/.env.backup
+
 # Reports and playwright artifacts
 playwright-report/

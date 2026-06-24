@@ -39,13 +39,29 @@ export default function MetaPixel({ pixelId }: { pixelId: string | null }) {
     }
   }, [pathname, searchParams, pixelId]);
 
+  // Track outbound link clicks
+  useEffect(() => {
+    if (!pixelId) return;
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest("a");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      if (href.startsWith("http") && !href.includes("raaghas.in")) {
+        trackMetaEvent("LinkClick", { content_name: href });
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [pixelId]);
+
   return null;
 }
 
-// Global Helper for Custom Events
-export const trackMetaEvent = (event: string, data?: any) => {
+// Global helper — pass optional eventID for server-side deduplication
+export const trackMetaEvent = (event: string, data?: any, eventID?: string) => {
   if (typeof window !== "undefined" && (window as any).fbq) {
-    (window as any).fbq("track", event, data);
+    (window as any).fbq("track", event, data || {}, eventID ? { eventID } : undefined);
     console.log(`[Meta Event] ${event}`, data);
   }
 };

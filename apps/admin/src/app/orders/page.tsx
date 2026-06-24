@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { 
   ShoppingBag, 
   Search, 
@@ -26,9 +27,10 @@ import {
 } from "lucide-react";
 import { useAdminAuth } from "@/components/providers/AuthProvider";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText } from "lucide-react";
+import { FileText, Printer } from "lucide-react";
 import { InvoiceModal } from "@/components/modals/InvoiceModal";
 import { BulkFulfillModal } from "@/components/modals/BulkFulfillModal";
+import { PackingSlipModal } from "@/components/modals/PackingSlipModal";
 import { OrderDetailView } from "@/components/orders/OrderDetailView";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -46,10 +48,17 @@ const STATUS_CONFIG: any = {
 export default function OrdersPage() {
   const { token } = useAdminAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [orders, setOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
-  const [activeTab, setActiveTab] = useState("ALL");
+
+  const activeTab = searchParams.get("tab") || "ACTIVE";
+  const setActiveTab = (tab: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tab);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const [showFilters, setShowFilters] = useState(false);
   
   // Filters State
@@ -67,6 +76,8 @@ export default function OrdersPage() {
   const [selectedOrderForInvoice, setSelectedOrderForInvoice] = useState<any>(null);
   const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false);
   const [isBulkFulfillModalOpen, setIsBulkFulfillModalOpen] = useState(false);
+  const [packingSlipOrders, setPackingSlipOrders] = useState<any[]>([]);
+  const [isPackingSlipOpen, setIsPackingSlipOpen] = useState(false);
 
 
 
@@ -84,7 +95,8 @@ export default function OrdersPage() {
     setIsLoading(true);
     try {
       const queryParams = new URLSearchParams();
-      if (activeTab !== "ALL") queryParams.append("status", activeTab);
+      if (activeTab === "ACTIVE") queryParams.append("excludeStatus", "CANCELLED");
+      else if (activeTab !== "ALL") queryParams.append("status", activeTab);
       if (filters.search) queryParams.append("search", filters.search);
       if (filters.source) queryParams.append("source", filters.source);
       if (filters.riskLevel) queryParams.append("riskLevel", filters.riskLevel);
@@ -162,23 +174,24 @@ export default function OrdersPage() {
     if (ordersToExport.length === 0) return;
 
     const headers = [
-      "Name", "Email", "Financial Status", "Paid at", "Fulfillment Status", 
-      "Fulfilled at", "Accepts Marketing", "Currency", "Subtotal", "Shipping", 
-      "Taxes", "Total", "Discount Code", "Discount Amount", "Shipping Method", 
-      "Created at", "Lineitem quantity", "Lineitem name", "Lineitem price", 
-      "Lineitem sku", "Lineitem fulfillment status", "Billing Name", "Billing Street", 
-      "Billing Address1", "Billing Address2", "Billing Company", "Billing City", 
-      "Billing Zip", "Billing Province", "Billing Country", "Billing Phone", 
-      "Shipping Name", "Shipping Street", "Shipping Address1", "Shipping Address2", 
-      "Shipping Company", "Shipping City", "Shipping Zip", "Shipping Province", 
-      "Shipping Country", "Shipping Phone", "Notes", "Note Attributes", 
-      "Cancelled at", "Payment Method", "Payment Reference", "Refunded Amount", 
-      "Vendor", "Outstanding Balance", "Employee", "Location", "Device ID", 
-      "Id", "Tags", "Risk Level", "Source", "Lineitem discount", 
-      "Tax 1 Name", "Tax 1 Value", "Tax 2 Name", "Tax 2 Value", "Tax 3 Name", 
-      "Tax 3 Value", "Tax 4 Name", "Tax 4 Value", "Tax 5 Name", "Tax 5 Value", 
-      "Phone", "Receipt Number", "Duties", "Billing Province Name", 
-      "Shipping Province Name", "Payment ID", "Payment Terms Name", 
+      "Order Number", "Email", "Customer Name", "Payment Status", "Paid at",
+      "Fulfillment Status", "Fulfilled at", "Accepts Marketing", "Currency",
+      "Subtotal", "Shipping Charges", "Tax Value", "Order Value",
+      "Discount Code", "Discount Amount", "Shipping Method",
+      "Order Date", "Quantity", "Product Name", "Unit Price",
+      "Lineitem sku", "Lineitem fulfillment status", "Billing Name", "Billing Street",
+      "Billing Address1", "Billing Address2", "Billing Company", "Billing City",
+      "Billing Zip", "Billing Province", "Billing Country", "Billing Phone",
+      "Shipping Name", "Shipping Street", "Shipping Address1", "Shipping Address2",
+      "Shipping Company", "Shipping City", "Shipping Zip", "Shipping Province",
+      "Shipping Country", "Shipping Phone", "Notes", "Note Attributes",
+      "Cancelled at", "Payment Method", "Payment Reference ID", "Refunded Amount",
+      "Vendor", "Outstanding Balance", "Employee", "Location", "Device ID",
+      "Id", "Tags", "Risk Level", "Source", "Lineitem discount",
+      "Tax 1 Name", "Tax 1 Value", "Tax 2 Name", "Tax 2 Value", "Tax 3 Name",
+      "Tax 3 Value", "Tax 4 Name", "Tax 4 Value", "Tax 5 Name", "Tax 5 Value",
+      "Customer Phone Number", "Receipt Number", "Duties", "Billing Province Name",
+      "Shipping Province Name", "Payment ID", "Payment Terms Name",
       "Next Payment Due At", "Payment References"
     ];
 
@@ -215,75 +228,76 @@ export default function OrdersPage() {
         const isFirst = index === 0;
 
         const row = [
-          orderName, // Name
-          isFirst ? email : "", // Email
-          isFirst ? financialStatus : "", // Financial Status
-          isFirst ? paidAt : "", // Paid at
-          isFirst ? fulfillmentStatus : "", // Fulfillment Status
-          isFirst ? fulfilledAt : "", // Fulfilled at
-          isFirst ? "no" : "", // Accepts Marketing
-          isFirst ? "INR" : "", // Currency
-          isFirst ? o.totalAmount : "", // Subtotal
-          isFirst ? "0" : "", // Shipping
-          isFirst ? "0" : "", // Taxes
-          isFirst ? o.totalAmount : "", // Total
-          "", // Discount Code
-          "0", // Discount Amount
-          isFirst ? "Standard Shipping" : "", // Shipping Method
-          createdAt, // Created at
-          item.quantity || "1", // Lineitem quantity
-          item.variant?.product?.title || "Custom Item", // Lineitem name
-          item.price || "0", // Lineitem price
-          item.variant?.sku || "", // Lineitem sku
-          "pending", // Lineitem fulfillment status
-          isFirst ? bName : "", // Billing Name
+          orderName,                                                            // Order Number
+          isFirst ? email : "",                                                 // Email
+          isFirst ? o.customerName || "" : "",                                  // Customer Name
+          isFirst ? financialStatus : "",                                        // Payment Status
+          isFirst ? paidAt : "",                                                 // Paid at
+          isFirst ? fulfillmentStatus : "",                                      // Fulfillment Status
+          isFirst ? fulfilledAt : "",                                            // Fulfilled at
+          isFirst ? "no" : "",                                                   // Accepts Marketing
+          isFirst ? "INR" : "",                                                  // Currency
+          isFirst ? o.totalAmount : "",                                          // Subtotal
+          isFirst ? "0" : "",                                                    // Shipping Charges
+          isFirst ? "0" : "",                                                    // Tax Value
+          isFirst ? o.totalAmount : "",                                          // Order Value
+          "",                                                                    // Discount Code
+          "0",                                                                   // Discount Amount
+          isFirst ? "Standard Shipping" : "",                                    // Shipping Method
+          createdAt,                                                             // Order Date
+          item.quantity || "1",                                                  // Quantity
+          item.variant?.product?.title || "Custom Item",                        // Product Name
+          item.price || "0",                                                     // Unit Price
+          item.variant?.sku || "",                                               // Lineitem sku
+          "pending",                                                             // Lineitem fulfillment status
+          isFirst ? bName : "",                                                  // Billing Name
           isFirst ? `${bAddress.address1 || ''} ${bAddress.address2 || ''}`.trim() : "", // Billing Street
-          isFirst ? bAddress.address1 || "" : "", // Billing Address1
-          isFirst ? bAddress.address2 || "" : "", // Billing Address2
-          "", // Billing Company
-          isFirst ? bAddress.city || "" : "", // Billing City
-          isFirst ? bAddress.pincode || "" : "", // Billing Zip
-          isFirst ? bAddress.state || "" : "", // Billing Province
-          isFirst ? bAddress.country || "IN" : "", // Billing Country
-          isFirst ? bAddress.phone || phone : "", // Billing Phone
-          isFirst ? sName : "", // Shipping Name
+          isFirst ? bAddress.address1 || "" : "",                               // Billing Address1
+          isFirst ? bAddress.address2 || "" : "",                               // Billing Address2
+          "",                                                                    // Billing Company
+          isFirst ? bAddress.city || "" : "",                                   // Billing City
+          isFirst ? bAddress.pincode || "" : "",                                // Billing Zip
+          isFirst ? bAddress.state || "" : "",                                  // Billing Province
+          isFirst ? bAddress.country || "IN" : "",                              // Billing Country
+          isFirst ? bAddress.phone || phone : "",                               // Billing Phone
+          isFirst ? sName : "",                                                  // Shipping Name
           isFirst ? `${sAddress.address1 || ''} ${sAddress.address2 || ''}`.trim() : "", // Shipping Street
-          isFirst ? sAddress.address1 || "" : "", // Shipping Address1
-          isFirst ? sAddress.address2 || "" : "", // Shipping Address2
-          "", // Shipping Company
-          isFirst ? sAddress.city || "" : "", // Shipping City
-          isFirst ? sAddress.pincode || "" : "", // Shipping Zip
-          isFirst ? sAddress.state || "" : "", // Shipping Province
-          isFirst ? sAddress.country || "IN" : "", // Shipping Country
-          isFirst ? sAddress.phone || phone : "", // Shipping Phone
-          isFirst ? o.notes || "" : "", // Notes
-          "", // Note Attributes
-          isFirst && o.status === 'CANCELLED' ? createdAt : "", // Cancelled at
-          isFirst ? o.paymentMethod || "manual" : "", // Payment Method
-          isFirst ? o.paymentId || "" : "", // Payment Reference
-          "0", // Refunded Amount
-          "Raaghas", // Vendor
-          "0", // Outstanding Balance
-          "", // Employee
-          "", // Location
-          "", // Device ID
-          o.id, // Id (Shopify internal ID fallback)
-          isFirst ? (o.tags?.join(",") || "") : "", // Tags
-          isFirst ? o.riskLevel || "Low" : "", // Risk Level
-          isFirst ? o.source || "web" : "", // Source
-          "0", // Lineitem discount
-          isFirst ? "GST" : "", // Tax 1 Name
-          isFirst ? "0" : "", // Tax 1 Value
-          "", "", "", "", "", "", "", "", // Tax 2-5
-          isFirst ? phone : "", // Phone
-          "", // Receipt Number
-          "", // Duties
-          isFirst ? bAddress.state || "" : "", // Billing Province Name
-          isFirst ? sAddress.state || "" : "", // Shipping Province Name
-          isFirst ? o.paymentId || "" : "", // Payment ID
-          "", // Payment Terms Name
-          "", // Next Payment Due At
-          "" // Payment References
+          isFirst ? sAddress.address1 || "" : "",                               // Shipping Address1
+          isFirst ? sAddress.address2 || "" : "",                               // Shipping Address2
+          "",                                                                    // Shipping Company
+          isFirst ? sAddress.city || "" : "",                                   // Shipping City
+          isFirst ? sAddress.pincode || "" : "",                                // Shipping Zip
+          isFirst ? sAddress.state || "" : "",                                  // Shipping Province
+          isFirst ? sAddress.country || "IN" : "",                              // Shipping Country
+          isFirst ? sAddress.phone || phone : "",                               // Shipping Phone
+          isFirst ? o.notes || "" : "",                                          // Notes
+          "",                                                                    // Note Attributes
+          isFirst && o.status === 'CANCELLED' ? createdAt : "",                 // Cancelled at
+          isFirst ? o.paymentMethod || "manual" : "",                           // Payment Method
+          isFirst ? o.paymentId || "" : "",                                     // Payment Reference ID
+          "0",                                                                   // Refunded Amount
+          "Raaghas",                                                             // Vendor
+          "0",                                                                   // Outstanding Balance
+          "",                                                                    // Employee
+          "",                                                                    // Location
+          "",                                                                    // Device ID
+          o.id,                                                                  // Id
+          isFirst ? (o.tags?.join(",") || "") : "",                             // Tags
+          isFirst ? o.riskLevel || "Low" : "",                                  // Risk Level
+          isFirst ? o.source || "web" : "",                                     // Source
+          "0",                                                                   // Lineitem discount
+          isFirst ? "GST" : "",                                                  // Tax 1 Name
+          isFirst ? "0" : "",                                                    // Tax 1 Value
+          "", "", "", "", "", "", "", "",                                        // Tax 2-5
+          isFirst ? phone : "",                                                  // Customer Phone Number
+          "",                                                                    // Receipt Number
+          "",                                                                    // Duties
+          isFirst ? bAddress.state || "" : "",                                  // Billing Province Name
+          isFirst ? sAddress.state || "" : "",                                  // Shipping Province Name
+          isFirst ? o.paymentId || "" : "",                                     // Payment ID
+          "",                                                                    // Payment Terms Name
+          "",                                                                    // Next Payment Due At
+          ""                                                                     // Payment References
         ];
 
         rows.push(row.map(escapeCSV));
@@ -372,13 +386,21 @@ export default function OrdersPage() {
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
             <div className="p-4 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex bg-gray-100/80 p-1 rounded-xl overflow-x-auto no-scrollbar">
-                {["ALL", "PENDING", "CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"].map((tab) => (
+                {[
+                  { key: "ACTIVE", label: "Active Orders" },
+                  { key: "PENDING", label: "Pending" },
+                  { key: "CONFIRMED", label: "Confirmed" },
+                  { key: "PROCESSING", label: "Processing" },
+                  { key: "SHIPPED", label: "Shipped" },
+                  { key: "DELIVERED", label: "Delivered" },
+                  { key: "CANCELLED", label: "Cancelled" },
+                ].map(({ key, label }) => (
                   <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 whitespace-nowrap rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-wine shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                    key={key}
+                    onClick={() => setActiveTab(key)}
+                    className={`px-4 py-2 whitespace-nowrap rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${activeTab === key ? 'bg-white text-wine shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                   >
-                    {tab}
+                    {label}
                   </button>
                 ))}
               </div>
@@ -538,13 +560,21 @@ export default function OrdersPage() {
                       </td>
                       <td className="px-6 py-5 text-right">
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity" onClick={e => e.stopPropagation()}>
-                          <button 
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setPackingSlipOrders([order]); setIsPackingSlipOpen(true); }}
+                            className="p-2 hover:bg-white hover:shadow-md rounded-lg text-gray-400 hover:text-charcoal transition-all"
+                            title="Print Packing Slip"
+                          >
+                            <Printer size={16} />
+                          </button>
+                          <button
                             onClick={(e) => { e.stopPropagation(); setSelectedOrderForInvoice(order); setIsInvoiceModalOpen(true); }}
                             className="p-2 hover:bg-white hover:shadow-md rounded-lg text-gray-400 hover:text-wine transition-all"
+                            title="Generate Invoice"
                           >
                             <FileText size={16} />
                           </button>
-                          <Link 
+                          <Link
                             href={`/orders/${order.id}`}
                             className="p-2 hover:bg-white hover:shadow-md rounded-lg text-gray-400 hover:text-charcoal transition-all"
                           >
@@ -582,7 +612,17 @@ export default function OrdersPage() {
                   <button onClick={() => handleBulkAction('assign')} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all">
                     <Users size={14} /> Assign
                   </button>
-                  <button 
+                  <button
+                    onClick={() => {
+                      const selected = orders.filter(o => selectedIds.includes(o.id));
+                      setPackingSlipOrders(selected);
+                      setIsPackingSlipOpen(true);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all"
+                  >
+                    <Printer size={14} /> Packing Slips
+                  </button>
+                  <button
                     onClick={() => setSelectedIds([])}
                     className="ml-4 text-[10px] uppercase font-bold text-white/40 hover:text-white transition-colors"
                   >
@@ -728,7 +768,7 @@ export default function OrdersPage() {
         order={selectedOrderForInvoice} 
       />
 
-      <BulkFulfillModal 
+      <BulkFulfillModal
         isOpen={isBulkFulfillModalOpen}
         onClose={() => setIsBulkFulfillModalOpen(false)}
         selectedOrderIds={selectedIds}
@@ -736,6 +776,12 @@ export default function OrdersPage() {
           setSelectedIds([]);
           fetchOrders();
         }}
+      />
+
+      <PackingSlipModal
+        isOpen={isPackingSlipOpen}
+        onClose={() => setIsPackingSlipOpen(false)}
+        orders={packingSlipOrders}
       />
     </div>
   );

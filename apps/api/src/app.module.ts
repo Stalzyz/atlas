@@ -43,6 +43,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { SizeGuidesModule } from './size-guides/size-guides.module';
 import { SupportModule } from './support/support.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { BackupModule } from './backup/backup.module';
 
 @Global()
 @Module({
@@ -74,6 +75,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
     SizeGuidesModule,
     SupportModule,
     WishlistModule,
+    BackupModule,
     ServeStaticModule.forRoot({
       rootPath: join(process.cwd(), 'uploads'),
       serveRoot: '/uploads',

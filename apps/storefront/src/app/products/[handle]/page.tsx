@@ -10,6 +10,7 @@ import ReviewForm from "@/components/reviews/ReviewForm";
 import { Metadata } from "next";
 
 import { getAssetUrl } from "@/lib/utils/assets";
+import Breadcrumb from "@/components/layout/Breadcrumb";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.raaghas.in");
 
@@ -94,6 +95,12 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
     }
   };
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    ...(product.collections?.[0] ? [{ label: product.collections[0].title, href: `/collections/${product.collections[0].handle}` }] : []),
+    { label: product.title, href: `/products/${product.handle}` },
+  ];
+
   return (
     <div className="min-h-screen">
       <script
@@ -101,6 +108,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-44 md:pt-48 pb-12 md:pb-24">
+        <Breadcrumb items={breadcrumbItems} />
         
         {/* Main Grid: Gallery & Info */}
         <div className="grid lg:grid-cols-2 gap-16 items-start">

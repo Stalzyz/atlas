@@ -27,6 +27,7 @@ export default function EditProductPage() {
   
   const [product, setProduct] = useState<any>(null);
   const [collections, setCollections] = useState<any[]>([]);
+  const [selectedCollectionIds, setSelectedCollectionIds] = useState<string[]>([]);
   const [sizeGuides, setSizeGuides] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -47,7 +48,11 @@ export default function EditProductPage() {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        if (prodRes.ok) setProduct(await prodRes.json());
+        if (prodRes.ok) {
+          const prodData = await prodRes.json();
+          setProduct(prodData);
+          setSelectedCollectionIds((prodData.collections || []).map((c: any) => c.id));
+        }
         if (collRes.ok) setCollections(await collRes.json());
         if (sgRes.ok) setSizeGuides(await sgRes.json());
       } catch (err) {
@@ -65,11 +70,11 @@ export default function EditProductPage() {
       const baseUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.raaghas.in');
       const res = await fetch(`${baseUrl}/products/${product.id}`, {
         method: 'PATCH',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` 
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify({ ...product, collections: selectedCollectionIds })
       });
 
       if (res.ok) {
@@ -388,17 +393,36 @@ export default function EditProductPage() {
              </div>
 
              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Category / Type</label>
-                <select 
-                  value={product.category || "General"}
-                  onChange={(e) => setProduct({ ...product, category: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-medium outline-none appearance-none"
-                >
-                   <option value="General">General</option>
-                   {Array.from(new Set((Array.isArray(collections) ? collections : []).map(c => c?.title || 'General'))).map(type => (
-                     <option key={type as string} value={type as string}>{type as string}</option>
-                   ))}
-                </select>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">
+                  Collections
+                  {selectedCollectionIds.length > 0 && (
+                    <span className="ml-2 bg-wine text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                      {selectedCollectionIds.length}
+                    </span>
+                  )}
+                </label>
+                <div className="max-h-48 overflow-y-auto space-y-2 border border-gray-100 rounded-xl p-3 bg-gray-50">
+                  {(Array.isArray(collections) ? collections : []).filter(Boolean).map((c: any) => (
+                    <label key={c.id} className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={selectedCollectionIds.includes(c.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedCollectionIds(prev => [...prev, c.id]);
+                          } else {
+                            setSelectedCollectionIds(prev => prev.filter(id => id !== c.id));
+                          }
+                        }}
+                        className="w-4 h-4 rounded accent-wine"
+                      />
+                      <span className="text-sm font-medium text-charcoal group-hover:text-wine transition-colors">{c.title}</span>
+                    </label>
+                  ))}
+                  {collections.length === 0 && (
+                    <p className="text-xs text-gray-400 text-center py-2">No collections found</p>
+                  )}
+                </div>
              </div>
 
              <div>

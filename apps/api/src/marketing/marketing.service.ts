@@ -253,7 +253,7 @@ export class MarketingService {
   // ─── EVENT LISTENERS ──────────────────────────────────────────────────────
   
   @OnEvent('order.placed')
-  async handleOrderPlaced(payload: { phone: string; name: string; orderId: string; amount: number }) {
+  async handleOrderPlaced(payload: { phone: string; name: string; orderId: string; amount: number; metaEventId?: string }) {
     this.logger.log(`🔔 Order Placed Event received for ${payload.orderId}. Syncing to Grafty...`);
     
     // 1. Send WhatsApp Confirmation
@@ -276,6 +276,7 @@ export class MarketingService {
         phone: payload.phone,
         email: order.customerEmail,
         name: payload.name,
+        metaEventId: payload.metaEventId,
       }).catch(e => this.logger.error('Meta CAPI error', e));
     }
   }
@@ -426,6 +427,7 @@ export class MarketingService {
     email?: string;
     name?: string;
     currency?: string;
+    metaEventId?: string;
   }) {
     const settings = await this.prisma.storeSettings.findUnique({
       where: { id: 'global' },
@@ -464,6 +466,7 @@ export class MarketingService {
           {
             event_name: event,
             event_time: Math.floor(Date.now() / 1000),
+            event_id: payload.metaEventId,
             action_source: "website",
             user_data: {
               ...(hashedPhone ? { ph: [hashedPhone] } : {}),
@@ -584,12 +587,27 @@ export class MarketingService {
 
   // ─── META / FACEBOOK COMMERCE FEED ────────────────────────────────────────
 
+  private cachedFeed: string | null = null;
+
+  @Cron('0 3 * * *')
+  async refreshFeedCache() {
+    this.logger.log('Refreshing Facebook product feed cache...');
+    this.cachedFeed = await this.buildFacebookXmlFeed();
+    this.logger.log('Facebook feed cache refreshed.');
+  }
+
   async generateFacebookXmlFeed(): Promise<string> {
+    if (this.cachedFeed) return this.cachedFeed;
+    this.cachedFeed = await this.buildFacebookXmlFeed();
+    return this.cachedFeed;
+  }
+
+  private async buildFacebookXmlFeed(): Promise<string> {
     const products = await this.prisma.product.findMany({
       where: { status: 'Active' },
       include: {
         variants: true,
-        images: { orderBy: { position: 'asc' }, take: 1 }
+        images: { orderBy: { position: 'asc' } }
       }
     });
 
@@ -598,24 +616,24 @@ export class MarketingService {
     for (const p of products) {
       if (!p.variants || p.variants.length === 0) continue;
 
-      const title = this.escapeXml(p.title);
       const description = this.escapeXml(p.description || p.title);
       const link = `https://raaghas.in/products/${p.handle}`;
-      const imageLink = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://raaghas.in/logo-dark.svg';
+      const primaryImage = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://raaghas.in/logo-dark.svg';
+      const additionalImages = (p.images || []).slice(1).map((img: any) =>
+        `      <g:additional_image_link>${this.escapeXml(img.url)}</g:additional_image_link>`
+      ).join('\n');
       const brand = 'Raaghas';
 
       for (const variant of p.variants) {
-        // Facebook requires unique IDs per variant if you sell variations
         const variantId = variant.id;
         const variantTitleParts = [variant.option1Value, variant.option2Value, variant.option3Value].filter(Boolean).join(' ');
-        const variantTitle = this.escapeXml(`${p.title} ${variantTitleParts ? '- ' + variantTitleParts : ''}`);
-        const inventory = variant.inventory > 0 ? 'in stock' : 'out of stock';
-        const salePrice = variant.mrp && Number(variant.mrp) > Number(variant.price) 
-          ? `<g:sale_price>${variant.price} INR</g:sale_price>` 
-          : '';
-
-        // If there's a specific price to show, we show the highest as standard, and sale as the current.
-        const basePrice = variant.mrp || variant.price;
+        const variantTitle = this.escapeXml(`${p.title}${variantTitleParts ? ' - ' + variantTitleParts : ''}`);
+        const availability = variant.inventory > 0 ? 'in stock' : 'out of stock';
+        const hasSale = variant.mrp && Number(variant.mrp) > Number(variant.price);
+        // g:price = regular/MRP price; g:sale_price = current discounted price
+        const regularPrice = hasSale ? `${variant.mrp} INR` : `${variant.price} INR`;
+        const salePriceTag = hasSale ? `<g:sale_price>${variant.price} INR</g:sale_price>` : '';
+        const skuTag = variant.sku ? `<g:sku>${this.escapeXml(variant.sku)}</g:sku>` : '';
 
         itemsXml += `
     <item>
@@ -623,18 +641,22 @@ export class MarketingService {
       <g:title>${variantTitle}</g:title>
       <g:description>${description}</g:description>
       <g:link>${link}</g:link>
-      <g:image_link>${imageLink}</g:image_link>
+      <g:image_link>${primaryImage}</g:image_link>
+${additionalImages}
       <g:brand>${brand}</g:brand>
       <g:condition>new</g:condition>
-      <g:availability>${inventory}</g:availability>
-      <g:price>${basePrice} INR</g:price>
-      ${salePrice}
+      <g:availability>${availability}</g:availability>
+      <g:quantity_to_sell_on_facebook>${Math.max(0, variant.inventory)}</g:quantity_to_sell_on_facebook>
+      <g:price>${regularPrice}</g:price>
+      ${salePriceTag}
+      ${skuTag}
+      <g:google_product_category>Apparel &amp; Accessories &gt; Clothing</g:google_product_category>
       <g:item_group_id>${p.id}</g:item_group_id>
     </item>`;
       }
     }
 
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    return `<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
     <title>Raaghas</title>
@@ -643,8 +665,6 @@ export class MarketingService {
     ${itemsXml}
   </channel>
 </rss>`;
-
-    return xml;
   }
 
   private escapeXml(unsafe: string): string {

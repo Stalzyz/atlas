@@ -157,6 +157,7 @@ export class OrdersService {
 
   async getAdminOrders(filters: {
     status?: OrderStatus;
+    excludeStatus?: string;
     financialStatus?: string;
     fulfillmentStatus?: string;
     source?: string;
@@ -171,6 +172,7 @@ export class OrdersService {
 
     // 1. Exact Matches
     if (filters.status) where.status = filters.status as any;
+    if (filters.excludeStatus) where.status = { not: filters.excludeStatus as any };
     if (filters.financialStatus) where.financialStatus = filters.financialStatus;
     if (filters.fulfillmentStatus) where.fulfillmentStatus = filters.fulfillmentStatus;
     if (filters.source) where.source = filters.source;

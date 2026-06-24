@@ -483,6 +483,19 @@ export default function CheckoutPage() {
             if (vRes.ok) {
               const orderData = await vRes.json();
               setPaymentSuccess(true);
+
+              // Track Purchase with deduplication eventID
+              const purchaseEventId = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+              import("@/components/analytics/MetaPixel").then((m) => {
+                m.trackMetaEvent("Purchase", {
+                  value: Number(orderData.totalAmount || orderData.total || 0),
+                  currency: "INR",
+                  content_ids: items.map((i) => i.variantId),
+                  content_type: "product",
+                  num_items: items.reduce((sum, i) => sum + i.quantity, 0),
+                  order_id: orderData.id,
+                }, purchaseEventId);
+              });
               if (token) {
                 if (saveNewAddress && !selectedSavedAddressId) {
                   fetch(`${API_URL}/api/v1/auth/me`, { headers: { Authorization: `Bearer ${token}` } })

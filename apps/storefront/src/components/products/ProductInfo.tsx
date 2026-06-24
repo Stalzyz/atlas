@@ -67,6 +67,17 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     // Generate random viewers on client-side only to avoid hydration mismatch
     setViewers(Math.floor(Math.random() * 22) + 12);
 
+    // Track Meta ViewContent
+    import("@/components/analytics/MetaPixel").then((m) => {
+      m.trackMetaEvent("ViewContent", {
+        content_ids: product.variants?.map((v: any) => v.id) || [product.id],
+        content_name: product.title,
+        content_type: "product",
+        currency: "INR",
+        value: product.variants?.[0]?.price ? Number(product.variants[0].price) : 0,
+      });
+    });
+
     // Track view for interests
     if (authUser?.id && product.id) {
       fetch(`${API_URL}/api/v1/products/track-view`, {

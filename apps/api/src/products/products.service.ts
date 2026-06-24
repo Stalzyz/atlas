@@ -131,8 +131,10 @@ export class ProductService {
       let orderBy: any = { createdAt: 'desc' };
       const sortMapping: Record<string, any> = {
         'newest': { createdAt: 'desc' },
+        'oldest': { createdAt: 'asc' },
+        'alphabetical': { title: 'asc' },
       };
-      
+
       if (sort && sortMapping[sort]) {
         orderBy = sortMapping[sort];
       }

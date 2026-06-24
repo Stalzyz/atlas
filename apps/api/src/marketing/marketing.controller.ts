@@ -115,6 +115,7 @@ export class MarketingController {
   @Public()
   @Get('facebook-feed.xml')
   @Header('Content-Type', 'application/xml')
+  @Header('Cache-Control', 'public, max-age=3600')
   async getFacebookFeed() {
     return this.marketingService.generateFacebookXmlFeed();
   }

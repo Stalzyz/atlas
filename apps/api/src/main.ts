@@ -77,6 +77,8 @@ async function bootstrap() {
     'https://api.raaghas.in',
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://localhost:6001',
+    'http://localhost:6002',
     'http://localhost:6005',
   ];
 

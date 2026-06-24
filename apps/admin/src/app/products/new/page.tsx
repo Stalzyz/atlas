@@ -54,15 +54,20 @@ export default function AddProductPage() {
 
   const [images, setImages] = useState<any[]>([]);
   const [sizeGuides, setSizeGuides] = useState<any[]>([]);
+  const [allCollections, setAllCollections] = useState<any[]>([]);
+  const [selectedCollectionIds, setSelectedCollectionIds] = useState<string[]>([]);
 
   useEffect(() => {
     async function loadGuides() {
       if (!token) return;
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.raaghas.in');
       try {
-        const sgRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005/api/v1' : 'https://api.raaghas.in/api/v1')}/cms/size-guides`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const [sgRes, collRes] = await Promise.all([
+          fetch(`${baseUrl}/api/v1/cms/size-guides`, { headers: { Authorization: `Bearer ${token}` } }),
+          fetch(`${baseUrl}/api/v1/products/collections`, { headers: { Authorization: `Bearer ${token}` } }),
+        ]);
         if (sgRes.ok) setSizeGuides(await sgRes.json());
+        if (collRes.ok) setAllCollections(await collRes.json());
       } catch (e) {
         console.error("Failed to fetch size guides", e);
       }
@@ -251,6 +256,7 @@ export default function AddProductPage() {
     try {
       const payload = {
         ...form,
+        collections: selectedCollectionIds,
         images: images.map(img => ({ url: img.url, isPrimary: img.isPrimary })),
         variants: combinations.map(comb => {
           const key = comb.join("-");
@@ -699,6 +705,38 @@ export default function AddProductPage() {
                 <option>Sarees</option>
                 <option>Ready to Wear</option>
               </select>
+            </div>
+            <div>
+              <label className="text-sm font-bold text-charcoal block mb-2">
+                Collections
+                {selectedCollectionIds.length > 0 && (
+                  <span className="ml-2 bg-wine text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                    {selectedCollectionIds.length}
+                  </span>
+                )}
+              </label>
+              <div className="max-h-40 overflow-y-auto space-y-2 border border-gray-200 rounded-xl p-3 bg-gray-50">
+                {allCollections.filter(Boolean).map((c: any) => (
+                  <label key={c.id} className="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={selectedCollectionIds.includes(c.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedCollectionIds(prev => [...prev, c.id]);
+                        } else {
+                          setSelectedCollectionIds(prev => prev.filter(id => id !== c.id));
+                        }
+                      }}
+                      className="w-4 h-4 rounded accent-wine"
+                    />
+                    <span className="text-sm text-charcoal group-hover:text-wine transition-colors">{c.title}</span>
+                  </label>
+                ))}
+                {allCollections.length === 0 && (
+                  <p className="text-xs text-gray-400 text-center py-2">Loading collections...</p>
+                )}
+              </div>
             </div>
             <div>
               <label className="text-sm font-bold text-charcoal block mb-1">Sub-Category</label>

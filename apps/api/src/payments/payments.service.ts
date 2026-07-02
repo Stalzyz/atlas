@@ -6,6 +6,7 @@ import { MarketingService } from '../marketing/marketing.service';
 import { GrowthService } from '../growth/growth.service';
 import { LedgerService } from '../analytics/ledger.service';
 import { MailService } from '../mail/mail.service';
+import { LogisticsService } from '../logistics/logistics.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@raaghas/database';
 import * as crypto from 'crypto';
@@ -34,6 +35,7 @@ export class PaymentsService implements OnModuleInit {
     private webhookQueue: WebhookQueueService,
     private ledgerService: LedgerService,
     private mailService: MailService,
+    @Inject(forwardRef(() => LogisticsService)) private logisticsService: LogisticsService,
   ) {}
 
 
@@ -248,8 +250,22 @@ export class PaymentsService implements OnModuleInit {
       }
     }
 
-    const shippingCost = Math.max(0, Number(data.shippingCost) || 0);
-    const netPayable = Math.max(0, baseTotal - discountAmount - walletCreditUsed) + extraTaxToCharge + shippingCost;
+    // 3b. Verify Shipping Cost Server-Side (Security Patch)
+    let validatedShippingCost = 0;
+    if (data.shippingMethodId && data.shippingAddress?.state) {
+      const shippingOptions = await this.logisticsService.getShippingOptions(data.shippingAddress.state, baseTotal, data.items);
+      const chosenOption = shippingOptions.find(o => o.id === data.shippingMethodId);
+      if (!chosenOption) {
+        throw new BadRequestException('Invalid or unavailable shipping method selected.');
+      }
+      validatedShippingCost = Number(chosenOption.cost);
+    } else {
+      // Fallback: don't allow frontend to bypass if method ID was omitted
+      const fallbackOptions = await this.logisticsService.getShippingOptions(data.shippingAddress?.state || 'Unknown', baseTotal, data.items);
+      validatedShippingCost = fallbackOptions.length > 0 ? Number(fallbackOptions[0].cost) : 0;
+    }
+
+    const netPayable = Math.max(0, baseTotal - discountAmount - walletCreditUsed) + extraTaxToCharge + validatedShippingCost;
 
     // 4. ATOMIC ORDER CREATION (PAYMENT_PENDING State)
     // We create the order BEFORE the gateway call so we have a record even if the user drops off.
@@ -281,7 +297,7 @@ export class PaymentsService implements OnModuleInit {
         discountCode: bestDiscountCode,
         discountAmount,
         walletCreditUsed,
-        shippingCost,
+        shippingCost: validatedShippingCost,
         shippingMethodId: data.shippingMethodId,
         idempotencyKey: ikey,
       }, tx);

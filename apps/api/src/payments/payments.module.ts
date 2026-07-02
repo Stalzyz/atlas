@@ -8,8 +8,10 @@ import { GrowthModule } from '../growth/growth.module';
 import { OrdersModule } from '../orders/orders.module';
 import { AnalyticsModule } from '../analytics/analytics.module';
 
+import { LogisticsModule } from '../logistics/logistics.module';
+
 @Module({
-  imports: [MarketingModule, InventoryModule, GrowthModule, forwardRef(() => OrdersModule), AnalyticsModule],
+  imports: [MarketingModule, InventoryModule, GrowthModule, forwardRef(() => OrdersModule), AnalyticsModule, forwardRef(() => LogisticsModule)],
   controllers: [PaymentsController],
   providers: [PaymentsService, WebhookQueueService],
   exports: [PaymentsService, WebhookQueueService],

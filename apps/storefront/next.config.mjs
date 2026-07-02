@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone', // Expert Analyst Fix: Memory Optimization
+  output: 'standalone',
   outputFileTracingRoot: "../../",
   experimental: {},
   webpack: (config) => config,
@@ -9,6 +9,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Use unoptimized to bypass Next.js image proxy — images are served directly
+    // from the public API domain (api.raaghas.in). This avoids "private IP" errors
+    // when Next.js tries to proxy localhost:6005 images through itself.
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "**" },
       { protocol: "http", hostname: "**" },

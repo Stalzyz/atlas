@@ -493,14 +493,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Share & Earn Section */}
-      <div className="bg-gradient-to-r from-wine/10 to-transparent p-6 rounded-2xl border border-wine/20 space-y-4">
+      <div className="bg-gradient-to-r from-wine/10 to-transparent dark:from-wine/30 dark:to-wine/5 p-6 rounded-2xl border border-wine/20 dark:border-wine/50 shadow-sm dark:shadow-wine/10 space-y-4">
         <div className="flex justify-between items-center">
-           <h4 className="text-[10px] uppercase font-bold tracking-widest text-wine flex items-center gap-2">
+           <h4 className="text-[10px] uppercase font-bold tracking-widest text-wine dark:text-wine-tint flex items-center gap-2">
              <Share2 size={12} /> Share & Earn
            </h4>
         </div>
-        <p className="text-xs text-theme-text-muted">
-          Share this product with friends. If they sign up using your link, you'll earn <span className="font-bold text-wine">₹100 credits</span>.
+        <p className="text-xs text-gray-700 dark:text-gray-200 leading-relaxed">
+          Share this product with friends. If they sign up using your link, you'll earn <span className="font-bold text-wine dark:text-wine-tint bg-wine/10 dark:bg-wine/20 px-1.5 py-0.5 rounded">₹100 credits</span>.
         </p>
         {referralCode ? (
           <div className="flex gap-2">

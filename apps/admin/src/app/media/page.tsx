@@ -256,7 +256,7 @@ export default function MediaManager() {
             >
               <div className="aspect-square bg-gray-50 relative flex items-center justify-center border-b border-gray-100 overflow-hidden">
                  {item.type?.toLowerCase().includes("image") ? (
-                   <img src={item.url?.startsWith('http') ? item.url : `${(`${API_BASE}/api/v1`).replace('/api/v1', '')}${item.url}`} alt={item.filename} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                   <img src={item.url?.startsWith('http') ? item.url : `${API_BASE.replace(/\/api\/v1\/?$/, "")}${item.url}`} alt={item.filename} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
                  ) : (
                    <div className="flex flex-col items-center gap-2">
                      <FilmIcon className="text-gray-300" size={40} />

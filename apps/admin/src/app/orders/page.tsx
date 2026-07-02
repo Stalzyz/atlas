@@ -458,7 +458,7 @@ export default function OrdersPage() {
                             const rawUrl = item.variant?.product?.images?.[0]?.url
                               || item.imageUrl
                               || item.variant?.imageUrl;
-                            const apiBase = (API_BASE).replace('/api/v1', '');
+                            const apiBase = API_BASE.replace(/\/api\/v1\/?$/, "");
                             const imageUrl = rawUrl
                               ? (rawUrl.startsWith('http') ? rawUrl : `${apiBase}${rawUrl}`)
                               : null;

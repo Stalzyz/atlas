@@ -284,7 +284,7 @@ function BulkEditContent() {
                     <div className="flex items-center gap-3 overflow-hidden">
                       {p.images?.[0] && (
                         <img
-                          src={p.images[0].url?.startsWith('http') ? p.images[0].url : `${API.replace('/api/v1', '')}${p.images[0].url}`}
+                          src={p.images[0].url?.startsWith('http') ? p.images[0].url : `${API_BASE.replace(/\/api\/v1\/?$/, "")}${p.images[0].url}`}
                           className="w-8 h-10 object-cover rounded flex-shrink-0"
                           alt={p.title}
                           onError={(e: any) => { e.target.style.display = 'none'; }}

@@ -286,7 +286,7 @@ export default function ProductManagement() {
     if (stock === 0) outOfStockCount++;
     else if (stock < 20) lowStockCount++;
 
-    const apiBase = (API_BASE).replace('/api/v1', '');
+    const apiBase = API_BASE.replace(/\/api\/v1\/?$/, "");
     const rawImageUrl = p.images?.[0]?.url || '';
     const imageUrl = rawImageUrl
       ? (rawImageUrl.startsWith('http') ? rawImageUrl : `${apiBase}${rawImageUrl}`)

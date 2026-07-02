@@ -586,7 +586,7 @@ export default function EditProductPage() {
                       className="relative aspect-[3/4] rounded-2xl overflow-hidden group"
                     >
                       <img 
-                        src={typeof img === 'string' ? (img.startsWith('http') ? img : `${(`${API_BASE}/api/v1`).replace('/api/v1', '')}${img}`) : (img?.url?.startsWith('http') ? img.url : `${(`${API_BASE}/api/v1`).replace('/api/v1', '')}${img?.url || ''}`)} 
+                        src={typeof img === 'string' ? (img.startsWith('http') ? img : `${API_BASE.replace(/\/api\/v1\/?$/, "")}${img}`) : (img?.url?.startsWith('http') ? img.url : `${API_BASE.replace(/\/api\/v1\/?$/, "")}${img?.url || ''}`)} 
                         className="w-full h-full object-cover" 
                       />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

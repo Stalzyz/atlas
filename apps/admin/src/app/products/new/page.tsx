@@ -514,7 +514,7 @@ export default function AddProductPage() {
                {/* Existing Images */}
                {images.map(img => (
                  <div key={img.id} className="aspect-[3/4] rounded-xl relative overflow-hidden group bg-gray-100 border border-gray-200">
-                    <img src={img.url?.startsWith('http') ? img.url : `${(`${API_BASE}/api/v1`).replace('/api/v1', '')}${img.url}`} className="w-full h-full object-cover" />
+                    <img src={img.url?.startsWith('http') ? img.url : `${API_BASE.replace(/\/api\/v1\/?$/, "")}${img.url}`} className="w-full h-full object-cover" />
                     {img.isPrimary && (
                       <span className="absolute top-2 left-2 bg-charcoal text-white text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Primary</span>
                     )}

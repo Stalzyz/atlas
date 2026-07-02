@@ -77,12 +77,12 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
     pm2 start apps/api/dist/src/main.js --name raaghas-api
 
   NODE_ENV=production PORT=6010 \
-    pm2 start apps/admin/.next/standalone/apps/admin/server.js \
+    pm2 start server.js \
     --name raaghas-admin \
     --cwd /var/www/raaghas_new/apps/admin/.next/standalone/apps/admin
 
   NODE_ENV=production PORT=6009 \
-    pm2 start apps/storefront/.next/standalone/apps/storefront/server.js \
+    pm2 start server.js \
     --name raaghas-storefront \
     --cwd /var/www/raaghas_new/apps/storefront/.next/standalone/apps/storefront
 

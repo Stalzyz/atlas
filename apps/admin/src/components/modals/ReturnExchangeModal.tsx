@@ -44,7 +44,7 @@ export function ReturnExchangeModal({
     if (!token) return;
     setIsLoadingVariants(true);
     try {
-      const res = await fetch(`${`${API_BASE}/api/v1`}/products/admin/${productId}`, {
+      const res = await fetch(`${API_BASE}/products/admin/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -65,7 +65,7 @@ export function ReturnExchangeModal({
 
     setIsSubmitting(true);
     try {
-      const res = await fetch(`${`${API_BASE}/api/v1`}/orders/admin/${orderId}/exchange-or-return`, {
+      const res = await fetch(`${API_BASE}/orders/admin/${orderId}/exchange-or-return`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

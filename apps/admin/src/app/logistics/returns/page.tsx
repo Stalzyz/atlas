@@ -21,7 +21,7 @@ export default function ReverseLogisticsPage() {
 
   const fetchReturns = async () => {
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       
       const [res, settingsRes] = await Promise.all([
         fetch(`${baseUrl}/logistics/returns`, {
@@ -58,7 +58,7 @@ export default function ReverseLogisticsPage() {
   const handleApprove = async (id: string) => {
     if (!confirm("Are you sure you want to approve this return request? This will automatically restore inventory and record a refund.")) return;
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/logistics/admin/returns/${id}/approve`, {
         method: "PATCH",
         headers: { 
@@ -82,7 +82,7 @@ export default function ReverseLogisticsPage() {
     const reason = prompt("Please enter the reason for rejection:");
     if (reason === null) return;
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/logistics/admin/returns/${id}/reject`, {
         method: "PATCH",
         headers: { 
@@ -127,7 +127,7 @@ export default function ReverseLogisticsPage() {
   const savePolicy = async () => {
     setSavingPolicy(true);
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/settings`, {
         method: "PATCH",
         headers: { 

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useAdminAuth } from "@/components/providers/AuthProvider";
 
-const API_URL = `${API_BASE}/api/v1`;
+const API_URL = API_BASE;
 
 interface Lead {
   id: string;

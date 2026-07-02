@@ -13,7 +13,7 @@ export default function EmailTemplateEditor({ params }: { params: Promise<{ id: 
   const isNew = id === 'new';
   const router = useRouter();
   const { token, isLoading: authLoading } = useAdminAuth();
-  const baseUrl = `${API_BASE}/api/v1`;
+  const baseUrl = API_BASE;
   const [error, setError] = useState<string | null>(null);
   
   const [template, setTemplate] = useState({

@@ -108,7 +108,7 @@ export default function CouponManagement() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure?")) return;
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/growth/coupons/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }

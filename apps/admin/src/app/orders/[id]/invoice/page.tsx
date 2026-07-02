@@ -24,7 +24,7 @@ export default function OrderInvoicePage() {
 
   const fetchOrder = async () => {
     try {
-      const apiBase = `${API_BASE}/api/v1`;
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}/orders/admin/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });

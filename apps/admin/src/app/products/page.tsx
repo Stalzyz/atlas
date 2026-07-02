@@ -62,7 +62,7 @@ export default function ProductManagement() {
       try {
         const headers: Record<string, string> = {};
         if (token) headers['Authorization'] = `Bearer ${token}`;
-        const res = await fetch(`${`${API_BASE}/api/v1`}/products?adminMode=true&limit=2000`, {
+        const res = await fetch(`${API_BASE}/products?adminMode=true&limit=2000`, {
           headers,
           credentials: 'include',
         });
@@ -82,7 +82,7 @@ export default function ProductManagement() {
   useEffect(() => {
     async function loadCollections() {
       try {
-        const res = await fetch(`${`${API_BASE}/api/v1`}/products/collections`);
+        const res = await fetch(`${API_BASE}/products/collections`);
         if (res.ok) {
           setCollections(await res.json());
         }
@@ -106,7 +106,7 @@ export default function ProductManagement() {
     formData.append("file", importFile);
 
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const headers: Record<string, string> = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
@@ -152,7 +152,7 @@ export default function ProductManagement() {
     
     setIsBulkLoading(true);
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const headers: Record<string, string> = { "Content-Type": "application/json" };
       if (token) headers['Authorization'] = `Bearer ${token}`;
       const res = await fetch(`${baseUrl}/products/bulk-action`, {
@@ -182,7 +182,7 @@ export default function ProductManagement() {
     if (!confirm("This will set taxRate = 5% and taxInclusive = true for ALL products. Continue?")) return;
     setIsSettingTax(true);
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/products/set-default-tax`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
@@ -652,7 +652,7 @@ export default function ProductManagement() {
                                  onClick={async () => {
                                    if (!confirm('Duplicate this product?')) return;
                                    try {
-                                     const res = await fetch(`${`${API_BASE}/api/v1`}/products/${p.id}/duplicate`, {
+                                     const res = await fetch(`${API_BASE}/products/${p.id}/duplicate`, {
                                        method: 'POST',
                                        headers: { Authorization: `Bearer ${token}` }
                                      });
@@ -668,7 +668,7 @@ export default function ProductManagement() {
                                  onClick={async () => {
                                     if (!confirm(`Are you sure you want to ${p.status === 'Draft' ? 'Publish' : 'Archive'} this product?`)) return;
                                     try {
-                                      const res = await fetch(`${`${API_BASE}/api/v1`}/products/${p.id}/toggle-publish`, {
+                                      const res = await fetch(`${API_BASE}/products/${p.id}/toggle-publish`, {
                                         method: 'PATCH',
                                         headers: { Authorization: `Bearer ${token}` }
                                       });

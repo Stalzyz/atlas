@@ -21,7 +21,7 @@ function BulkEditContent() {
   const [editedItems, setEditedItems] = useState<Record<string, any>>({});
   const [sizeGuides, setSizeGuides] = useState<any[]>([]);
 
-  const API = `${API_BASE}/api/v1`;
+  const API = API_BASE;
 
   useEffect(() => {
     async function loadGuides() {

@@ -43,7 +43,7 @@ export default function CollectionsPage() {
   async function loadCollections() {
     setLoading(true);
     try {
-      const apiBase = (API_BASE).replace(/\/api\/v1\/?$/, '') + '/api/v1';
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}/products/collections?adminMode=true`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -83,7 +83,7 @@ export default function CollectionsPage() {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const apiBase = (API_BASE).replace(/\/api\/v1\/?$/, '') + '/api/v1';
+      const apiBase = API_BASE;
       const url = editingCollection 
         ? `${apiBase}/products/collections/${editingCollection.id}`
         : `${apiBase}/products/collections`;
@@ -112,7 +112,7 @@ export default function CollectionsPage() {
     if (!confirm(`Are you sure you want to delete the "${title}" collection?`)) return;
 
     try {
-      const apiBase = (API_BASE).replace(/\/api\/v1\/?$/, '') + '/api/v1';
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}/products/collections/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }

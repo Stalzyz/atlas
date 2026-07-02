@@ -100,7 +100,7 @@ export default function OrdersPage() {
     if (!token) return;
     const fetchSettings = async () => {
       try {
-        const apiBase = `${API_BASE}/api/v1`;
+        const apiBase = API_BASE;
         const res = await fetch(`${apiBase}/settings`, { headers: { Authorization: `Bearer ${token}` } });
         if (res.ok) setStoreSettings(await res.json());
       } catch (err) {}
@@ -129,7 +129,7 @@ export default function OrdersPage() {
       if (filters.financialStatus) queryParams.append("financialStatus", filters.financialStatus);
       if (filters.fulfillmentStatus) queryParams.append("fulfillmentStatus", filters.fulfillmentStatus);
 
-      const apiBase = `${API_BASE}/api/v1`;
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}/orders/admin/all?${queryParams.toString()}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -168,7 +168,7 @@ export default function OrdersPage() {
     }
 
     try {
-      const apiBase = `${API_BASE}/api/v1`;
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}${endpoint.replace('/api/v1', '')}`, {
         method: 'PATCH',
         headers: { 

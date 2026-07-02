@@ -33,7 +33,7 @@ export default function FulfillmentDesk() {
 
   const fetchStoreSettings = async () => {
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/settings`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -48,7 +48,7 @@ export default function FulfillmentDesk() {
 
   const fetchOrders = async () => {
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/orders/admin/all`, {
         headers: { Authorization: `Bearer ${token}` }
       });

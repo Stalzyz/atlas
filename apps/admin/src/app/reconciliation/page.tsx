@@ -245,7 +245,7 @@ export default function ReconciliationPage() {
 
       // 2. Fetch all confirmed orders from the DB (no date filter, let the CSV define the scope)
       const res = await fetch(
-        `${`${API_BASE}/api/v1`}/orders/admin/all`,
+        `${API_BASE}/orders/admin/all`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const orders: any[] = await res.json();

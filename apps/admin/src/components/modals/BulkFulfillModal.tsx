@@ -23,7 +23,7 @@ export function BulkFulfillModal({ isOpen, onClose, selectedOrderIds, onComplete
         trackingId: trackingId // Using same tracking ID for simplicity in basic bulk, or can be improved later
       }));
 
-      const apiBase = `${API_BASE}/api/v1`;
+      const apiBase = API_BASE;
       const res = await fetch(`${apiBase}/orders/admin/bulk-fulfillments`, {
         method: "POST",
         headers: { 

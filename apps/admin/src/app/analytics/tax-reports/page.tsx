@@ -43,7 +43,7 @@ export default function GSTReportsPage() {
   async function loadTaxData() {
     try {
       setLoading(true);
-      const apiBase = (API_BASE).replace(/\/api\/v1\/?$/, '') + '/api/v1';
+      const apiBase = API_BASE;
       const params = new URLSearchParams();
       if (startDate) params.append('from', startDate);
       if (endDate) params.append('to', endDate);

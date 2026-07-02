@@ -63,7 +63,7 @@ export default function AddProductPage() {
     async function loadGuides() {
       if (!token) return;
       // NEXT_PUBLIC_API_URL already includes /api/v1 — don't append it again
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       try {
         const [sgRes, collRes] = await Promise.all([
           fetch(`${baseUrl}/size-guides`, { headers: { Authorization: `Bearer ${token}` } }),

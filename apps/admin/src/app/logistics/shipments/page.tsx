@@ -23,7 +23,7 @@ export default function ShipmentTrackingPage() {
 
   const fetchShipments = async () => {
     try {
-      const baseUrl = `${API_BASE}/api/v1`;
+      const baseUrl = API_BASE;
       const res = await fetch(`${baseUrl}/logistics/shipments`, {
         headers: { Authorization: `Bearer ${token}` }
       });

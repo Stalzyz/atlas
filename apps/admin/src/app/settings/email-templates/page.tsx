@@ -15,7 +15,7 @@ export default function EmailTemplatesPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { token, isLoading: authLoading } = useAdminAuth();
-  const baseUrl = `${API_BASE}/api/v1`;
+  const baseUrl = API_BASE;
 
   useEffect(() => {
     // Wait until auth provider has finished loading before fetching

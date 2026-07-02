@@ -24,7 +24,7 @@ function SlipContent({ order, storeSettings }: { order: any; storeSettings: any 
   const fromWebsite = storeSettings?.websiteUrl || 'www.raaghas.in';
 
   return (
-    <div className="slip-container" style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '0.25in', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto' }}>
+    <div className="slip-container" style={{ width: '100%', height: '148.5mm', boxSizing: 'border-box', padding: '0.4in', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto', overflow: 'hidden', pageBreakInside: 'avoid' }}>
       {/* Top Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '0.1in', marginBottom: '0.15in' }}>
         <div style={{ flex: 1 }}>
@@ -37,7 +37,7 @@ function SlipContent({ order, storeSettings }: { order: any; storeSettings: any 
       </div>
 
       {/* Ship To */}
-      <div style={{ flex: 1, paddingLeft: '0.1in' }}>
+      <div style={{ paddingLeft: '0.1in' }}>
         <h3 style={{ margin: '0 0 0.05in 0', fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase' }}>SHIP TO</h3>
         <p style={{ margin: 0, fontSize: '12pt', fontWeight: 'bold' }}>{shippingAddr.name || order.customerName}</p>
         <p style={{ margin: '4px 0 0', fontSize: '9pt', lineHeight: 1.4 }}>
@@ -50,7 +50,7 @@ function SlipContent({ order, storeSettings }: { order: any; storeSettings: any 
       </div>
 
       {/* Footer */}
-      <div style={{ borderTop: '1px solid #000', paddingTop: '0.1in', marginTop: '0.2in', textAlign: 'center' }}>
+      <div style={{ borderTop: '1px solid #000', paddingTop: '0.1in', marginTop: 'auto', textAlign: 'center' }}>
         <p style={{ margin: 0, fontSize: '9pt', fontWeight: 'bold' }}>Thank you for shopping with us!</p>
         <p style={{ margin: '2px 0 0', fontSize: '7.5pt' }}>
           {fromName} | {fromEmail} | {fromWebsite}
@@ -84,7 +84,7 @@ export const PackingSlipModal: React.FC<PackingSlipModalProps> = ({ isOpen, onCl
         <head>
           <title>Packing Slip${isBulk ? 's' : ` - ${orders[0]?.id || ''}`}</title>
           <style>
-            @page { size: A5; margin: 10pt; }
+            @page { size: A4 portrait; margin: 0; }
             body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; }
             .page-break { page-break-after: always; }
             * { box-sizing: border-box; }

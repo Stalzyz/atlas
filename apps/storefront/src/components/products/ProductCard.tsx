@@ -33,13 +33,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const isWishlisted = isInWishlist(product.id);
-  const price = Number(product.price || 0);
-  const rawCompare = product.compareAtPrice || (product as any).mrp;
-  const compareAtPrice = rawCompare ? Number(rawCompare) : null;
-  const savings = compareAtPrice && compareAtPrice > price ? compareAtPrice - price : 0;
-  
   const hasVariants = product.variants && product.variants.length > 0;
   const variants: any[] = product.variants || [];
+  
+  const price = Number(product.price || variants[0]?.price || 0);
+  const rawCompare = product.compareAtPrice || (product as any).mrp || variants[0]?.mrp || variants[0]?.compareAtPrice;
+  const compareAtPrice = rawCompare ? Number(rawCompare) : null;
+  const savings = compareAtPrice && compareAtPrice > price ? compareAtPrice - price : 0;
 
   const optionGroups = (() => {
     const groups: { name: string; values: string[] }[] = [];

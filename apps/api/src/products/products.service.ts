@@ -1,11 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import OpenAI from 'openai';
 
 @Injectable()
 export class ProductService {
+  private openai?: OpenAI;
+  private readonly logger = new Logger(ProductService.name);
+
   constructor(
     private prisma: PrismaService,
-  ) {}
+  ) {
+    if (process.env.OPENAI_API_KEY) {
+      this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    }
+  }
 
   async findAll(query: { 
     ids?: string[];
@@ -315,6 +323,56 @@ export class ProductService {
     return [...dbCollections, ...virtualCollections];
   }
 
+  private async aiPreProcessCsv(rows: any[]): Promise<any[]> {
+    if (!this.openai) {
+      this.logger.warn('OpenAI API Key is missing. Skipping AI pre-processing and falling back to standard import.');
+      return rows;
+    }
+    
+    this.logger.log(`Starting AI Pre-Processing for ${rows.length} rows...`);
+    const chunkSize = 30;
+    let processedRows: any[] = [];
+    
+    for (let i = 0; i < rows.length; i += chunkSize) {
+      const chunk = rows.slice(i, i + chunkSize);
+      
+      try {
+        const prompt = `
+You are an expert eCommerce data normalization assistant.
+Your task is to take this array of raw product CSV rows (in JSON format) and clean, map, and augment them.
+Rules:
+1. Standardize column names. The output MUST use exactly these keys if the data exists: "Product_ID", "Title", "Handle", "Description", "Category", "Brand", "Color", "Size", "SKU", "Price", "Inventory", "Status", "Published". Keep any other columns as they are.
+2. If "Handle" is missing or blank, generate an SEO-friendly URL slug (e.g. "red-cotton-t-shirt"). Variants of the same base product MUST be given the exact same Handle so they group together!
+3. If "SKU" is missing or blank, generate one following the format [BRAND-3]-[CAT-3]-[COLOR-3]-[SIZE] (e.g. RAA-APP-RED-XL). If size or color are missing, omit them or use a default.
+4. Return the result strictly as a valid JSON object with a single key "rows" containing the array of processed objects.
+        `;
+
+        const response = await this.openai.chat.completions.create({
+          model: 'gpt-4o-mini',
+          messages: [
+            { role: 'system', content: prompt },
+            { role: 'user', content: JSON.stringify(chunk) }
+          ],
+          response_format: { type: 'json_object' }
+        });
+
+        const rawContent = response.choices[0]?.message?.content || '{}';
+        const parsedContent = JSON.parse(rawContent);
+        
+        if (parsedContent && Array.isArray(parsedContent.rows)) {
+          processedRows = processedRows.concat(parsedContent.rows);
+        } else {
+          throw new Error('AI returned invalid JSON format (missing "rows" array)');
+        }
+      } catch (err: any) {
+        this.logger.error(`AI Pre-processing chunk failed: ${err.message}. Falling back to raw chunk.`);
+        processedRows = processedRows.concat(chunk);
+      }
+    }
+    this.logger.log('AI Pre-Processing completed.');
+    return processedRows;
+  }
+
   async processCsvBulkUpload(buffer: Buffer) {
     const Papa = require('papaparse');
     const parseNum = (val: any, defaultVal: any = 0) => {
@@ -332,7 +390,7 @@ export class ProductService {
     const parsed = Papa.parse(csvString, {
       header: true,
       skipEmptyLines: true,
-      dynamicTyping: true,
+      dynamicTyping: false,
     });
 
     if (parsed.errors.length > 0) {
@@ -346,7 +404,11 @@ export class ProductService {
       }
     }
 
-    const rows = parsed.data as any[];
+    let rows = parsed.data as any[];
+    
+    // AI Pre-Processing step (Skipped if OPENAI_API_KEY is not set)
+    rows = await this.aiPreProcessCsv(rows);
+    
     const summary = { success: 0, updated: 0, failed: 0, errors: [] as {key: string, error: string}[] };
 
     // Group rows by Product Identifier (Title or Handle or Product_ID)
@@ -423,8 +485,9 @@ export class ProductService {
             collectionIds.push({ id: dbColl.id });
           }
 
-          const rawStatus = (firstRow.Status || firstRow.Published?.toString()?.toLowerCase() === 'true' ? 'ACTIVE' : 'DRAFT').toString().toUpperCase();
-          const isPublished = rawStatus === 'ACTIVE' || firstRow.Published?.toString().toUpperCase() === 'TRUE';
+          const rawStatusStr = (firstRow.Status || firstRow.Published?.toString()?.trim()?.toLowerCase() === 'true' || firstRow.Published === true ? 'ACTIVE' : 'DRAFT').toString().trim().toUpperCase();
+          const rawStatus = rawStatusStr === 'ACTIVE' || rawStatusStr === 'PUBLISHED' ? 'ACTIVE' : 'DRAFT';
+          const isPublished = rawStatus === 'ACTIVE';
 
           const productPayload: any = {
             title,
@@ -1016,7 +1079,7 @@ export class ProductService {
         
         if (item.status !== undefined) {
            productData.status = item.status;
-           productData.published = item.status === 'Active' || item.status === 'PUBLISHED' || item.status === 'ACTIVE';
+           productData.published = item.status.toString().toUpperCase() === 'ACTIVE' || item.status.toString().toUpperCase() === 'PUBLISHED';
         }
         if (item.bundleIds !== undefined) productData.bundleIds = item.bundleIds;
         if (item.featuredCoupon !== undefined) productData.featuredCoupon = item.featuredCoupon;
@@ -1055,21 +1118,6 @@ export class ProductService {
           const variants = await tx.variant.findMany({ where: { productId: item.id }, take: 1, orderBy: { id: 'asc' } });
           if (variants.length > 0) {
              await tx.variant.update({ where: { id: variants[0].id }, data: variantData });
-          }
-        }
-
-        // Auto-Draft if Out of Stock
-        const productInfo = await tx.product.findUnique({
-          where: { id: item.id },
-          include: { variants: true }
-        });
-        if (productInfo) {
-          const totalInventory = productInfo.variants.reduce((sum: number, v: any) => sum + v.inventory, 0);
-          if (totalInventory <= 0 && productInfo.status !== 'DRAFT') {
-            await tx.product.update({
-              where: { id: item.id },
-              data: { status: 'DRAFT', published: false }
-            });
           }
         }
 

@@ -99,7 +99,7 @@ export default function ReviewList({ productId }: { productId: string }) {
                   ))}
                </div>
                <span className="text-[10px] text-charcoal/30 uppercase font-bold tracking-widest font-sans">
-                 {new Date(review.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                 {new Date(review.createdAt).toLocaleDateString('en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}
                </span>
             </div>
             

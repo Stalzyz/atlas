@@ -130,7 +130,7 @@ export default function EditOrderItemsPage() {
           </Link>
           <div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">Edit Order Items</h1>
-            <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Order #{order.formattedOrderNumber || order.orderNumber || order.id.slice(-8).toUpperCase()}</p>
+            <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Order #{order.formattedOrderNumber || (order.orderNumber != null ? String(order.orderNumber + 1000) : order.id.slice(-8).toUpperCase())}</p>
           </div>
         </div>
         <button 

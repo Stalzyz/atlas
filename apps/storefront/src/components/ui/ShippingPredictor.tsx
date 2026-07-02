@@ -71,7 +71,7 @@ export function ShippingPredictor() {
       const minDate = new Date(today); minDate.setDate(today.getDate() + minDays);
       const maxDate = new Date(today); maxDate.setDate(today.getDate() + maxDays);
       
-      setDeliveryDate(`Arrives ${minDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${maxDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`);
+      setDeliveryDate(`Arrives ${minDate.toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })} - ${maxDate.toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })}`);
 
     } catch (err: any) {
       setError(err.message || "An error occurred while checking shipping.");

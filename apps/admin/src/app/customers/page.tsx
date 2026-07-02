@@ -92,8 +92,8 @@ export default function CustomersPage() {
       `"${c.role || ''}"`,
       c._count?.orders || 0,
       c.wallet?.balance || 0,
-      `"${c.createdAt ? new Date(c.createdAt).toLocaleDateString() : ''}"`,
-      `"${c.lastActiveAt ? new Date(c.lastActiveAt).toLocaleDateString() : ''}"`,
+      `"${c.createdAt ? new Date(c.createdAt).toLocaleDateString('en-GB') : ''}"`,
+      `"${c.lastActiveAt ? new Date(c.lastActiveAt).toLocaleDateString('en-GB') : ''}"`,
       `"${(c.interests || []).join('; ')}"`
     ]);
     const csv = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
@@ -236,8 +236,8 @@ export default function CustomersPage() {
                        <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
                          <Clock size={14} className="text-gray-300" />
                          {activeTab === 'ALL' 
-                           ? new Date(customer.createdAt).toLocaleDateString()
-                           : customer.lastActiveAt ? new Date(customer.lastActiveAt).toLocaleDateString() : 'Never'}
+                           ? new Date(customer.createdAt).toLocaleDateString('en-GB')
+                           : customer.lastActiveAt ? new Date(customer.lastActiveAt).toLocaleDateString('en-GB') : 'Never'}
                        </div>
                     </td>
                     <td className="px-8 py-6">

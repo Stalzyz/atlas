@@ -504,7 +504,7 @@ export class GrowthService {
 
     // Fetch Global Settings for Loyalty
     const settings = await this.settingsService.getSettings();
-    const minOrderValue = Number(settings.loyaltyMinOrderValue || 2000.00);
+    const minOrderValue = Number(settings.loyaltyMinOrderValue || 0.00);
     const pointsRate = Number(settings.loyaltyPointsRate || 1.00);
 
     const orderTotal = Number(order.totalAmount);
@@ -546,5 +546,57 @@ export class GrowthService {
 
     // Optionally notify the user they earned points
     // await this.notificationsService.notify(...)
+  }
+
+  async revokeLoyaltyPoints(userId: string, orderId: string) {
+    await this.prisma.$transaction(async (tx) => {
+      // Find the original credit transaction for this order
+      const originalReward = await tx.walletTransaction.findFirst({
+        where: {
+          wallet: { userId },
+          referenceId: orderId,
+          type: 'CREDIT',
+          reason: 'LOYALTY_REWARD'
+        }
+      });
+
+      if (!originalReward) {
+        return; // No points were awarded, nothing to revoke
+      }
+
+      // Check if we already revoked it to prevent double-revocation
+      const alreadyRevoked = await tx.walletTransaction.findFirst({
+        where: {
+          wallet: { userId },
+          referenceId: orderId,
+          type: 'DEBIT',
+          reason: 'MANUAL_ADJUSTMENT'
+        }
+      });
+
+      if (alreadyRevoked) {
+        return;
+      }
+
+      // Deduct the points from wallet
+      await tx.wallet.update({
+        where: { id: originalReward.walletId },
+        data: { balance: { decrement: originalReward.amount } }
+      });
+
+      // Log the revocation
+      await tx.walletTransaction.create({
+        data: {
+          walletId: originalReward.walletId,
+          amount: originalReward.amount,
+          type: 'DEBIT',
+          reason: 'MANUAL_ADJUSTMENT',
+          referenceId: orderId,
+          notes: `Revoked ${originalReward.amount} points due to cancellation of Order #${orderId.substring(0, 8)}`
+        }
+      });
+      
+      console.log(`Revoked ${originalReward.amount} loyalty points from user ${userId} for cancelled order ${orderId}`);
+    });
   }
 }

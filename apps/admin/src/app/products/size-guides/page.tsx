@@ -157,7 +157,7 @@ export default function SizeGuidesPage() {
               <div key={guide.id} className="p-6 flex items-center justify-between hover:bg-gray-50 transition-colors">
                 <div>
                   <h3 className="font-bold text-charcoal">{guide.name}</h3>
-                  <p className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Updated {new Date(guide.updatedAt).toLocaleDateString()}</p>
+                  <p className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Updated {new Date(guide.updatedAt).toLocaleDateString('en-GB')}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <button onClick={() => startEdit(guide)} className="p-2 bg-gray-50 rounded-lg text-gray-400 hover:text-charcoal hover:bg-gray-100"><Edit size={16} /></button>

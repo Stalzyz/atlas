@@ -95,7 +95,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, ord
         <div className="flex-1 overflow-y-auto p-8 bg-gray-50">
           <InvoiceDocument 
             invoiceNumber={order?.formattedOrderNumber || `INV-${new Date(order?.createdAt || Date.now()).getFullYear()}-${order?.orderNumber != null ? String(order.orderNumber).padStart(5, '0') : (order?.id || 'XXXX').slice(-4).toUpperCase()}`}
-            date={new Date(order?.createdAt || Date.now()).toLocaleDateString()}
+            date={new Date(order?.createdAt || Date.now()).toLocaleDateString('en-GB')}
             customer={{
               name: order.customerName,
               email: order.customerEmail,

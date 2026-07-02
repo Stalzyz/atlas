@@ -168,7 +168,7 @@ function MyOrdersPageContent() {
                          <span className="text-charcoal/40 font-normal mx-2">·</span>
                          ₹{Number(order.totalAmount).toLocaleString()}
                        </p>
-                       <p className="text-xs text-charcoal/50">{new Date(order.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                       <p className="text-xs text-charcoal/50">{new Date(order.createdAt).toLocaleDateString('en-GB', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                     </div>
 
                     {/* Status & Action */}

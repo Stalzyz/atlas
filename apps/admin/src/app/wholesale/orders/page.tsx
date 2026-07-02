@@ -108,7 +108,7 @@ export default function WholesaleOrders() {
                       <p className="font-bold text-charcoal text-sm">{order.retailer?.businessName || "Direct Boutique"}</p>
                       <p className="text-[10px] text-gray-400 mt-0.5">{order._count?.items || 0} pieces</p>
                     </td>
-                    <td className="p-4 text-xs font-medium text-gray-500">{new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td className="p-4 text-xs font-medium text-gray-500">{new Date(order.createdAt).toLocaleDateString('en-GB')}</td>
                     <td className="p-4">
                       <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-widest ${statusCfg.color}`}>
                         <StatusIcon size={12} /> {statusCfg.label}

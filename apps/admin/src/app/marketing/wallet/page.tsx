@@ -247,7 +247,7 @@ export default function WalletManagement() {
                         <div>
                           <p className="text-xs font-bold text-charcoal">{tx.reason.replace(/_/g, ' ')}</p>
                           <p className="text-[9px] text-gray-400 font-medium mt-0.5">
-                            {new Date(tx.createdAt).toLocaleDateString()} &middot; {tx.notes || 'No notes'}
+                            {new Date(tx.createdAt).toLocaleDateString('en-GB')} &middot; {tx.notes || 'No notes'}
                           </p>
                         </div>
                         <p className={`text-xs font-bold ${tx.type === 'CREDIT' ? 'text-green-600' : 'text-red-600'}`}>

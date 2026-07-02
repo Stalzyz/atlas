@@ -143,7 +143,7 @@ export default function InvoiceHistory() {
                               <span className="font-bold text-sm text-charcoal">{inv.invoiceNumber}</span>
                            </div>
                         </td>
-                        <td className="py-4 px-6 text-sm text-gray-500">{new Date(inv.date).toLocaleDateString()}</td>
+                        <td className="py-4 px-6 text-sm text-gray-500">{new Date(inv.date).toLocaleDateString('en-GB')}</td>
                         <td className="py-4 px-6">
                            <p className="text-sm font-bold text-charcoal">{inv.customerName || 'N/A'}</p>
                            {inv.referenceType && <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mt-1">{inv.referenceType}</p>}

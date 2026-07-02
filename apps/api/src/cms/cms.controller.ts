@@ -448,7 +448,7 @@ export class CmsController {
             order: 0,
             content: {
               title: policy.title,
-              lastUpdated: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
+              lastUpdated: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
               sections: policy.sections,
             },
             style: { padding: 80 },

@@ -222,7 +222,7 @@ export default function InvoiceView() {
             <table className="text-[10px] ml-auto font-bold uppercase tracking-widest text-gray-500">
               <tbody>
                 <tr><td className="pr-4 py-1 text-left">Invoice No.</td><td className="text-charcoal">{invoiceNumber}</td></tr>
-                <tr><td className="pr-4 py-1 text-left">Date</td><td className="text-charcoal">{new Date(date).toLocaleDateString()}</td></tr>
+                <tr><td className="pr-4 py-1 text-left">Date</td><td className="text-charcoal">{new Date(date).toLocaleDateString('en-GB')}</td></tr>
                 <tr><td className="pr-4 py-1 text-left">Place of Supply</td><td className="text-charcoal">{seller.state}</td></tr>
               </tbody>
             </table>

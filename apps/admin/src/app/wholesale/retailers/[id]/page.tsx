@@ -216,7 +216,7 @@ export default function RetailerProfile({ params }: { params: Promise<{ id: stri
                     <Package size={16} className="text-gray-300" />
                     <div>
                       <p className="text-sm font-bold text-charcoal uppercase text-[10px]">#{order.id?.slice(-6) || "N/A"}</p>
-                      <p className="text-[10px] text-gray-400 flex items-center gap-1"><Calendar size={10} /> {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : "N/A"}</p>
+                      <p className="text-[10px] text-gray-400 flex items-center gap-1"><Calendar size={10} /> {order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-GB') : "N/A"}</p>
                     </div>
                   </div>
                   <div className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${ORDER_STATUS_COLOR[order.status] || "bg-gray-100 text-gray-600"}`}>

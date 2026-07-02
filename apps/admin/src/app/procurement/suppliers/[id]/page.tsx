@@ -197,7 +197,7 @@ export default function SupplierDashboard() {
                     const bal = Math.max(0, amount - paid);
                     return (
                       <tr key={o.id || i} className="hover:bg-gray-50/80 transition">
-                         <td className="py-4 px-6 text-sm text-charcoal">{new Date(o.createdAt || o.date).toLocaleDateString()}</td>
+                         <td className="py-4 px-6 text-sm text-charcoal">{new Date(o.createdAt || o.date).toLocaleDateString('en-GB')}</td>
                          <td className="py-4 px-6 text-sm text-wine font-bold">PO-{(o.id || '').substring(0,6).toUpperCase()}</td>
                          <td className="py-4 px-6 text-sm text-charcoal font-medium">₹{amount.toLocaleString()}</td>
                          <td className="py-4 px-6 text-sm text-gray-500">₹{paid.toLocaleString()}</td>

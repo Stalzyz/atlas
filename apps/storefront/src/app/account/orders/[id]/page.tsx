@@ -103,7 +103,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                          <h1 className="text-4xl font-bold tracking-tight text-charcoal">
                             {order.formattedOrderNumber || (order.orderNumber != null ? `RGS-${order.orderNumber + 1000}` : order.id.slice(-10).toUpperCase())}
                          </h1>
-                         <p className="text-xs text-charcoal/40 font-medium">Placed on {new Date(order.createdAt).toLocaleDateString()} at {new Date(order.createdAt).toLocaleTimeString()}</p>
+                         <p className="text-xs text-charcoal/40 font-medium">Placed on {new Date(order.createdAt).toLocaleDateString('en-GB')} at {new Date(order.createdAt).toLocaleTimeString()}</p>
                       </div>
                       {(() => {
                         const smartStatus = getSmartStatus(order);
@@ -125,23 +125,25 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                    <div className="relative py-8">
                       <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-50 -translate-y-1/2" />
                       <div className="absolute top-1/2 left-0 h-0.5 bg-wine -translate-y-1/2 transition-all duration-1000" style={{ 
-                        width: order.status === 'PENDING' ? '12.5%' :
-                               order.status === 'CONFIRMED' ? '37.5%' :
-                               order.status === 'SHIPPED' ? '62.5%' :
-                               order.status === 'DELIVERED' ? '100.5%' : '0%'
+                        width: order.status === 'PENDING' ? '16.5%' :
+                               (order.status === 'CONFIRMED' || order.status === 'PROCESSING') ? '50%' :
+                               (order.status === 'SHIPPED' || order.status === 'DELIVERED') ? '100%' : '0%'
                       }} />
                       
                       <div className="flex justify-between relative">
                          {[
-                            { label: "Ordered", desc: "Received", step: 'PENDING', icon: <ShoppingBag size={14} /> },
-                            { label: "Approved", desc: "Crafting", step: 'CONFIRMED', icon: <CheckCircle2 size={14} /> },
-                            { label: "Dispatched", desc: "In Transit", step: 'SHIPPED', icon: <Truck size={14} /> },
-                            { label: "Arrived", desc: "Home", step: 'DELIVERED', icon: <MapPin size={14} /> }
+                            { label: "Order Confirmed", desc: "", step: 'PENDING', icon: <ShoppingBag size={14} /> },
+                            { label: "Processing", desc: "", step: 'CONFIRMED', icon: <CheckCircle2 size={14} /> },
+                            { label: "Shipped", desc: "", step: 'SHIPPED', icon: <Truck size={14} /> }
                          ].map((step, idx) => {
-                            const active = order.status === step.step || order.status === 'PAYMENT_PENDING' || (idx === 0 && order.status !== 'PENDING' && order.status !== 'PAYMENT_PENDING' && order.status !== 'ABANDONED') || (idx === 1 && (order.status === 'SHIPPED' || order.status === 'DELIVERED')) || (idx === 2 && order.status === 'DELIVERED');
+                            const active = order.status === step.step || 
+                                           order.status === 'PAYMENT_PENDING' || 
+                                           (idx === 0 && order.status !== 'PENDING' && order.status !== 'PAYMENT_PENDING' && order.status !== 'ABANDONED') || 
+                                           (idx === 1 && (order.status === 'SHIPPED' || order.status === 'DELIVERED' || order.status === 'PROCESSING')) || 
+                                           (idx === 2 && (order.status === 'SHIPPED' || order.status === 'DELIVERED'));
                             return (
-                               <div key={idx} className="flex flex-col items-center text-center gap-3">
-                                  <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${active ? 'bg-wine text-white shadow-xl' : 'bg-white border text-gray-200'}`}>
+                               <div key={idx} className="flex flex-col items-center text-center gap-3 bg-white px-2">
+                                  <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all z-10 ${active ? 'bg-wine text-white shadow-xl' : 'bg-white border text-gray-200'}`}>
                                      {step.icon}
                                   </div>
                                   <div className="space-y-0.5">
@@ -152,6 +154,15 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                             )
                          })}
                       </div>
+                      
+                      {/* Tracking Callout */}
+                      {(order.status === 'SHIPPED' || order.status === 'DELIVERED') && order.trackingId && (
+                        <div className="mt-8 text-center bg-gray-50/50 rounded-xl p-4 border border-gray-100">
+                          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+                            Your order has been dispatched. Please click "Track Package" below for live delivery updates.
+                          </p>
+                        </div>
+                      )}
                    </div>
 
                    {/* Quick Actions (In-Card) */}
@@ -208,7 +219,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                               )}
                             </div>
                             <div className="flex items-center gap-4">
-                              <p className="text-[10px] text-charcoal/30 font-bold uppercase tracking-widest">{new Date(event.timestamp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</p>
+                              <p className="text-[10px] text-charcoal/30 font-bold uppercase tracking-widest">{new Date(event.timestamp).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</p>
                               <div className="w-1 h-1 rounded-full bg-charcoal/10" />
                               <p className="text-[10px] text-charcoal/30 font-bold uppercase tracking-widest">{new Date(event.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</p>
                             </div>

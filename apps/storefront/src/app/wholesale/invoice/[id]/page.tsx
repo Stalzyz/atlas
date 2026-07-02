@@ -86,7 +86,7 @@ export default function InvoicePage() {
             </div>
             <div className="text-right text-sm space-y-1">
               <p><span className="text-gray-400">Invoice:</span> <strong className="ml-2 font-mono">{invoiceNumber}</strong></p>
-              <p><span className="text-gray-400">Date:</span> <strong className="ml-2">{new Date(date).toLocaleDateString()}</strong></p>
+              <p><span className="text-gray-400">Date:</span> <strong className="ml-2">{new Date(date).toLocaleDateString('en-GB')}</strong></p>
             </div>
           </div>
 

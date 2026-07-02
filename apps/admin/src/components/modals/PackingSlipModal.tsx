@@ -24,33 +24,33 @@ function SlipContent({ order, storeSettings }: { order: any; storeSettings: any 
   const fromWebsite = storeSettings?.websiteUrl || 'www.raaghas.in';
 
   return (
-    <div className="slip-container" style={{ width: '100%', height: '148.5mm', boxSizing: 'border-box', padding: '0.4in', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto', overflow: 'hidden', pageBreakInside: 'avoid' }}>
+    <div className="slip-container" style={{ width: '15cm', minHeight: '9cm', height: 'auto', boxSizing: 'border-box', padding: '15px', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto', pageBreakInside: 'avoid' }}>
       {/* Top Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '0.1in', marginBottom: '0.15in' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '10px', marginBottom: '10px' }}>
         <div style={{ flex: 1 }}>
           <h1 style={{ margin: 0, fontSize: '12pt', fontWeight: 'bold', textTransform: 'uppercase' }}>{fromName}</h1>
         </div>
         <div style={{ textAlign: 'right' }}>
           <p style={{ margin: 0, fontSize: '11pt', fontWeight: 'bold' }}>Order #{order.formattedOrderNumber || order.orderNumber || order.id.slice(-10).toUpperCase()}</p>
-          <p style={{ margin: '2px 0 0', fontSize: '8pt' }}>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+          <p style={{ margin: '2px 0 0', fontSize: '8pt' }}>Date: {new Date(order.createdAt).toLocaleDateString('en-GB')}</p>
         </div>
       </div>
 
       {/* Ship To */}
-      <div style={{ paddingLeft: '0.1in' }}>
-        <h3 style={{ margin: '0 0 0.05in 0', fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase' }}>SHIP TO</h3>
+      <div style={{ paddingLeft: '5px' }}>
+        <h3 style={{ margin: '0 0 5px 0', fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase' }}>SHIP TO</h3>
         <p style={{ margin: 0, fontSize: '12pt', fontWeight: 'bold' }}>{shippingAddr.name || order.customerName}</p>
-        <p style={{ margin: '4px 0 0', fontSize: '9pt', lineHeight: 1.4 }}>
+        <p style={{ margin: '4px 0 0', fontSize: '10pt', fontWeight: 'bold', lineHeight: 1.4 }}>
           {shippingAddr.address1 || shippingAddr.line1 || shippingAddr.address || ''}<br />
           {shippingAddr.address2 ? <>{shippingAddr.address2}<br /></> : null}
           {shippingAddr.city}, {shippingAddr.province || shippingAddr.state} {shippingAddr.zip || shippingAddr.postalCode}<br />
           {shippingAddr.country || 'India'}
         </p>
-        {(shippingAddr.phone || order.customerPhone) && <p style={{ margin: '6px 0 0', fontSize: '9pt', fontWeight: 'bold' }}>{shippingAddr.phone || order.customerPhone}</p>}
+        {(shippingAddr.phone || order.customerPhone) && <p style={{ margin: '6px 0 0', fontSize: '10pt', fontWeight: 'bold' }}>{shippingAddr.phone || order.customerPhone}</p>}
       </div>
 
       {/* Footer */}
-      <div style={{ borderTop: '1px solid #000', paddingTop: '0.1in', marginTop: 'auto', textAlign: 'center' }}>
+      <div style={{ borderTop: '1px solid #000', paddingTop: '10px', marginTop: 'auto', textAlign: 'center' }}>
         <p style={{ margin: 0, fontSize: '9pt', fontWeight: 'bold' }}>Thank you for shopping with us!</p>
         <p style={{ margin: '2px 0 0', fontSize: '7.5pt' }}>
           {fromName} | {fromEmail} | {fromWebsite}
@@ -84,7 +84,7 @@ export const PackingSlipModal: React.FC<PackingSlipModalProps> = ({ isOpen, onCl
         <head>
           <title>Packing Slip${isBulk ? 's' : ` - ${orders[0]?.id || ''}`}</title>
           <style>
-            @page { size: A4 portrait; margin: 0; }
+            @page { margin: 0; }
             body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; }
             .page-break { page-break-after: always; }
             * { box-sizing: border-box; }

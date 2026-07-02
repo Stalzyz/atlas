@@ -206,7 +206,7 @@ function OrderTrackingDetailPageInner() {
                          {isCurrent && isCompleted && (
                            <div className="text-[10px] text-wine font-bold uppercase tracking-widest flex items-center gap-2 mt-2">
                              <div className="w-1.5 h-1.5 bg-wine rounded-full animate-pulse" />
-                             Status Update: {new Date(order.updatedAt).toLocaleDateString()}
+                             Status Update: {new Date(order.updatedAt).toLocaleDateString('en-GB')}
                            </div>
                          )}
                       </div>

@@ -22,6 +22,15 @@ export class MarketingController {
     return this.marketingService.trackOrUpdateLead(body);
   }
 
+  // ─── META CATALOG FEED ────────────────────────────────────────────────────
+
+  @Public()
+  @Get('meta-feed.xml')
+  @Header('Content-Type', 'application/xml')
+  async getMetaFeed() {
+    return this.marketingService.generateFacebookXmlFeed();
+  }
+
   // ─── DISCOUNT VALIDATION ──────────────────────────────────────────────────
 
   @Public()

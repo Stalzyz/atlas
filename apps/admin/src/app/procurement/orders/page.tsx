@@ -246,7 +246,7 @@ export default function StockOrdersPage() {
                       <p className="text-[10px] text-gray-400 font-bold uppercase">{order._count?.items || 0} items</p>
                     </td>
                     <td className="px-6 py-4 text-xs text-gray-500">
-                      {new Date(order.createdAt).toLocaleDateString()}
+                      {new Date(order.createdAt).toLocaleDateString('en-GB')}
                     </td>
                     <td className="px-6 py-4">
                       <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-bold uppercase tracking-widest ${status.color}`}>

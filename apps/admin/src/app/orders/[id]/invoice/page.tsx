@@ -16,21 +16,34 @@ export default function OrderInvoicePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [settings, setSettings] = useState<any>(null);
+
   useEffect(() => {
     if (token && id) {
-      fetchOrder();
+      fetchOrderAndSettings();
     }
   }, [id, token]);
 
-  const fetchOrder = async () => {
+  const fetchOrderAndSettings = async () => {
     try {
       const apiBase = API_BASE;
-      const res = await fetch(`${apiBase}/orders/admin/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error("Failed to fetch order details");
-      const data = await res.json();
-      setOrder(data);
+      const [orderRes, settingsRes] = await Promise.all([
+        fetch(`${apiBase}/orders/admin/${id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        }),
+        fetch(`${apiBase}/settings`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      ]);
+      
+      if (!orderRes.ok) throw new Error("Failed to fetch order details");
+      const orderData = await orderRes.json();
+      setOrder(orderData);
+
+      if (settingsRes.ok) {
+        const settingsData = await settingsRes.json();
+        setSettings(settingsData);
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -68,7 +81,7 @@ export default function OrderInvoicePage() {
   };
 
   const shippingAddr = order.shippingAddr || getParsedAddress(order.shippingAddress);
-  const date = new Date(order.createdAt).toLocaleDateString('en-IN', {
+  const date = new Date(order.createdAt).toLocaleDateString('en-GB', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
@@ -116,19 +129,19 @@ export default function OrderInvoicePage() {
         {/* Header */}
         <div className="flex justify-between items-start border-b border-gray-100 pb-12">
           <div>
-            <img src="/logo-dark.svg" alt="Raaghas Logo" className="h-16 w-auto mb-4 object-contain" />
+            <img src={settings?.logoUrl || "/logo-dark.svg"} alt={settings?.storeName || "Raaghas Logo"} className="h-16 w-auto mb-4 object-contain" />
             <p className="text-[10px] text-gray-400 leading-relaxed font-bold uppercase tracking-widest">
-              Luxury Women's Ethnic Wear<br/>
-              Raaghas Pvt Ltd<br/>
-              Salem, India
+              {settings?.tagline || "Luxury Women's Ethnic Wear"}<br/>
+              {settings?.storeName || "Raaghas Pvt Ltd"}<br/>
+              {settings?.businessAddress || "Salem, India"}
             </p>
           </div>
           <div className="text-right space-y-4">
             <h2 className="text-2xl font-bold uppercase tracking-[0.3em] text-gray-200">Tax Invoice</h2>
             <div className="text-[10px] font-bold uppercase tracking-widest space-y-1">
-              <p className="text-gray-400">Invoice No: <span className="text-charcoal">#{order.formattedOrderNumber || order.orderNumber || order.id.slice(-6).toUpperCase()}</span></p>
+              <p className="text-gray-400">Invoice No: <span className="text-charcoal">#{order.formattedOrderNumber || (order.orderNumber != null ? String(order.orderNumber + 1000) : order.id.slice(-6).toUpperCase())}</span></p>
               <p className="text-gray-400">Date: <span className="text-charcoal">{date}</span></p>
-              <p className="text-gray-400">Order ID: <span className="text-charcoal">#{order.formattedOrderNumber || order.orderNumber || order.id.slice(-10).toUpperCase()}</span></p>
+              <p className="text-gray-400">Order ID: <span className="text-charcoal">#{order.formattedOrderNumber || (order.orderNumber != null ? String(order.orderNumber + 1000) : order.id.slice(-10).toUpperCase())}</span></p>
             </div>
           </div>
         </div>

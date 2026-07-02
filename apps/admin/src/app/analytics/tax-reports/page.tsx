@@ -74,7 +74,7 @@ export default function GSTReportsPage() {
       r.formattedOrderNumber || r.orderId.slice(-8).toUpperCase(),
       r.customerName,
       r.customerEmail,
-      new Date(r.date).toLocaleDateString(),
+      new Date(r.date).toLocaleDateString('en-GB'),
       r.taxableValue.toFixed(2),
       r.cgst.toFixed(2),
       r.sgst.toFixed(2),
@@ -232,7 +232,7 @@ export default function GSTReportsPage() {
                       <p className="text-[10px] text-gray-400 font-sans mt-0.5">{r.customerEmail}</p>
                     </td>
                     <td className="px-8 py-5 text-xs text-gray-500 font-sans">
-                      {new Date(r.date).toLocaleDateString()}
+                      {new Date(r.date).toLocaleDateString('en-GB')}
                     </td>
                     <td className="px-8 py-5 text-xs font-medium text-charcoal text-right">
                       ₹{r.taxableValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}

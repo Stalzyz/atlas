@@ -100,7 +100,7 @@ export class CommunicationService {
         <p>Please find attached the invoice for your recent purchase/transaction.</p>
         <div style="background: #FDFBF7; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <p><strong>Invoice Number:</strong> ${invoice.invoiceNumber}</p>
-          <p><strong>Date:</strong> ${new Date(invoice.date).toLocaleDateString()}</p>
+          <p><strong>Date:</strong> ${new Date(invoice.date).toLocaleDateString('en-GB')}</p>
           <p><strong>Total Amount:</strong> ₹${Number(invoice.totalAmount).toLocaleString()}</p>
         </div>
         <p>If you have any questions, please reach out to our concierge.</p>

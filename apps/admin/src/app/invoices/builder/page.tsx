@@ -285,8 +285,8 @@ export default function InvoiceBuilder() {
                      <h1 className="text-4xl font-light text-gray-300 uppercase tracking-widest mb-4">INVOICE</h1>
                      <div className="space-y-1">
                        <p className="text-xs text-gray-500"><span className="font-bold uppercase tracking-widest mr-2">Invoice No:</span> INV-2026-001</p>
-                       <p className="text-xs text-gray-500"><span className="font-bold uppercase tracking-widest mr-2">Date:</span> {new Date().toLocaleDateString()}</p>
-                       <p className="text-xs text-gray-500"><span className="font-bold uppercase tracking-widest mr-2">Due Date:</span> {new Date(Date.now() + 86400000 * 30).toLocaleDateString()}</p>
+                       <p className="text-xs text-gray-500"><span className="font-bold uppercase tracking-widest mr-2">Date:</span> {new Date().toLocaleDateString('en-GB')}</p>
+                       <p className="text-xs text-gray-500"><span className="font-bold uppercase tracking-widest mr-2">Due Date:</span> {new Date(Date.now() + 86400000 * 30).toLocaleDateString('en-GB')}</p>
                      </div>
                   </div>
                </div>

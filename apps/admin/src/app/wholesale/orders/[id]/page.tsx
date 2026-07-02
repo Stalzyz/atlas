@@ -77,7 +77,7 @@ export default function OrderDetails() {
           </Link>
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-charcoal uppercase">Order #{id.toString().slice(-8)}</h2>
-            <p className="text-gray-500 text-sm mt-1">{order.retailer?.businessName} • {new Date(order.createdAt).toLocaleDateString()}</p>
+            <p className="text-gray-500 text-sm mt-1">{order.retailer?.businessName} • {new Date(order.createdAt).toLocaleDateString('en-GB')}</p>
           </div>
         </div>
         <div className="flex gap-3">

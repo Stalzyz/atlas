@@ -617,14 +617,14 @@ export class PaymentsService implements OnModuleInit {
   private async _confirmOrderFromWebhook(providerOrderId: string, paymentId: string, gateway: string) {
     return this.prisma.$transaction(async (tx) => {
       // BUG-009 FIX: Consistent normalized lookup
-      const order = await tx.order.findFirst({
+      let order = await tx.order.findFirst({
         where: {
           OR: [
             { paymentIntentId: providerOrderId },
             { paymentReference: providerOrderId },
             { paymentId: providerOrderId },
           ],
-          status: OS.PAYMENT_PENDING,
+          status: 'PAYMENT_PENDING',
         },
         include: { items: true },
       });
@@ -648,16 +648,17 @@ export class PaymentsService implements OnModuleInit {
             OR: [{ paymentIntentId: providerOrderId }, { paymentReference: providerOrderId }],
             status: 'CANCELLED',
           },
+          include: { items: true },
         });
         if (cancelled) {
-          this.logger.error(`Late payment captured for CANCELLED order ${cancelled.id}. Requires refund of ${cancelled.totalAmount}.`);
-          throw new Error(`LATE_PAYMENT_REFUND_REQUIRED:${cancelled.totalAmount}`);
+          this.logger.warn(`Late payment captured for CANCELLED order ${cancelled.id}. Resurrecting order to CONFIRMED state instead of refunding.`);
+          order = cancelled;
+        } else {
+          throw new Error(`No PAYMENT_PENDING or CANCELLED order found for providerOrderId: ${providerOrderId}`);
         }
-
-        throw new Error(`No PAYMENT_PENDING order found for providerOrderId: ${providerOrderId}`);
       }
 
-      // State transition: PAYMENT_PENDING → CONFIRMED
+      // State transition: PAYMENT_PENDING/CANCELLED → CONFIRMED
       const confirmedOrder = await tx.order.update({
         where: { id: order.id },
         data: {

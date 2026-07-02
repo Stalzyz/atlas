@@ -303,7 +303,7 @@ export default function ReviewModerationPage() {
                                 <span className="text-[10px] text-blue-500 uppercase tracking-widest font-sans">Verified Buyer</span>
                              </h4>
                              <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-1">
-                                {new Date(review.createdAt).toLocaleDateString()} at {new Date(review.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                {new Date(review.createdAt).toLocaleDateString('en-GB')} at {new Date(review.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                              </p>
                           </div>
                        </div>

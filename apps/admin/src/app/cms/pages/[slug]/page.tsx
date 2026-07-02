@@ -168,7 +168,7 @@ export default function PageEditor() {
     if (type === "LEGAL_PROSE") {
       defaultContent = { 
         title: pageData.title, 
-        lastUpdated: new Date().toLocaleDateString(),
+        lastUpdated: new Date().toLocaleDateString('en-GB'),
         sections: [{ title: "1. Introduction", content: "Enter your policy text here..." }] 
       };
     } else if (type === "ACCORDION_FAQ") {

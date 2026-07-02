@@ -198,9 +198,14 @@ export default function OrdersPage() {
     if (ordersToExport.length === 0) return;
 
     const headers = [
-      "Order Number", "Order Date", "Customer Name", "Customer Phone Number",
-      "Payment Status", "Payment Reference ID", "Product Name", "Quantity",
-      "Unit Price", "Order Value", "Shipping Charges", "Tax value"
+      "Order Number", "Order Date", "Customer Name", "Customer Email", "Customer Phone Number",
+      "Shipping Name", "Shipping Street", "Shipping City", "Shipping State", "Shipping Pincode",
+      "Billing Name", "Billing Street", "Billing City", "Billing State", "Billing Pincode",
+      "Fulfillment Status", "Tracking ID", "Carrier Name",
+      "Payment Status", "Payment Reference ID", "Wallet Credit Used", 
+      "Discount Code", "Discount Amount", "Product Name", "Product SKU", "Variant Options", 
+      "Quantity", "Unit Price", "Shipping Charges", "Tax value", "Order Value",
+      "Source", "Internal Notes", "Tags"
     ];
 
     const escapeCSV = (val: any) => {
@@ -220,34 +225,73 @@ export default function OrdersPage() {
       const phone = o.customerPhone || "";
       const createdAt = format(new Date(o.createdAt), "yyyy-MM-dd HH:mm:ss");
       const financialStatus = o.financialStatus || "pending";
-      const fulfillmentStatus = o.fulfillmentStatus || "unfulfilled";
-      const paidAt = o.paidAt ? format(new Date(o.paidAt), "yyyy-MM-dd HH:mm:ss") : (financialStatus === 'paid' ? createdAt : "");
-      const fulfilledAt = o.fulfillmentDate ? format(new Date(o.fulfillmentDate), "yyyy-MM-dd HH:mm:ss") : (fulfillmentStatus === 'fulfilled' ? createdAt : "");
+      const fulfillmentStatus = o.fulfillmentStatus || o.status || "unfulfilled";
       
       const bAddress = (typeof o.billingAddress === 'string' ? JSON.parse(o.billingAddress) : o.billingAddress) || {};
       const sAddress = (typeof o.shippingAddress === 'string' ? JSON.parse(o.shippingAddress) : o.shippingAddress) || {};
       
-      const bName = bAddress.name || o.customerName || "";
       const sName = sAddress.name || o.customerName || "";
+      const sStreet = [sAddress.addressLine1, sAddress.addressLine2, sAddress.landmark].filter(Boolean).join(", ");
+      const sCity = sAddress.city || "";
+      const sState = sAddress.state || "";
+      const sPincode = sAddress.pincode || sAddress.zipCode || "";
+      
+      const bName = bAddress.name || o.customerName || "";
+      const bStreet = [bAddress.addressLine1, bAddress.addressLine2, bAddress.landmark].filter(Boolean).join(", ");
+      const bCity = bAddress.city || "";
+      const bState = bAddress.state || "";
+      const bPincode = bAddress.pincode || bAddress.zipCode || "";
+
+      const tags = (o.tags || []).join(" | ");
 
       const items = (o.items && o.items.length > 0) ? o.items : [{}];
 
       items.forEach((item: any, index: number) => {
         const isFirst = index === 0;
 
+        let optionsStr = "";
+        try {
+          const variantOpts = item.variant?.options ? (typeof item.variant.options === 'string' ? JSON.parse(item.variant.options) : item.variant.options) : null;
+          if (variantOpts && typeof variantOpts === 'object') {
+            optionsStr = Object.entries(variantOpts).map(([k,v]) => `${k}: ${v}`).join(", ");
+          }
+        } catch(e) {}
+
         const row = [
           orderName,                                                            // Order Number
           createdAt,                                                            // Order Date
           isFirst ? o.customerName || "" : "",                                  // Customer Name
+          isFirst ? email : "",                                                 // Customer Email
           isFirst ? phone : "",                                                 // Customer Phone Number
+          isFirst ? sName : "",                                                 // Shipping Name
+          isFirst ? sStreet : "",                                               // Shipping Street
+          isFirst ? sCity : "",                                                 // Shipping City
+          isFirst ? sState : "",                                                // Shipping State
+          isFirst ? sPincode : "",                                              // Shipping Pincode
+          isFirst ? bName : "",                                                 // Billing Name
+          isFirst ? bStreet : "",                                               // Billing Street
+          isFirst ? bCity : "",                                                 // Billing City
+          isFirst ? bState : "",                                                // Billing State
+          isFirst ? bPincode : "",                                              // Billing Pincode
+          isFirst ? fulfillmentStatus : "",                                     // Fulfillment Status
+          isFirst ? o.trackingId || "" : "",                                    // Tracking ID
+          isFirst ? o.carrierName || "" : "",                                   // Carrier Name
           isFirst ? financialStatus : "",                                       // Payment Status
-          isFirst ? o.paymentId || "" : "",                                     // Payment Reference ID
+          isFirst ? o.paymentId || o.paymentReference || "" : "",               // Payment Reference ID
+          isFirst ? o.walletCreditUsed || "0" : "",                             // Wallet Credit Used
+          isFirst ? o.discountCode || "" : "",                                  // Discount Code
+          isFirst ? o.discountAmount || "0" : "",                               // Discount Amount
           item.variant?.product?.title || item.title || "Custom Item",          // Product Name
+          item.variant?.sku || item.sku || "",                                  // Product SKU
+          optionsStr,                                                           // Variant Options
           item.quantity || "1",                                                 // Quantity
           item.price || "0",                                                    // Unit Price
-          isFirst ? o.totalAmount : "",                                         // Order Value
-          isFirst ? o.shippingAmount || "0" : "",                               // Shipping Charges
-          isFirst ? o.taxAmount || "0" : ""                                     // Tax value
+          isFirst ? o.shippingAmount || o.shipping || "0" : "",                 // Shipping Charges
+          isFirst ? o.taxAmount || o.taxes || "0" : "",                         // Tax value
+          isFirst ? o.totalAmount || o.total || "0" : "",                       // Order Value
+          isFirst ? o.source || "" : "",                                        // Source
+          isFirst ? o.internalNotes || "" : "",                                 // Internal Notes
+          isFirst ? tags : ""                                                   // Tags
         ];
 
         rows.push(row.map(escapeCSV));

@@ -204,7 +204,7 @@ export default function CustomerDetailPage() {
               </div>
               <div className="flex justify-between border-b border-gray-50 pb-2">
                 <span className="text-gray-400">Joined</span>
-                <span className="text-charcoal font-medium">{new Date(customer.createdAt).toLocaleDateString()}</span>
+                <span className="text-charcoal font-medium">{new Date(customer.createdAt).toLocaleDateString('en-GB')}</span>
               </div>
               <div className="flex justify-between border-b border-gray-50 pb-2">
                 <span className="text-gray-400">Reward Points</span>
@@ -270,7 +270,7 @@ export default function CustomerDetailPage() {
                         <p className="text-xs text-gray-400 mt-1">{order.items?.length || 0} items</p>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600">
-                        {new Date(order.createdAt).toLocaleDateString()}
+                        {new Date(order.createdAt).toLocaleDateString('en-GB')}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest border ${

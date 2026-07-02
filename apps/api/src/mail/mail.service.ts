@@ -18,8 +18,16 @@ export class MailService {
     });
   }
 
-  private wrapEmailHtml(content: string): string {
+  private async wrapEmailHtml(content: string): Promise<string> {
     if (content.includes('<!DOCTYPE html>')) return content;
+    
+    const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
+    const storeName = settings?.storeName || 'Raaghas Pvt Ltd';
+    const address = settings?.businessAddress || 'Salem, India';
+    const supportEmail = settings?.supportEmail || 'care@raaghas.in';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in';
+    const logoUrl = settings?.logoUrl || `${appUrl}/logo-dark.svg`;
+
     return `<!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +48,7 @@ export class MailService {
     <div style="max-width: 600px; margin: 0 auto; background: #FFFFFF; padding: 50px 40px;">
       <!-- Header -->
       <div style="text-align: center; padding-bottom: 50px;">
-        <img src="https://raaghas.in/logo-dark.svg" alt="Raaghas" style="height: 28px; display: block; margin: 0 auto;" />
+        <img src="${logoUrl}" alt="${storeName}" style="height: 28px; display: block; margin: 0 auto;" />
       </div>
 
       ${content}
@@ -48,11 +56,11 @@ export class MailService {
       <!-- Footer -->
       <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #EAEAEA; text-align: center;">
         <p style="margin: 0; font-size: 10px; color: #999999; text-transform: uppercase; letter-spacing: 2px; line-height: 2.5;">
-          Raaghas Pvt Ltd<br/>
-          Salem, India<br/><br/>
-          <a href="https://raaghas.in/collections" style="color: #999999; text-decoration: none; padding-right: 15px;">SHOP</a> | 
-          <a href="https://raaghas.in/account" style="color: #999999; text-decoration: none; padding: 0 15px;">ACCOUNT</a> | 
-          <a href="mailto:care@raaghas.in" style="color: #999999; text-decoration: none; padding-left: 15px;">CLIENT CARE</a>
+          ${storeName}<br/>
+          ${address}<br/><br/>
+          <a href="${appUrl}/collections" style="color: #999999; text-decoration: none; padding-right: 15px;">SHOP</a> | 
+          <a href="${appUrl}/account" style="color: #999999; text-decoration: none; padding: 0 15px;">ACCOUNT</a> | 
+          <a href="mailto:${supportEmail}" style="color: #999999; text-decoration: none; padding-left: 15px;">CLIENT CARE</a>
         </p>
       </div>
     </div>
@@ -104,7 +112,7 @@ export class MailService {
               <h2 style="margin: 15px 0 0; font-size: 36px;">₹${amount.toLocaleString()}</h2>
             </div>
             
-            <a href="https://raaghas.in/account" class="button-premium">View Dashboard</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Dashboard</a>
           </div>
     `;
 
@@ -114,7 +122,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
 
     try {
@@ -123,7 +131,7 @@ export class MailService {
         await transporter.sendMail({
           from: `"Raaghas Wholesale" <${this.fromEmail}>`,
           to,
-          cc: this.CC_EMAIL,
+          
           subject,
           html,
         });
@@ -145,7 +153,7 @@ export class MailService {
         body: JSON.stringify({
           from: `Raaghas Wholesale <${this.fromEmail}>`,
           to: [to],
-          cc: [this.CC_EMAIL],
+          
           subject,
           html,
         }),
@@ -210,7 +218,7 @@ export class MailService {
             </table>
 
             <div style="margin-top: 60px;">
-              <a href="https://raaghas.in/account" class="button-premium">Track Order</a>
+              <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">Track Order</a>
             </div>
           </div>
     `;
@@ -221,7 +229,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
 
     try {
@@ -298,7 +306,7 @@ export class MailService {
           </div>
     `;
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout for OTPs
@@ -370,7 +378,7 @@ export class MailService {
           </div>
     `;
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -416,7 +424,7 @@ export class MailService {
     }
   }
   async sendCustomEmail(to: string, subject: string, html: string) {
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
 
     try {
@@ -424,7 +432,7 @@ export class MailService {
         await transporter.sendMail({
           from: `"Raaghas" <${this.fromEmail}>`,
           to,
-          cc: this.CC_EMAIL,
+          
           subject,
           html,
         });
@@ -441,7 +449,7 @@ export class MailService {
           body: JSON.stringify({
             from: `Raaghas <${this.fromEmail}>`,
             to: [to],
-            cc: [this.CC_EMAIL],
+            
             subject,
             html,
           }),
@@ -473,14 +481,14 @@ export class MailService {
               <p style="margin: 0; font-size: 18px; color: #111111; font-family: monospace; letter-spacing: 2px;">${trackingId}</p>
             </div>
             
-            <a href="https://raaghas.in/account" class="button-premium">Track Shipment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">Track Shipment</a>
           </div>
     `;
     return this.sendCustomEmail(to, subject, html);
   }
 
   async sendEmailWithAttachment(to: string, subject: string, html: string, filename: string, content: Buffer) {
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
     const from = this.fromEmail;
 
@@ -489,7 +497,7 @@ export class MailService {
         await transporter.sendMail({
           from: `"Raaghas" <${from}>`,
           to,
-          cc: this.CC_EMAIL,
+          
           subject,
           html,
           attachments: [{ filename, content }]
@@ -518,14 +526,14 @@ export class MailService {
           </div>
     `;
     
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
 
     try {
       if (transporter) {
         await transporter.sendMail({
           from: `"Raaghas Accounts" <${this.fromEmail}>`,
           to,
-          cc: this.CC_EMAIL,
+          
           subject,
           html,
           attachments
@@ -558,7 +566,7 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Rest assured, your selections have been reserved. Please retry your payment to complete the acquisition.</p>
             
-            <a href="https://raaghas.in/checkout" class="button-premium">Retry Payment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/checkout" class="button-premium">Retry Payment</a>
           </div>
     `;
 
@@ -568,7 +576,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     const transporter = await this.getTransporter();
 
     try {
@@ -577,7 +585,7 @@ export class MailService {
         await transporter.sendMail({
           from: `"Raaghas" <${this.fromEmail}>`,
           to,
-          cc: this.CC_EMAIL,
+          
           subject,
           html,
         });
@@ -595,7 +603,7 @@ export class MailService {
           body: JSON.stringify({
             from: `Raaghas <${this.fromEmail}>`,
             to: [to],
-            cc: [this.CC_EMAIL],
+            
             subject,
             html,
           }),
@@ -631,7 +639,7 @@ export class MailService {
             
             <p style="font-size: 11px; color: #888888; font-style: italic; margin-bottom: 40px;">You can use this balance towards your next luxury acquisition.</p>
             
-            <a href="https://raaghas.in/account" class="button-premium">View Wallet</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Wallet</a>
           </div>
     `;
 
@@ -641,7 +649,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     return this.sendCustomEmail(to, subject, html);
   }
 
@@ -661,7 +669,7 @@ export class MailService {
               <h2 style="margin: 15px 0 0; font-size: 36px;">${isCredit ? '+' : '-'}₹${amount.toLocaleString('en-IN')}</h2>
             </div>
             
-            <a href="https://raaghas.in/account" class="button-premium">View Ledger</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Ledger</a>
           </div>
     `;
 
@@ -671,7 +679,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     return this.sendCustomEmail(to, subject, html);
   }
 
@@ -696,10 +704,10 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
       
       // Also inject the checkoutUrl properly since the default template uses /cart
-      html = html.replace('href="https://raaghas.in/cart"', `href="${checkoutUrl}"`);
+      html = html.replace(`href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/cart"`, `href="${checkoutUrl}"`);
     }
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     return this.sendCustomEmail(to, subject, html);
   }
 
@@ -719,11 +727,11 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Please allow 5-7 business days for the amount to reflect in your original payment method.</p>
             
-            <a href="https://raaghas.in/account" class="button-premium">View Account</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Account</a>
           </div>
     `;
 
-    html = this.wrapEmailHtml(html);
+    html = await this.wrapEmailHtml(html);
     return this.sendCustomEmail(to, subject, html);
   }
 }

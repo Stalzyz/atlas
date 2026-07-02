@@ -70,7 +70,7 @@ export class WholesalePdfService {
       doc.fillColor(grayColor)
          .text('Date', rightColumnX, 100, { width: 80, align: 'left' })
          .fillColor(charcoalColor)
-         .text(new Date(invoice.date).toLocaleDateString(), rightColumnX + 80, 100, { align: 'right' });
+         .text(new Date(invoice.date).toLocaleDateString('en-GB'), rightColumnX + 80, 100, { align: 'right' });
 
       doc.fillColor(grayColor)
          .text('Place of Supply', rightColumnX, 115, { width: 80, align: 'left' })

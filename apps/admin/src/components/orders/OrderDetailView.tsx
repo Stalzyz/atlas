@@ -506,7 +506,7 @@ export function OrderDetailView({ id, onClose }: { id: string, onClose?: () => v
                <div className="flex flex-col md:flex-row justify-between md:items-center gap-6">
                   <div className="space-y-1">
                      <span className="text-[10px] font-bold text-wine tracking-[0.2em] uppercase">Order Instance</span>
-                     <h1 className="text-4xl font-bold tracking-tight text-charcoal">#{order.formattedOrderNumber || order.orderNumber || order.id.slice(-10).toUpperCase()}</h1>
+                     <h1 className="text-4xl font-bold tracking-tight text-charcoal">#{order.formattedOrderNumber || (order.orderNumber != null ? String(order.orderNumber + 1000) : order.id.slice(-10).toUpperCase())}</h1>
                      <p className="text-xs text-gray-400 font-medium flex items-center gap-2"><Calendar size={12} /> Placed on {new Date(order.createdAt).toLocaleString()}</p>
                      <div className="flex flex-wrap gap-2">
                        {(() => {
@@ -1012,7 +1012,7 @@ export function OrderDetailView({ id, onClose }: { id: string, onClose?: () => v
                              p.status === 'successful' ? 'bg-green-50 text-green-600' : 'bg-yellow-50 text-yellow-600'
                            }`}>{p.status}</span>
                          </div>
-                         <p className="text-xs text-gray-400 font-sans">₹{Number(p.amount).toLocaleString()} • {new Date(p.createdAt).toLocaleDateString()}</p>
+                         <p className="text-xs text-gray-400 font-sans">₹{Number(p.amount).toLocaleString()} • {new Date(p.createdAt).toLocaleDateString('en-GB')}</p>
                          <p className="text-[9px] text-gray-300 font-mono">{p.paymentId}</p>
                       </div>
                     ))}

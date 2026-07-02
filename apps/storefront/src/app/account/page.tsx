@@ -222,7 +222,7 @@ function AccountDashboardContent() {
                       </div>
                       <div className="bg-theme-text/5 p-6 flex justify-between items-center px-12">
                          <p className="text-[9px] text-theme-text/50 font-medium uppercase tracking-widest">
-                           {order.estimatedDelivery ? `Est. Arrival: ${new Date(order.estimatedDelivery).toLocaleDateString()}` : `Ordered on: ${new Date(order.createdAt || Date.now()).toLocaleDateString()}`}
+                           {order.estimatedDelivery ? `Est. Arrival: ${new Date(order.estimatedDelivery).toLocaleDateString('en-GB')}` : `Ordered on: ${new Date(order.createdAt || Date.now()).toLocaleDateString('en-GB')}`}
                          </p>
                          <div className="flex -space-x-3">
                             {order.items?.slice(0, 3).map((item: any, i: number) => (

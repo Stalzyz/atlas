@@ -229,7 +229,7 @@ export default function Dashboard() {
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{act.channel} • {act.status}</p>
                     <p className="text-xs text-gray-400 flex items-center gap-1">
                       <Clock size={10} /> 
-                      {new Date(act.date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}
+                      {new Date(act.date).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })}
                     </p>
                   </div>
                 </div>

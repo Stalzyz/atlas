@@ -118,7 +118,7 @@ export default function PublicTrackingPage() {
                 </div>
                 <div>
                    <p className="text-sm font-bold text-charcoal">{shipment.courier || 'Standard Logistics'}</p>
-                   <p className="text-xs text-charcoal/60 mt-1">Estimated Arrival: {shipment.estimatedDelivery ? new Date(shipment.estimatedDelivery).toLocaleDateString() : 'TBD'}</p>
+                   <p className="text-xs text-charcoal/60 mt-1">Estimated Arrival: {shipment.estimatedDelivery ? new Date(shipment.estimatedDelivery).toLocaleDateString('en-GB') : 'TBD'}</p>
                 </div>
              </div>
              <div className="space-y-4">

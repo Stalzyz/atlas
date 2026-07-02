@@ -255,7 +255,7 @@ export default function FulfillmentDesk() {
                     </td>
                     <td className="px-6 py-4">
                       <p className="text-sm font-bold text-charcoal">#{order.formattedOrderNumber || order.orderNumber || order.id.slice(-8).toUpperCase()}</p>
-                      <p className="text-[10px] text-gray-400 font-medium">{new Date(order.createdAt).toLocaleDateString()}</p>
+                      <p className="text-[10px] text-gray-400 font-medium">{new Date(order.createdAt).toLocaleDateString('en-GB')}</p>
                     </td>
                     <td className="px-6 py-4">
                       <p className="text-sm font-bold text-charcoal">{order.customerName}</p>

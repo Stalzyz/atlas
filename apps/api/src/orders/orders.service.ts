@@ -263,6 +263,11 @@ export class OrdersService {
         
         // Revoke Referral Reward
         this.growthService.revokeReferralReward(order.id).catch(e => this.logger.error(`Failed to revoke referral reward for order ${order.id}`, e));
+
+        // Revoke Loyalty Points
+        if (order.userId) {
+          this.growthService.revokeLoyaltyPoints(order.userId, order.id).catch(e => this.logger.error(`Failed to revoke loyalty points for order ${order.id}`, e));
+        }
       }
 
       const updatedOrder = await tx.order.update({

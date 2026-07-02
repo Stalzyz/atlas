@@ -289,7 +289,7 @@ export default function MediaManager() {
                  <p className="text-[10px] font-bold truncate text-gray-700">{item.filename}</p>
                  <div className="flex justify-between items-center mt-1">
                    <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">{Math.round((item.size || 0) / 1024)} KB</span>
-                   <span className="text-[9px] text-gray-300 font-medium">{new Date(item.createdAt).toLocaleDateString()}</span>
+                   <span className="text-[9px] text-gray-300 font-medium">{new Date(item.createdAt).toLocaleDateString('en-GB')}</span>
                  </div>
               </div>
             </div>

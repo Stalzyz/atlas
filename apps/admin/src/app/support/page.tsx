@@ -100,7 +100,7 @@ export default function SupportDashboard() {
                 </div>
                 <p className="text-xs text-gray-500 line-clamp-1 font-sans">{ticket.message}</p>
                 <div className="flex items-center gap-2 mt-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                   <Clock size={10} /> {new Date(ticket.createdAt).toLocaleDateString()}
+                   <Clock size={10} /> {new Date(ticket.createdAt).toLocaleDateString('en-GB')}
                 </div>
               </div>
             ))}

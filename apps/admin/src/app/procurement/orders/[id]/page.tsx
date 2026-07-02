@@ -73,7 +73,7 @@ export default function PurchaseOrderDetails() {
         <div className="text-right">
           <h2 className="text-2xl font-bold uppercase text-charcoal">Purchase Order</h2>
           <p className="text-gray-500 font-bold">#{displayId}</p>
-          <p className="text-gray-400 text-xs mt-1">Created: {po.createdAt ? new Date(po.createdAt).toLocaleDateString() : "N/A"}</p>
+          <p className="text-gray-400 text-xs mt-1">Created: {po.createdAt ? new Date(po.createdAt).toLocaleDateString('en-GB') : "N/A"}</p>
         </div>
       </div>
 
@@ -85,7 +85,7 @@ export default function PurchaseOrderDetails() {
           </Link>
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-charcoal uppercase">PO #{displayId}</h2>
-            <p className="text-gray-500 text-sm mt-1">{po.supplier?.name} • Created {po.createdAt ? new Date(po.createdAt).toLocaleDateString() : "N/A"}</p>
+            <p className="text-gray-500 text-sm mt-1">{po.supplier?.name} • Created {po.createdAt ? new Date(po.createdAt).toLocaleDateString('en-GB') : "N/A"}</p>
           </div>
         </div>
         <div className="flex gap-3">

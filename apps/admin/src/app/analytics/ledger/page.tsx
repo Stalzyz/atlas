@@ -181,7 +181,7 @@ export default function LedgerPage() {
                 <tr key={entry.id} className="hover:bg-gray-50/50 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="text-sm text-charcoal font-medium">
-                      {new Date(entry.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      {new Date(entry.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </div>
                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">
                       {new Date(entry.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}

@@ -285,7 +285,7 @@ export default function ReverseLogisticsPage() {
                     <td className="px-8 py-6">
                       <p className="text-sm font-bold text-charcoal">#{ret.id.slice(-8).toUpperCase()}</p>
                       <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider mt-1">
-                        {new Date(ret.createdAt).toLocaleDateString()}
+                        {new Date(ret.createdAt).toLocaleDateString('en-GB')}
                       </p>
                     </td>
                     <td className="px-8 py-6">

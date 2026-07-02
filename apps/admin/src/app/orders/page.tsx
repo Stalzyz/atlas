@@ -439,13 +439,13 @@ export default function OrdersPage() {
                       <td className="px-6 py-5">
                         <div className="flex flex-col gap-1 max-w-[200px]">
                           {order.items?.map((item: any, idx: number) => (
-                            <div key={idx} className="flex flex-col" title={`${item.quantity}x ${item.variant?.product?.title || 'Unknown'} (${item.variant?.sku || ''})`}>
+                            <div key={idx} className="flex flex-col" title={`${item.quantity}x ${item.productName || item.variant?.product?.title || 'Unknown'} (${item.sku || item.variant?.sku || ''})`}>
                               <span className="text-xs font-bold text-gray-700 truncate">
-                                {item.quantity}x {item.variant?.product?.title || 'Unknown Product'}
+                                {item.quantity}x {item.productName || item.variant?.product?.title || 'Unknown Product'}
                               </span>
-                              {item.variant?.sku && (
+                              {(item.sku || item.variant?.sku) && (
                                 <span className="text-[9px] text-gray-400 uppercase tracking-widest truncate">
-                                  {item.variant.sku}
+                                  {item.sku || item.variant?.sku}
                                 </span>
                               )}
                             </div>

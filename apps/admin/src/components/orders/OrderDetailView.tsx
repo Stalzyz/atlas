@@ -950,6 +950,12 @@ export function OrderDetailView({ id, onClose }: { id: string, onClose?: () => v
                         <CreditCard size={14} />
                         <span className="text-[10px] font-bold uppercase tracking-widest">{order.paymentMethod} • Settled</span>
                      </div>
+                     {(order.paymentId || order.paymentIntentId || order.paymentReference) && (
+                       <div className="flex items-center gap-3 text-gray-500">
+                          <Hash size={14} />
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Ref: {order.paymentId || order.paymentIntentId || order.paymentReference}</span>
+                       </div>
+                     )}
                   </div>
                </div>
 

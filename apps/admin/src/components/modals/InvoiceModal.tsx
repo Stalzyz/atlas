@@ -32,9 +32,10 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, ord
           <title>Invoice - ${order?.formattedOrderNumber || (order?.orderNumber != null ? String(order.orderNumber + 1000) : (order?.id || '').slice(-4).toUpperCase())}</title>
           <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
           <style>
+            @page { size: A5; margin: 10pt; }
             @media print {
               body { margin: 0; padding: 0; }
-              #invoice-content { border: none !important; box-shadow: none !important; }
+              #invoice-content { border: none !important; box-shadow: none !important; width: 100%; height: auto; }
             }
             body {
               font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -102,7 +103,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, ord
               address: order.shippingAddress || {}
             }}
             items={order.items?.map((item: any) => ({
-              name: item.variant?.product?.title || 'Product',
+              name: item.productName || item.variant?.product?.title || 'Product',
               variant: `${item.variant?.option1Name}: ${item.variant?.option1Value}`,
               qty: item.quantity,
               price: Number(item.price) / 1.12, // Backward calculation for base price

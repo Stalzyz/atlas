@@ -739,20 +739,49 @@ export class OrdersService {
       if (!userId) {
         const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.raaghas.in`;
         const email = data.customerEmail ? data.customerEmail.toLowerCase().trim() : fallbackEmail;
-        let user = await txn.user.findUnique({ where: { email } });
+        let user = await txn.user.findFirst({ 
+          where: { 
+            OR: [
+              { email },
+              ...(data.customerPhone ? [{ phone: data.customerPhone }] : [])
+            ]
+          } 
+        });
+
         if (user) {
           userId = user.id;
         } else {
-          user = await txn.user.create({
-            data: {
-              email,
-              name: data.customerName || 'Guest Customer',
-              phone: data.customerPhone || '',
-              role: 'CUSTOMER',
-              wallet: { create: { balance: 0 } }
+          try {
+            user = await txn.user.create({
+              data: {
+                email,
+                name: data.customerName || 'Guest Customer',
+                phone: data.customerPhone || '',
+                role: 'CUSTOMER',
+                wallet: { create: { balance: 0 } }
+              }
+            });
+            userId = user.id;
+          } catch (err: any) {
+            // Handle race conditions or edge cases where phone exists
+            if (err.code === 'P2002') {
+               user = await txn.user.findFirst({ 
+                  where: { 
+                    OR: [
+                      { email },
+                      ...(data.customerPhone ? [{ phone: data.customerPhone }] : [])
+                    ]
+                  } 
+               });
+               if (user) {
+                  userId = user.id;
+               } else {
+                  throw err;
+               }
+            } else {
+               throw err;
             }
-          });
-          userId = user.id;
+          }
         }
       }
 

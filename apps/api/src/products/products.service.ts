@@ -566,6 +566,7 @@ export class ProductService {
             if (imgSrc && !shopifyImageUrls.has(imgSrc)) {
               images.push({ 
                 url: imgSrc, 
+                // Shopify positions are 1-indexed; normalize to 0-indexed
                 position: r['Image Position'] ? Number(r['Image Position']) - 1 : currentPos++ 
               });
               shopifyImageUrls.add(imgSrc);
@@ -573,14 +574,16 @@ export class ProductService {
           }
 
           if (images.length > 0) {
-            // Clear old images and add new ones (Simplified approach)
+            // Re-normalize positions sequentially starting from 0 to prevent gaps
+            const normalizedImages = images.map((img, idx) => ({ ...img, position: idx }));
+            // Clear old images and add new ones
             await tx.image.deleteMany({ where: { productId: product.id } });
             await tx.image.createMany({
-              data: images.map((img: { url: string, position: number }) => ({
+              data: normalizedImages.map((img: { url: string, position: number }) => ({
                 url: img.url,
                 position: img.position,
                 productId: product.id,
-                altText: `${title} - ${img.position + 1}`
+                altText: img.position === 0 ? title : `${title} - ${img.position + 1}`
               }))
             });
           }
@@ -797,15 +800,19 @@ export class ProductService {
           await tx.image.deleteMany({ where: { id: { in: orphans } } });
         }
 
-        // Update or Create
-        for (const img of images) {
+        // Update or Create — re-normalize positions sequentially starting from 0
+        // This prevents gaps in positions (e.g., 1,2,3 instead of 0,1,2) which
+        // cause the wrong image to show as the primary product thumbnail.
+        for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
+          const img = images[imgIdx];
+          const normalizedPosition = imgIdx; // Always 0-indexed, sequential
           if (img.id && currentImageIds.includes(img.id)) {
             await tx.image.update({
               where: { id: img.id },
               data: {
                 url: img.url,
                 altText: img.altText,
-                position: img.position || 0
+                position: normalizedPosition
               }
             });
           } else {
@@ -813,7 +820,7 @@ export class ProductService {
               data: {
                 url: img.url,
                 altText: img.altText,
-                position: img.position || 0,
+                position: normalizedPosition,
                 productId: id
               }
             });

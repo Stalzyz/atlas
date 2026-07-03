@@ -86,10 +86,19 @@ export default function MediaManager() {
   };
 
   const copyLinks = () => {
-    const links = mediaItems.filter(i => selectedIds.includes(i.id)).map(i => i.url).join("\n");
+    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6005').replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
+    const links = mediaItems
+      .filter(i => selectedIds.includes(i.id))
+      .map(i => {
+        const url = i.url || '';
+        // Always return a full absolute URL so it works when pasted into CSV files
+        return url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? url : `/${url}`}`;
+      })
+      .join("\n");
     navigator.clipboard.writeText(links);
-    alert(`${selectedIds.length} links copied to clipboard!`);
+    alert(`${selectedIds.length} link${selectedIds.length > 1 ? 's' : ''} copied to clipboard!`);
   };
+
 
   const exportToCSV = () => {
     const selected = mediaItems.filter(i => selectedIds.includes(i.id));

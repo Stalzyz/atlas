@@ -113,7 +113,8 @@ export class ProductController {
   }
 
   @Post('bulk-upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @RequirePermission('products:write')
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 5 * 1024 * 1024 } }))
   async bulkUpload(@UploadedFile() file: any) {
     if (!file) {
       throw new BadRequestException('CSV file is required.');

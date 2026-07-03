@@ -324,18 +324,36 @@ export class ProductService {
 
   async processCsvBulkUpload(buffer: Buffer) {
     const Papa = require('papaparse');
+
+    // ─── Helpers ────────────────────────────────────────────────────────────────
     const parseNum = (val: any, defaultVal: any = 0) => {
       if (val === undefined || val === null || val === '') return defaultVal;
       const parsed = Number(val.toString().replace(/[^0-9.-]/g, ''));
       return isNaN(parsed) ? defaultVal : parsed;
     };
+
+    // BUG-9 FIX: Normalize image URLs — relative /uploads/ paths get absolute URL
+    const publicApiBase = process.env.API_URL 
+      ? process.env.API_URL.replace(/\/api\/v1\/?$/, '').replace(/\/$/, '')
+      : (process.env.NODE_ENV === 'production' ? 'https://api.raaghas.in' : 'http://localhost:6005');
+
+    const normalizeImageUrl = (url: string | null | undefined): string | null => {
+      if (!url || !url.trim()) return null;
+      const trimmed = url.trim();
+      if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+      if (trimmed.startsWith('/uploads/')) return `${publicApiBase}${trimmed}`;
+      // Unknown format — still store as-is, frontend getAssetUrl will handle
+      return trimmed;
+    };
+
+    // ─── Parse CSV ───────────────────────────────────────────────────────────────
     let csvString = buffer.toString('utf-8');
-    
+
     // Remove BOM if present (common in Excel/Shopify exports)
     if (csvString.charCodeAt(0) === 0xFEFF) {
       csvString = csvString.slice(1);
     }
-    
+
     const parsed = Papa.parse(csvString, {
       header: true,
       skipEmptyLines: true,
@@ -354,177 +372,201 @@ export class ProductService {
     }
 
     let rows = parsed.data as any[];
-    
-    // Deterministic Normalization
+
+    if (rows.length === 0) {
+      return {
+        success: false,
+        message: 'CSV file is empty or contains only headers.',
+        summary: { success: 0, updated: 0, failed: 0, errors: [] }
+      };
+    }
+
+    // ─── Row Normalization ───────────────────────────────────────────────────────
     rows = rows.map((row: any) => {
-      const title = row.Title || row.Name || '';
-      let handle = row.Handle || '';
-      
+      const title = (row.Title || row.Name || '').toString().trim();
+      let handle = (row.Handle || '').toString().trim();
+
       // Auto-generate Handle if missing, based on Title
       if (!handle && title) {
-        handle = title.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        handle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
       }
 
-      return {
-        ...row,
-        Title: title,
-        Handle: handle,
-      };
+      return { ...row, Title: title, Handle: handle };
     });
+
     const summary = { success: 0, updated: 0, failed: 0, errors: [] as {key: string, error: string}[] };
 
-    // Group rows by Product Identifier (Title or Handle or Product_ID)
-    // This allows CSV to have one row per variant
+    // ─── Group rows by Product Identifier ────────────────────────────────────────
     const productGroups = new Map<string, any[]>();
     let lastKey: string | null = null;
-    
+
     for (const row of rows) {
-      let key = row.Product_ID || row.Handle;
-      
+      let key = (row.Product_ID || row.Handle || '').toString().trim();
+
       if (!key) {
         if (lastKey) {
-          key = lastKey; // Inherit handle for variant rows that are completely blank or missing Handle
+          key = lastKey; // Inherit from previous product (variant row)
         } else if (row.Name || row.Title) {
-          key = row.Name || row.Title;
-          lastKey = key; // Update lastKey since this is a new product without Handle
+          key = (row.Name || row.Title).toString().trim();
+          lastKey = key;
         }
       } else {
-        lastKey = key; // Update the running parent key
+        lastKey = key;
       }
-      
+
       if (!key) continue;
-      
+
       if (!productGroups.has(key)) productGroups.set(key, []);
       productGroups.get(key)!.push(row);
     }
 
+    // ─── Process each Product Group ───────────────────────────────────────────────
     for (const [key, productRows] of productGroups.entries()) {
       try {
+        // BUG-3 FIX: Extend transaction timeout to 30s for products with many variants
         await (this.prisma as any).$transaction(async (tx: any) => {
           const firstRow = productRows[0];
-          const title = (firstRow.Name || firstRow.Title || `Product ${key}`).toString();
-          let handle = (firstRow.Handle || title).toString().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+          const title = (firstRow.Name || firstRow.Title || `Product ${key}`).toString().trim();
+          const handle = (firstRow.Handle || title).toString().toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
-          // 1. Find or Create Product
-          let product = await tx.product.findFirst({
-            where: { handle }
-          });
+          // ── 1. Find or Create Product ──────────────────────────────────────────
+          // BUG-6 FIX: Removed the redundant collision check. findFirst by handle is
+          // already sufficient. The previous "collision" branch was unreachable in normal
+          // cases and caused random handles on race conditions.
+          let product = await tx.product.findFirst({ where: { handle } });
 
-          // 1.1 Check handle collision to prevent Unique Constraint Error
-          const handleCollision = await tx.product.findFirst({
-            where: { handle, id: { not: product?.id || 'non-existent' } }
-          });
-          if (handleCollision) {
-            handle = `${handle}-${Math.floor(Math.random() * 100000)}`;
+          // ── 1a. Size Guide Lookup ──────────────────────────────────────────────
+          let sizeGuideId: string | undefined = undefined;
+          if (firstRow.Size_Guide?.toString().trim()) {
+            const guide = await tx.sizeGuide.findFirst({
+              where: { name: { equals: firstRow.Size_Guide.toString().trim(), mode: 'insensitive' } }
+            });
+            if (guide) sizeGuideId = guide.id;
           }
 
-          let sizeGuideId = undefined;
-          if (firstRow.Size_Guide) {
-            const guide = await tx.sizeGuide.findUnique({ where: { name: firstRow.Size_Guide } });
-            if (guide) {
-              sizeGuideId = guide.id;
-            }
-          }
-
-          // 1.2 Automatically create and map Collection records from Category/Type/Collection columns
+          // ── 1b. Collections Auto-sync ──────────────────────────────────────────
           const collectionTitles = new Set<string>();
-          if (firstRow.Category) collectionTitles.add(firstRow.Category.toString().trim());
-          if (firstRow['Product Category']) collectionTitles.add(firstRow['Product Category'].toString().trim());
-          if (firstRow.Type) collectionTitles.add(firstRow.Type.toString().trim());
-          if (firstRow.Collection) {
-            firstRow.Collection.toString().split(',').map((c: string) => c.trim()).filter(Boolean).forEach((c: string) => collectionTitles.add(c));
+          if (firstRow.Category?.toString().trim()) collectionTitles.add(firstRow.Category.toString().trim());
+          if (firstRow['Product Category']?.toString().trim()) collectionTitles.add(firstRow['Product Category'].toString().trim());
+          if (firstRow.Type?.toString().trim()) collectionTitles.add(firstRow.Type.toString().trim());
+          if (firstRow.Collection?.toString().trim()) {
+            firstRow.Collection.toString().split(',')
+              .map((c: string) => c.trim()).filter(Boolean)
+              .forEach((c: string) => collectionTitles.add(c));
           }
 
           const collectionIds: { id: string }[] = [];
           for (const cTitle of collectionTitles) {
             if (!cTitle || cTitle.toLowerCase() === 'general') continue;
-            let collHandle = cTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-            let dbColl = await tx.collection.findFirst({ where: { OR: [{ handle: collHandle }, { title: cTitle }] } });
+            const collHandle = cTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+            let dbColl = await tx.collection.findFirst({
+              where: { OR: [{ handle: collHandle }, { title: { equals: cTitle, mode: 'insensitive' } }] }
+            });
             if (!dbColl) {
-              // Create it if it doesn't exist
-              dbColl = await tx.collection.create({ data: { title: cTitle, handle: collHandle } });
+              try {
+                dbColl = await tx.collection.create({ data: { title: cTitle, handle: collHandle } });
+              } catch {
+                // Race condition: collection was created by another concurrent transaction
+                dbColl = await tx.collection.findFirst({ where: { handle: collHandle } });
+              }
             }
-            collectionIds.push({ id: dbColl.id });
+            if (dbColl) collectionIds.push({ id: dbColl.id });
           }
 
-          const rawStatusStr = (firstRow.Status || firstRow.Published?.toString()?.trim()?.toLowerCase() === 'true' || firstRow.Published === true ? 'ACTIVE' : 'DRAFT').toString().trim().toUpperCase();
-          const rawStatus = rawStatusStr === 'ACTIVE' || rawStatusStr === 'PUBLISHED' ? 'ACTIVE' : 'DRAFT';
+          // ── 1c. Status/Published parsing (BUG-7 FIX) ──────────────────────────
+          // Clear, unambiguous status parsing replaces the broken ternary chain
+          let rawStatus: 'ACTIVE' | 'DRAFT' = 'DRAFT';
+          const statusCol = firstRow.Status?.toString().trim().toUpperCase();
+          const publishedCol = firstRow.Published?.toString().trim().toLowerCase();
+
+          if (statusCol === 'ACTIVE' || statusCol === 'PUBLISHED' || statusCol === 'TRUE') {
+            rawStatus = 'ACTIVE';
+          } else if (!statusCol && (publishedCol === 'true' || publishedCol === '1' || publishedCol === 'yes')) {
+            rawStatus = 'ACTIVE';
+          }
           const isPublished = rawStatus === 'ACTIVE';
+
+          // ── 1d. Tax Rate & Inclusive ───────────────────────────────────────────
+          const taxRateRaw = firstRow.Tax_Rate?.toString().trim().replace(/[^0-9.]/g, '');
+          const taxRate = taxRateRaw ? (Number(taxRateRaw) || undefined) : undefined;
+          const taxInclusiveRaw = firstRow.Tax_Inclusive?.toString().trim().toUpperCase();
+          const taxInclusive = taxInclusiveRaw ? taxInclusiveRaw === 'TRUE' : undefined;
 
           const productPayload: any = {
             title,
             handle,
-            description: firstRow.Description || firstRow.Long_Description || firstRow['Body (HTML)'] || '',
-            category: firstRow.Category || firstRow['Product Category'] || firstRow['Product Type'] || firstRow.Type || firstRow.Product_Type || 'General',
-            subCategory: firstRow.Sub_Category || '',
-            brand: firstRow.Brand || firstRow.Vendor || 'Raaghas',
-            collection: firstRow.Collection || '',
-            productType: firstRow.Product_Type || firstRow.Type || 'Apparel',
-            gender: firstRow.Gender || 'Unisex',
-            ageGroup: firstRow.Age_Group || 'Adult',
-            fabric: firstRow.Fabric || '',
-            material: firstRow.Material || '',
-            pattern: firstRow.Pattern || '',
-            fitType: firstRow.Fit_Type || '',
-            sleeveType: firstRow.Sleeve_Type || '',
-            neckType: firstRow.Neck_Type || '',
-            length: firstRow.Length || '',
-            occasion: firstRow.Occasion || '',
-            style: firstRow.Style || '',
-            tags: firstRow.Tags || '',
-            searchKeywords: firstRow.Search_Keywords || firstRow.Tags || '',
-            seoTitle: firstRow.SEO_Title || title,
-            metaDescription: firstRow.Meta_Description || '',
-            metaKeywords: firstRow.Meta_Keywords || firstRow.Tags || '',
-            hsnCode: firstRow.HSN_Code?.toString() || 'TEXTILE-00',
-            taxRate: firstRow.Tax_Rate !== undefined && firstRow.Tax_Rate !== '' ? Number(firstRow.Tax_Rate.toString().replace(/[^0-9.]/g, '')) || undefined : undefined,
-            taxInclusive: firstRow.Tax_Inclusive !== undefined && firstRow.Tax_Inclusive !== '' ? firstRow.Tax_Inclusive.toString().toUpperCase() === 'TRUE' : undefined,
+            description: (firstRow.Description || firstRow.Long_Description || firstRow['Body (HTML)'] || '').toString(),
+            category: (firstRow.Category || firstRow['Product Category'] || firstRow['Product Type'] || firstRow.Type || firstRow.Product_Type || 'General').toString().trim(),
+            subCategory: firstRow.Sub_Category?.toString().trim() || '',
+            brand: (firstRow.Brand || firstRow.Vendor || 'Raaghas').toString().trim(),
+            collection: firstRow.Collection?.toString().trim() || '',
+            productType: (firstRow.Product_Type || firstRow.Type || 'Apparel').toString().trim(),
+            gender: firstRow.Gender?.toString().trim() || 'Unisex',
+            ageGroup: firstRow.Age_Group?.toString().trim() || 'Adult',
+            fabric: firstRow.Fabric?.toString().trim() || '',
+            material: firstRow.Material?.toString().trim() || '',
+            pattern: firstRow.Pattern?.toString().trim() || '',
+            fitType: firstRow.Fit_Type?.toString().trim() || '',
+            sleeveType: firstRow.Sleeve_Type?.toString().trim() || '',
+            neckType: firstRow.Neck_Type?.toString().trim() || '',
+            length: firstRow.Length?.toString().trim() || '',
+            occasion: firstRow.Occasion?.toString().trim() || '',
+            style: firstRow.Style?.toString().trim() || '',
+            tags: firstRow.Tags?.toString().trim() || '',
+            searchKeywords: firstRow.Search_Keywords?.toString().trim() || firstRow.Tags?.toString().trim() || '',
+            seoTitle: firstRow.SEO_Title?.toString().trim() || title,
+            metaDescription: firstRow.Meta_Description?.toString().trim() || '',
+            metaKeywords: firstRow.Meta_Keywords?.toString().trim() || firstRow.Tags?.toString().trim() || '',
+            hsnCode: firstRow.HSN_Code?.toString().trim() || 'TEXTILE-00',
+            taxRate,
+            taxInclusive,
             status: rawStatus,
             published: isPublished,
           };
 
-          // Remove undefined values so Prisma defaults can take over if creating
-          Object.keys(productPayload).forEach(key => productPayload[key] === undefined && delete productPayload[key]);
+          // Remove undefined values so Prisma schema defaults apply on create
+          Object.keys(productPayload).forEach(k => productPayload[k] === undefined && delete productPayload[k]);
 
-          if (sizeGuideId) {
-            productPayload.sizeGuideId = sizeGuideId;
-          }
-          if (collectionIds.length > 0) {
-            productPayload.collections = { connect: collectionIds };
-          }
+          if (sizeGuideId) productPayload.sizeGuideId = sizeGuideId;
+          if (collectionIds.length > 0) productPayload.collections = { connect: collectionIds };
 
           if (product) {
-            product = await tx.product.update({
-              where: { id: product.id },
-              data: productPayload
-            });
+            product = await tx.product.update({ where: { id: product.id }, data: productPayload });
             summary.updated++;
           } else {
-            product = await tx.product.create({
-              data: productPayload
-            });
+            product = await tx.product.create({ data: productPayload });
             summary.success++;
           }
 
-          // 2. Process Variants
-          const baseSku = firstRow.SKU?.toString() || firstRow['Variant SKU']?.toString() || product.handle;
+          // ── 2. Process Variants ────────────────────────────────────────────────
+          const baseSku = firstRow.SKU?.toString().trim() || firstRow['Variant SKU']?.toString().trim() || product.handle;
+
           for (const vRow of productRows) {
-            let sku = vRow.SKU?.toString() || vRow['Variant SKU']?.toString();
+            let sku = vRow.SKU?.toString().trim() || vRow['Variant SKU']?.toString().trim();
             if (!sku) {
-               // Fallback: If no SKU provided, inherit parent's SKU and append options
-               const optionsStr = [
-                 vRow['Option1 Value'] || vRow.Size, 
-                 vRow['Option2 Value'] || vRow.Color, 
-                 vRow['Option3 Value'] || vRow.Secondary_Color
-               ].filter(Boolean).join('-');
-               
-               const optionVal = optionsStr || 'base';
-               sku = `${baseSku}-var-${optionVal.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+              // Fallback: auto-generate SKU from base + options
+              const optionsStr = [
+                vRow['Option1 Value']?.toString().trim() || vRow.Size?.toString().trim(),
+                vRow['Option2 Value']?.toString().trim() || vRow.Color?.toString().trim(),
+                vRow['Option3 Value']?.toString().trim() || vRow.Secondary_Color?.toString().trim(),
+              ].filter(Boolean).join('-');
+              sku = `${baseSku}-${(optionsStr || 'base').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
             }
+
+            // BUG-2 FIX: Normalize empty/whitespace barcodes to null to prevent @unique violation
+            const rawBarcode = vRow.Barcode?.toString().trim() || vRow['Variant Barcode']?.toString().trim() || null;
+            const barcode = rawBarcode && rawBarcode.length > 0 ? rawBarcode : null;
+
+            // BUG-8 FIX: Only set option2/option3 if a real value was provided.
+            // Defaulting to "Default" when the CSV has no Color column pollutes the variant options UI.
+            const opt1Val = vRow['Option1 Value']?.toString().trim() || vRow.Size?.toString().trim() || 'Default';
+            const opt2Val = vRow['Option2 Value']?.toString().trim() || vRow.Color?.toString().trim() || null;
+            const opt3Val = vRow['Option3 Value']?.toString().trim() || vRow.Secondary_Color?.toString().trim() || null;
 
             const variantPayload: any = {
               sku,
-              barcode: vRow.Barcode?.toString().trim() || vRow['Variant Barcode']?.toString().trim() || null,
+              barcode,
               price: parseNum(vRow.Selling_Price || vRow.Price || vRow['Variant Price'], 0),
               mrp: parseNum(vRow.MRP || vRow.Selling_Price || vRow.Price || vRow['Variant Compare At Price'] || vRow['Variant Price'], 0),
               sellingPrice: parseNum(vRow.Selling_Price || vRow.Price || vRow['Variant Price'], 0),
@@ -532,72 +574,102 @@ export class ProductService {
               costPrice: vRow.Cost_Price ? parseNum(vRow.Cost_Price, null) : null,
               discountPercentage: vRow.Discount_Percent ? parseNum(vRow.Discount_Percent, null) : null,
               inventory: parseNum(vRow.Stock_Qty || vRow.Stock || vRow['Variant Inventory Qty'] || vRow.Inventory, 0),
-              option1Name: vRow['Option1 Name'] || 'Size',
-              option1Value: vRow['Option1 Value']?.toString() || vRow.Size?.toString() || 'Default',
-              option2Name: vRow['Option2 Name'] || 'Color',
-              option2Value: vRow['Option2 Value']?.toString() || vRow.Color?.toString() || 'Default',
-              option3Name: vRow['Option3 Name'] || 'Secondary Color',
-              option3Value: vRow['Option3 Value']?.toString() || vRow.Secondary_Color?.toString() || null,
+              option1Name: vRow['Option1 Name']?.toString().trim() || 'Size',
+              option1Value: opt1Val,
+              option2Name: opt2Val ? (vRow['Option2 Name']?.toString().trim() || 'Color') : null,
+              option2Value: opt2Val,
+              option3Name: opt3Val ? (vRow['Option3 Name']?.toString().trim() || 'Secondary Color') : null,
+              option3Value: opt3Val,
               productId: product.id,
             };
 
+            // BUG-1 FIX: Check if this SKU belongs to a DIFFERENT product — cross-product SKU collision.
             const existingVariant = await tx.variant.findUnique({ where: { sku } });
             if (existingVariant) {
-              await tx.variant.update({ where: { id: existingVariant.id }, data: variantPayload });
+              if (existingVariant.productId !== product.id) {
+                // SKU collision: this SKU was previously assigned to another product.
+                // Generate a disambiguated SKU rather than silently corrupting the other product.
+                const disambiguatedSku = `${sku}-${product.handle.slice(-6)}`;
+                variantPayload.sku = disambiguatedSku;
+                await tx.variant.create({ data: variantPayload });
+                summary.errors.push({ key, error: `SKU "${sku}" collision: renamed to "${disambiguatedSku}" for this product.` });
+              } else {
+                // Same product — safe update
+                await tx.variant.update({ where: { id: existingVariant.id }, data: variantPayload });
+              }
             } else {
               await tx.variant.create({ data: variantPayload });
             }
           }
 
-          // 3. Process Media
-          const images: { url: string, position: number }[] = [];
-          if (firstRow.Main_Image) images.push({ url: firstRow.Main_Image, position: 0 });
-          if (firstRow.Image_2) images.push({ url: firstRow.Image_2, position: 1 });
-          if (firstRow.Image_3) images.push({ url: firstRow.Image_3, position: 2 });
-          if (firstRow.Image_4) images.push({ url: firstRow.Image_4, position: 3 });
-          if (firstRow.Image_5) images.push({ url: firstRow.Image_5, position: 4 });
+          // ── 3. Process Media ───────────────────────────────────────────────────
+          const rawImages: (string | null)[] = [
+            normalizeImageUrl(firstRow.Main_Image),
+            normalizeImageUrl(firstRow.Image_2),
+            normalizeImageUrl(firstRow.Image_3),
+            normalizeImageUrl(firstRow.Image_4),
+            normalizeImageUrl(firstRow.Image_5),
+          ];
 
-          // Also collect Shopify 'Image Src' across all rows if present
-          const shopifyImageUrls = new Set(images.map(img => img.url));
-          let currentPos = images.length;
-          
+          // Deduplicate and remove nulls
+          const seenUrls = new Set<string>();
+          const images: { url: string; position: number }[] = [];
+          for (const url of rawImages) {
+            if (url && !seenUrls.has(url)) {
+              seenUrls.add(url);
+              images.push({ url, position: images.length });
+            }
+          }
+
+          // Shopify 'Image Src' column across all variant rows
           for (const r of productRows) {
-            const imgSrc = r['Image Src'];
-            if (imgSrc && !shopifyImageUrls.has(imgSrc)) {
-              images.push({ 
-                url: imgSrc, 
-                // Shopify positions are 1-indexed; normalize to 0-indexed
-                position: r['Image Position'] ? Number(r['Image Position']) - 1 : currentPos++ 
-              });
-              shopifyImageUrls.add(imgSrc);
+            const imgSrc = normalizeImageUrl(r['Image Src']);
+            if (imgSrc && !seenUrls.has(imgSrc)) {
+              // Shopify Image Position is 1-indexed; convert to 0-indexed
+              const pos = r['Image Position'] ? Math.max(0, Number(r['Image Position']) - 1) : images.length;
+              images.push({ url: imgSrc, position: pos });
+              seenUrls.add(imgSrc);
             }
           }
 
           if (images.length > 0) {
-            // Re-normalize positions sequentially starting from 0 to prevent gaps
-            const normalizedImages = images.map((img, idx) => ({ ...img, position: idx }));
-            // Clear old images and add new ones
-            await tx.image.deleteMany({ where: { productId: product.id } });
-            await tx.image.createMany({
-              data: normalizedImages.map((img: { url: string, position: number }) => ({
+            // Re-normalize positions to 0-indexed sequential to guarantee correct thumbnail order
+            const finalImages = images
+              .sort((a, b) => a.position - b.position)
+              .map((img, idx) => ({
                 url: img.url,
-                position: img.position,
+                position: idx,
                 productId: product.id,
-                altText: img.position === 0 ? title : `${title} - ${img.position + 1}`
-              }))
-            });
+                altText: idx === 0 ? title : `${title} - ${idx + 1}`,
+              }));
+
+            await tx.image.deleteMany({ where: { productId: product.id } });
+            await tx.image.createMany({ data: finalImages });
           }
-        });
+
+        }, { timeout: 30000 }); // BUG-3 FIX: 30s transaction timeout for large products
       } catch (err: any) {
         summary.failed++;
-        summary.errors.push({ key, error: err.message });
+        const errMsg = err?.message || String(err);
+        // Surface specific Prisma error codes for better debugging
+        if (err?.code === 'P2002') {
+          const field = err?.meta?.target?.join(', ') || 'unknown field';
+          summary.errors.push({ key, error: `Unique constraint violation on [${field}]. Check for duplicate SKU or barcode in your CSV.` });
+        } else if (err?.code === 'P2025') {
+          summary.errors.push({ key, error: `Record not found during update. The product may have been deleted. Re-upload to recreate.` });
+        } else if (errMsg.includes('Transaction already closed') || errMsg.includes('timed out')) {
+          summary.errors.push({ key, error: `Transaction timeout: this product has too many variants or images. Try splitting into smaller batches.` });
+        } else {
+          summary.errors.push({ key, error: errMsg });
+        }
       }
     }
 
-    return { 
-      success: true, 
-      message: `Import complete. ${summary.success} created, ${summary.updated} updated, ${summary.failed} failed.`,
-      summary 
+    const hasErrors = summary.errors.length > 0;
+    return {
+      success: true,
+      message: `Import complete: ${summary.success} created, ${summary.updated} updated, ${summary.failed} failed.${hasErrors ? ` See error log for ${summary.errors.length} issue(s).` : ''}`,
+      summary
     };
   }
 

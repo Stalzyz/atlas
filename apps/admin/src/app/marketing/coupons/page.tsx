@@ -3,7 +3,7 @@
 import { API_BASE } from "@/lib/api";
 
 import { useEffect, useState } from "react";
-import { Plus, Search, Trash2, Edit2, Tag, Calendar, Users, Percent, IndianRupee, Loader2 } from "lucide-react";
+import { Zap, Plus, Search, Trash2, Edit2, Tag, Calendar, Users, Percent, IndianRupee, Loader2, ToggleLeft, ToggleRight } from "lucide-react";
 import { useAdminAuth } from "@/components/providers/AuthProvider";
 import AutomatedOffers from "../offers/page";
 
@@ -205,8 +205,8 @@ export default function CouponManagement() {
                 <button onClick={() => handleEdit(coupon)} className="p-2 text-gray-400 hover:text-blue-500 transition-colors">
                   <Edit2 size={16} />
                 </button>
-                <button onClick={() => handleToggle(coupon.id)} className={`p-2 transition-colors ${coupon.isActive ? 'text-green-500 hover:text-green-600' : 'text-gray-300 hover:text-wine'}`}>
-                  <Tag size={16} />
+                <button onClick={() => handleToggle(coupon.id)} className={`p-2 transition-colors ${coupon.isActive ? 'text-wine hover:text-charcoal' : 'text-gray-300 hover:text-wine'}`} title={coupon.isActive ? "Pause Coupon" : "Activate Coupon"}>
+                  {coupon.isActive ? <ToggleRight size={22} className="text-wine" /> : <ToggleLeft size={22} />}
                 </button>
                 <button onClick={() => handleDelete(coupon.id)} className="p-2 text-gray-400 hover:text-red-500 transition-colors">
                   <Trash2 size={16} />
@@ -233,9 +233,21 @@ export default function CouponManagement() {
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5 justify-end">
                   <Calendar size={10} /> Status
                 </p>
-                <span className={`inline-block px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest ${coupon.isActive ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
-                  {coupon.isActive ? 'Active' : 'Paused'}
-                </span>
+                {(() => {
+                  const isExpired = coupon.endDate && new Date(coupon.endDate) < new Date();
+                  if (isExpired) {
+                    return (
+                      <span className="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest bg-gray-50 text-gray-500 border border-gray-200">
+                        Expired
+                      </span>
+                    );
+                  }
+                  return (
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest ${coupon.isActive ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                      {coupon.isActive ? 'Active' : 'Paused'}
+                    </span>
+                  );
+                })()}
               </div>
             </div>
           </div>

@@ -1232,8 +1232,13 @@ export class ProductService {
         products
       };
     }
-    return (this.prisma as any).collection.findUnique({
-      where: { id },
+    return (this.prisma as any).collection.findFirst({
+      where: {
+        OR: [
+          { id },
+          { handle: id }
+        ]
+      },
       include: {
         products: {
           take: 200, // Safeguard limit to prevent OOM

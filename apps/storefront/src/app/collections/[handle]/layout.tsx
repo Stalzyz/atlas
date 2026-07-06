@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 async function getCollection(handle: string) {
   try {
-    const res = await fetch(`${API_URL}/api/v1/collections/${encodeURIComponent(handle)}`, { cache: "no-store" });
+    const res = await fetch(`${API_URL}/api/v1/products/collections/${encodeURIComponent(handle)}`, { cache: "no-store" });
     if (!res.ok) return null;
     const data = await res.json();
     if (data.success === false) return null;

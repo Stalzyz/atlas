@@ -1122,8 +1122,7 @@ export class ProductService {
            productData.status = item.status;
            productData.published = item.status.toString().toUpperCase() === 'ACTIVE' || item.status.toString().toUpperCase() === 'PUBLISHED';
         }
-        if (item.bundleIds !== undefined) productData.bundleIds = item.bundleIds;
-        if (item.featuredCoupon !== undefined) productData.featuredCoupon = item.featuredCoupon;
+        // Removed bundleIds and featuredCoupon as they are not in schema
         
         if (item.sizeGuideId !== undefined) {
           if (item.sizeGuideId && typeof item.sizeGuideId === 'string' && item.sizeGuideId.trim() !== '') {

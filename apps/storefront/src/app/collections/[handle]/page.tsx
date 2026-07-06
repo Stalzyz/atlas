@@ -65,7 +65,10 @@ function CollectionPageContent({ handle }: { handle: string }) {
     updateParams({ tags: next, page: "1" });
   };
   const toggleSize = (size: string) => {
-    updateParams({ sizes: selectedSizes.includes(size) ? [] : [size], page: "1" });
+    const nextSizes = selectedSizes.includes(size)
+      ? selectedSizes.filter(s => s !== size)
+      : [...selectedSizes, size];
+    updateParams({ sizes: nextSizes, page: "1" });
   };
   const setInStockOnly = (v: boolean) => updateParams({ inStock: v ? "true" : null, page: "1" });
   const setShowCombo = (v: boolean) => updateParams({ combo: v ? "true" : null, page: "1" });

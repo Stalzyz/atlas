@@ -101,8 +101,6 @@ function BulkEditContent() {
               hsnCode: p.hsnCode || '',
               taxRate: p.taxRate || '12.00',
               taxInclusive: p.taxInclusive !== false,
-              bundleIds: p.bundleIds || '',
-              featuredCoupon: p.featuredCoupon || '',
               sizeGuideId: p.sizeGuideId || '',
             };
           });
@@ -236,7 +234,7 @@ function BulkEditContent() {
                 <th className="px-4 py-3 font-bold text-gray-600 border-r bg-green-50" colSpan={7}>Taxonomy</th>
                 <th className="px-4 py-3 font-bold text-gray-600 border-r bg-yellow-50" colSpan={9}>Attributes</th>
                 <th className="px-4 py-3 font-bold text-gray-600 border-r bg-purple-50" colSpan={4}>SEO &amp; Meta</th>
-                <th className="px-4 py-3 font-bold text-gray-600 border-r bg-gray-100" colSpan={6}>Misc</th>
+                <th className="px-4 py-3 font-bold text-gray-600 border-r bg-gray-100" colSpan={4}>Misc</th>
               </tr>
               <tr className="text-xs uppercase tracking-wider text-gray-500">
                 <th className="px-4 py-2 sticky left-0 bg-gray-50 z-10 border-r border-b shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Reference Only</th>
@@ -272,8 +270,6 @@ function BulkEditContent() {
                 <th className="px-3 py-2 border-r border-b">HSN Code</th>
                 <th className="px-3 py-2 border-r border-b">Tax Rate (%)</th>
                 <th className="px-3 py-2 border-r border-b">Tax Inclusive?</th>
-                <th className="px-3 py-2 border-r border-b">Bundle IDs</th>
-                <th className="px-3 py-2 border-r border-b">Featured Coupon</th>
                 <th className="px-3 py-2 border-r border-b">Size Guide</th>
               </tr>
             </thead>
@@ -355,8 +351,6 @@ function BulkEditContent() {
                       <option value="exclusive">Exclusive (+Tax)</option>
                     </select>
                   </td>
-                  {renderInput(p.id, "bundleIds", "text", "w-40")}
-                  {renderInput(p.id, "featuredCoupon", "text", "w-32")}
                   {renderInput(p.id, "sizeGuideId", "text", "w-32")}
                 </tr>
               ))}

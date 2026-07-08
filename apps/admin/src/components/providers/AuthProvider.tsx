@@ -56,8 +56,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const tk = storedToken || data.access_token;
           setToken(tk);
           setUser(data.user);
+          // Refresh cookie max-age
+          if (tk) document.cookie = `admin_token=${tk}; path=/; max-age=${30*24*60*60}`;
         } else {
           localStorage.removeItem('admin_token');
+          document.cookie = 'admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
           setToken(null);
           setUser(null);
         }
@@ -95,6 +98,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Store token in localStorage as Bearer fallback (works across ports in dev)
     localStorage.setItem('admin_token', data.access_token);
+    document.cookie = `admin_token=${data.access_token}; path=/; max-age=${30*24*60*60}`;
     setToken(data.access_token);
     setUser(data.user);
 
@@ -102,10 +106,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
-    localStorage.removeItem('admin_token');
-    setToken(null);
-    setUser(null);
-
     try {
       await fetch(`${API_BASE()}/auth/logout`, {
         method: 'POST',
@@ -114,9 +114,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
     } catch (e) {
       console.error('Logout request failed');
+    } finally {
+      localStorage.removeItem('admin_token');
+      document.cookie = 'admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      setToken(null);
+      setUser(null);
+      window.location.href = '/login';
     }
-
-    window.location.href = '/login';
   };
 
   return (

@@ -56,11 +56,24 @@ function SidebarLink({ href, icon, label, roles, permission }: SidebarLinkProps)
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ isOpen = false, onClose }: { isOpen?: boolean, onClose?: () => void }) {
   const { user, logout } = useAdminAuth();
 
   return (
-    <aside className="w-64 flex flex-col z-20 relative" style={{ background: "linear-gradient(180deg, #28104E 0%, #1a0a33 100%)" }}>
+    <>
+      {/* Mobile Backdrop */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-20 md:hidden backdrop-blur-sm transition-opacity"
+          onClick={onClose}
+        />
+      )}
+
+      <aside className={`
+        fixed inset-y-0 left-0 w-64 flex flex-col z-30 transition-transform duration-300 ease-in-out
+        md:relative md:translate-x-0
+        ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
+      `} style={{ background: "linear-gradient(180deg, #28104E 0%, #1a0a33 100%)" }}>
       {/* Top glow */}
       <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(151,84,203,0.25) 0%, transparent 70%)" }} />
 
@@ -156,5 +169,6 @@ export function Sidebar() {
         </button>
       </div>
     </aside>
+    </>
   );
 }

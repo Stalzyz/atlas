@@ -3,7 +3,9 @@
 import { Sidebar } from "@/components/Sidebar";
 import { usePathname } from "next/navigation";
 import { AuthProvider, useAdminAuth } from "@/components/providers/AuthProvider";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 function AuthGuard({ children, isAuthPage }: { children: React.ReactNode, isAuthPage: boolean }) {
@@ -38,6 +40,7 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
   const isAuthPage = pathname === "/login" || pathname?.startsWith("/login/") || false;
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <>
@@ -49,23 +52,31 @@ export default function ClientLayout({
           </div>
         ) : (
           <>
-            <Sidebar />
-            <main className="flex-1 flex flex-col overflow-hidden">
-              <header className="h-16 bg-[var(--surface)] border-b border-[var(--border)] flex items-center justify-between px-8 z-10 shadow-sm">
-                <h1 className="text-sm font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em]">System Overview</h1>
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <main className="flex-1 flex flex-col overflow-hidden w-full">
+              <header className="h-16 bg-[var(--surface)] border-b border-[var(--border)] flex items-center justify-between px-4 md:px-8 z-10 shadow-sm">
+                <div className="flex items-center">
+                  <button 
+                    onClick={() => setIsSidebarOpen(true)}
+                    className="md:hidden mr-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                  >
+                    <Menu size={24} />
+                  </button>
+                  <h1 className="text-sm font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em] hidden sm:block">System Overview</h1>
+                </div>
                 <div className="flex items-center gap-4">
                   <a 
                     href="https://atlas.grekam.in" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-wine text-ivory px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-wine-dark hover:shadow-lg hover:shadow-wine/20 transition-all active:scale-95"
+                    className="bg-wine text-ivory px-4 md:px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-wine-dark hover:shadow-lg hover:shadow-wine/20 transition-all active:scale-95"
                   >
                     View Live Store
                   </a>
                 </div>
               </header>
               
-              <div className="flex-1 overflow-y-auto p-8 custom-scrollbar bg-[var(--bg)]">
+              <div className="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar bg-[var(--bg)] w-full overflow-x-hidden">
                 {children}
               </div>
             </main>

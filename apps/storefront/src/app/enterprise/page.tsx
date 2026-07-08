@@ -140,7 +140,7 @@ export default function EnterpriseLandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
-              href="http://localhost:4402/login" 
+              href="https://atlasadmin.grekam.in/login" 
               className="luxury-button w-full sm:w-auto shadow-xl shadow-[var(--cta)]/20 text-center"
             >
               View Demo
@@ -375,7 +375,7 @@ export default function EnterpriseLandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
-              href="http://localhost:4402/login" 
+              href="https://atlasadmin.grekam.in/login" 
               className="luxury-button shadow-xl shadow-[var(--cta)]/20 text-center w-full sm:w-auto"
             >
               View Demo

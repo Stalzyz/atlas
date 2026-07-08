@@ -16,98 +16,85 @@ interface Section {
 
 const FALLBACK_SECTIONS: Section[] = [
   { 
-    id: "hero", 
-    type: "HERO", 
+    id: "category-strip", 
+    type: "CATEGORY_STRIP", 
     order: 0, 
     content: {
-      variant: "quantum_mosaic",
-      videoUrl: "https://v1.uifaces.co/videos/abstract-silk.mp4", // Abstract silk loop
-      textureImage: "https://images.unsplash.com/photo-1610030469983-98e550d615e1?q=80&w=800",
-      productPhoto: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=1200",
-      marqueeText: "THE AESTHETIC ERA // SPRING 2024 // HANDCRAFTED GRACE //",
-      primaryCta: { text: "Explore Collection", link: "/collections/all" }
+      categories: [
+        { label: "Men", image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=200&h=200&fit=crop", link: "/collections/men" },
+        { label: "Women", image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=200&h=200&fit=crop", link: "/collections/women" },
+        { label: "Kids", image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=200&h=200&fit=crop", link: "/collections/kids" },
+        { label: "Beauty", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54c28?w=200&h=200&fit=crop", link: "/collections/beauty" },
+        { label: "Home", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=200&h=200&fit=crop", link: "/collections/home" },
+        { label: "Studio", image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=200&h=200&fit=crop", link: "/collections/studio" }
+      ]
+    } 
+  },
+  { 
+    id: "hero-banner", 
+    type: "BANNER", 
+    order: 1, 
+    content: {
+      image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200",
+      mobileImage: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800",
+      headline: "END OF REASON SALE",
+      subheadline: "50-80% OFF ON TOP BRANDS",
+      ctaText: "Shop Now",
+      ctaLink: "/collections/all"
+    } 
+  },
+  { 
+    id: "deal-of-the-day", 
+    type: "PRODUCT_GRID", 
+    order: 2, 
+    content: { 
+      title: "DEAL OF THE DAY", 
+      count: 4, 
+      collectionHandle: "all" 
+    } 
+  },
+  { 
+    id: "biggest-deals", 
+    type: "IMAGE_ROW", 
+    order: 3, 
+    content: {
+      title: "BIGGEST DEALS ON TOP BRANDS",
+      images: [
+        { url: "https://images.unsplash.com/photo-1551028719-01c1eb5a8b4f?w=600&h=600&fit=crop", link: "/collections/all" },
+        { url: "https://images.unsplash.com/photo-1560243563-062bfc001d68?w=600&h=600&fit=crop", link: "/collections/all" },
+        { url: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=600&fit=crop", link: "/collections/all" },
+        { url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop", link: "/collections/all" }
+      ]
+    } 
+  },
+  { 
+    id: "shop-by-category", 
+    type: "CATEGORIES_MOSAIC", 
+    order: 4, 
+    content: {
+      headline: "SHOP BY CATEGORY",
+      subheadline: "",
+      categories: [
+        { id: "1", label: "Western Wear", handle: "western-wear", image: "https://images.unsplash.com/photo-1485230895905-31d011684ac9?q=80&w=800", size: "large" },
+        { id: "2", label: "Ethnic Wear", handle: "ethnic-wear", image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=600", size: "small" },
+        { id: "3", label: "Activewear", handle: "activewear", image: "https://images.unsplash.com/photo-1518459031867-a89b944bffe4?q=80&w=600", size: "small" },
+        { id: "4", label: "Footwear", handle: "footwear", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800", size: "medium" }
+      ]
     } 
   },
   { 
     id: "trust", 
     type: "TRUST_BAR", 
-    order: 1, 
-    content: {
-      items: [
-        { icon: "Truck", text: "Global Shipping" },
-        { icon: "CheckCircle", text: "Authentic Handloom" },
-        { icon: "Clock", text: "24/7 Concierge" },
-        { icon: "Shield", text: "Verified Luxury" }
-      ]
-    } 
-  },
-  { 
-    id: "mosaic", 
-    type: "CATEGORIES_MOSAIC", 
-    order: 2, 
-    content: {
-      headline: "The Curations",
-      subheadline: "Handpicked selections for every facet of your life.",
-      categories: [
-        { id: "1", label: "Artisan Touch", handle: "artisan-touch", image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=800", size: "large" },
-        { id: "2", label: "Pure Cotton", handle: "pure-cotton-kurtis", image: "https://images.unsplash.com/photo-1610030469983-98e550d615e1?q=80&w=600", size: "small" },
-        { id: "3", label: "Kalamkari", handle: "kalamkari", image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=600", size: "small" },
-        { id: "4", label: "Fresh Drops", handle: "Fresh-Drops", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800", size: "medium" }
-      ]
-    } 
-  },
-  { 
-    id: "bestsellers", 
-    type: "PRODUCT_GRID", 
-    order: 3, 
-    content: { 
-      title: "The Bestsellers", 
-      count: 8, 
-      collectionHandle: "artisan-touch" 
-    } 
-  },
-  { 
-    id: "story-offer", 
-    type: "STORY_BANNER", 
-    order: 4, 
-    content: { 
-      headline: "The First Handshake",
-      subheadline: "Experience Atlas with 10% off your first order.",
-      image: "https://images.unsplash.com/photo-1594235412402-b1ed2efaa873?q=80&w=1200",
-      ctaText: "Claim Discount", 
-      ctaLink: "/collections/all",
-      code: "ATLAS10"
-    } 
-  },
-  { 
-    id: "social-proof", 
-    type: "SOCIAL_PROOF", 
     order: 5, 
     content: {
-      headline: "Atlas in the Wild",
-      subtext: "Tag us @atlas.official to be featured.",
       items: [
-        { image: "https://images.unsplash.com/photo-1594235412402-b1ed2efaa873?q=80&w=400", name: "Riya", city: "Bangalore", story: "Best for long office hours!" },
-        { image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=400", name: "Ananya", city: "Mumbai", story: "The fabric is like butter." },
-        { image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=400", name: "Priya", city: "Delhi", story: "Royal Wine is stunning." },
-        { image: "https://images.unsplash.com/photo-1610030469983-98e550d615e1?q=80&w=400", name: "Sneha", city: "Hyderabad", story: "Fastest delivery ever." }
+        { icon: "CheckCircle", text: "100% ORIGINAL guarantee" },
+        { icon: "RefreshCcw", text: "Return within 14days" },
+        { icon: "Truck", text: "Get free delivery" },
+        { icon: "CreditCard", text: "Secure payments" }
       ]
     } 
-  },
-  { 
-    id: "instagram", 
-    type: "INSTAGRAM_FEED", 
-    order: 6, 
-    content: {
-      headline: "Visual Diary",
-      url: "https://instagram.com/atlas.official",
-      handleText: "@atlas.official"
-    } 
-  },
-  { id: "newsletter", type: "NEWSLETTER", order: 7, content: {
-    headline: "The Inner Circle",
-    body: "Subscribe for early access to curated collections and secret events."
-  } }
+  }
 ];
 
 // ─── Data Fetching ────────────────────────────────────────────────────────────

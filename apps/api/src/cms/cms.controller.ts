@@ -707,7 +707,7 @@ export class CmsController {
        throw new BadRequestException('File not uploaded');
     }
      
-    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.grekam.in");
+    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://atlasapi.grekam.in");
     baseUrl = baseUrl.replace(/\/$/, "");
     
     // Perform "Monster Level" optimization

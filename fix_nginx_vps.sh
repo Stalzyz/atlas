@@ -64,13 +64,13 @@ map \$http_origin \$cors_origin {
 
 server {
     listen 80;
-    server_name atlas.grekam.in www.atlas.grekam.in admin.grekam.in api.grekam.in;
+    server_name atlas.grekam.in www.atlas.grekam.in atlasadmin.grekam.in atlasapi.grekam.in;
     return 301 https://\$host\$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name api.grekam.in;
+    server_name atlasapi.grekam.in;
     ssl_certificate /etc/letsencrypt/live/atlas/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/atlas/privkey.pem;
     client_max_body_size 50M;
@@ -110,7 +110,7 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name admin.grekam.in;
+    server_name atlasadmin.grekam.in;
     ssl_certificate /etc/letsencrypt/live/atlas/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/atlas/privkey.pem;
 

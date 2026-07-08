@@ -335,7 +335,7 @@ export class ProductService {
     // BUG-9 FIX: Normalize image URLs — relative /uploads/ paths get absolute URL
     const publicApiBase = process.env.API_URL 
       ? process.env.API_URL.replace(/\/api\/v1\/?$/, '').replace(/\/$/, '')
-      : (process.env.NODE_ENV === 'production' ? 'https://api.grekam.in' : 'http://localhost:6005');
+      : (process.env.NODE_ENV === 'production' ? 'https://atlasapi.grekam.in' : 'http://localhost:6005');
 
     const normalizeImageUrl = (url: string | null | undefined): string | null => {
       if (!url || !url.trim()) return null;

@@ -5,7 +5,7 @@ const path = require('path');
 // Initialize Prisma directly using the default client in node_modules
 const prisma = new PrismaClient();
 const UPLOADS_DIR = '/var/www/atlas_new/shared/uploads';
-const BASE_URL = 'https://api.grekam.in/uploads';
+const BASE_URL = 'https://atlasapi.grekam.in/uploads';
 
 async function syncMedia() {
   console.log('🧪 Starting SURGICAL Media Sync...');

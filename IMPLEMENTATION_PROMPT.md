@@ -14,7 +14,7 @@ This is a **Turborepo monorepo** with three apps:
 | `api` | NestJS + Prisma | `apps/api/src/` |
 | `database` | Prisma schema | `packages/database/prisma/schema.prisma` |
 
-API base URL: `https://api.grekam.in/api/v1`  
+API base URL: `https://atlasapi.grekam.in/api/v1`  
 Storefront URL: `https://atlas.grekam.in`
 
 ---
@@ -442,7 +442,7 @@ const salePrice = variant.mrp && Number(variant.mrp) > Number(variant.price) ? v
 
 #### 8B. Ensure Feed is Publicly Accessible
 The `@Public()` decorator is already on the route — confirm no auth middleware blocks it.
-Test: `curl -I https://api.grekam.in/api/v1/marketing/facebook-feed.xml` should return `200 OK`.
+Test: `curl -I https://atlasapi.grekam.in/api/v1/marketing/facebook-feed.xml` should return `200 OK`.
 
 #### 8C. Auto-Refresh / Cache
 Add response header for Meta's crawler:

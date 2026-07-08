@@ -363,7 +363,7 @@ export class MailService {
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
-    const resetUrl = `https://admin.grekam.in/reset-password?token=${token}`;
+    const resetUrl = `https://atlasadmin.grekam.in/reset-password?token=${token}`;
     const subject = `Reset your Atlas Admin Password`;
     let html = `
           <div style="text-align: center;">

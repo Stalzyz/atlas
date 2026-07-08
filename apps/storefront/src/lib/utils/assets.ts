@@ -10,7 +10,7 @@ import { API_URL } from "../api";
 function getPublicAssetBase(): string {
   // In production, always use the public API domain for images
   if (process.env.NODE_ENV === "production") {
-    return "https://api.grekam.in";
+    return "https://atlasapi.grekam.in";
   }
   // In development, use whatever API_URL is configured
   return API_URL;

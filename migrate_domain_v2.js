@@ -2,15 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const replacements = [
-  { old: /api\.atlas\.in/g, new: 'atlasapi.grekam.in' },
-  { old: /admin\.atlas\.in/g, new: 'atlasadmin.grekam.in' },
-  { old: /www\.atlas\.in/g, new: 'www.atlas.grekam.in' },
-  { old: /admin@atlas\.in/g, new: 'admin@grekam.in' },
-  { old: /support@atlas\.in/g, new: 'support@grekam.in' },
-  { old: /wholesale@atlas\.in/g, new: 'wholesale@grekam.in' },
-  { old: /notifications@atlas\.in/g, new: 'notifications@grekam.in' },
-  { old: /love@atlas\.in/g, new: 'love@grekam.in' },
-  { old: /atlas\.in/g, new: 'atlas.grekam.in' }
+  { old: /api\.grekam\.in/g, new: 'atlasatlasapi.grekam.in' },
+  { old: /admin\.grekam\.in/g, new: 'atlasatlasadmin.grekam.in' }
 ];
 
 const ignoredDirs = ['.git', 'node_modules', '.next', '.turbo', '.local_npm_cache'];
@@ -43,11 +36,11 @@ function processDirectory(dir) {
           console.log(`Updated: ${fullPath}`);
         }
       } catch (err) {
-        // Ignore read errors for binary files that slip through
+        // Ignore binary file read errors
       }
     }
   }
 }
 
 processDirectory(__dirname);
-console.log('Migration complete!');
+console.log('Migration v2 complete!');

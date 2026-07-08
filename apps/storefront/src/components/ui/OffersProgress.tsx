@@ -30,7 +30,7 @@ export function OffersProgress() {
   useEffect(() => {
     setMounted(true);
     // Fetch global settings to get the dynamic free shipping threshold
-    fetch(`https://api.grekam.in/api/v1/logistics/free-shipping-threshold`)
+    fetch(`https://atlasapi.grekam.in/api/v1/logistics/free-shipping-threshold`)
       .then(res => res.json())
       .then(data => {
          if (data?.threshold) {

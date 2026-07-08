@@ -39,8 +39,8 @@ set -e
 cat > /var/www/atlas_new/apps/api/.env << 'EOF'
 PORT=6005
 NODE_ENV=production
-API_URL=https://api.grekam.in
-CORS_ORIGINS=https://atlas.grekam.in,https://www.atlas.grekam.in,https://admin.grekam.in
+API_URL=https://atlasapi.grekam.in
+CORS_ORIGINS=https://atlas.grekam.in,https://www.atlas.grekam.in,https://atlasadmin.grekam.in
 DATABASE_URL=postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas
 JWT_SECRET=87AkYYOOGO2mM8gzBOGVRGjK0Io+0MidlPPZNgdwetU88pzxNwkbQvlemYHcjSb0
 GOOGLE_CLIENT_ID=26400214778-vmiat5v0jqdv5cmt1lohui9islphlfo7.apps.googleusercontent.com
@@ -76,7 +76,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "STEP 4: Verifying API is live..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 sleep 5
-HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.grekam.in/api/v1/products)
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://atlasapi.grekam.in/api/v1/products)
 if [ "$HTTP_STATUS" = "200" ]; then
   echo "✅ API is LIVE! Products endpoint returning 200."
 else

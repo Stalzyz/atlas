@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { adminLogin, waitForStableNetwork } from './helpers/auth';
 
-const ADMIN_URL = 'https://admin.grekam.in';
+const ADMIN_URL = 'https://atlasadmin.grekam.in';
 const STORE_URL = 'https://atlas.grekam.in';
 
 test.describe('💎 Production Hardcore Validation', () => {
@@ -64,13 +64,13 @@ test.describe('💎 Production Hardcore Validation', () => {
 
   test('API: Core Health Checks', async ({ request }) => {
     // Check public settings endpoint
-    const settingsRes = await request.get('https://api.grekam.in/api/v1/settings/public');
+    const settingsRes = await request.get('https://atlasapi.grekam.in/api/v1/settings/public');
     expect(settingsRes.ok()).toBeTruthy();
     const settings = await settingsRes.json();
     expect(settings).toHaveProperty('storeName');
 
     // Check products endpoint
-    const productsRes = await request.get('https://api.grekam.in/api/v1/products');
+    const productsRes = await request.get('https://atlasapi.grekam.in/api/v1/products');
     expect(productsRes.ok()).toBeTruthy();
   });
 

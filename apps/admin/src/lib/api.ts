@@ -6,7 +6,7 @@
  *   2. Cookie: admin_token=<token>    (HttpOnly cookie, set on login)
  *
  * Using `credentials: 'include'` ensures the browser sends the admin_token cookie
- * on all cross-origin requests to api.grekam.in, even if the in-memory token is null.
+ * on all cross-origin requests to atlasapi.grekam.in, even if the in-memory token is null.
  */
 
 export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6005').replace(/\/$/, '');

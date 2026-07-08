@@ -145,7 +145,7 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
   echo "🌐 Deploying Nginx configuration..."
   cp /var/www/atlas_new/atlas_nginx.conf /etc/nginx/sites-available/atlas
   # Remove stale duplicate symlinks that cause limit_req_zone conflicts
-  rm -f /etc/nginx/sites-enabled/atlas.conf /etc/nginx/sites-enabled/admin.grekam.in
+  rm -f /etc/nginx/sites-enabled/atlas.conf /etc/nginx/sites-enabled/atlasadmin.grekam.in
   ln -sf /etc/nginx/sites-available/atlas /etc/nginx/sites-enabled/atlas
   nginx -t && systemctl reload nginx && echo "✅ Nginx reloaded" || echo "⚠️  Nginx reload failed — check: nginx -t"
 
@@ -159,7 +159,7 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
   echo "🏁 ═══════════════════════════════════════════════════════"
   echo "   DEPLOYMENT COMPLETE"
   echo "   Storefront : https://atlas.grekam.in"
-  echo "   Admin      : https://admin.grekam.in"
-  echo "   API Health : https://api.grekam.in/api/v1/health"
+  echo "   Admin      : https://atlasadmin.grekam.in"
+  echo "   API Health : https://atlasapi.grekam.in/api/v1/health"
   echo "═══════════════════════════════════════════════════════════"
 REMOTE_SCRIPT

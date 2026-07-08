@@ -75,6 +75,6 @@ REMOTE
 
 echo ""
 echo "🏁 Shielded Injection Complete."
-echo "👉 Login: https://admin.grekam.in/login"
+echo "👉 Login: https://atlasadmin.grekam.in/login"
 echo "👉 User:  $ADMIN_EMAIL"
 echo "👉 Pass:  $ADMIN_PASS"

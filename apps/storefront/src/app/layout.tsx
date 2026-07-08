@@ -68,15 +68,15 @@ const fontJost      = '"Jost", "DM Sans", -apple-system, sans-serif';
 export const metadata: Metadata = {
   metadataBase: new URL("https://atlas.grekam.in"),
   title: {
-    default: "Atlas | India's Leading Premium Casual & Office Wear",
-    template: "%s | Atlas"
+    default: "E-Commerce Enterprise engine",
+    template: "%s | E-Commerce Enterprise engine",
   },
-  description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort and elegant evening transitions.",
+  description: "Enterprise e-commerce engine for scaling brands.",
   openGraph: {
     type: "website",
     url: "https://atlas.grekam.in",
-    title: "Atlas | Premium Casual & Office Wear",
-    description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
+    title: "E-Commerce Enterprise engine",
+    description: "Enterprise e-commerce engine for scaling brands.",
     siteName: "Atlas",
     images: [{
       url: "/og-image.jpg",
@@ -87,8 +87,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atlas | Premium Casual & Office Wear",
-    description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
+    title: "E-Commerce Enterprise engine",
+    description: "Enterprise e-commerce engine for scaling brands.",
     images: ["/og-image.jpg"]
   },
   verification: {
@@ -266,7 +266,7 @@ export default async function RootLayout({
   `;
 
   const darkThemeVariables = `
-    .dark body, .dark {
+    html.dark body, html.dark {
       --primary: ${sanitize(getVal(dk, "primary", "#6237A0"))};
       --bg: ${sanitize(getVal(dk, "bg", "#0D0718"))};
       --surface: ${sanitize(getVal(dk, "surface", "#160D2A"))};
@@ -314,7 +314,7 @@ export default async function RootLayout({
               "name": "Atlas",
               "url": "https://atlas.grekam.in",
               "logo": "https://atlas.grekam.in/logo.png",
-              "description": "Atlas is India's leading luxury brand for premium casual and office wear.",
+              "description": "Enterprise e-commerce engine for scaling brands.",
               "sameAs": [
                 "https://www.facebook.com/atlas",
                 "https://www.instagram.com/atlas"

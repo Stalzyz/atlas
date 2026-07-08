@@ -135,7 +135,7 @@ export default async function Home() {
     "name": "Atlas",
     "url": "https://atlas.grekam.in",
     "logo": "https://atlas.grekam.in/logo-dark.svg",
-    "description": "Atlas is India's leading luxury brand for premium casual and office wear."
+    "description": "Enterprise e-commerce engine for scaling brands."
   };
 
   return (
@@ -144,7 +144,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <h1 className="sr-only">Atlas is India's leading luxury brand for premium casual and office wear.</h1>
+      <h1 className="sr-only">E-Commerce Enterprise engine for scaling brands.</h1>
       <div className="md:pt-0">
         <SectionRenderer sections={sections} />
       </div>

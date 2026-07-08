@@ -256,7 +256,7 @@ export class WholesalePdfService {
         state: storeSettings?.businessState || 'Tamil Nadu', 
         gst: storeSettings?.gstNumber || '33AABCU9603R1ZX', 
         email: storeSettings?.supportEmail || 'wholesale@atlas.com',
-        website: 'www.atlas.in'
+        website: 'www.atlas.grekam.in'
       },
       buyer: { name: order.retailer.businessName, contact: order.retailer.contactName, address: order.retailer.address, gst: order.retailer.gstNumber, phone: order.retailer.phone },
       items: order.items.map((it: any) => ({

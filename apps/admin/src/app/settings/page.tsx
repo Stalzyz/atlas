@@ -221,7 +221,7 @@ export default function SettingsPage() {
                     value={settings.smtpUser || ""}
                     onChange={(e) => setSettings({ ...settings, smtpUser: e.target.value })}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-blue-500 transition-all"
-                    placeholder="notifications@atlas.in"
+                    placeholder="notifications@grekam.in"
                   />
                 </div>
                 <div>

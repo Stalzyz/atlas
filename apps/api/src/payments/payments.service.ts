@@ -335,8 +335,8 @@ export class PaymentsService implements OnModuleInit {
         }
 
         const txnId = `PP_${Date.now()}`;
-        const apiUrl = settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.atlas.in');
-        const frontUrl = settings?.storefrontUrl || process.env.FRONTEND_URL || 'https://atlas.in';
+        const apiUrl = settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.grekam.in');
+        const frontUrl = settings?.storefrontUrl || process.env.FRONTEND_URL || 'https://atlas.grekam.in';
 
         const ppPayload = {
           merchantId,
@@ -952,7 +952,7 @@ export class PaymentsService implements OnModuleInit {
         originalTransactionId: paymentId,
         merchantTransactionId: refundId,
         amount: Math.round(amount * 100),
-        callbackUrl: `${settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.atlas.in')}/api/v1/payments/phonepe-refund-callback`,
+        callbackUrl: `${settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.grekam.in')}/api/v1/payments/phonepe-refund-callback`,
       };
 
       const base64Payload = Buffer.from(JSON.stringify(ppPayload)).toString('base64');

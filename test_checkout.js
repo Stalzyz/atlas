@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer');
   page.on('pageerror', error => console.log('PAGE ERROR:', error.message));
   page.on('requestfailed', request => console.log('REQUEST FAILED:', request.url(), request.failure().errorText));
 
-  await page.goto('https://atlas.in/checkout');
+  await page.goto('https://atlas.grekam.in/checkout');
   
   // Wait a bit to see if any errors pop up
   await new Promise(resolve => setTimeout(resolve, 5000));

@@ -8,7 +8,7 @@ async function main() {
   });
 
   if (template) {
-    const newBody = template.body.replace("https://atlas.in/checkout/retry/{{orderId}}", "https://atlas.in/checkout");
+    const newBody = template.body.replace("https://atlas.grekam.in/checkout/retry/{{orderId}}", "https://atlas.grekam.in/checkout");
     await prisma.emailTemplate.update({
       where: { id: template.id },
       data: { body: newBody }

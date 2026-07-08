@@ -72,9 +72,9 @@ async function bootstrap() {
   
   // 1. MUST BE FIRST: Enable CORS with Strict Whitelist
   const whitelist = [
-    'https://atlas.in',
-    'https://admin.atlas.in',
-    'https://api.atlas.in',
+    'https://atlas.grekam.in',
+    'https://admin.grekam.in',
+    'https://api.grekam.in',
     'http://localhost:4401',
     'http://localhost:4402',
     'http://localhost:6005',

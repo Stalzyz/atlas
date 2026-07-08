@@ -120,7 +120,7 @@ export default function ShipmentTrackingPage() {
                   <p className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Tracking ID</p>
                   <div className="flex items-center gap-2 mt-1">
                     {shipment.trackingId ? (
-                      <a href={`https://atlas.in/track/${shipment.trackingId}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-wine transition-colors group cursor-pointer">
+                      <a href={`https://atlas.grekam.in/track/${shipment.trackingId}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-wine transition-colors group cursor-pointer">
                         <p className="text-sm font-bold text-charcoal group-hover:text-wine transition-colors">{shipment.trackingId}</p>
                         <ExternalLink size={12} className="text-gray-300 group-hover:text-wine transition-colors" />
                       </a>

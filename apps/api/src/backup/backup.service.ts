@@ -114,7 +114,7 @@ export class BackupService {
   private async sendFailureAlert(type: string, reason: string) {
     try {
       const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
-      const adminEmail = settings?.supportEmail || process.env.ADMIN_EMAIL || 'admin@atlas.in';
+      const adminEmail = settings?.supportEmail || process.env.ADMIN_EMAIL || 'admin@grekam.in';
 
       await this.mail.sendCustomEmail(
         adminEmail,

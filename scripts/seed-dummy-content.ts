@@ -7,7 +7,7 @@ async function main() {
   console.log('🌱 Starting Dummy Content Seeding...');
 
   // 1. Create Dummy Customer
-  const customerEmail = 'tester@atlas.in';
+  const customerEmail = 'tester@atlas.grekam.in';
   const hashedPass = await bcrypt.hash('AtlasTest2024!', 10);
   
   const customer = await prisma.user.upsert({

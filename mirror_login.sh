@@ -5,7 +5,7 @@
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-ADMIN_EMAIL="admin@atlas.in"
+ADMIN_EMAIL="admin@grekam.in"
 ADMIN_PASS="AtlasAdmin2024!"
 
 echo "🔍 Mirroring Login Logic on VPS..."

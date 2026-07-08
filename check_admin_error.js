@@ -12,8 +12,8 @@ const { chromium } = require('playwright');
     }
   });
 
-  console.log('Navigating to https://admin.atlas.in/login ...');
-  await page.goto('https://admin.atlas.in/login', { waitUntil: 'networkidle' });
+  console.log('Navigating to https://admin.grekam.in/login ...');
+  await page.goto('https://admin.grekam.in/login', { waitUntil: 'networkidle' });
   
   await page.screenshot({ path: 'admin_screenshot.png' });
   console.log('Screenshot saved to admin_screenshot.png');

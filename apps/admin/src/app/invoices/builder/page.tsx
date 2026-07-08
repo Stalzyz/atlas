@@ -28,7 +28,7 @@ export default function InvoiceBuilder() {
     companyName: "ATLAS WHOLESALE",
     address: "123 Silk Board Road\nBengaluru, India",
     phone: "+91 98765 43210",
-    email: "wholesale@atlas.in",
+    email: "wholesale@grekam.in",
     gst: "GSTIN29ABCDE1234F",
     color: "#701A31",
     font: "sans",

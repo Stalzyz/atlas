@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer');
   page.on('pageerror', error => console.log('PAGE ERROR:', error.message));
   page.on('requestfailed', request => console.log('REQUEST FAILED:', request.url(), request.failure().errorText));
 
-  await page.goto('https://admin.atlas.in', { waitUntil: 'networkidle2' });
+  await page.goto('https://admin.grekam.in', { waitUntil: 'networkidle2' });
   
   await browser.close();
 })();

@@ -12,8 +12,8 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const BASE_URL = 'https://admin.atlas.in';
-const EMAIL    = 'admin@atlas.in';
+const BASE_URL = 'https://admin.grekam.in';
+const EMAIL    = 'admin@grekam.in';
 const PASSWORD = 'AtlasAdmin2024!';
 const USER_DATA_DIR = path.join(os.tmpdir(), 'atlas-playwright-profile');
 const SCREENSHOT_DIR = path.join('test-results', 'admin-live');

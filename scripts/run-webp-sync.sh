@@ -7,7 +7,7 @@ set -e
 RELEASE_DIR=$(readlink -f /var/www/atlas_new/current)
 API_DIR="$RELEASE_DIR/apps/api"
 UPLOADS_DIR="/var/www/atlas_new/shared/uploads"
-BASE_URL="https://api.atlas.in/uploads"
+BASE_URL="https://api.grekam.in/uploads"
 SCRIPT="$API_DIR/___webp_sync___.js"
 
 echo "🔍 Release Dir: $RELEASE_DIR"

@@ -61,7 +61,7 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="username"
               className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-purple-deep/30 transition-all text-sm"
-              placeholder="admin@atlas.in"
+              placeholder="admin@grekam.in"
             />
           </div>
 

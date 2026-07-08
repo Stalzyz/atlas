@@ -55,7 +55,7 @@ export default function ClientLayout({
                 <h1 className="text-sm font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em]">System Overview</h1>
                 <div className="flex items-center gap-4">
                   <a 
-                    href="https://atlas.in" 
+                    href="https://atlas.grekam.in" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-wine text-ivory px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-wine-dark hover:shadow-lg hover:shadow-wine/20 transition-all active:scale-95"

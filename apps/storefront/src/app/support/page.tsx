@@ -79,7 +79,7 @@ export default function SupportPage() {
                  <div>
                     <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Digital Correspondence</h4>
                     <p className="text-xl font-bold text-charcoal mt-1">General Inquiries</p>
-                    <p className="text-sm text-gray-500 mt-1">{settings?.supportEmail || 'support@atlas.in'}</p>
+                    <p className="text-sm text-gray-500 mt-1">{settings?.supportEmail || 'support@grekam.in'}</p>
                  </div>
               </div>
 

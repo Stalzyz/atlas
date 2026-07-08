@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
     description: product.description || `Handcrafted high-luxury ethnic wear from Atlas.`,
     openGraph: {
       type: "website",
-      url: `https://atlas.in/products/${product.handle}`,
+      url: `https://atlas.grekam.in/products/${product.handle}`,
       title: `${product.title} | Atlas`,
       description: product.description || `Handcrafted high-luxury ethnic wear from Atlas.`,
       images: imageUrl ? [{ url: imageUrl, width: 1080, height: 1080, alt: product.title }] : [],
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
       },
       "offers": {
         "@type": "Offer",
-        "url": `${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/products/${product.handle}`,
+        "url": `${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/products/${product.handle}`,
         "priceCurrency": "INR",
         "price": product.variants?.[0]?.price,
         "availability": (product.variants?.[0]?.availableStock ?? product.variants?.[0]?.inventory ?? 0) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"

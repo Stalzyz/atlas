@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
     description,
     openGraph: {
       type: "website",
-      url: `https://atlas.in/collections/${collection.handle}`,
+      url: `https://atlas.grekam.in/collections/${collection.handle}`,
       title,
       description,
       images: imageUrl ? [{ url: imageUrl, alt: collection.title }] : [],

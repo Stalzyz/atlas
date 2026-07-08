@@ -3,7 +3,7 @@
 async function run() {
   const urls = [
     'http://localhost:5001/api/v1/cms/pages/home',
-    'https://api.atlas.in/api/v1/cms/pages/home'
+    'https://api.grekam.in/api/v1/cms/pages/home'
   ];
   for (const url of urls) {
     try {

@@ -742,7 +742,7 @@ export class OrdersService {
       }
 
       if (!userId) {
-        const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.in`;
+        const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.grekam.in`;
         const email = data.customerEmail ? data.customerEmail.toLowerCase().trim() : fallbackEmail;
         let user = await txn.user.findFirst({ 
           where: { 
@@ -888,7 +888,7 @@ export class OrdersService {
     }
 
     if (!userId) {
-      const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.in`;
+      const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.grekam.in`;
       const email = data.customerEmail ? data.customerEmail.toLowerCase().trim() : fallbackEmail;
       if (clerkId) {
         let user = await prisma.user.findUnique({ where: { clerkId } });
@@ -1400,7 +1400,7 @@ export class OrdersService {
     for (const order of abandonedOrders) {
       if (!order.customerEmail) continue;
       
-      const checkoutUrl = `${process.env.FRONTEND_URL || 'https://atlas.in'}/checkout/${order.id}`;
+      const checkoutUrl = `${process.env.FRONTEND_URL || 'https://atlas.grekam.in'}/checkout/${order.id}`;
       
       await this.mailService.sendAbandonedCartEmail(
         order.customerEmail,

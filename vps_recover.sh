@@ -1,5 +1,5 @@
 #!/usr/bin/expect -f
-# Full VPS Recovery Script for atlas.in
+# Full VPS Recovery Script for atlas.grekam.in
 
 set timeout 600
 set VPS_IP "72.61.231.187"

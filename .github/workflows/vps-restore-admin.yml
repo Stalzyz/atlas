@@ -25,7 +25,7 @@ jobs:
             const prisma = new PrismaClient();
 
             async function main() {
-              const email = 'admin@atlas.in';
+              const email = 'admin@grekam.in';
               const pass = 'admin123';
               const hashedPassword = await bcrypt.hash(pass, 10);
               

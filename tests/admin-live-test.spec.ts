@@ -10,9 +10,9 @@ import { test, expect, Page } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const BASE_URL  = 'https://admin.atlas.in';
-const API_URL   = 'https://api.atlas.in';
-const ADMIN_EMAIL    = 'admin@atlas.in';
+const BASE_URL  = 'https://admin.grekam.in';
+const API_URL   = 'https://api.grekam.in';
+const ADMIN_EMAIL    = 'admin@grekam.in';
 const ADMIN_PASSWORD = 'Admin@123456';
 
 // ── helpers ────────────────────────────────────────────────────────────────────

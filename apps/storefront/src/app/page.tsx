@@ -146,8 +146,8 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Atlas",
-    "url": "https://atlas.in",
-    "logo": "https://atlas.in/logo-dark.svg",
+    "url": "https://atlas.grekam.in",
+    "logo": "https://atlas.grekam.in/logo-dark.svg",
     "description": "Atlas is India's leading luxury brand for premium casual and office wear."
   };
 

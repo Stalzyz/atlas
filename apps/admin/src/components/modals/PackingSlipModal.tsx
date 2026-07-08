@@ -20,8 +20,8 @@ function SlipContent({ order, storeSettings }: { order: any; storeSettings: any 
   const fromState = storeSettings?.businessState || 'Tamil Nadu';
   const fromZip = storeSettings?.businessZip || '600001';
   const fromPhone = storeSettings?.supportPhone || '';
-  const fromEmail = storeSettings?.supportEmail || 'support@atlas.in';
-  const fromWebsite = storeSettings?.websiteUrl || 'www.atlas.in';
+  const fromEmail = storeSettings?.supportEmail || 'support@grekam.in';
+  const fromWebsite = storeSettings?.websiteUrl || 'www.atlas.grekam.in';
 
   return (
     <div className="slip-container" style={{ width: '15cm', minHeight: '9cm', height: 'auto', boxSizing: 'border-box', padding: '15px', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto', pageBreakInside: 'avoid' }}>

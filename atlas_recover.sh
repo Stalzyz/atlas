@@ -228,7 +228,7 @@ for port in 4401 6005 6009 3000; do
 done
 
 inf "Checking public URLs..."
-for url in "http://atlas.in" "https://atlas.in" "https://api.atlas.in/api/v1/health"; do
+for url in "http://atlas.grekam.in" "https://atlas.grekam.in" "https://api.grekam.in/api/v1/health"; do
     STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null || echo "unreachable")
     echo "  $url → $STATUS"
 done

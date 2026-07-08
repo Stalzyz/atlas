@@ -504,7 +504,7 @@ export default function CheckoutPage() {
         currency: "INR",
         name: "Atlas",
         description: "Luxury Wardrobe Purchase",
-        image: "https://atlas.in/logo.png",
+        image: "https://atlas.grekam.in/logo.png",
         order_id: data.providerOrderId,
         handler: async function (response: any) {
           paymentHandled = true;

@@ -114,7 +114,7 @@ const resetBody = `
             <p>We received a request to reset your password for your Atlas account.</p>
             <p>Click the button below to set a new password. This link will expire in 15 minutes.</p>
             <div style="text-align: center; margin: 40px 0;">
-              <a href="https://atlas.in/reset-password?token=\${token}" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Reset Password</a>
+              <a href="https://atlas.grekam.in/reset-password?token=\${token}" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Reset Password</a>
             </div>
             <p style="font-size: 13px; color: #888; text-align: center;">If you didn't request this, you can safely ignore this email.</p>
 `;
@@ -135,7 +135,7 @@ const failedBody = `
             <p style="text-align: center;">Don't worry, your items are still waiting for you. Please click below to retry your payment and complete your order.</p>
             
             <div style="text-align: center; margin-top: 30px;">
-              <a href="https://atlas.in/checkout" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Retry Payment</a>
+              <a href="https://atlas.grekam.in/checkout" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Retry Payment</a>
             </div>
 `;
 const failedStart = content.indexOf('let html = `', content.indexOf('async sendPaymentFailedEmail'));

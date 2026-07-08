@@ -34,7 +34,7 @@ export class SupportService {
 
     try {
       const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
-      const supportEmail = settings?.supportEmail || 'support@atlas.in';
+      const supportEmail = settings?.supportEmail || 'support@grekam.in';
 
       // Send email to store owner/support
       const adminHtml = `

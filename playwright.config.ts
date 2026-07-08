@@ -8,7 +8,7 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   retries: 1,
   use: {
-    baseURL: process.env.BASE_URL || 'https://atlas.in',
+    baseURL: process.env.BASE_URL || 'https://atlas.grekam.in',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

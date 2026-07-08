@@ -69,7 +69,7 @@ export class CommunicationService {
       const preferredFrom = settings?.supportEmail;
       const from = (smtpUser && preferredFrom && preferredFrom.split('@')[1] === smtpUser.split('@')[1])
         ? preferredFrom
-        : smtpUser || preferredFrom || process.env.SMTP_FROM || 'no-reply@atlas.in';
+        : smtpUser || preferredFrom || process.env.SMTP_FROM || 'no-reply@atlas.grekam.in';
       const storeName = settings?.storeName || 'Atlas';
 
       const mailOptions = {

@@ -143,7 +143,7 @@ export function Sidebar() {
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-semibold text-[#ffffff] truncate">{user?.name || 'Admin User'}</p>
-            <p className="text-[10px] text-[#ffffff] opacity-60 truncate">{user?.email || 'admin@atlas.in'}</p>
+            <p className="text-[10px] text-[#ffffff] opacity-60 truncate">{user?.email || 'admin@grekam.in'}</p>
           </div>
         </Link>
 

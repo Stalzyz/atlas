@@ -7,6 +7,6 @@ const { chromium } = require('playwright');
       console.log('404 URL:', response.url());
     }
   });
-  await page.goto('https://www.atlas.in/collections/all', { waitUntil: 'networkidle' });
+  await page.goto('https://www.atlas.grekam.in/collections/all', { waitUntil: 'networkidle' });
   await browser.close();
 })();

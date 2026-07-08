@@ -10,7 +10,7 @@ const puppeteer = require('puppeteer');
     }
   });
 
-  await page.goto('https://atlas.in/collections/all', { waitUntil: 'networkidle2' });
+  await page.goto('https://atlas.grekam.in/collections/all', { waitUntil: 'networkidle2' });
   
   const h3s = await page.evaluate(() => Array.from(document.querySelectorAll('h3')).map(h => h.innerText));
   console.log('H3 TEXTS:', h3s);

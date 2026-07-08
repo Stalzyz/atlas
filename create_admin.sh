@@ -5,7 +5,7 @@
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-ADMIN_EMAIL="admin@atlas.in"
+ADMIN_EMAIL="admin@grekam.in"
 ADMIN_PASS="AtlasAdmin2024!"
 
 echo "👤 PREPARING SHIELDED ADMIN INJECTION..."
@@ -75,6 +75,6 @@ REMOTE
 
 echo ""
 echo "🏁 Shielded Injection Complete."
-echo "👉 Login: https://admin.atlas.in/login"
+echo "👉 Login: https://admin.grekam.in/login"
 echo "👉 User:  $ADMIN_EMAIL"
 echo "👉 Pass:  $ADMIN_PASS"

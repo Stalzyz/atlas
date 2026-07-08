@@ -4,7 +4,7 @@ import * as path from 'path';
 
 const prisma = new PrismaClient();
 const UPLOADS_DIR = '/var/www/atlas_new/shared/uploads';
-const BASE_URL = 'https://api.atlas.in/uploads';
+const BASE_URL = 'https://api.grekam.in/uploads';
 
 async function syncMedia() {
   console.log('🔍 Starting Media Database Sync...');

@@ -681,7 +681,7 @@ export default function ProductManagement() {
                                   {p.status === 'Draft' ? 'Publish Product' : 'Archive Product'}
                                </button>
                                <a 
-                                 href={`https://atlas.in/products/${p.handle}`} 
+                                 href={`https://atlas.grekam.in/products/${p.handle}`} 
                                  target="_blank" 
                                  className="w-full text-left px-4 py-2 text-xs font-bold text-blue-600 hover:bg-blue-50 flex items-center gap-3 border-t border-gray-50 mt-1"
                                >

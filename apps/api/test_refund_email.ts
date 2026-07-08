@@ -7,7 +7,7 @@ async function run() {
   const mailService = new MailService(prisma as any);
   
   // Try sending a test email
-  const toEmail = 'contact@atlas.in'; // We'll use the contact email for testing
+  const toEmail = 'contact@atlas.grekam.in'; // We'll use the contact email for testing
   const customerName = 'Stalin Kumar';
   const orderId = 'TEST-123456';
   const amount = 2500;

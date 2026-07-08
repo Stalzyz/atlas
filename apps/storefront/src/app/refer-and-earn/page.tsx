@@ -23,7 +23,7 @@ export default function ReferAndEarn() {
     }
   }, [token]);
 
-  const shareUrl = `https://atlas.in/?ref=${referralCode}`;
+  const shareUrl = `https://atlas.grekam.in/?ref=${referralCode}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);

@@ -120,7 +120,7 @@ export class InvoicesService {
         state: storeSettings?.businessState || 'Tamil Nadu', 
         gst: storeSettings?.gstNumber || '33AABCU9603R1ZX', 
         email: storeSettings?.supportEmail || 'wholesale@atlas.com',
-        website: 'www.atlas.in'
+        website: 'www.atlas.grekam.in'
       },
       buyer: { 
         name: invoice.customerName, 

@@ -1,6 +1,6 @@
 import * as request from 'supertest';
 
-export const getAuthToken = async (server: any, email: string = 'test@atlas.in', pass: string = 'password123') => {
+export const getAuthToken = async (server: any, email: string = 'test@atlas.grekam.in', pass: string = 'password123') => {
   // 1. Ensure the user exists (using your seed-admin endpoint for testing)
   await request(server)
     .post('/auth/seed-admin')

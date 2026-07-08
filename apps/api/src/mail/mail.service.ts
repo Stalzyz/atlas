@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class MailService {
   private readonly logger = new Logger(MailService.name);
   private readonly apiKey = process.env.RESEND_API_KEY;
-  private readonly fromEmail = process.env.EMAIL_FROM || 'noreply@atlas.in';
+  private readonly fromEmail = process.env.EMAIL_FROM || 'noreply@atlas.grekam.in';
   private readonly CC_EMAIL = 'raaghaclothing@gmail.com';
 
   constructor(private prisma: PrismaService) {}
@@ -24,8 +24,8 @@ export class MailService {
     const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
     const storeName = settings?.storeName || 'Atlas Pvt Ltd';
     const address = settings?.businessAddress || 'Salem, India';
-    const supportEmail = settings?.supportEmail || 'care@atlas.in';
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in';
+    const supportEmail = settings?.supportEmail || 'care@atlas.grekam.in';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in';
     const logoUrl = settings?.logoUrl || `${appUrl}/logo-dark.svg`;
 
     return `<!DOCTYPE html>
@@ -112,7 +112,7 @@ export class MailService {
               <h2 style="margin: 15px 0 0; font-size: 36px;">₹${amount.toLocaleString()}</h2>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Dashboard</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">View Dashboard</a>
           </div>
     `;
 
@@ -218,7 +218,7 @@ export class MailService {
             </table>
 
             <div style="margin-top: 60px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">Track Order</a>
+              <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">Track Order</a>
             </div>
           </div>
     `;
@@ -363,7 +363,7 @@ export class MailService {
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
-    const resetUrl = `https://admin.atlas.in/reset-password?token=${token}`;
+    const resetUrl = `https://admin.grekam.in/reset-password?token=${token}`;
     const subject = `Reset your Atlas Admin Password`;
     let html = `
           <div style="text-align: center;">
@@ -481,7 +481,7 @@ export class MailService {
               <p style="margin: 0; font-size: 18px; color: #111111; font-family: monospace; letter-spacing: 2px;">${trackingId}</p>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">Track Shipment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">Track Shipment</a>
           </div>
     `;
     return this.sendCustomEmail(to, subject, html);
@@ -566,7 +566,7 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Rest assured, your selections have been reserved. Please retry your payment to complete the acquisition.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/checkout" class="button-premium">Retry Payment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/checkout" class="button-premium">Retry Payment</a>
           </div>
     `;
 
@@ -639,7 +639,7 @@ export class MailService {
             
             <p style="font-size: 11px; color: #888888; font-style: italic; margin-bottom: 40px;">You can use this balance towards your next luxury acquisition.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Wallet</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">View Wallet</a>
           </div>
     `;
 
@@ -669,7 +669,7 @@ export class MailService {
               <h2 style="margin: 15px 0 0; font-size: 36px;">${isCredit ? '+' : '-'}₹${amount.toLocaleString('en-IN')}</h2>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Ledger</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">View Ledger</a>
           </div>
     `;
 
@@ -704,7 +704,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
       
       // Also inject the checkoutUrl properly since the default template uses /cart
-      html = html.replace(`href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/cart"`, `href="${checkoutUrl}"`);
+      html = html.replace(`href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/cart"`, `href="${checkoutUrl}"`);
     }
 
     html = await this.wrapEmailHtml(html);
@@ -727,7 +727,7 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Please allow 5-7 business days for the amount to reflect in your original payment method.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Account</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.grekam.in'}/account" class="button-premium">View Account</a>
           </div>
     `;
 

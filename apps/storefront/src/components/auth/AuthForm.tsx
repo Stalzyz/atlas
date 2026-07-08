@@ -70,7 +70,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Invalid OTP");
 
-      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.in' } : {};
+      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.grekam.in' } : {};
       Cookies.set("auth_token", data.access_token, { expires: 30, path: '/', ...domainOpt });
       localStorage.setItem("user", JSON.stringify(data.user));
       
@@ -104,7 +104,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       if (!res.ok) throw new Error(data.message || "Google login failed");
 
       console.log("✅ Google Auth Successful, saving session...");
-      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.in' } : {};
+      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.grekam.in' } : {};
       Cookies.set("auth_token", data.access_token, { expires: 30, path: '/', ...domainOpt });
       localStorage.setItem("user", JSON.stringify(data.user));
 

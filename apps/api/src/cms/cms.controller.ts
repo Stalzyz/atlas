@@ -125,7 +125,7 @@ const POLICY_PAGES = [
       },
       {
         title: '9. Contact Us',
-        content: '<p>If you have any questions about our Privacy Policy or how your data is used, feel free to reach out:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📱 WhatsApp: +91 89460 11689</p><p>We\'re always here to help you.</p>'
+        content: '<p>If you have any questions about our Privacy Policy or how your data is used, feel free to reach out:</p><p>📧 <a href="mailto:contact@atlas.grekam.in">contact@atlas.grekam.in</a><br/>📱 WhatsApp: +91 89460 11689</p><p>We\'re always here to help you.</p>'
       }
     ]
   },
@@ -185,7 +185,7 @@ const POLICY_PAGES = [
       },
       {
         title: '12. Contact Us',
-        content: '<p>For queries or support:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📍 Bangalore | Salem</p>'
+        content: '<p>For queries or support:</p><p>📧 <a href="mailto:contact@atlas.grekam.in">contact@atlas.grekam.in</a><br/>📍 Bangalore | Salem</p>'
       }
     ]
   },
@@ -209,7 +209,7 @@ const POLICY_PAGES = [
       },
       {
         title: 'How to Initiate a Return',
-        content: '<ol><li>Email us at <a href="mailto:contact@atlas.in">contact@atlas.in</a> within 7 days of delivery with your order ID, photos of the issue, and reason for return.</li><li>Our team will review your request and respond within 48 business hours.</li><li>Once approved, we\'ll share a return shipping label or schedule a pickup (available in select pincodes).</li><li>Pack the item securely in its original packaging with all tags intact.</li><li>Upon receiving and inspecting the item, we\'ll process your refund or exchange.</li></ol>'
+        content: '<ol><li>Email us at <a href="mailto:contact@atlas.grekam.in">contact@atlas.grekam.in</a> within 7 days of delivery with your order ID, photos of the issue, and reason for return.</li><li>Our team will review your request and respond within 48 business hours.</li><li>Once approved, we\'ll share a return shipping label or schedule a pickup (available in select pincodes).</li><li>Pack the item securely in its original packaging with all tags intact.</li><li>Upon receiving and inspecting the item, we\'ll process your refund or exchange.</li></ol>'
       },
       {
         title: 'Refunds',
@@ -221,7 +221,7 @@ const POLICY_PAGES = [
       },
       {
         title: 'Contact Us',
-        content: '<p>For any queries regarding returns or refunds, please reach out to us:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📱 WhatsApp: +91 89460 11689<br/>🕐 Monday – Saturday, 10am – 6pm IST</p>'
+        content: '<p>For any queries regarding returns or refunds, please reach out to us:</p><p>📧 <a href="mailto:contact@atlas.grekam.in">contact@atlas.grekam.in</a><br/>📱 WhatsApp: +91 89460 11689<br/>🕐 Monday – Saturday, 10am – 6pm IST</p>'
       }
     ]
   }
@@ -707,7 +707,7 @@ export class CmsController {
        throw new BadRequestException('File not uploaded');
     }
      
-    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.atlas.in");
+    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.grekam.in");
     baseUrl = baseUrl.replace(/\/$/, "");
     
     // Perform "Monster Level" optimization

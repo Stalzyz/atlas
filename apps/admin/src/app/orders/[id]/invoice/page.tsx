@@ -236,8 +236,8 @@ export default function OrderInvoicePage() {
           <p className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em]">Thank you for choosing Atlas</p>
           <div className="flex justify-center gap-8 text-[9px] font-bold text-wine/40 uppercase tracking-widest">
             <span>Instagram: @atlas.official</span>
-            <span>Web: www.atlas.in</span>
-            <span>Support: love@atlas.in</span>
+            <span>Web: www.atlas.grekam.in</span>
+            <span>Support: love@grekam.in</span>
           </div>
         </div>
 

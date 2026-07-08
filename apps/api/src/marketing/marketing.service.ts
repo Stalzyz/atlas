@@ -183,7 +183,7 @@ export class MarketingService {
       // Email Nudge
       if (lead.email) {
         const itemCount = Array.isArray(lead.items) ? lead.items.length : 1;
-        const recoveryLink = `${process.env.STOREFRONT_URL || 'https://atlas.in'}/cart?recover=${lead.id}`;
+        const recoveryLink = `${process.env.STOREFRONT_URL || 'https://atlas.grekam.in'}/cart?recover=${lead.id}`;
         const emailResult = await this.mailService.sendAbandonedCartEmail(
           lead.email, 
           name, 
@@ -617,8 +617,8 @@ export class MarketingService {
       if (!p.variants || p.variants.length === 0) continue;
 
       const description = this.escapeXml(p.description || p.title);
-      const link = `https://atlas.in/products/${p.handle}`;
-      const primaryImage = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://atlas.in/logo-dark.svg';
+      const link = `https://atlas.grekam.in/products/${p.handle}`;
+      const primaryImage = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://atlas.grekam.in/logo-dark.svg';
       const additionalImages = (p.images || []).slice(1).map((img: any) =>
         `      <g:additional_image_link>${this.escapeXml(img.url)}</g:additional_image_link>`
       ).join('\n');
@@ -660,7 +660,7 @@ ${additionalImages}
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
     <title>Atlas</title>
-    <link>https://atlas.in</link>
+    <link>https://atlas.grekam.in</link>
     <description>Atlas Exclusive Product Catalogue</description>
     ${itemsXml}
   </channel>

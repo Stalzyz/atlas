@@ -160,7 +160,7 @@ export class NotificationsService {
         <tr>
           <td style="background:#2C1010;padding:28px 40px;text-align:center;">
             <div style="margin-bottom:16px;">
-              <a href="https://instagram.com/atlas.in" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Instagram</a>
+              <a href="https://instagram.com/atlas.grekam.in" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Instagram</a>
               <span style="color:#7B1C1C;">|</span>
               <a href="https://facebook.com/atlas" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Facebook</a>
               <span style="color:#7B1C1C;">|</span>
@@ -168,7 +168,7 @@ export class NotificationsService {
             </div>
             <div style="font-size:11px;color:#888;line-height:1.8;">
               © ${new Date().getFullYear()} Atlas — All rights reserved<br/>
-              <a href="https://atlas.in" style="color:#B8860B;text-decoration:none;">atlas.in</a>
+              <a href="https://atlas.grekam.in" style="color:#B8860B;text-decoration:none;">atlas.grekam.in</a>
             </div>
           </td>
         </tr>
@@ -212,9 +212,9 @@ export class NotificationsService {
       ${greeting('customerName')}
       <p style="font-size:15px;color:#444;line-height:1.8;">We're so glad you're here. Your Atlas account has been successfully created. You're now part of a community that celebrates the timeless beauty of Indian luxury fashion.</p>
       <p style="font-size:15px;color:#444;line-height:1.8;">Start exploring our curated collections — from everyday elegance to occasion wear, all crafted with care.</p>
-      ${btn('https://atlas.in/collections/all', 'Explore Collections')}
+      ${btn('https://atlas.grekam.in/collections/all', 'Explore Collections')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">If you didn't create this account, please ignore this email or contact us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a>.</p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">If you didn't create this account, please ignore this email or contact us at <a href="mailto:support@grekam.in" style="color:#7B1C1C;">support@grekam.in</a>.</p>
       ${sign}
     `);
 
@@ -235,10 +235,10 @@ export class NotificationsService {
         { label: 'Payment Method', value: '{{order.paymentMethod}}' },
         { label: 'Shipping To', value: '{{order.shippingCity}}' },
       ])}
-      ${btn('https://atlas.in/account/orders', 'Track My Order')}
+      ${btn('https://atlas.grekam.in/account/orders', 'Track My Order')}
       <p style="font-size:13px;color:#888;line-height:1.8;text-align:center;">Estimated delivery: <strong>{{order.estimatedDelivery}}</strong></p>
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">Questions? We're just an email away — <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a></p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">Questions? We're just an email away — <a href="mailto:support@grekam.in" style="color:#7B1C1C;">support@grekam.in</a></p>
       ${sign}
     `);
 
@@ -256,9 +256,9 @@ export class NotificationsService {
         { label: 'Reason', value: '{{order.failureReason}}' },
       ])}
       <p style="font-size:15px;color:#444;line-height:1.8;">Your cart has been saved — you can pick up right where you left off.</p>
-      ${btn('https://atlas.in/cart', 'Return to Cart')}
+      ${btn('https://atlas.grekam.in/cart', 'Return to Cart')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">If you continue to face issues, please reach out to us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a> or WhatsApp us and we'll sort it out personally.</p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">If you continue to face issues, please reach out to us at <a href="mailto:support@grekam.in" style="color:#7B1C1C;">support@grekam.in</a> or WhatsApp us and we'll sort it out personally.</p>
       ${sign}
     `);
 
@@ -278,9 +278,9 @@ export class NotificationsService {
         { label: 'Failure Reason', value: '{{payment.failureReason}}' },
       ])}
       <p style="font-size:15px;color:#444;line-height:1.8;"><strong>No amount has been deducted.</strong> If you did see a deduction, it will be automatically reversed within 5–7 business days.</p>
-      ${btn('https://atlas.in/account/orders/{{order.id}}', 'Retry Payment')}
+      ${btn('https://atlas.grekam.in/account/orders/{{order.id}}', 'Retry Payment')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">Need help? Contact us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a></p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">Need help? Contact us at <a href="mailto:support@grekam.in" style="color:#7B1C1C;">support@grekam.in</a></p>
       ${sign}
     `);
 
@@ -299,7 +299,7 @@ export class NotificationsService {
         <p style="margin:0;font-size:14px;color:#444;font-weight:bold;">{{offer.discountLabel}}</p>
         <p style="margin:8px 0 0;font-size:12px;color:#999;">Valid till {{offer.validTill}}</p>
       </div>
-      ${btn('https://atlas.in/collections/all?coupon={{offer.couponCode}}', '🛍️ Shop Now & Save')}
+      ${btn('https://atlas.grekam.in/collections/all?coupon={{offer.couponCode}}', '🛍️ Shop Now & Save')}
       ${divider}
       <p style="font-size:12px;color:#aaa;text-align:center;line-height:1.8;">Terms & conditions apply. Cannot be combined with other offers. Applicable on orders above ₹{{offer.minOrderValue}}.</p>
       ${sign}
@@ -324,7 +324,7 @@ export class NotificationsService {
         {{/each}}
         <div style="text-align:right;margin-top:12px;font-size:15px;color:#2C1010;font-weight:bold;">Total: ₹{{cart.totalAmount}}</div>
       </div>
-      ${btn('https://atlas.in/cart', 'Complete My Purchase')}
+      ${btn('https://atlas.grekam.in/cart', 'Complete My Purchase')}
       ${divider}
       <p style="font-size:13px;color:#888;text-align:center;line-height:1.8;">Need help deciding? WhatsApp us and we'll help you find the perfect fit.</p>
       ${sign}
@@ -343,7 +343,7 @@ export class NotificationsService {
         <h2 style="font-size:30px;color:#7B1C1C;letter-spacing:5px;margin:10px 0;font-family:monospace;">{{cart.couponCode}}</h2>
         <p style="margin:0;font-size:13px;color:#666;">{{cart.discountPercent}}% OFF · Valid for 24 hours only</p>
       </div>
-      ${btn('https://atlas.in/cart?coupon={{cart.couponCode}}', '🎁 Claim My Discount')}
+      ${btn('https://atlas.grekam.in/cart?coupon={{cart.couponCode}}', '🎁 Claim My Discount')}
       ${divider}
       <p style="font-size:12px;color:#aaa;text-align:center;">Cart value: ₹{{cart.totalAmount}} · {{cart.itemCount}} item(s) · Offer valid for 24 hours</p>
       ${sign}
@@ -450,7 +450,7 @@ export class NotificationsService {
           '<p style="margin:0;font-size:12px;color:#888;letter-spacing:3px;text-transform:uppercase;">Wallet Credited</p>' +
           '<h2 style="font-size:36px;color:#7B1C1C;margin:12px 0;">₹{{rewardAmount}}</h2>' +
           '<p style="margin:0;font-size:14px;color:#666;">added to your Atlas wallet</p></div>' +
-          btn('https://atlas.in/account', '💰 View My Wallet') +
+          btn('https://atlas.grekam.in/account', '💰 View My Wallet') +
           divider + sign
         ),
         isActive: true,
@@ -472,7 +472,7 @@ export class NotificationsService {
           '<h2 style="font-size:32px;color:#7B1C1C;letter-spacing:6px;margin:10px 0;font-family:monospace;">{{couponCode}}</h2>' +
           '<p style="margin:0;font-size:14px;color:#444;font-weight:bold;">{{discountValue}} OFF your first order</p>' +
           '<p style="margin:8px 0 0;font-size:12px;color:#999;">Valid for 30 days from today</p></div>' +
-          btn('https://atlas.in/collections/all', '🛍️ Start Shopping') +
+          btn('https://atlas.grekam.in/collections/all', '🛍️ Start Shopping') +
           divider +
           '<p style="font-size:12px;color:#aaa;text-align:center;line-height:1.8;">Valid on orders above ₹499. One-time use only.</p>' +
           sign

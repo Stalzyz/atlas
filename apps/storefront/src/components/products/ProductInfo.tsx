@@ -507,12 +507,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <input 
               type="text"
               readOnly
-              value={`https://atlas.in/products/${product.handle}?ref=${referralCode}`}
+              value={`https://atlas.grekam.in/products/${product.handle}?ref=${referralCode}`}
               className="flex-1 bg-theme-bg border border-theme-border rounded-xl px-4 py-3 text-xs outline-none text-theme-text opacity-70"
             />
             <button 
               onClick={() => {
-                navigator.clipboard.writeText(`https://atlas.in/products/${product.handle}?ref=${referralCode}`);
+                navigator.clipboard.writeText(`https://atlas.grekam.in/products/${product.handle}?ref=${referralCode}`);
                 setCopiedRef(true);
                 setTimeout(() => setCopiedRef(false), 2000);
               }}

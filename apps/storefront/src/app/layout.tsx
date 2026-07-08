@@ -66,7 +66,7 @@ const fontDMSans    = '"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
 const fontJost      = '"Jost", "DM Sans", -apple-system, sans-serif';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atlas.in"),
+  metadataBase: new URL("https://atlas.grekam.in"),
   title: {
     default: "Atlas | India's Leading Premium Casual & Office Wear",
     template: "%s | Atlas"
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort and elegant evening transitions.",
   openGraph: {
     type: "website",
-    url: "https://atlas.in",
+    url: "https://atlas.grekam.in",
     title: "Atlas | Premium Casual & Office Wear",
     description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
     siteName: "Atlas",
@@ -312,8 +312,8 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Atlas",
-              "url": "https://atlas.in",
-              "logo": "https://atlas.in/logo.png",
+              "url": "https://atlas.grekam.in",
+              "logo": "https://atlas.grekam.in/logo.png",
               "description": "Atlas is India's leading luxury brand for premium casual and office wear.",
               "sameAs": [
                 "https://www.facebook.com/atlas",

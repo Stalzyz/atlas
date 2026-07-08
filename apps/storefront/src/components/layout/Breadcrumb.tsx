@@ -13,7 +13,7 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      item: `https://atlas.in${item.href}`,
+      item: `https://atlas.grekam.in${item.href}`,
     })),
   };
 

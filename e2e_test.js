@@ -4,7 +4,7 @@ async function runTests() {
   console.log("🚀 STARTING E2E VPS PIPELINE TEST...");
   
   const BASE_URL = "http://localhost:6005/api/v1";
-  const TEST_EMAIL = "qa-master-e2e@atlas.in";
+  const TEST_EMAIL = "qa-master-e2e@atlas.grekam.in";
 
   try {
     const pRes = await fetch(`${BASE_URL}/products?limit=5`);

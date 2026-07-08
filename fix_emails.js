@@ -7,7 +7,7 @@ let content = fs.readFileSync(mailServicePath, 'utf8');
 // Update wrapEmailHtml logo
 content = content.replace(
   /<img src="https:\/\/api\.atlas\.in\/uploads\/[^"]+" alt="Atlas"/g,
-  '<img src="https://atlas.in/logo-dark.svg" alt="Atlas"'
+  '<img src="https://atlas.grekam.in/logo-dark.svg" alt="Atlas"'
 );
 
 // We need to strip out the repeated wrappers in the HTML variables

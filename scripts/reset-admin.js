@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = 'admin@atlas.in';
+  const email = 'admin@grekam.in';
   const newPass = 'atlas2024';
   console.log(`🔒 [ATOMIC] Resetting password for ${email}...`);
   const hashedPassword = await bcrypt.hash(newPass, 10);

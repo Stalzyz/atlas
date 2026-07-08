@@ -18,7 +18,7 @@ const puppeteer = require('puppeteer');
     console.log('BROWSER REQUEST FAILED:', request.url(), request.failure().errorText);
   });
 
-  await page.goto('https://atlas.in', { waitUntil: 'networkidle2' });
+  await page.goto('https://atlas.grekam.in', { waitUntil: 'networkidle2' });
 
   // Look for any products
   const products = await page.$$eval('a', links => links.map(a => a.href).filter(h => h.includes('/products/')));

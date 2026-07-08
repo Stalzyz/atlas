@@ -353,7 +353,7 @@ export class InventoryService {
     }
 
     const settings = await this.settingsService.getSettings();
-    const supportEmail = settings.supportEmail || 'admin@atlas.in';
+    const supportEmail = settings.supportEmail || 'admin@grekam.in';
 
     let alertsHtml = '';
     for (const alert of radar.allAlerts) {

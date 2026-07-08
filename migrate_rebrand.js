@@ -7,8 +7,8 @@ const IGNORE_DIRS = [
 
 // Text replacements
 const REPLACEMENTS = [
-    { old: /api\.atlas\.in/g, new: 'api.atlas.in' },
-    { old: /atlas\.in/g, new: 'atlas.in' },
+    { old: /api\.atlas\.in/g, new: 'api.grekam.in' },
+    { old: /atlas\.in/g, new: 'atlas.grekam.in' },
     { old: /Atlas Heritage/g, new: 'Atlas Heritage' },
     { old: /Atlas Clothing/g, new: 'Atlas Clothing' },
     { old: /Atlas/g, new: 'Atlas' },

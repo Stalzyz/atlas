@@ -98,8 +98,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(data.access_token);
     setUser(data.user);
 
-    router.push('/');
-    router.refresh();
+    window.location.href = '/';
   };
 
   const logout = async () => {

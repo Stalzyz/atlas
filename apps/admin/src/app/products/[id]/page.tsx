@@ -200,7 +200,7 @@ export default function EditProductPage() {
           </button>
           <div>
             <h1 className="text-xl font-bold text-charcoal">{product.title}</h1>
-            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mt-0.5">Edit Sanctuary Item</p>
+            <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mt-0.5">Edit Product</p>
           </div>
         </div>
         <div className="flex items-center gap-3">

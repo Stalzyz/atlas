@@ -1,11 +1,11 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 
 const localPrisma = new PrismaClient({ 
-  datasources: { db: { url: 'postgresql://postgres@127.0.0.1:5432/raaghas_cert' } } 
+  datasources: { db: { url: 'postgresql://postgres@127.0.0.1:5432/atlas_cert' } } 
 });
 
 const remotePrisma = new PrismaClient({ 
-  datasources: { db: { url: 'postgresql://raaghas_user:Raaghas%40Prod2024@127.0.0.1:5433/raaghas' } } 
+  datasources: { db: { url: 'postgresql://atlas_user:Atlas%40Prod2024@127.0.0.1:5433/atlas' } } 
 });
 
 async function sync() {

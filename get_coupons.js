@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@raaghas/database');
+const { PrismaClient } = require('@atlas/database');
 const prisma = new PrismaClient();
 async function run() {
   const c = await prisma.discount.findFirst();

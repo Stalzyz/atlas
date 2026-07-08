@@ -12,7 +12,7 @@ import { useTheme } from "@/components/providers/ThemeContext";
 import SmartSearchBar from "./SmartSearchBar";
 
 export function Header({ settings, theme: themeConfig, menu }: { settings: any, theme: any, menu: any }) {
-  const storeName = themeConfig?.storeName || settings?.storeName || "RAAGHAS";
+  const storeName = themeConfig?.storeName || settings?.storeName || "ATLAS";
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const { cartCount, toggleDrawer } = useCart();
   const { isAuthenticated, user, logout } = useAuth();

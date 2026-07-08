@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { WalletTxType, WalletTxReason, ReferralStatus, DiscountType } from '@raaghas/database';
-import { Prisma } from '@raaghas/database';
+import { WalletTxType, WalletTxReason, ReferralStatus, DiscountType } from '@atlas/database';
+import { Prisma } from '@atlas/database';
 const { Decimal } = Prisma;
 import { OnEvent } from '@nestjs/event-emitter';
 import { NotificationsService } from '../notifications/notifications.service';

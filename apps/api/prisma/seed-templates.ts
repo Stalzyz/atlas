@@ -7,11 +7,11 @@ async function main() {
     {
       name: 'Order Confirmation',
       type: 'ORDER_PLACED',
-      subject: 'Your Raaghas Order #{{order.id}} is Confirmed!',
+      subject: 'Your Atlas Order #{{order.id}} is Confirmed!',
       body: `<div style="font-family: serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #eee; border-radius: 20px;">
-  <h1 style="color: #701A31; text-align: center;">RAAGHAS</h1>
+  <h1 style="color: #28104E; text-align: center;">ATLAS</h1>
   <p>Dear {{customer.name}},</p>
-  <p>Thank you for shopping with Raaghas. Your order <strong>#{{order.id}}</strong> has been successfully placed.</p>
+  <p>Thank you for shopping with Atlas. Your order <strong>#{{order.id}}</strong> has been successfully placed.</p>
   <div style="background: #fdfbf7; padding: 20px; border-radius: 10px; margin: 20px 0;">
     <p style="margin:0; color: #555;"><strong>Order Total:</strong> ₹{{order.totalAmount}}</p>
     <p style="margin:5px 0 0; color: #555;"><strong>Date:</strong> {{order.date}}</p>
@@ -25,9 +25,9 @@ async function main() {
     {
       name: 'Order Shipped (Tracking)',
       type: 'ORDER_SHIPPED',
-      subject: 'Your Raaghas Order #{{order.id}} has Shipped!',
+      subject: 'Your Atlas Order #{{order.id}} has Shipped!',
       body: `<div style="font-family: serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #eee; border-radius: 20px;">
-  <h1 style="color: #701A31; text-align: center;">RAAGHAS</h1>
+  <h1 style="color: #28104E; text-align: center;">ATLAS</h1>
   <p>Dear {{customer.name}},</p>
   <p>Great news! Your order <strong>#{{order.id}}</strong> is on its way to you.</p>
   <div style="background: #fdfbf7; padding: 20px; border-radius: 10px; margin: 20px 0;">
@@ -45,7 +45,7 @@ async function main() {
       type: 'RETURN_APPROVED',
       subject: 'Update on your Return Request #{{return.id}}',
       body: `<div style="font-family: serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #eee; border-radius: 20px;">
-  <h1 style="color: #701A31; text-align: center;">RAAGHAS</h1>
+  <h1 style="color: #28104E; text-align: center;">ATLAS</h1>
   <p>Dear {{customer.name}},</p>
   <p>Your return request for order <strong>#{{order.id}}</strong> has been approved.</p>
   <p>Our logistics partner will contact you shortly to arrange a pickup. Please ensure the items are packed in their original condition with all tags attached.</p>

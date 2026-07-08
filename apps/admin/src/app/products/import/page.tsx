@@ -91,7 +91,7 @@ export default function ImportCenterPage() {
             <span>•</span>
             <div>Auto-Sync Enabled</div>
           </div>
-          <div>Raaghas Enterprise v2.0</div>
+          <div>Atlas Enterprise v2.0</div>
         </div>
       </div>
     </div>

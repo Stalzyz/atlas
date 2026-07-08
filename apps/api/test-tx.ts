@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 
 async function main() {
   const prisma = new PrismaClient();

@@ -52,7 +52,7 @@ export default function WholesaleCheckoutPage() {
       {/* ─── LEFT: Confirmation Steps ───────────────────────────────────────── */}
       <div className="w-full md:w-[60%] p-6 md:p-12 lg:p-20 bg-white shadow-sm z-10 space-y-12">
         <div>
-          <Link href="/" className="text-3xl font-serif tracking-widest text-charcoal block mb-4">RAAGHAS</Link>
+          <Link href="/" className="text-3xl font-serif tracking-widest text-charcoal block mb-4">ATLAS</Link>
           <span className="text-xs tracking-widest text-gray-400 font-bold uppercase">B2B Wholesale Portal</span>
         </div>
 

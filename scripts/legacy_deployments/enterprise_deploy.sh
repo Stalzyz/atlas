@@ -1,12 +1,12 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS ENTERPRISE DEPLOYMENT v3.0
+#  ATLAS ENTERPRISE DEPLOYMENT v3.0
 #  Optimized for Product Module Upgrade & GST Infrastructure
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 RELEASES_DIR="$APP_ROOT/releases"
 CURRENT_LINK="$APP_ROOT/current"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
@@ -14,7 +14,7 @@ RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$RELEASES_DIR/$RELEASE_NAME"
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
 
-echo "🚀 INITIATING RAAGHAS ENTERPRISE DEPLOYMENT [$TIMESTAMP]"
+echo "🚀 INITIATING ATLAS ENTERPRISE DEPLOYMENT [$TIMESTAMP]"
 echo "📌 Branch: $GIT_BRANCH"
 
 # ── STEP 1: SSH & Environment Check ───────────────────────────────────────────
@@ -49,7 +49,7 @@ ssh root@$VPS_IP bash << REMOTE
 
   echo "📥 Cloning Repository..."
   mkdir -p "$RELEASE_PATH"
-  git clone --depth=1 --branch $GIT_BRANCH https://github.com/raaghas/raaghas-monorepo.git "$RELEASE_PATH"
+  git clone --depth=1 --branch $GIT_BRANCH https://github.com/atlas/atlas-monorepo.git "$RELEASE_PATH"
   cd "$RELEASE_PATH"
 
   echo "🛠️ Installing Dependencies..."
@@ -69,7 +69,7 @@ ssh root@$VPS_IP bash << REMOTE
   echo "✅ Schema verified (HSN & Variants active)."
 
   echo "🔨 Building Monorepo..."
-  DATABASE_URL="\$DATABASE_URL" npx turbo build --filter=raaghas-api --filter=admin --filter=storefront
+  DATABASE_URL="\$DATABASE_URL" npx turbo build --filter=atlas-api --filter=admin --filter=storefront
 
   echo "📦 Injecting Standalone Assets..."
   # Admin
@@ -88,11 +88,11 @@ ssh root@$VPS_IP bash << REMOTE
   ln -sfn "$RELEASE_PATH" "$CURRENT_LINK"
 
   echo "🚀 Process Management: PM2 Reload..."
-  pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+  pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
   cd "$CURRENT_LINK"
-  NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api
-  NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin
-  NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront
+  NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api
+  NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin
+  NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront
   pm2 save
 
   echo "🧹 Cleaning up old releases..."
@@ -101,11 +101,11 @@ ssh root@$VPS_IP bash << REMOTE
   echo "🏥 Enterprise Health Audit..."
   sleep 10
   API_STATUS=\$(curl -sf http://localhost:6005/api/v1/health || echo "FAILED")
-  if echo "\$API_STATUS" | grep -q "RAAGHAS_STABLE"; then
+  if echo "\$API_STATUS" | grep -q "ATLAS_STABLE"; then
     echo "✅ DEPLOYMENT SUCCESSFUL: System is Stable."
   else
     echo "⚠️  Health check uncertain. Inspecting logs..."
-    pm2 logs raaghas-api --lines 50 --nostream
+    pm2 logs atlas-api --lines 50 --nostream
     exit 1
   fi
 REMOTE

@@ -1,6 +1,6 @@
 #!/bin/bash
-# VPS Recovery - Restart Raaghas services
-APP_ROOT="/var/www/raaghas_new"
+# VPS Recovery - Restart Atlas services
+APP_ROOT="/var/www/atlas_new"
 
 echo "=== Step 1: Kill stuck processes ==="
 pkill -9 -f "prisma" 2>/dev/null && echo "killed prisma" || echo "no prisma to kill"
@@ -34,12 +34,12 @@ sleep 1
 echo ""
 echo "=== Step 6: Start PM2 services ==="
 cd "$APP_ROOT/current"
-PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api --no-autorestart || \
-  PORT=6005 pm2 restart raaghas-api
-PORT=6010 pm2 start apps/admin/server.js --name raaghas-admin --no-autorestart || \
-  PORT=6010 pm2 restart raaghas-admin
-PORT=6009 pm2 start apps/storefront/server.js --name raaghas-storefront --no-autorestart || \
-  PORT=6009 pm2 restart raaghas-storefront
+PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api --no-autorestart || \
+  PORT=6005 pm2 restart atlas-api
+PORT=6010 pm2 start apps/admin/server.js --name atlas-admin --no-autorestart || \
+  PORT=6010 pm2 restart atlas-admin
+PORT=6009 pm2 start apps/storefront/server.js --name atlas-storefront --no-autorestart || \
+  PORT=6009 pm2 restart atlas-storefront
 
 echo ""
 echo "=== Step 7: Save PM2 ==="

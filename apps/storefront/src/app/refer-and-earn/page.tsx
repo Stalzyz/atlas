@@ -23,7 +23,7 @@ export default function ReferAndEarn() {
     }
   }, [token]);
 
-  const shareUrl = `https://raaghas.in/?ref=${referralCode}`;
+  const shareUrl = `https://atlas.in/?ref=${referralCode}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);
@@ -32,7 +32,7 @@ export default function ReferAndEarn() {
   };
 
   const shareWhatsApp = () => {
-    const text = `Hey! Check out Raaghas for some amazing ethnic wear. Use my link to get a special discount on your first order: ${shareUrl}`;
+    const text = `Hey! Check out Atlas for some amazing ethnic wear. Use my link to get a special discount on your first order: ${shareUrl}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -40,7 +40,7 @@ export default function ReferAndEarn() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center space-y-6">
         <Gift size={64} className="text-wine opacity-20" />
-        <h2 className="text-3xl font-serif text-charcoal">Join the Raaghas Family</h2>
+        <h2 className="text-3xl font-serif text-charcoal">Join the Atlas Family</h2>
         <p className="text-gray-500 max-w-sm">Sign in to unlock your unique referral link and start earning store credits.</p>
         <button className="bg-wine text-white px-8 py-3 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-charcoal transition-all">Sign In to Continue</button>
       </div>
@@ -54,7 +54,7 @@ export default function ReferAndEarn() {
         <h2 className="text-[10px] uppercase font-bold tracking-[0.4em] text-wine">Growth Engine</h2>
         <h1 className="text-4xl md:text-5xl font-serif text-charcoal tracking-tight">Refer & Earn Luxury Credits</h1>
         <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
-          Invite your friends to experience Raaghas. They get a discount on their first purchase, and you earn <span className="text-wine font-bold">₹100 credits</span> for every successful referral.
+          Invite your friends to experience Atlas. They get a discount on their first purchase, and you earn <span className="text-wine font-bold">₹100 credits</span> for every successful referral.
         </p>
       </div>
 
@@ -104,7 +104,7 @@ export default function ReferAndEarn() {
            <div className="flex gap-6">
               <div className="w-12 h-12 bg-wine text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">2</div>
               <div className="space-y-1">
-                 <h4 className="font-bold text-charcoal">They shop at Raaghas</h4>
+                 <h4 className="font-bold text-charcoal">They shop at Atlas</h4>
                  <p className="text-sm text-gray-500">Your friends get an automatic discount at checkout.</p>
               </div>
            </div>
@@ -122,7 +122,7 @@ export default function ReferAndEarn() {
       <div className="bg-charcoal text-white rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
          <div className="space-y-2 text-center md:text-left">
             <h3 className="text-xl font-serif">Your Earnings</h3>
-            <p className="text-xs opacity-40 uppercase font-bold tracking-widest">Credited to your Raaghas Wallet</p>
+            <p className="text-xs opacity-40 uppercase font-bold tracking-widest">Credited to your Atlas Wallet</p>
          </div>
          <div className="flex gap-12">
             <div className="text-center space-y-1">

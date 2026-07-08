@@ -200,7 +200,7 @@ function reconcile(orders: any[], gwTxns: GatewayTxn[]): ReconciliationResult[] 
       gw_amount: t.amount,
       email: t.email,
       date: t.created_at,
-      notes: "Payment captured in gateway but no matching confirmed order found in Raaghas.",
+      notes: "Payment captured in gateway but no matching confirmed order found in Atlas.",
     });
   });
 

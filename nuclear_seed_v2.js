@@ -3,7 +3,7 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
 // Path to the generated Prisma client on the VPS
-const targetClientPath = path.join('/var/www/raaghas_new', 'packages/database/generated-client');
+const targetClientPath = path.join('/var/www/atlas_new', 'packages/database/generated-client');
 
 if (!fs.existsSync(targetClientPath)) {
   console.error("❌ ERROR: Generated client folder does NOT exist at " + targetClientPath);
@@ -36,7 +36,7 @@ async function main() {
   console.log('👤 Creating Users...');
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@raaghas.com',
+      email: 'admin@atlas.com',
       password: hashedPass,
       name: 'Master Admin',
       role: 'ADMIN'
@@ -123,7 +123,7 @@ async function main() {
       data: {
         title: t.title,
         handle: t.handle,
-        vendor: 'Raaghas',
+        vendor: 'Atlas',
         category: t.cat,
         published: true,
         status: 'PUBLISHED',

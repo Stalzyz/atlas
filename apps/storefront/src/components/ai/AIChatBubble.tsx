@@ -8,7 +8,7 @@ import { MessageSquare, X, Send, Sparkles, Loader2, User, Camera, ShoppingBag, E
 export function AIChatBubble() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: 'ai' | 'user', content: string }[]>([
-    { role: 'ai', content: "I am your personal Raaghas Muse. How can I help you discover your perfect style today?" }
+    { role: 'ai', content: "I am your personal Atlas Muse. How can I help you discover your perfect style today?" }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -224,7 +224,7 @@ export function AIChatBubble() {
                 </div>
               </div>
               <p className="text-[9px] text-center text-gray-300 mt-2 font-medium tracking-wide">
-                Indulge in a personalized styling session powered by Raaghas AI.
+                Indulge in a personalized styling session powered by Atlas AI.
               </p>
             </div>
           </motion.div>

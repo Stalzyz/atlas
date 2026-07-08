@@ -108,7 +108,7 @@ export default function MediaManager() {
     
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `raaghas_media_links_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `atlas_media_links_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

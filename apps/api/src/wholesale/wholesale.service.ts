@@ -320,8 +320,8 @@ export class WholesaleService {
       invoiceNumber: order.formattedOrderNumber || order.orderNumber ? `PRO-${order.orderNumber}` : `PRO-${order.id.slice(0,8).toUpperCase()}`,
       date: new Date().toISOString(),
       seller: {
-        name: (settings as any)?.storeName || 'Raaghas',
-        email: (settings as any)?.supportEmail || 'wholesale@raaghas.com',
+        name: (settings as any)?.storeName || 'Atlas',
+        email: (settings as any)?.supportEmail || 'wholesale@atlas.com',
         phone: (settings as any)?.supportPhone || '',
         gst: (settings as any)?.gstNumber || '33AABCU9603R1ZX', 
         address: (settings as any)?.businessAddress || 'Salem, India',
@@ -344,7 +344,7 @@ export class WholesaleService {
         grandTotal
       },
       bankDetails: {
-        accountName: (settings as any)?.accountName || 'Raaghas Pvt Ltd',
+        accountName: (settings as any)?.accountName || 'Atlas Pvt Ltd',
         accountNumber: (settings as any)?.accountNumber || '50200012345678',
         ifscCode: (settings as any)?.ifscCode || 'HDFC0001234',
         bankName: (settings as any)?.bankName || 'HDFC Bank, Chennai Main'
@@ -352,7 +352,7 @@ export class WholesaleService {
       // Responsiveness helper for PDF generation
       layoutConfig: {
         fontSize: '10px',
-        primaryColor: '#701A31',
+        primaryColor: '#28104E',
         spacing: 'tight'
       }
     };

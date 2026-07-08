@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-#  🔧  RAAGHAS — ENVIRONMENT SETUP WIZARD
+#  🔧  ATLAS — ENVIRONMENT SETUP WIZARD
 #  Run this locally on your Mac ONCE to create all .env.production files
 #  Usage: bash setup_env.sh
 # =============================================================================
@@ -12,7 +12,7 @@ ask()    { echo -e "${YELLOW}  › $1${RESET}"; }
 info()   { echo -e "${CYAN}  $1${RESET}"; }
 ok()     { echo -e "${GREEN}  ✓ $1${RESET}"; }
 
-banner "🔧 Raaghas Environment Setup Wizard"
+banner "🔧 Atlas Environment Setup Wizard"
 
 echo ""
 info "This wizard creates .env.production files for all 3 apps."

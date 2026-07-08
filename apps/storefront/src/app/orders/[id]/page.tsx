@@ -49,7 +49,7 @@ const statusSteps = [
     status: "DELIVERED", 
     label: "Hand-Delivered", 
     icon: <Gift size={18} strokeWidth={1.5} />, 
-    description: "The Raaghas experience has arrived. We hope you cherish every thread." 
+    description: "The Atlas experience has arrived. We hope you cherish every thread." 
   },
 ];
 
@@ -276,7 +276,7 @@ function OrderTrackingDetailPageInner() {
                      </div>
                      <div className="flex-1 py-1 space-y-2 flex flex-col justify-center">
                         <div>
-                          <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-wine mb-1">{item.variant.product.type || "RAAGHAS LUXE"}</p>
+                          <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-wine mb-1">{item.variant.product.type || "ATLAS LUXE"}</p>
                           <h4 className="text-sm font-bold text-charcoal tracking-widest uppercase line-clamp-2 leading-tight">{item.variant.product.title}</h4>
                         </div>
                         <div className="flex justify-between items-end border-t border-charcoal/5 pt-3 mt-1">

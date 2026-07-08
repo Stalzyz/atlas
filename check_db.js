@@ -2,7 +2,7 @@ const { PrismaClient } = require('./packages/database/generated-client');
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: "postgresql://postgres@localhost/raaghas_cert?host=/tmp"
+      url: "postgresql://postgres@localhost/atlas_cert?host=/tmp"
     }
   }
 });

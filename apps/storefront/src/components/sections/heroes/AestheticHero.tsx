@@ -228,7 +228,7 @@ export function AestheticHero({ content, style, settings }: AestheticHeroProps) 
             >
               <div className="inline-block glass-card px-4 py-1.5 rounded-full mb-8 border-theme-border bg-primary/5">
                 <span className="text-[10px] font-bold text-primary uppercase tracking-[0.4em]">
-                   {content.description || "The Raaghas Signature"}
+                   {content.description || "The Atlas Signature"}
                 </span>
               </div>
 
@@ -278,7 +278,7 @@ export function AestheticHero({ content, style, settings }: AestheticHeroProps) 
               {content.image ? (
                 <Image 
                   src={getAssetUrl(content.image)} 
-                  alt={content.headline || "Raaghas Fashion"} 
+                  alt={content.headline || "Atlas Fashion"} 
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"

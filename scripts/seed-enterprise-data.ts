@@ -1,4 +1,4 @@
-import { PrismaClient, UserRole, OrderStatus, Prisma } from '@raaghas/database';
+import { PrismaClient, UserRole, OrderStatus, Prisma } from '@atlas/database';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,10 +12,10 @@ async function main() {
   console.log('👥 Seeding Users...');
   
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@raaghas.com' },
+    where: { email: 'admin@atlas.com' },
     update: {},
     create: {
-      email: 'admin@raaghas.com',
+      email: 'admin@atlas.com',
       name: 'Super Admin',
       role: UserRole.SUPER_ADMIN,
       password: 'Admin123', // In real life, hash this!

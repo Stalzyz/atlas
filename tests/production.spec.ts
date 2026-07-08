@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { adminLogin, waitForStableNetwork } from './helpers/auth';
 
-const ADMIN_URL = 'https://admin.raaghas.in';
-const STORE_URL = 'https://raaghas.in';
+const ADMIN_URL = 'https://admin.atlas.in';
+const STORE_URL = 'https://atlas.in';
 
 test.describe('💎 Production Hardcore Validation', () => {
 
@@ -11,7 +11,7 @@ test.describe('💎 Production Hardcore Validation', () => {
     await waitForStableNetwork(page);
 
     // Verify logo and main text
-    await expect(page.locator('text=RAAGHAS')).toBeVisible();
+    await expect(page.locator('text=ATLAS')).toBeVisible();
     
     // Check if products exist (using generic card selector)
     const productCount = await page.locator('a[href*="/products/"]').count();
@@ -39,7 +39,7 @@ test.describe('💎 Production Hardcore Validation', () => {
   test('Admin: Financial Infrastructure Validation', async ({ page }) => {
     // These credentials should be set in environment variables in a real CI environment
     // Using placeholders for now to demonstrate the flow
-    const email = process.env.ADMIN_EMAIL || 'admin@raaghas.in';
+    const email = process.env.ADMIN_EMAIL || 'admin@atlas.in';
     const password = process.env.ADMIN_PASSWORD || 'password';
 
     await adminLogin(page, `${ADMIN_URL}/login`, email, password);
@@ -64,13 +64,13 @@ test.describe('💎 Production Hardcore Validation', () => {
 
   test('API: Core Health Checks', async ({ request }) => {
     // Check public settings endpoint
-    const settingsRes = await request.get('https://api.raaghas.in/api/v1/settings/public');
+    const settingsRes = await request.get('https://api.atlas.in/api/v1/settings/public');
     expect(settingsRes.ok()).toBeTruthy();
     const settings = await settingsRes.json();
     expect(settings).toHaveProperty('storeName');
 
     // Check products endpoint
-    const productsRes = await request.get('https://api.raaghas.in/api/v1/products');
+    const productsRes = await request.get('https://api.atlas.in/api/v1/products');
     expect(productsRes.ok()).toBeTruthy();
   });
 

@@ -12,5 +12,5 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cat /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx | grep -i "admin_order_sequence"
-            ls -la /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx
+            cat /var/www/atlas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx | grep -i "admin_order_sequence"
+            ls -la /var/www/atlas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx

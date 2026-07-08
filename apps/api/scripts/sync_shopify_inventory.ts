@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 import fetch from 'node-fetch';
 
 const prisma = new PrismaClient();

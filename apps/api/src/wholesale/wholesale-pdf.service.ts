@@ -17,7 +17,7 @@ export class WholesalePdfService {
         size: 'A4',
         info: {
           Title: `Proforma Invoice - ${invoice.invoiceNumber}`,
-          Author: 'Raaghas',
+          Author: 'Atlas',
         }
       });
       
@@ -25,7 +25,7 @@ export class WholesalePdfService {
       doc.on('data', buffers.push.bind(buffers));
       doc.on('end', () => resolve(Buffer.concat(buffers)));
 
-      const wineColor = '#701A31';
+      const wineColor = '#28104E';
       const charcoalColor = '#333333';
       const grayColor = '#999999';
 
@@ -220,7 +220,7 @@ export class WholesalePdfService {
       doc.fillColor(grayColor)
          .font('Helvetica')
          .fontSize(8)
-         .text('Thank you for choosing Raaghas', 50, 780, { align: 'center', characterSpacing: 1 })
+         .text('Thank you for choosing Atlas', 50, 780, { align: 'center', characterSpacing: 1 })
          .text(`This is a computer generated ${isRetail ? 'invoice' : 'pro-forma'} and does not require a physical signature.`, { align: 'center' });
 
       doc.end();
@@ -251,12 +251,12 @@ export class WholesalePdfService {
       invoiceNumber: order.formattedOrderNumber || order.orderNumber ? `PRO-${order.orderNumber}` : `PRO-${order.id.slice(0,8).toUpperCase()}`,
       date: new Date().toISOString(),
       seller: { 
-        name: storeSettings?.storeName || 'Raaghas', 
+        name: storeSettings?.storeName || 'Atlas', 
         address: storeSettings?.businessAddress || 'Salem, India', 
         state: storeSettings?.businessState || 'Tamil Nadu', 
         gst: storeSettings?.gstNumber || '33AABCU9603R1ZX', 
-        email: storeSettings?.supportEmail || 'wholesale@raaghas.com',
-        website: 'www.raaghas.in'
+        email: storeSettings?.supportEmail || 'wholesale@atlas.com',
+        website: 'www.atlas.in'
       },
       buyer: { name: order.retailer.businessName, contact: order.retailer.contactName, address: order.retailer.address, gst: order.retailer.gstNumber, phone: order.retailer.phone },
       items: order.items.map((it: any) => ({
@@ -268,7 +268,7 @@ export class WholesalePdfService {
         taxableValue: Number(it.totalPrice)
       })),
       summary: { subtotal: Number(order.totalAmount), taxes: [], grandTotal: Number(order.totalAmount), totalGst: 0 },
-      bankDetails: { bankName: 'HDFC Bank', accountName: 'Raaghas', accountNumber: '50200012345678', ifscCode: 'HDFC0001234' }
+      bankDetails: { bankName: 'HDFC Bank', accountName: 'Atlas', accountNumber: '50200012345678', ifscCode: 'HDFC0001234' }
     };
   }
 

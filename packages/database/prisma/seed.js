@@ -11,9 +11,9 @@ async function main() {
     update: {},
     create: {
       id: 'global',
-      storeName: 'Raaghas Luxury',
+      storeName: 'Atlas Luxury',
       tagline: 'Timeless Elegance in Every Thread',
-      supportEmail: 'care@raaghas.com',
+      supportEmail: 'care@atlas.com',
       businessState: 'Tamil Nadu',
       defaultGstRate: 12.00,
     }
@@ -24,7 +24,7 @@ async function main() {
   const customers = [
     { email: 'premium@example.com', name: 'Arjun Kapoor', balance: 25000 },
     { email: 'retail@example.com', name: 'Meera Sharma', balance: 1500 },
-    { email: 'tester@raaghas.com', name: 'Raaghas QA', balance: 5000 },
+    { email: 'tester@atlas.com', name: 'Atlas QA', balance: 5000 },
   ];
 
   const userIds = [];

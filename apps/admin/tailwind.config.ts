@@ -14,39 +14,48 @@ const config: Config = {
         sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
-        // ─── Brand Colors (unified with storefront) ───────────────────
+        // ─── Brand Colors (Purple Palette from AwsmColor) ────────────
         wine: {
-          tint:    '#A9445B',
-          light:   '#8C1C2A',
-          DEFAULT: '#6D0F1B', // ✅ Fixed: was #590100, now matches storefront
-          dark:    '#4D0A13',
+          tint:    '#DEACF5',
+          light:   '#9754CB',
+          DEFAULT: '#28104E',
+          dark:    '#180930',
         },
-        ivory: {
-          light:   '#FDFCFB',
-          DEFAULT: '#F8F5F2',
-          dark:    '#E8DED7',
+        purple: {
+          deep:    '#28104E',
+          medium:  '#6237A0',
+          light:   '#9754CB',
+          lavender:'#DEACF5',
         },
-        charcoal: {
-          light:   '#3A3A3A',
-          DEFAULT: '#1A1A1A',
-          dark:    '#0A0A0A',
-        },
-        beige: {
-          light:   '#F9F7F5',
-          DEFAULT: '#E8DED7',
-          dark:    '#D6BCB4',
-        },
-        rose: {
-          light:   '#EAD1D1',
-          DEFAULT: '#D6AFAF',
-          dark:    '#B08D8D',
+        orchid: {
+          DEFAULT: '#6237A0',
+          light:   '#9754CB',
+          dark:    '#28104E',
         },
         gold: {
-          DEFAULT: '#C6A769',
-          muted:   '#D4C3A1',
+          DEFAULT: '#9754CB',
+          muted:   '#DEACF5',
+          dark:    '#6237A0',
+        },
+        cream: {
+          light:   '#FFFFFF',
+          DEFAULT: '#FAFAFA',
+          dark:    '#F0EEF8',
+        },
+        ivory: {
+          light:   '#FFFFFF',
+          DEFAULT: '#FAFAFA',
+          dark:    '#F0EEF8',
+        },
+        charcoal: {
+          light:   '#4A4A6A',
+          DEFAULT: '#1A1A2E',
+          dark:    '#0D0D1A',
         },
         // ─── Semantic CSS Variable Tokens ─────────────────────────────
         primary:            'var(--primary)',
+        secondary:          'var(--secondary)',
+        cta:                'var(--cta)',
         'theme-bg':         'var(--bg)',
         'theme-surface':    'var(--surface)',
         'theme-text':       'var(--text-primary)',

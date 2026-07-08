@@ -1,5 +1,5 @@
 #!/usr/bin/expect -f
-# Full VPS Recovery Script for raaghas.in
+# Full VPS Recovery Script for atlas.in
 
 set timeout 600
 set VPS_IP "72.61.231.187"
@@ -43,14 +43,14 @@ expect "# " { send "chown -R root:root ~/.npm; npm cache clean --force; echo '�
 
 # ─── PHASE 5: LOCATE PROJECT ────────────────────────────────────────────────
 expect "# " {
-    send {PROJ=$(ls -d /var/www/raaghas_new/current /var/www/raaghas/current /root/raaghas /var/www/current 2>/dev/null | head -1); echo "PROJECT: $PROJ"}
+    send {PROJ=$(ls -d /var/www/atlas_new/current /var/www/atlas/current /root/atlas /var/www/current 2>/dev/null | head -1); echo "PROJECT: $PROJ"}
     send "\r"
 }
 expect "# " { send "ls /var/www/ 2>/dev/null; ls /root/ 2>/dev/null | head -20\r" }
 
 # ─── PHASE 6: CLEAN INSTALL ─────────────────────────────────────────────────
 expect "# " {
-    send {cd $(ls -d /var/www/raaghas_new/current /var/www/raaghas/current 2>/dev/null | head -1) 2>/dev/null || echo "LOCATING..."}
+    send {cd $(ls -d /var/www/atlas_new/current /var/www/atlas/current 2>/dev/null | head -1) 2>/dev/null || echo "LOCATING..."}
     send "\r"
 }
 expect "# " { send "pwd && ls\r" }

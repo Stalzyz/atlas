@@ -1,18 +1,18 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS MASTER DEPLOY v8.0 — THE "UNBREAKABLE" EDITION
+#  ATLAS MASTER DEPLOY v8.0 — THE "UNBREAKABLE" EDITION
 #  Fixed: Node 22 Support | Clean Binary Paths | 3-Tier Prisma Fallback
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$APP_ROOT/releases/$RELEASE_NAME"
 PRISMA_VERSION="6.7.0"
 
-echo "🛡️  RAAGHAS MASTER DEPLOY v8.0 — $TIMESTAMP"
+echo "🛡️  ATLAS MASTER DEPLOY v8.0 — $TIMESTAMP"
 
 # ── PHASE 1: System Readiness Check ───────────────────────────────────────────
 echo ""
@@ -111,7 +111,7 @@ rsync -az -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -
 rm -rf .tmp_deps
 
 # 5. Configs
-rsync -az -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress scripts/ raaghas_nginx.conf root@$VPS_IP:$RELEASE_PATH/
+rsync -az -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress scripts/ atlas_nginx.conf root@$VPS_IP:$RELEASE_PATH/
 
 # ── PHASE 7: Remote Launch ────────────────────────────────────────────────────
 echo ""
@@ -122,8 +122,8 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP "APP_ROOT='$APP_ROOT' RELEASE_NAME=
   CURRENT_LINK="$APP_ROOT/current"
 
   # Kill Old
-  pm2 stop raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
-  pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+  pm2 stop atlas-api atlas-admin atlas-storefront 2>/dev/null || true
+  pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
   fuser -k 6005/tcp 6009/tcp 6010/tcp 2>/dev/null || true
 
   # Load Env
@@ -149,16 +149,16 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP "APP_ROOT='$APP_ROOT' RELEASE_NAME=
   ln -sfn "$APP_ROOT/shared/uploads" "$RELEASE_PATH/uploads"
 
   # Nginx
-  rm -f /etc/nginx/sites-enabled/raaghas
-  cp "$RELEASE_PATH/raaghas_nginx.conf" /etc/nginx/sites-available/raaghas.conf
-  ln -sfn /etc/nginx/sites-available/raaghas.conf /etc/nginx/sites-enabled/raaghas.conf
+  rm -f /etc/nginx/sites-enabled/atlas
+  cp "$RELEASE_PATH/atlas_nginx.conf" /etc/nginx/sites-available/atlas.conf
+  ln -sfn /etc/nginx/sites-available/atlas.conf /etc/nginx/sites-enabled/atlas.conf
   nginx -t && systemctl reload nginx
 
   # PM2 Start
   cd "$CURRENT_LINK"
-  PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api
-  PORT=6010 pm2 start apps/admin/server.js --name raaghas-admin
-  PORT=6009 pm2 start apps/storefront/server.js --name raaghas-storefront
+  PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api
+  PORT=6010 pm2 start apps/admin/server.js --name atlas-admin
+  PORT=6009 pm2 start apps/storefront/server.js --name atlas-storefront
   pm2 save
   
   echo "✅ PRODUCTION ONLINE."

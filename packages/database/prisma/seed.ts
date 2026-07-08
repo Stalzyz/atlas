@@ -17,9 +17,9 @@ async function main() {
     update: {},
     create: {
       id: 'global',
-      storeName: 'Raaghas Luxury',
+      storeName: 'Atlas Luxury',
       tagline: 'Timeless Elegance in Every Thread',
-      supportEmail: 'care@raaghas.com',
+      supportEmail: 'care@atlas.com',
       businessState: 'Tamil Nadu',
       defaultGstRate: 12.00,
     }
@@ -28,11 +28,11 @@ async function main() {
 
   // 3. USERS & WALLET
   const testUser = await prisma.user.upsert({
-    where: { email: 'tester@raaghas.com' },
+    where: { email: 'tester@atlas.com' },
     update: {},
     create: {
-      email: 'tester@raaghas.com',
-      name: 'Raaghas Test Customer',
+      email: 'tester@atlas.com',
+      name: 'Atlas Test Customer',
       role: UserRole.CUSTOMER,
       wallet: {
         create: {

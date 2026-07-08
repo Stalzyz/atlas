@@ -72,11 +72,11 @@ const FALLBACK_SECTIONS: Section[] = [
     order: 4, 
     content: { 
       headline: "The First Handshake",
-      subheadline: "Experience Raaghas with 10% off your first order.",
+      subheadline: "Experience Atlas with 10% off your first order.",
       image: "https://images.unsplash.com/photo-1594235412402-b1ed2efaa873?q=80&w=1200",
       ctaText: "Claim Discount", 
       ctaLink: "/collections/all",
-      code: "RAAGHAS10"
+      code: "ATLAS10"
     } 
   },
   { 
@@ -84,8 +84,8 @@ const FALLBACK_SECTIONS: Section[] = [
     type: "SOCIAL_PROOF", 
     order: 5, 
     content: {
-      headline: "Raaghas in the Wild",
-      subtext: "Tag us @raaghas.official to be featured.",
+      headline: "Atlas in the Wild",
+      subtext: "Tag us @atlas.official to be featured.",
       items: [
         { image: "https://images.unsplash.com/photo-1594235412402-b1ed2efaa873?q=80&w=400", name: "Riya", city: "Bangalore", story: "Best for long office hours!" },
         { image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=400", name: "Ananya", city: "Mumbai", story: "The fabric is like butter." },
@@ -100,8 +100,8 @@ const FALLBACK_SECTIONS: Section[] = [
     order: 6, 
     content: {
       headline: "Visual Diary",
-      url: "https://instagram.com/raaghas.official",
-      handleText: "@raaghas.official"
+      url: "https://instagram.com/atlas.official",
+      handleText: "@atlas.official"
     } 
   },
   { id: "newsletter", type: "NEWSLETTER", order: 7, content: {
@@ -128,7 +128,7 @@ export async function generateMetadata(): Promise<import("next").Metadata> {
   const page = await getHomePageData();
   if (page) {
     return {
-      title: page.metaTitle || page.title || "Raaghas | Authentic Handloom",
+      title: page.metaTitle || page.title || "Atlas | Authentic Handloom",
       description: page.metaDescription,
       openGraph: {
         images: page.ogImage ? [{ url: page.ogImage }] : [],
@@ -145,10 +145,10 @@ export default async function Home() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Raaghas",
-    "url": "https://raaghas.in",
-    "logo": "https://raaghas.in/logo-dark.svg",
-    "description": "Raaghas is India's leading luxury brand for premium casual and office wear."
+    "name": "Atlas",
+    "url": "https://atlas.in",
+    "logo": "https://atlas.in/logo-dark.svg",
+    "description": "Atlas is India's leading luxury brand for premium casual and office wear."
   };
 
   return (
@@ -157,7 +157,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <h1 className="sr-only">Raaghas is India's leading luxury brand for premium casual and office wear.</h1>
+      <h1 className="sr-only">Atlas is India's leading luxury brand for premium casual and office wear.</h1>
       <div className="md:pt-0">
         <SectionRenderer sections={sections} />
       </div>

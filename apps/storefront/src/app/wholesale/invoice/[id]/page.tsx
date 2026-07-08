@@ -46,7 +46,7 @@ export default function InvoicePage() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Raaghas_Proforma_${String(id).toUpperCase()}.pdf`;
+      a.download = `Atlas_Proforma_${String(id).toUpperCase()}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();

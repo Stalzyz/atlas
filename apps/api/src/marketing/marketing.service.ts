@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { OnEvent } from '@nestjs/event-emitter';
-import { LeadStatus } from '@raaghas/database';
+import { LeadStatus } from '@atlas/database';
 import { GraftyService } from '../communication/grafty.service';
 import { MailService } from '../mail/mail.service';
 import * as crypto from 'crypto';
@@ -183,7 +183,7 @@ export class MarketingService {
       // Email Nudge
       if (lead.email) {
         const itemCount = Array.isArray(lead.items) ? lead.items.length : 1;
-        const recoveryLink = `${process.env.STOREFRONT_URL || 'https://raaghas.in'}/cart?recover=${lead.id}`;
+        const recoveryLink = `${process.env.STOREFRONT_URL || 'https://atlas.in'}/cart?recover=${lead.id}`;
         const emailResult = await this.mailService.sendAbandonedCartEmail(
           lead.email, 
           name, 
@@ -339,7 +339,7 @@ export class MarketingService {
             <p>We hope you love your purchase. If you have any issues or questions, simply reply to this email.</p>
             <br/>
             <p>Thank you for shopping with us!</p>
-            <p><strong>Raaghas</strong></p>
+            <p><strong>Atlas</strong></p>
           </div>
         `;
         await this.mailService.sendCustomEmail(email, subject, html)
@@ -617,12 +617,12 @@ export class MarketingService {
       if (!p.variants || p.variants.length === 0) continue;
 
       const description = this.escapeXml(p.description || p.title);
-      const link = `https://raaghas.in/products/${p.handle}`;
-      const primaryImage = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://raaghas.in/logo-dark.svg';
+      const link = `https://atlas.in/products/${p.handle}`;
+      const primaryImage = p.images && p.images.length > 0 ? this.escapeXml(p.images[0].url) : 'https://atlas.in/logo-dark.svg';
       const additionalImages = (p.images || []).slice(1).map((img: any) =>
         `      <g:additional_image_link>${this.escapeXml(img.url)}</g:additional_image_link>`
       ).join('\n');
-      const brand = 'Raaghas';
+      const brand = 'Atlas';
 
       for (const variant of p.variants) {
         const variantId = variant.id;
@@ -659,9 +659,9 @@ ${additionalImages}
     return `<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
-    <title>Raaghas</title>
-    <link>https://raaghas.in</link>
-    <description>Raaghas Exclusive Product Catalogue</description>
+    <title>Atlas</title>
+    <link>https://atlas.in</link>
+    <description>Atlas Exclusive Product Catalogue</description>
     ${itemsXml}
   </channel>
 </rss>`;

@@ -63,7 +63,7 @@ export class MigrationService {
         ...options,
         signal: controller.signal,
         headers: {
-          'User-Agent': 'Raaghas-Migration-Engine/2.1 (Node.js/Expert-Patch)',
+          'User-Agent': 'Atlas-Migration-Engine/2.1 (Node.js/Expert-Patch)',
           ...options.headers,
         },
       });

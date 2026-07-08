@@ -37,7 +37,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                     {items.length}
                   </span>
                 </h2>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">Raaghas Collections</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-charcoal/40 font-bold">Atlas Collections</p>
               </div>
               <button 
                 onClick={onClose} 

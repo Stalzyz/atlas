@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-#  🖥️  RAAGHAS — VPS FIRST-TIME BOOTSTRAP SCRIPT
+#  🖥️  ATLAS — VPS FIRST-TIME BOOTSTRAP SCRIPT
 #  Run this ONCE on a fresh Ubuntu 22.04 / 24.04 VPS as root
 #  Usage: curl -sL <url> | bash   OR   bash vps_setup.sh
 # =============================================================================
@@ -48,8 +48,8 @@ if ! command -v psql &>/dev/null; then
 fi
 
 # Create DB + User
-DB_NAME="raaghas_db"
-DB_USER="raaghas_user"
+DB_NAME="atlas_db"
+DB_USER="atlas_user"
 DB_PASS="$(openssl rand -base64 24 | tr -d '/@+=' | head -c 20)"
 
 sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';" 2>/dev/null || true
@@ -75,8 +75,8 @@ ufw allow ssh        # Port 22
 ufw allow 80/tcp     # HTTP
 ufw allow 443/tcp    # HTTPS
 # Internal app ports — block from public, only NGINX proxies them
-ufw deny 6001/tcp
-ufw deny 6002/tcp
+ufw deny 4401/tcp
+ufw deny 4402/tcp
 ufw deny 6005/tcp
 ufw --force enable
 success "Firewall configured."
@@ -98,7 +98,7 @@ success "NGINX ready."
 # ── 8. System Log Directory ───────────────────────────────────────────────────
 banner "8. Log Directories"
 mkdir -p /var/log/pm2
-mkdir -p /var/www/raaghas_backups
+mkdir -p /var/www/atlas_backups
 success "Directories created."
 
 # ── 9. Final Summary ──────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 {
-  "name": "raaghas-api",
+  "name": "atlas-api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -34,7 +34,7 @@
     "@nestjs/throttler": "^6.5.0",
     "@prisma/adapter-pg": "6.7.0",
     "@prisma/client": "6.7.0",
-    "@raaghas/database": "^1.0.0",
+    "@atlas/database": "^1.0.0",
     "@types/multer": "^2.1.0",
     "@types/passport-jwt": "^4.0.1",
     "bcryptjs": "^2.4.3",

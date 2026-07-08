@@ -32,7 +32,7 @@ export function InstagramFeedSection({ content }: { content: any }) {
   ];
 
   const images = content.images || defaultImages;
-  const instagramId = content.instagramId || "raaghas_clothing";
+  const instagramId = content.instagramId || "atlas_clothing";
   const handleUrl = `https://www.instagram.com/${instagramId}`;
   const handleText = content.handleText || `@${instagramId}`;
 
@@ -61,7 +61,7 @@ export function InstagramFeedSection({ content }: { content: any }) {
           className="text-3xl font-serif transition-colors duration-500"
           style={{ color: textColor }}
         >
-          {content.headline || "Raaghas on Instagram"}
+          {content.headline || "Atlas on Instagram"}
         </h2>
         <a 
           href={handleUrl} 

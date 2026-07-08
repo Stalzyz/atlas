@@ -17,7 +17,7 @@ export default function AddProductPage() {
     shortDescription: "",
     category: "New Arrivals",
     subCategory: "",
-    brand: "Raaghas",
+    brand: "Atlas",
     vendor: "",
     productType: "Apparel",
     gender: "Unisex",
@@ -695,7 +695,7 @@ export default function AddProductPage() {
                 <label className="text-sm font-bold text-charcoal block mb-1">Featured Coupon Code</label>
                 <input 
                   type="text" 
-                  placeholder="e.g. RAAGHAS10" 
+                  placeholder="e.g. ATLAS10" 
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-wine transition-colors uppercase"
                   value={form.featuredCoupon}
                   onChange={e => setForm({...form, featuredCoupon: e.target.value.toUpperCase()})}
@@ -904,7 +904,7 @@ export default function AddProductPage() {
               <input type="text" value={form.searchKeywords} onChange={e => setForm({...form, searchKeywords: e.target.value})} className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none text-sm" placeholder="Internal search boosters..." />
             </div>
             <div className="pt-2 border-t border-gray-100">
-               <p className="text-[10px] text-gray-400 font-mono break-all">https://raaghas.com/products/{form.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') || "handle"}</p>
+               <p className="text-[10px] text-gray-400 font-mono break-all">https://atlas.com/products/{form.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') || "handle"}</p>
             </div>
           </div>
 

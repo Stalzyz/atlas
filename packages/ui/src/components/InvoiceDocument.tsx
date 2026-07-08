@@ -45,7 +45,7 @@ export const InvoiceDocument: React.FC<InvoiceProps> = ({
       {/* Header */}
       <div className="flex justify-between items-start border-b border-gray-100 pb-8 mb-8">
         <div>
-          <img src="/logo-dark.svg" alt="Raaghas Luxury Logo" className="h-12 w-auto mb-2 object-contain" />
+          <img src="/logo-dark.svg" alt="Atlas Luxury Logo" className="h-12 w-auto mb-2 object-contain" />
           <p className="text-gray-500 text-sm">Luxury ethnic wear crafted for moments that matter.</p>
         </div>
         <div className="text-right">
@@ -145,7 +145,7 @@ export const InvoiceDocument: React.FC<InvoiceProps> = ({
       </div>
 
       <div className="mt-12 text-center">
-        <p className="text-[#6D0F1B] font-medium tracking-wide">Thank you for choosing Raaghas Luxury</p>
+        <p className="text-[#6D0F1B] font-medium tracking-wide">Thank you for choosing Atlas Luxury</p>
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ export function CSVImporter() {
     
     // Kurti 1: Anarkali with 3 variants
     const row1 = [
-      "floral-anarkali-kurti", "Floral Print Anarkali Kurti", "Floral Print Anarkali Kurti", "Beautiful flowing Anarkali kurti perfect for festive occasions.", "Ethnic Wear", "Kurti", "Raaghas",
+      "floral-anarkali-kurti", "Floral Print Anarkali Kurti", "Floral Print Anarkali Kurti", "Beautiful flowing Anarkali kurti perfect for festive occasions.", "Ethnic Wear", "Kurti", "Atlas",
       "Women", "Adult", "Cotton Blend", "Anarkali", "3/4 Sleeve", "Round Neck",
       "ACTIVE", "", "KRT-FLR-S", "89012345001", "1299", "2499", "1299",
       "600", "15", "S", "Pink",
@@ -118,7 +118,7 @@ export function CSVImporter() {
 
     // Kurti 2: A-Line Kurti with 2 variants
     const row4 = [
-      "geometric-aline-kurti", "Geometric Print A-Line Kurti", "Geometric Print A-Line Kurti", "Modern A-line cut for everyday office wear.", "Everyday Wear", "Kurti", "Raaghas",
+      "geometric-aline-kurti", "Geometric Print A-Line Kurti", "Geometric Print A-Line Kurti", "Modern A-line cut for everyday office wear.", "Everyday Wear", "Kurti", "Atlas",
       "Women", "Adult", "Rayon", "A-Line", "Short Sleeve", "V-Neck",
       "ACTIVE", "", "KRT-GEO-M", "89012345010", "899", "1599", "899",
       "400", "30", "M", "Navy Blue",
@@ -134,7 +134,7 @@ export function CSVImporter() {
 
     // Kurti 3: Straight Cut Solid Kurti (Single Variant)
     const row6 = [
-      "solid-straight-kurti-yellow", "Solid Straight Cut Kurti", "Solid Straight Cut Kurti", "Bright yellow straight kurti with side slits.", "Casual Wear", "Kurti", "Raaghas",
+      "solid-straight-kurti-yellow", "Solid Straight Cut Kurti", "Solid Straight Cut Kurti", "Bright yellow straight kurti with side slits.", "Casual Wear", "Kurti", "Atlas",
       "Women", "Adult", "Pure Cotton", "Straight", "Sleeveless", "Boat Neck",
       "ACTIVE", "", "KRT-STR-YEL-FS", "89012345020", "699", "999", "699",
       "350", "40", "Free Size", "Mustard Yellow",
@@ -143,7 +143,7 @@ export function CSVImporter() {
 
     // Kurti 4: Embellished Flared Kurti (2 Variants)
     const row7 = [
-      "embellished-flared-kurti", "Embellished Flared Party Kurti", "Embellished Flared Party Kurti", "Heavy mirror work flared kurti.", "Party Wear", "Kurti", "Raaghas",
+      "embellished-flared-kurti", "Embellished Flared Party Kurti", "Embellished Flared Party Kurti", "Heavy mirror work flared kurti.", "Party Wear", "Kurti", "Atlas",
       "Women", "Adult", "Georgette", "Flared", "Full Sleeve", "Keyhole Neck",
       "ACTIVE", "", "KRT-EMB-XL", "89012345030", "1999", "3999", "1999",
       "950", "5", "XL", "Teal Green",
@@ -173,7 +173,7 @@ export function CSVImporter() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", "raaghas_enterprise_catalog.csv");
+    link.setAttribute("download", "atlas_enterprise_catalog.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

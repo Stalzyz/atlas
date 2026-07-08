@@ -92,7 +92,7 @@ export default function WholesaleRegisterPage() {
           <div className="space-y-4">
             <h1 className="text-4xl font-serif text-theme-text tracking-tight">Dossier Received</h1>
             <p className="text-theme-text-muted leading-relaxed font-sans">
-              Thank you for applying to the Raaghas Wholesale Program. Our curation team will review your business credentials and GST status within 48 hours.
+              Thank you for applying to the Atlas Wholesale Program. Our curation team will review your business credentials and GST status within 48 hours.
             </p>
           </div>
           <div className="pt-4">
@@ -117,7 +117,7 @@ export default function WholesaleRegisterPage() {
                 </span>
                 <h1 className="text-5xl md:text-6xl font-serif text-theme-text leading-[1.1] tracking-tight">
                   Grow Your Boutique <br />
-                  <span className="italic text-wine">With Raaghas.</span>
+                  <span className="italic text-wine">With Atlas.</span>
                 </h1>
                 <p className="text-theme-text-muted leading-relaxed max-w-md font-sans">
                   Join our select network of luxury resellers across India. Access exclusive wholesale pricing, advanced inventory reservations, and priority shipping for your clientele.

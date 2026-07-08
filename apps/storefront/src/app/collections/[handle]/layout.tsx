@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
   
   if (!collection) return { title: "Collection Not Found" };
 
-  const title = `${collection.title} Collection | Raaghas`;
+  const title = `${collection.title} Collection | Atlas`;
   const description = collection.description || `Explore our premium ${collection.title.toLowerCase()} collection. Curated for elegance, comfort, and timeless luxury.`;
   const imageUrl = collection.bannerUrl || collection.thumbnailUrl;
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
     description,
     openGraph: {
       type: "website",
-      url: `https://raaghas.in/collections/${collection.handle}`,
+      url: `https://atlas.in/collections/${collection.handle}`,
       title,
       description,
       images: imageUrl ? [{ url: imageUrl, alt: collection.title }] : [],

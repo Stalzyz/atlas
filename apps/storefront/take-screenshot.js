@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
   
   await page.setViewport({ width: 1280, height: 800 });
-  await page.goto('http://localhost:6001', { waitUntil: 'networkidle0' });
+  await page.goto('http://localhost:4401', { waitUntil: 'networkidle0' });
   
   await page.screenshot({ path: 'screenshot.png', fullPage: true });
   

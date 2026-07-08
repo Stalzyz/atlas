@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 async function main() {
-  const client = new Client({ connectionString: 'postgresql://postgres@127.0.0.1:5432/raaghas_cert' });
+  const client = new Client({ connectionString: 'postgresql://postgres@127.0.0.1:5432/atlas_cert' });
   await client.connect();
   const res = await client.query(`
     SELECT tablename FROM pg_catalog.pg_tables 

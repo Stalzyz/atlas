@@ -21,11 +21,11 @@ du -sh /var/www/* 2>/dev/null | sort -rh | head -20
 
 echo ""
 echo "━━━ OLD RELEASES (>3 kept) ━━━"
-ls -td /var/www/raaghas_new/releases/release_* 2>/dev/null | tail -n +4
+ls -td /var/www/atlas_new/releases/release_* 2>/dev/null | tail -n +4
 
 echo ""
 echo "━━━ OLD RELEASE SIZES ━━━"
-ls -td /var/www/raaghas_new/releases/release_* 2>/dev/null | tail -n +4 | xargs -I{} du -sh {} 2>/dev/null
+ls -td /var/www/atlas_new/releases/release_* 2>/dev/null | tail -n +4 | xargs -I{} du -sh {} 2>/dev/null
 
 echo ""
 echo "━━━ NPM CACHE ━━━"
@@ -78,7 +78,7 @@ find /var/www -xtype l 2>/dev/null | head -20
 
 echo ""
 echo "━━━ NODE_MODULES in INACTIVE projects ━━━"
-find /var/www -name "node_modules" -type d -not -path "*/raaghas_new/current/*" 2>/dev/null | \
+find /var/www -name "node_modules" -type d -not -path "*/atlas_new/current/*" 2>/dev/null | \
   xargs -I{} du -sh {} 2>/dev/null | sort -rh | head -10
 
 echo ""

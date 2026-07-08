@@ -29,7 +29,7 @@ export class InvoicesService {
 
     return this.mailService.sendEmailWithAttachment(
       invoice.customerEmail,
-      `Tax Invoice ${invoice.invoiceNumber} from Raaghas`,
+      `Tax Invoice ${invoice.invoiceNumber} from Atlas`,
       `Dear ${invoice.customerName}, please find your invoice attached.`,
       `Invoice-${invoice.invoiceNumber}.pdf`,
       pdfBuffer
@@ -115,12 +115,12 @@ export class InvoicesService {
       invoiceNumber: invoice.invoiceNumber,
       date: invoice.date.toISOString(),
       seller: { 
-        name: storeSettings?.storeName || 'Raaghas', 
+        name: storeSettings?.storeName || 'Atlas', 
         address: storeSettings?.businessAddress || 'Salem, India', 
         state: storeSettings?.businessState || 'Tamil Nadu', 
         gst: storeSettings?.gstNumber || '33AABCU9603R1ZX', 
-        email: storeSettings?.supportEmail || 'wholesale@raaghas.com',
-        website: 'www.raaghas.in'
+        email: storeSettings?.supportEmail || 'wholesale@atlas.com',
+        website: 'www.atlas.in'
       },
       buyer: { 
         name: invoice.customerName, 
@@ -145,7 +145,7 @@ export class InvoicesService {
       },
       bankDetails: { 
         bankName: 'HDFC Bank', 
-        accountName: 'Raaghas', 
+        accountName: 'Atlas', 
         accountNumber: '50200012345678', 
         ifscCode: 'HDFC0001234' 
       }

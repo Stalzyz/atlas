@@ -1,7 +1,7 @@
 #!/bin/bash
 # Fix missing product images for ordered items
 
-PGPASSWORD=raaghas_2026 psql -h localhost -U postgres -d raaghas << 'EOF'
+PGPASSWORD=atlas_2026 psql -h localhost -U postgres -d atlas << 'EOF'
 
 -- Step 1: See which products linked to orders have no images
 SELECT p.id, p.title, COUNT(i.id) as image_count

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ╔══════════════════════════════════════════════════════════════╗
-# ║  RAAGHAS PRODUCTION REAL-TIME LOG MONITOR                   ║
+# ║  ATLAS PRODUCTION REAL-TIME LOG MONITOR                   ║
 # ║  Watches PM2 logs for critical commerce pipeline failures   ║
 # ╚══════════════════════════════════════════════════════════════╝
 
@@ -20,12 +20,12 @@ if ! command -v pm2 &> /dev/null; then
     exit 1
 fi
 
-echo -e "${CYAN}🚀 Starting Raaghas Pipeline Monitor...${NC}"
+echo -e "${CYAN}🚀 Starting Atlas Pipeline Monitor...${NC}"
 echo -e "${BLUE}Watching for: ${RED}CRITICAL${BLUE}, ${YELLOW}Oversell${BLUE}, ${PURPLE}Webhook-Failures${BLUE}, ${GREEN}Order-Placed${NC}"
 echo "----------------------------------------------------------------"
 
 # Patterns to watch for (Mac compatible: removed stdbuf)
-pm2 logs raaghas-api --lines 50 | sed -l \
+pm2 logs atlas-api --lines 50 | sed -l \
   -e "s/\(.*CRITICAL.*\)/${RED}\1${NC}/g" \
   -e "s/\(.*Oversell Prevented.*\)/${YELLOW}\1${NC}/g" \
   -e "s/\(.*DEAD LETTER QUEUE.*\)/${RED}\1${NC}/g" \

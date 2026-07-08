@@ -1,13 +1,13 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-#  RAAGHAS: SURGICAL WEBP SYNC — Run this ON the VPS
+#  ATLAS: SURGICAL WEBP SYNC — Run this ON the VPS
 # ═══════════════════════════════════════════════════════
 set -e
 
-RELEASE_DIR=$(readlink -f /var/www/raaghas_new/current)
+RELEASE_DIR=$(readlink -f /var/www/atlas_new/current)
 API_DIR="$RELEASE_DIR/apps/api"
-UPLOADS_DIR="/var/www/raaghas_new/shared/uploads"
-BASE_URL="https://api.raaghas.in/uploads"
+UPLOADS_DIR="/var/www/atlas_new/shared/uploads"
+BASE_URL="https://api.atlas.in/uploads"
 SCRIPT="$API_DIR/___webp_sync___.js"
 
 echo "🔍 Release Dir: $RELEASE_DIR"

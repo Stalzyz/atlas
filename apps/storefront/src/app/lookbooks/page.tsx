@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Lookbooks | Raaghas — Curated Editorial Collections",
+  title: "Lookbooks | Atlas — Curated Editorial Collections",
   description:
-    "Explore Raaghas seasonal lookbooks — editorial collections showcasing the art of Indian textile tradition styled for the modern woman.",
+    "Explore Atlas seasonal lookbooks — editorial collections showcasing the art of Indian textile tradition styled for the modern woman.",
 };
 
 const LOOKBOOKS = [

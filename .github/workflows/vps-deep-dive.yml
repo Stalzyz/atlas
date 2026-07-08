@@ -26,22 +26,22 @@ jobs:
             cat << 'SCRIPT' > /tmp/deep_dive.sh
             #!/bin/bash
             echo "--- DATABASE URL ---" > /tmp/deep_dive_result.txt
-            grep DATABASE_URL /var/www/raaghas_new/shared/.env >> /tmp/deep_dive_result.txt || true
+            grep DATABASE_URL /var/www/atlas_new/shared/.env >> /tmp/deep_dive_result.txt || true
             
             # Extract DB credentials
-            DB_URL=$(grep DATABASE_URL /var/www/raaghas_new/shared/.env | cut -d '=' -f2)
+            DB_URL=$(grep DATABASE_URL /var/www/atlas_new/shared/.env | cut -d '=' -f2)
             
             echo "--- ALL DATABASES ---" >> /tmp/deep_dive_result.txt
             sudo -u postgres psql -c "\l" >> /tmp/deep_dive_result.txt 2>&1
             
             echo "--- ALL SCHEMAS IN CURRENT DB ---" >> /tmp/deep_dive_result.txt
-            sudo -u postgres psql -d raaghas_cert -c "\dn" >> /tmp/deep_dive_result.txt 2>&1
+            sudo -u postgres psql -d atlas_cert -c "\dn" >> /tmp/deep_dive_result.txt 2>&1
             
             echo "--- TABLES IN CURRENT DB ---" >> /tmp/deep_dive_result.txt
-            sudo -u postgres psql -d raaghas_cert -c "\dt" >> /tmp/deep_dive_result.txt 2>&1
+            sudo -u postgres psql -d atlas_cert -c "\dt" >> /tmp/deep_dive_result.txt 2>&1
             
             echo "--- COUNT ROWS ---" >> /tmp/deep_dive_result.txt
-            sudo -u postgres psql -d raaghas_cert -c "SELECT relname, n_live_tup FROM pg_stat_user_tables ORDER BY n_live_tup DESC;" >> /tmp/deep_dive_result.txt 2>&1
+            sudo -u postgres psql -d atlas_cert -c "SELECT relname, n_live_tup FROM pg_stat_user_tables ORDER BY n_live_tup DESC;" >> /tmp/deep_dive_result.txt 2>&1
             SCRIPT
             
             chmod +x /tmp/deep_dive.sh

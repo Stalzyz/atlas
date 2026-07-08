@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 const prisma = new PrismaClient();
 async function main() {
   const count = await prisma.product.count();

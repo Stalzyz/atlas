@@ -18,7 +18,7 @@ export default function RecentlyViewed() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("raaghas_recent_views");
+      const stored = localStorage.getItem("atlas_recent_views");
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {

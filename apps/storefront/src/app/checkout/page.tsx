@@ -502,9 +502,9 @@ export default function CheckoutPage() {
         key: data.paymentPayload.keyId,
         amount: data.paymentPayload.amountInPaise,
         currency: "INR",
-        name: "Raaghas",
+        name: "Atlas",
         description: "Luxury Wardrobe Purchase",
-        image: "https://raaghas.in/logo.png",
+        image: "https://atlas.in/logo.png",
         order_id: data.providerOrderId,
         handler: async function (response: any) {
           paymentHandled = true;
@@ -674,7 +674,7 @@ export default function CheckoutPage() {
       <div className="w-full md:w-[55%] lg:w-[60%] p-6 md:p-12 lg:p-20 order-2 md:order-1 flex flex-col">
         <div className="mb-10 block">
           <Link href="/" className="text-3xl font-serif tracking-widest text-theme-text block mb-4">
-            RAAGHAS
+            ATLAS
           </Link>
           <div className="flex items-center text-[10px] uppercase tracking-widest text-theme-text-muted gap-2">
             <Link href="/cart" className="hover:text-wine transition-colors">Cart</Link>
@@ -707,7 +707,7 @@ export default function CheckoutPage() {
                     <IndianRupee size={20} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold">Raaghas Wallet</h3>
+                    <h3 className="text-sm font-bold">Atlas Wallet</h3>
                     <p className="text-xs text-theme-text-muted">
                       Available: ₹{wallet.balance.toLocaleString()} <br/>
                       <span className="text-[10px] opacity-70">(Max {maxCreditUsagePercent}% of cart value per order)</span>

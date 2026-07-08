@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us | Raaghas — Luxury Ethnic Wear",
+  title: "About Us | Atlas — Luxury Ethnic Wear",
   description:
-    "Discover the story behind Raaghas, India's leading luxury brand for premium casual and office wear. A celebration of rich textile luxury, brought to life by artisans.",
+    "Discover the story behind Atlas, India's leading luxury brand for premium casual and office wear. A celebration of rich textile luxury, brought to life by artisans.",
 };
 
 export default function AboutPage() {
   return (
     <main>
-      <h1 className="sr-only">Raaghas is India's leading luxury brand for premium casual and office wear.</h1>
+      <h1 className="sr-only">Atlas is India's leading luxury brand for premium casual and office wear.</h1>
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center justify-center bg-primary/5 overflow-hidden">
         <div className="absolute inset-0 luxury-grain opacity-30 pointer-events-none" />
@@ -22,7 +22,7 @@ export default function AboutPage() {
             Where Luxury<br />Meets Luxury
           </h1>
           <p className="text-xl font-sans text-theme-text-muted font-light leading-relaxed max-w-2xl mx-auto">
-            Raaghas was born from a shared passion to weave the luxury of Indian craftsmanship into the modern age. 
+            Atlas was born from a shared passion to weave the luxury of Indian craftsmanship into the modern age. 
             Every stitch carries the legacy of traditional artisans, carefully curated for the contemporary connoisseur.
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-lg text-theme-text-muted font-sans leading-relaxed mb-6 font-light">
               We believe in the power of slow fashion — clothes made with intention, worn with pride, and cherished for generations. 
-              Each Raaghas piece is created in limited quantities with hand-selected materials from across India&apos;s weaving heartlands.
+              Each Atlas piece is created in limited quantities with hand-selected materials from across India&apos;s weaving heartlands.
             </p>
             <p className="text-lg text-theme-text-muted font-sans leading-relaxed font-light">
               From the kalamkari artists of Andhra Pradesh to the block printers of Jaipur, we partner directly with artisans 
@@ -48,7 +48,7 @@ export default function AboutPage() {
           <div className="aspect-[4/5] rounded-[4rem] overflow-hidden bg-primary/10 flex items-center justify-center">
             <div className="text-center text-primary/20 p-12">
               <div className="text-9xl font-serif font-bold">R</div>
-              <div className="text-2xl font-serif mt-4 tracking-widest">RAAGHAS</div>
+              <div className="text-2xl font-serif mt-4 tracking-widest">ATLAS</div>
             </div>
           </div>
         </div>

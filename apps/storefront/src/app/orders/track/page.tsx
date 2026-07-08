@@ -76,7 +76,7 @@ export default function GuestTrackingPage() {
               <label className="text-[10px] uppercase font-bold tracking-[0.25em] text-charcoal/30">Email Credentials</label>
               <input 
                 type="email" 
-                placeholder="artisan@raaghas.com"
+                placeholder="artisan@atlas.com"
                 required
                 className="w-full bg-transparent border-b border-charcoal/10 px-0 py-4 text-sm font-medium focus:border-wine outline-none transition-colors placeholder:text-charcoal/10"
                 value={email}

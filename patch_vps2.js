@@ -1,5 +1,5 @@
 const fs = require('fs');
-const filePath = '/var/www/raaghas_new/current/apps/api/dist/src/payments/payments.service.js';
+const filePath = '/var/www/atlas_new/current/apps/api/dist/src/payments/payments.service.js';
 let code = fs.readFileSync(filePath, 'utf8');
 
 const target = \`                    checksum: \\\`\${sha256hash}###\${saltIndex}\\\`,

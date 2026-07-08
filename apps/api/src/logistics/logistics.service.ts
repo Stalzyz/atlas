@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { ShipmentStatus, ReturnStatus } from '@raaghas/database';
+import { ShipmentStatus, ReturnStatus } from '@atlas/database';
 import { ConfigService } from '@nestjs/config';
 import { ShiprocketProvider } from './providers/shiprocket.provider';
 import { DelhiveryProvider } from './providers/delhivery.provider';

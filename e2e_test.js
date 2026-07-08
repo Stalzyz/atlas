@@ -4,7 +4,7 @@ async function runTests() {
   console.log("🚀 STARTING E2E VPS PIPELINE TEST...");
   
   const BASE_URL = "http://localhost:6005/api/v1";
-  const TEST_EMAIL = "qa-master-e2e@raaghas.in";
+  const TEST_EMAIL = "qa-master-e2e@atlas.in";
 
   try {
     const pRes = await fetch(`${BASE_URL}/products?limit=5`);
@@ -19,7 +19,7 @@ async function runTests() {
     });
     if (!otpSendRes.ok) throw new Error("Failed to send OTP");
     
-    const otpQuery = `sudo -u postgres psql -d raaghas -t -c "SELECT code FROM \\"Otp\\" WHERE email='${TEST_EMAIL}' ORDER BY \\"createdAt\\" DESC LIMIT 1;"`;
+    const otpQuery = `sudo -u postgres psql -d atlas -t -c "SELECT code FROM \\"Otp\\" WHERE email='${TEST_EMAIL}' ORDER BY \\"createdAt\\" DESC LIMIT 1;"`;
     const otpCode = execSync(otpQuery).toString().trim();
     console.log(`🔑 Intercepted OTP: ${otpCode}`);
 
@@ -51,15 +51,15 @@ async function runTests() {
     const orderId = intentData.id;
     console.log(`✅ Order Created: ${orderId} (Status: ${intentData.status})`);
 
-    const orderQuery = `sudo -u postgres psql -d raaghas -t -c "SELECT status FROM \\"Order\\" WHERE id='${orderId}';"`;
+    const orderQuery = `sudo -u postgres psql -d atlas -t -c "SELECT status FROM \\"Order\\" WHERE id='${orderId}';"`;
     const orderStatus = execSync(orderQuery).toString().trim();
     console.log(`📊 Verified DB State: ${orderStatus}`);
 
     console.log("🧹 Cleaning up dummy test order...");
-    execSync(`sudo -u postgres psql -d raaghas -c "DELETE FROM \\"PaymentIntent\\" WHERE \\"orderId\\"='${orderId}';"`);
-    execSync(`sudo -u postgres psql -d raaghas -c "DELETE FROM \\"OrderItem\\" WHERE \\"orderId\\"='${orderId}';"`);
-    execSync(`sudo -u postgres psql -d raaghas -c "DELETE FROM \\"Order\\" WHERE id='${orderId}';"`);
-    execSync(`sudo -u postgres psql -d raaghas -c "DELETE FROM \\"User\\" WHERE email='${TEST_EMAIL}';"`);
+    execSync(`sudo -u postgres psql -d atlas -c "DELETE FROM \\"PaymentIntent\\" WHERE \\"orderId\\"='${orderId}';"`);
+    execSync(`sudo -u postgres psql -d atlas -c "DELETE FROM \\"OrderItem\\" WHERE \\"orderId\\"='${orderId}';"`);
+    execSync(`sudo -u postgres psql -d atlas -c "DELETE FROM \\"Order\\" WHERE id='${orderId}';"`);
+    execSync(`sudo -u postgres psql -d atlas -c "DELETE FROM \\"User\\" WHERE email='${TEST_EMAIL}';"`);
 
     console.log("\n🎉 ALL PIPELINE TESTS PASSED SUCCESSFULLY!");
   } catch (err) {

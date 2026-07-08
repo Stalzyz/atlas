@@ -43,7 +43,7 @@ describe('Shopify Migration (e2e)', () => {
               title: 'Shopify Silk Saree',
               handle: 'shopify-silk-saree',
               body_html: 'Luxury silk saree',
-              vendor: 'Raaghas',
+              vendor: 'Atlas',
               product_type: 'Silk Sarees',
               tags: 'silk, traditional',
               variants: [{

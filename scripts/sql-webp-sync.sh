@@ -1,13 +1,13 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-#  RAAGHAS: SQL-BASED WEBP SYNC — zero Node.js deps
+#  ATLAS: SQL-BASED WEBP SYNC — zero Node.js deps
 #  Run on VPS: bash /tmp/sql-webp-sync.sh
 # ═══════════════════════════════════════════════════════
 
 # Get the DATABASE_URL from the API environment
-ENV_FILE="/var/www/raaghas_new/current/apps/api/.env"
+ENV_FILE="/var/www/atlas_new/current/apps/api/.env"
 if [ ! -f "$ENV_FILE" ]; then
-  ENV_FILE="/var/www/raaghas_new/apps/api/.env"
+  ENV_FILE="/var/www/atlas_new/apps/api/.env"
 fi
 
 echo "📁 Loading env from: $ENV_FILE"

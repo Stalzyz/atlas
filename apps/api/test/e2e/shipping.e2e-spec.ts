@@ -62,7 +62,7 @@ describe('Shipping & Logistics (e2e)', () => {
       .send({
         fulfillmentId,
         courierId: 'manual',
-        trackingId: 'TRK-RAAGHAS-123',
+        trackingId: 'TRK-ATLAS-123',
         estimatedDelivery: new Date(Date.now() + 86400000 * 3).toISOString()
       });
 
@@ -70,9 +70,9 @@ describe('Shipping & Logistics (e2e)', () => {
 
     // 5. Customer Tracking
     const trackingRes = await request(server)
-      .get('/logistics/tracking/TRK-RAAGHAS-123');
+      .get('/logistics/tracking/TRK-ATLAS-123');
 
     expect(trackingRes.status).toBe(200);
-    expect(trackingRes.body.trackingId).toBe('TRK-RAAGHAS-123');
+    expect(trackingRes.body.trackingId).toBe('TRK-ATLAS-123');
   });
 });

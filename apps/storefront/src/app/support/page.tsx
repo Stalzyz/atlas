@@ -49,7 +49,7 @@ export default function SupportPage() {
         <div className="space-y-12">
            <div>
               <h1 className="text-5xl md:text-6xl font-serif text-charcoal leading-tight">Concierge & <br/> Customer Care</h1>
-              <p className="text-gray-500 mt-6 text-lg max-w-md font-sans">Experience the Raaghas commitment to luxury and excellence. Our team is here to assist with your bespoke curation.</p>
+              <p className="text-gray-500 mt-6 text-lg max-w-md font-sans">Experience the Atlas commitment to luxury and excellence. Our team is here to assist with your bespoke curation.</p>
            </div>
 
            <div className="space-y-8">
@@ -79,7 +79,7 @@ export default function SupportPage() {
                  <div>
                     <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Digital Correspondence</h4>
                     <p className="text-xl font-bold text-charcoal mt-1">General Inquiries</p>
-                    <p className="text-sm text-gray-500 mt-1">{settings?.supportEmail || 'support@raaghas.in'}</p>
+                    <p className="text-sm text-gray-500 mt-1">{settings?.supportEmail || 'support@atlas.in'}</p>
                  </div>
               </div>
 

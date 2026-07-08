@@ -1,4 +1,4 @@
-/* ─── Raaghas Storefront — Global CSS ─────────────────────────────────────
+/* ─── Atlas Storefront — Global CSS ─────────────────────────────────────
    CSS variables here are FALLBACK defaults.
    The definitive token values are dynamically injected by layout.tsx
    via the CMS theme API (light/dark objects). These :root values
@@ -8,39 +8,51 @@
 /* ─── Light Mode (Fallback defaults) ──────────────────────────────────── */
 :root {
   /* Semantic tokens — overridden by layout.tsx dynamic injection */
-  --primary:        #6D0F1B;
-  --bg:             #FDFBF7;
+  --primary:        #28104E;
+  --secondary:      #6237A0;
+  --cta:            #9754CB;
+  --accent-light:   #DEACF5;
+  --bg:             #FAFAFA;
   --surface:        #FFFFFF;
-  --text-primary:   #1A1A1A;
-  --text-secondary: #666666;
-  --border:         #EEEEEE;
-  --glass-bg:       rgba(255, 255, 255, 0.7);
-  --glass-border:   rgba(109, 15, 27, 0.1);
+  --text-primary:   #1A1A2E;
+  --text-secondary: #6B6B8A;
+  --border:         #E8E0F5;
+  --glass-bg:       rgba(222, 172, 245, 0.12);
+  --glass-border:   rgba(98, 55, 160, 0.18);
 
   /* Aliases (kept for legacy component compatibility) */
-  --wine:       #6D0F1B;
-  --wine-light: #8C1C2A;
-  --wine-dark:  #4D0A13;
+  --wine:       #28104E;
+  --wine-light: #6237A0;
+  --wine-dark:  #180930;
 
   /* Button */
-  --btn-radius: 0.5rem;
+  --btn-radius: 9999px;
+}
+
+/* ─── Selection Highlight ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(151, 84, 203, 0.3); /* Purple tint */
+  color: inherit;
 }
 
 /* ─── Dark Mode ─────────────────────────────────────────────────────────── */
 .dark {
-  --primary:        #8C1C2A;
-  --bg:             #0F0F10;
-  --surface:        #1A1A1C;
-  --text-primary:   #F5F5F5;
-  --text-secondary: #B0B0B0;
-  --border:         #2A2A2C;
-  --glass-bg:       rgba(255, 255, 255, 0.05);
-  --glass-border:   rgba(255, 255, 255, 0.1);
+  --primary:        #6237A0;
+  --secondary:      #9754CB;
+  --cta:            #DEACF5;
+  --accent-light:   #DEACF5;
+  --bg:             #0D0718;
+  --surface:        #160D2A;
+  --text-primary:   #F0EAFF;
+  --text-secondary: #B8A8D8;
+  --border:         #2E1D54;
+  --glass-bg:       rgba(98, 55, 160, 0.15);
+  --glass-border:   rgba(151, 84, 203, 0.25);
 
   /* Aliases */
-  --wine:       #8E1F2E;
-  --wine-light: #A3293B;
-  --wine-dark:  #6D0F1B;
+  --wine:       #6237A0;
+  --wine-light: #9754CB;
+  --wine-dark:  #28104E;
 }
 
 /* Force fix hardcoded colors in Dark Mode to ensure contrast */
@@ -103,11 +115,21 @@
   }
 
   body {
-    @apply bg-[var(--bg)] text-[var(--text-primary)] font-sans antialiased;
+    @apply bg-[var(--bg)] text-[var(--text-primary)] antialiased;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    @apply tracking-tight;
+    font-weight: 600;
+  }
+
+  /* Labels, tags, badge text, uppercase caps — Jost */
+  .label, .badge, .tag,
+  [class*="uppercase"][class*="tracking"],
+  .luxury-button, .secondary-button {
+    font-family: 'Jost', 'DM Sans', sans-serif;
   }
 }
 
@@ -118,12 +140,12 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(40, 16, 78, 0.08); /* Purple tinted shadow */
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card:hover {
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 48px rgba(40, 16, 78, 0.15); /* Purple tinted hover shadow */
     filter: brightness(1.05);
     transform: translateY(-6px);
   }
@@ -139,7 +161,7 @@
   .luxury-button {
     @apply relative overflow-hidden px-10 py-3.5 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold transition-all duration-500 hover:opacity-90 hover:shadow-lg active:scale-95;
     border-radius: var(--btn-radius);
-    background-color: var(--primary);
+    background: linear-gradient(135deg, var(--secondary), var(--cta));
     color: var(--surface);
   }
 
@@ -212,7 +234,7 @@
   animation: marquee 20s linear infinite;
 }
 
-/* ─── Raaghas CMS Helper Classes (rg-*) ─────────────────────────────────
+/* ─── Atlas CMS Helper Classes (rg-*) ─────────────────────────────────
    Use these classes in any custom HTML block in the CMS.
    They automatically adapt to light and dark mode.
    ────────────────────────────────────────────────────────────────────── */
@@ -282,7 +304,7 @@
 /* Buttons */
 .rg-btn {
   display: inline-block;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--secondary), var(--cta));
   color: #fff;
   font-size: 11px;
   font-weight: 700;

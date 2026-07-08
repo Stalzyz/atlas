@@ -10,14 +10,14 @@ export async function generateMetadata() {
     if (res.ok) {
       const page = await res.json();
       return {
-        title: page.metaTitle || "Terms & Conditions | Raaghas",
-        description: page.metaDescription || "Raaghas terms and conditions – read our terms of service for our luxury ethnic wear platform.",
+        title: page.metaTitle || "Terms & Conditions | Atlas",
+        description: page.metaDescription || "Atlas terms and conditions – read our terms of service for our luxury ethnic wear platform.",
       };
     }
   } catch {}
   return {
-    title: "Terms & Conditions | Raaghas",
-    description: "Raaghas terms and conditions – read our terms of service for our luxury ethnic wear platform.",
+    title: "Terms & Conditions | Atlas",
+    description: "Atlas terms and conditions – read our terms of service for our luxury ethnic wear platform.",
   };
 }
 

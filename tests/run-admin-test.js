@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  RAAGHAS ADMIN — FULL LIVE TEST (Node.js Script)
+ *  ATLAS ADMIN — FULL LIVE TEST (Node.js Script)
  *  Uses Playwright's launchPersistentContext to bypass macOS sandbox
  *
  *  Run: node tests/run-admin-test.js
@@ -12,10 +12,10 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const BASE_URL = 'https://admin.raaghas.in';
-const EMAIL    = 'admin@raaghas.in';
-const PASSWORD = 'RaaghasAdmin2024!';
-const USER_DATA_DIR = path.join(os.tmpdir(), 'raaghas-playwright-profile');
+const BASE_URL = 'https://admin.atlas.in';
+const EMAIL    = 'admin@atlas.in';
+const PASSWORD = 'AtlasAdmin2024!';
+const USER_DATA_DIR = path.join(os.tmpdir(), 'atlas-playwright-profile');
 const SCREENSHOT_DIR = path.join('test-results', 'admin-live');
 
 const PAGES = [
@@ -68,7 +68,7 @@ async function run() {
   fs.mkdirSync(USER_DATA_DIR, { recursive: true });
 
   const results = [];
-  console.log('\n💎 RAAGHAS ADMIN — FULL LIVE TEST SUITE\n');
+  console.log('\n💎 ATLAS ADMIN — FULL LIVE TEST SUITE\n');
   console.log(`📂 Screenshots: ${SCREENSHOT_DIR}`);
   console.log(`🌐 Target: ${BASE_URL}\n`);
 

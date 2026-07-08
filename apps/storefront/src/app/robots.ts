@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/account/', '/cart', '/checkout/', '/admin/', '/orders/'],
     },
-    sitemap: 'https://raaghas.in/sitemap.xml',
+    sitemap: 'https://atlas.in/sitemap.xml',
   };
 }

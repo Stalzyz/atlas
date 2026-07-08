@@ -157,8 +157,8 @@ const SECTION_PALETTE: { type: SectionType; label: string; icon: React.ReactNode
     description: "Grid of real customer styling photos",
     content: {
       headline: "Styled by Real Women",
-      subtext: "Join 10,000+ women who choose Raaghas for their daily comfort.",
-      handleText: "@raaghas.official",
+      subtext: "Join 10,000+ women who choose Atlas for their daily comfort.",
+      handleText: "@atlas.official",
       items: [
         { name: "Ananya M.", city: "Mumbai", comment: "The drape is absolutely divine." },
         { name: "Priya S.", city: "Bangalore", comment: "Most comfortable saree I own." }
@@ -239,7 +239,7 @@ const DEFAULT_CONTENT: Record<SectionType, any> = {
     settings: { animation: "fade", speed: "medium" } 
   },
   FEATURE_GRID: { 
-    content: { headline: "The Raaghas Promise", features: [{ icon: "Gem", title: "Premium Fabrics", description: "Only the finest Dupion silk & pure cotton." }, { icon: "HandMetal", title: "Hand-Crafted", description: "Every stitch placed by artisanal hands." }, { icon: "Globe", title: "Worldwide Shipping", description: "Delivered to your door, anywhere." }, { icon: "RotateCcw", title: "Easy Returns", description: "30-day no-questions-asked returns." }] }, 
+    content: { headline: "The Atlas Promise", features: [{ icon: "Gem", title: "Premium Fabrics", description: "Only the finest Dupion silk & pure cotton." }, { icon: "HandMetal", title: "Hand-Crafted", description: "Every stitch placed by artisanal hands." }, { icon: "Globe", title: "Worldwide Shipping", description: "Delivered to your door, anywhere." }, { icon: "RotateCcw", title: "Easy Returns", description: "30-day no-questions-asked returns." }] }, 
     style: { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 }, 
     settings: { animation: "fade", speed: "medium" } 
   },
@@ -288,7 +288,7 @@ const DEFAULT_CONTENT: Record<SectionType, any> = {
     settings: { animation: "fade", speed: "medium" } 
   },
   BRAND_STORY: { 
-    content: { headline: "Founded by Two Sisters", body: "Raaghas began with a shared passion.", signatureText: "— Sneha & Priya", image: "" }, 
+    content: { headline: "Founded by Two Sisters", body: "Atlas began with a shared passion.", signatureText: "— Sneha & Priya", image: "" }, 
     style: { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 }, 
     settings: { animation: "fade", speed: "medium" } 
   },
@@ -298,12 +298,12 @@ const DEFAULT_CONTENT: Record<SectionType, any> = {
     settings: { animation: "fade", speed: "medium" } 
   },
   NEWSLETTER: { 
-    content: { headline: "Join the Raaghas Family", body: "Subscribe to our newsletter." }, 
+    content: { headline: "Join the Atlas Family", body: "Subscribe to our newsletter." }, 
     style: { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 }, 
     settings: { animation: "fade", speed: "medium" } 
   },
   INSTAGRAM_FEED: { 
-    content: { headline: "Follow Our Journey", handleText: "@raaghas.official", accessToken: "", postCount: 6 }, 
+    content: { headline: "Follow Our Journey", handleText: "@atlas.official", accessToken: "", postCount: 6 }, 
     style: { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 }, 
     settings: { animation: "fade", speed: "medium" } 
   },
@@ -333,7 +333,7 @@ const DEFAULT_CONTENT: Record<SectionType, any> = {
     settings: { animation: "fade", speed: "medium" } 
   },
   SOCIAL_PROOF: { 
-    content: { headline: "Styled by Real Women", subtext: "Join 10,000+ women who choose Raaghas for their daily comfort.", handleText: "@raaghas.official", items: [{ name: "Ananya M.", city: "Mumbai", comment: "The drape is absolutely divine.", image: "" }, { name: "Priya S.", city: "Bangalore", comment: "Most comfortable saree I own.", image: "" }] }, 
+    content: { headline: "Styled by Real Women", subtext: "Join 10,000+ women who choose Atlas for their daily comfort.", handleText: "@atlas.official", items: [{ name: "Ananya M.", city: "Mumbai", comment: "The drape is absolutely divine.", image: "" }, { name: "Priya S.", city: "Bangalore", comment: "Most comfortable saree I own.", image: "" }] }, 
     style: { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 }, 
     settings: { animation: "fade", speed: "medium" } 
   },
@@ -477,20 +477,7 @@ const DEFAULT_POPUP_CONFIG = {
 export default function ThemeBuilder() {
   const defaultStyle = { textAlign: "center", backgroundColor: "#ffffff", textColor: "#2D2926", padding: 60 };
   const defaultSettings = { animation: "fade", speed: 0.5, delay: 0 };
-  const [sections, setSections] = useState<Section[]>([
-    { id: "hero", type: "HERO", order: 0, content: DEFAULT_CONTENT["HERO"].content, style: DEFAULT_CONTENT["HERO"].style, settings: DEFAULT_CONTENT["HERO"].settings },
-    { id: "categories", type: "CATEGORY_STRIP", order: 1, content: DEFAULT_CONTENT["CATEGORY_STRIP"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "best-sellers", type: "PRODUCT_GRID", order: 2, content: { ...DEFAULT_CONTENT["PRODUCT_GRID"].content, title: "Our Best Sellers", collectionHandle: "best-sellers" }, style: defaultStyle, settings: defaultSettings },
-    { id: "new-arrivals", type: "PRODUCT_GRID", order: 3, content: { ...DEFAULT_CONTENT["PRODUCT_GRID"].content, title: "Fresh Drops", collectionHandle: "new-arrivals" }, style: defaultStyle, settings: defaultSettings },
-    { id: "bundles", type: "AOV_BUNDLES", order: 4, content: DEFAULT_CONTENT["AOV_BUNDLES"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "featured", type: "FEATURED_COLLECTION", order: 5, content: DEFAULT_CONTENT["FEATURED_COLLECTION"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "social-proof", type: "SOCIAL_PROOF", order: 6, content: DEFAULT_CONTENT["SOCIAL_PROOF"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "testimonials", type: "TESTIMONIALS", order: 7, content: DEFAULT_CONTENT["TESTIMONIALS"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "value-strip", type: "TRUST_BAR", order: 8, content: DEFAULT_CONTENT["TRUST_BAR"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "recommended", type: "SMART_GRID", order: 9, content: { ...DEFAULT_CONTENT["SMART_GRID"].content, title: "Picked For You" }, style: defaultStyle, settings: defaultSettings },
-    { id: "offer", type: "DEAL_BANNER", order: 10, content: DEFAULT_CONTENT["DEAL_BANNER"].content, style: defaultStyle, settings: defaultSettings },
-    { id: "lead-capture", type: "NEWSLETTER", order: 11, content: DEFAULT_CONTENT["NEWSLETTER"].content, style: defaultStyle, settings: defaultSettings },
-  ]);
+  const [sections, setSections] = useState<Section[]>([]);
 
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const [deviceMode, setDeviceMode] = useState<"mobile" | "tablet" | "desktop">("desktop");
@@ -502,7 +489,7 @@ export default function ThemeBuilder() {
   const [activeThemeTab, setActiveThemeTab] = useState<"general" | "layout" | "footer" | "light" | "dark" | "popup">("general");
   const [isSaving, setIsSaving] = useState(false);
   const [theme, setTheme] = useState<ThemeSettings>({
-    storeName: "Raaghas",
+    storeName: "Atlas",
     logoLight: null,
     logoDark: null,
     faviconLight: null,
@@ -513,7 +500,7 @@ export default function ThemeBuilder() {
     buttonRadius: "0.5rem",
     headerCollections: [],
     // Light Defaults
-    light_primaryColor: "#701A31",
+    light_primaryColor: "#28104E",
     light_bg: "#FDFBF7",
     light_surface: "#FFFFFF",
     light_textPrimary: "#1A1A1A",
@@ -522,7 +509,7 @@ export default function ThemeBuilder() {
     light_glassBg: "rgba(255, 255, 255, 0.7)",
     light_glassBorder: "rgba(255, 255, 255, 0.3)",
     // Dark Defaults
-    dark_primaryColor: "#8C1C2A",
+    dark_primaryColor: "#28104E",
     dark_bg: "#0F0F10",
     dark_surface: "#1A1A1C",
     dark_textPrimary: "#F5F5F5",
@@ -562,7 +549,7 @@ export default function ThemeBuilder() {
         if (pagesRes.ok) {
           const data = await pagesRes.json();
           console.log("CMS: Page Data Loaded", data);
-          if (data && data.sections?.length > 0) {
+          if (data && data.sections) {
             setSections(data.sections.map((s: any) => ({
               ...s,
               content: s.content || {},
@@ -629,7 +616,7 @@ export default function ThemeBuilder() {
     let data: any = null;
 
     if (presetId?.startsWith('saved-')) {
-      const saved = JSON.parse(localStorage.getItem('raaghas_saved_sections') || '[]');
+      const saved = JSON.parse(localStorage.getItem('atlas_saved_sections') || '[]');
       data = saved.find((s: any) => `saved-${s.id}` === presetId);
     } else {
       data = presetId ? { ...DEFAULT_CONTENT[type], ...SECTION_PRESETS[presetId] } : DEFAULT_CONTENT[type];

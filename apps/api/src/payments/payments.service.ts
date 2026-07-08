@@ -8,7 +8,7 @@ import { LedgerService } from '../analytics/ledger.service';
 import { MailService } from '../mail/mail.service';
 import { LogisticsService } from '../logistics/logistics.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Prisma } from '@raaghas/database';
+import { Prisma } from '@atlas/database';
 import * as crypto from 'crypto';
 import Razorpay from 'razorpay';
 import { WebhookQueueService } from './webhook-queue.service';
@@ -335,8 +335,8 @@ export class PaymentsService implements OnModuleInit {
         }
 
         const txnId = `PP_${Date.now()}`;
-        const apiUrl = settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.raaghas.in');
-        const frontUrl = settings?.storefrontUrl || process.env.FRONTEND_URL || 'https://raaghas.in';
+        const apiUrl = settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.atlas.in');
+        const frontUrl = settings?.storefrontUrl || process.env.FRONTEND_URL || 'https://atlas.in';
 
         const ppPayload = {
           merchantId,
@@ -573,6 +573,13 @@ export class PaymentsService implements OnModuleInit {
           metaEventId: data.metaEventId,
         });
         
+        if (order.userId) {
+          this.growthService.processReferralReward(order.userId, order.id)
+            .catch(e => this.logger.error('Referral reward failed (verifyAndConfirmOrder):', e));
+          this.growthService.processLoyaltyPoints(order.userId, order.id)
+            .catch(e => this.logger.error('Loyalty points failed (verifyAndConfirmOrder):', e));
+        }
+        
         // Send email confirmation
         this.ordersService.sendOrderConfirmationEmail(order.id)
           .catch(e => this.logger.error('Failed to send order confirmation email (confirmPayment)', e));
@@ -788,7 +795,6 @@ export class PaymentsService implements OnModuleInit {
         if (order.userId) {
           this.growthService.processReferralReward(order.userId, order.id)
             .catch(e => this.logger.error('Referral reward failed:', e));
-            
           this.growthService.processLoyaltyPoints(order.userId, order.id)
             .catch(e => this.logger.error('Loyalty points processing failed:', e));
         }
@@ -946,7 +952,7 @@ export class PaymentsService implements OnModuleInit {
         originalTransactionId: paymentId,
         merchantTransactionId: refundId,
         amount: Math.round(amount * 100),
-        callbackUrl: `${settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.raaghas.in')}/api/v1/payments/phonepe-refund-callback`,
+        callbackUrl: `${settings?.apiUrl || process.env.API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:6005' : 'https://api.atlas.in')}/api/v1/payments/phonepe-refund-callback`,
       };
 
       const base64Payload = Buffer.from(JSON.stringify(ppPayload)).toString('base64');

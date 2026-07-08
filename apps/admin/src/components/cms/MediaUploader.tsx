@@ -33,7 +33,7 @@ export function MediaUploader({ value, onChange, label = "Section Image" }: Medi
   const [recentUploads, setRecentUploads] = useState<string[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("raaghas_media_recent");
+    const saved = localStorage.getItem("atlas_media_recent");
     if (saved) setRecentUploads(JSON.parse(saved));
   }, []);
 
@@ -63,7 +63,7 @@ export function MediaUploader({ value, onChange, label = "Section Image" }: Medi
   const saveRecent = (url: string) => {
     const next = [url, ...recentUploads.filter(u => u !== url)].slice(0, 10);
     setRecentUploads(next);
-    localStorage.setItem("raaghas_media_recent", JSON.stringify(next));
+    localStorage.setItem("atlas_media_recent", JSON.stringify(next));
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

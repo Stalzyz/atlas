@@ -1,6 +1,6 @@
 # Implementation Plan: Shipping and Tracking Integration
 
-This document outlines the integration of **Shiprocket** and **Delhivery** APIs for automated shipping and real-time tracking in the Raaghas platform.
+This document outlines the integration of **Shiprocket** and **Delhivery** APIs for automated shipping and real-time tracking in the Atlas platform.
 
 ## 1. Objectives
 - Automate shipment creation when an order is confirmed.

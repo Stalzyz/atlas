@@ -37,7 +37,7 @@ export default function PublicTrackingPage() {
   if (loading) return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
       <Loader2 className="animate-spin text-wine" size={40} />
-      <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-gray-400">Locating your Raaghas shipment...</p>
+      <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-gray-400">Locating your Atlas shipment...</p>
     </div>
   );
 
@@ -81,7 +81,7 @@ export default function PublicTrackingPage() {
              <div className="absolute left-[15px] top-4 bottom-4 w-px bg-charcoal/10" />
 
              {(shipment.history || [
-               { status: 'CONFIRMED', message: 'The artisan order has been verified and is ready for creation.', timestamp: shipment.order.createdAt, location: 'Raaghas Studio' },
+               { status: 'CONFIRMED', message: 'The artisan order has been verified and is ready for creation.', timestamp: shipment.order.createdAt, location: 'Atlas Studio' },
                { status: 'PACKED', message: 'Your items have been carefully packaged in our signature luxury box.', timestamp: shipment.shippedAt || new Date(), location: 'Distribution Hub' },
                { status: 'SHIPPED', message: 'Package has been handed over to our premium logistics partner.', timestamp: shipment.shippedAt, location: 'Transit Point' },
              ]).map((event: any, i: number) => (
@@ -137,7 +137,7 @@ export default function PublicTrackingPage() {
         <div className="bg-charcoal text-ivory rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
            <div className="space-y-2 text-center md:text-left">
               <h3 className="text-lg font-serif">Need assistance with your delivery?</h3>
-              <p className="text-xs text-ivory/60 uppercase font-bold tracking-widest">Our Raaghas Concierge is here to help.</p>
+              <p className="text-xs text-ivory/60 uppercase font-bold tracking-widest">Our Atlas Concierge is here to help.</p>
            </div>
            <button className="bg-wine text-white px-8 py-4 rounded-xl text-[10px] uppercase font-bold tracking-widest shadow-xl whitespace-nowrap">
               Contact Support

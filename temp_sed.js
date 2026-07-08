@@ -1,5 +1,5 @@
 const fs = require('fs');
-const file = '/Users/stalinkumar/Documents/Raaghas_website/apps/api/src/mail/mail.service.ts';
+const file = '/Users/stalinkumar/Documents/Atlas_website/apps/api/src/mail/mail.service.ts';
 let content = fs.readFileSync(file, 'utf8');
 
 content = content.replace(
@@ -7,7 +7,7 @@ content = content.replace(
   \`async sendAbandonedCartEmail(to: string, buyerName: string, orderId: string, checkoutUrl: string) {
     const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'CART_ABANDONED_REMINDER' } });
     
-    let subject = \\\`You left something behind in your atelier... | Raaghas\\\`;
+    let subject = \\\`You left something behind in your atelier... | Atlas\\\`;
     let html = \\\`
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Pending Curation</p>

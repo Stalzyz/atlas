@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║  RAAGHAS PRODUCTION LOAD SIMULATOR                          ║
+ * ║  ATLAS PRODUCTION LOAD SIMULATOR                          ║
  * ║  Simulates real checkout flows with concurrent users        ║
  * ║  Tests: inventory locking, idempotency, payment failures    ║
  * ╚══════════════════════════════════════════════════════════════╝
@@ -13,7 +13,7 @@
  *   node load-test.js --scenario double-click
  *   node load-test.js --scenario full-pipeline
  *
- * Run on VPS: node /var/www/raaghas_new/scripts/load-test.js
+ * Run on VPS: node /var/www/atlas_new/scripts/load-test.js
  */
 
 'use strict';
@@ -327,7 +327,7 @@ const scenarios = {
 
 async function main() {
   console.log('╔══════════════════════════════════════════════════════════════╗');
-  console.log('║  RAAGHAS PRODUCTION LOAD SIMULATOR                          ║');
+  console.log('║  ATLAS PRODUCTION LOAD SIMULATOR                          ║');
   console.log('╚══════════════════════════════════════════════════════════════╝');
   console.log(`  API:       ${API_BASE}`);
   console.log(`  Scenario:  ${SCENARIO}`);

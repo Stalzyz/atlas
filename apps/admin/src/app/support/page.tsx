@@ -191,7 +191,7 @@ export default function SupportDashboard() {
                        <p className="text-xs text-green-600 mt-1">Directly start a WhatsApp conversation with {selectedTicket.name.split(' ')[0]}.</p>
                     </div>
                     <a 
-                      href={`https://wa.me/91${selectedTicket.phone?.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${selectedTicket.name}, this is Raaghas Support. We received your inquiry about "${selectedTicket.subject}". How can we help?`)}`}
+                      href={`https://wa.me/91${selectedTicket.phone?.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${selectedTicket.name}, this is Atlas Support. We received your inquiry about "${selectedTicket.subject}". How can we help?`)}`}
                       target="_blank"
                       className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-green-700 transition-all shadow-md active:scale-95"
                     >

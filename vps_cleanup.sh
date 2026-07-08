@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# --- Raaghas VPS Deep Clean Script ---
+# --- Atlas VPS Deep Clean Script ---
 echo "🚀 Starting VPS Deep Clean..."
 
 # 1. Clear Deployment Garbage

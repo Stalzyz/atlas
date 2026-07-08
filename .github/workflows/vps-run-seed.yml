@@ -19,5 +19,5 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cd /var/www/raaghas_new/current/apps/api
+            cd /var/www/atlas_new/current/apps/api
             npx ts-node scripts/seed_dummy_data.ts

@@ -29,7 +29,7 @@ describe('CMS (e2e)', () => {
       .send({
         page: {
           handle: 'home',
-          title: 'Raaghas Home',
+          title: 'Atlas Home',
           sections: [
             { type: 'HERO', order: 0, content: { heading: 'Welcome' } }
           ]

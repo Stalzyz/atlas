@@ -10,8 +10,8 @@ const nextConfig = {
   },
   images: {
     // Use unoptimized to bypass Next.js image proxy — images are served directly
-    // from the public API domain (api.raaghas.in). This avoids "private IP" errors
-    // when Next.js tries to proxy localhost:6005 images through itself.
+    // from the public API domain (api.atlas.in). This avoids "private IP" errors
+    // when Next.js tries to proxy process.env.NEXT_PUBLIC_APP_URL:6005 images through itself.
     unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "**" },

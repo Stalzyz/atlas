@@ -1,12 +1,12 @@
 /**
- * Authenticated API client for Raaghas Admin.
+ * Authenticated API client for Atlas Admin.
  *
  * The AuthGuard accepts BOTH:
  *   1. Authorization: Bearer <token>  (in-memory JWT)
  *   2. Cookie: admin_token=<token>    (HttpOnly cookie, set on login)
  *
  * Using `credentials: 'include'` ensures the browser sends the admin_token cookie
- * on all cross-origin requests to api.raaghas.in, even if the in-memory token is null.
+ * on all cross-origin requests to api.atlas.in, even if the in-memory token is null.
  */
 
 export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6005').replace(/\/$/, '');

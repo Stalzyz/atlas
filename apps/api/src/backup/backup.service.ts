@@ -114,11 +114,11 @@ export class BackupService {
   private async sendFailureAlert(type: string, reason: string) {
     try {
       const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
-      const adminEmail = settings?.supportEmail || process.env.ADMIN_EMAIL || 'admin@raaghas.in';
+      const adminEmail = settings?.supportEmail || process.env.ADMIN_EMAIL || 'admin@atlas.in';
 
       await this.mail.sendCustomEmail(
         adminEmail,
-        `[ALERT] Raaghas ${type.toUpperCase()} Backup Failed`,
+        `[ALERT] Atlas ${type.toUpperCase()} Backup Failed`,
         `
           <div style="text-align:center;">
             <h2 style="color:#c0392b;">Backup Failure Alert</h2>

@@ -17,4 +17,4 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cat /var/www/raaghas_new/shared/.env | grep DATABASE_URL
+            cat /var/www/atlas_new/shared/.env | grep DATABASE_URL

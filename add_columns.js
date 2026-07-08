@@ -1,8 +1,8 @@
-const { PrismaClient } = require('@raaghas/database');
+const { PrismaClient } = require('@atlas/database');
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: "postgresql://postgres:postgres@localhost:5432/raaghas"
+      url: "postgresql://postgres:postgres@localhost:5432/atlas"
     }
   }
 });

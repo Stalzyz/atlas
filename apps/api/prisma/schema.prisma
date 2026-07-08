@@ -269,7 +269,7 @@ model Section {
 
 model ThemeSettings {
   id               String   @id @default("global")
-  storeName        String   @default("Raaghas")
+  storeName        String   @default("Atlas")
   updatedAt        DateTime @updatedAt
   config           Json?
   buttonRadius     String   @default("0.5rem")
@@ -280,7 +280,7 @@ model ThemeSettings {
   fontHeading      String   @default("serif")
   logoDark         String?
   logoLight        String?
-  primaryColor     String   @default("#701A31")
+  primaryColor     String   @default("#28104E")
   secondaryColor   String   @default("#F4F1ED")
   customFooterHtml String?
   customGlobalCss  String?
@@ -420,7 +420,7 @@ model DiscountUsage {
 
 model StoreSettings {
   id                        String   @id @default("global")
-  storeName                 String   @default("Raaghas")
+  storeName                 String   @default("Atlas")
   logoUrl                   String?
   supportEmail              String?
   supportPhone              String?

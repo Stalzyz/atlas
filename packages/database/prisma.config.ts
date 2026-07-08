@@ -4,8 +4,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 let envPath = '';
-if (fs.existsSync('/var/www/raaghas_new/shared/.env')) {
-  envPath = '/var/www/raaghas_new/shared/.env';
+if (fs.existsSync('/var/www/atlas_new/shared/.env')) {
+  envPath = '/var/www/atlas_new/shared/.env';
 } else {
   envPath = path.resolve(__dirname, '../../.env');
 }

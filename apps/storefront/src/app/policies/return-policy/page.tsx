@@ -10,14 +10,14 @@ export async function generateMetadata() {
     if (res.ok) {
       const page = await res.json();
       return {
-        title: page.metaTitle || "Return & Refund Policy | Raaghas",
-        description: page.metaDescription || "Raaghas return and refund policy – learn about our hassle-free return process for luxury ethnic wear.",
+        title: page.metaTitle || "Return & Refund Policy | Atlas",
+        description: page.metaDescription || "Atlas return and refund policy – learn about our hassle-free return process for luxury ethnic wear.",
       };
     }
   } catch {}
   return {
-    title: "Return & Refund Policy | Raaghas",
-    description: "Raaghas return and refund policy – learn about our hassle-free return process for luxury ethnic wear.",
+    title: "Return & Refund Policy | Atlas",
+    description: "Atlas return and refund policy – learn about our hassle-free return process for luxury ethnic wear.",
   };
 }
 

@@ -18,7 +18,7 @@ export class AuthController {
       secure: isProd,
       sameSite: isProd ? 'none' : 'lax',
       path: '/',
-      domain: isProd ? '.raaghas.in' : undefined,
+      domain: isProd ? '.atlas.in' : undefined,
       maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
     });
   }
@@ -87,7 +87,7 @@ export class AuthController {
       secure: isProd,
       sameSite: isProd ? 'none' : 'lax',
       path: '/',
-      domain: isProd ? '.raaghas.in' : undefined,
+      domain: isProd ? '.atlas.in' : undefined,
       expires: new Date(0) // Expire immediately
     });
     return { success: true };

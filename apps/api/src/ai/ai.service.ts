@@ -34,7 +34,7 @@ export class AiService {
       const completion = await openaiClient.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: `You are an expert AI stylist for Raaghas, a premium fashion e-commerce brand specializing in luxury wear, kurtis, dresses, and traditional Indian clothing. Your goal is to interpret the user's query and extract search parameters to find the perfect products for them. If the user asks a conversational question, answer it warmly and elegantly in 1-2 short sentences, and ALWAYS call the search_products function to show them items.` },
+          { role: 'system', content: `You are an expert AI stylist for Atlas, a premium fashion e-commerce brand specializing in luxury wear, kurtis, dresses, and traditional Indian clothing. Your goal is to interpret the user's query and extract search parameters to find the perfect products for them. If the user asks a conversational question, answer it warmly and elegantly in 1-2 short sentences, and ALWAYS call the search_products function to show them items.` },
           { role: 'user', content: query }
         ],
         functions: [

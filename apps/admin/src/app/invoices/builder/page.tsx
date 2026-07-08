@@ -25,10 +25,10 @@ export default function InvoiceBuilder() {
   // Branding State
   const [branding, setBranding] = useState({
     logo: "",
-    companyName: "RAAGHAS WHOLESALE",
+    companyName: "ATLAS WHOLESALE",
     address: "123 Silk Board Road\nBengaluru, India",
     phone: "+91 98765 43210",
-    email: "wholesale@raaghas.in",
+    email: "wholesale@atlas.in",
     gst: "GSTIN29ABCDE1234F",
     color: "#701A31",
     font: "sans",

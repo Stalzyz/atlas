@@ -1,25 +1,25 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — MASTER DEPLOYMENT SCRIPT v9.0 (rsync — no more timeouts)
+#  ATLAS — MASTER DEPLOYMENT SCRIPT v9.0 (rsync — no more timeouts)
 #  Uses rsync to only transfer CHANGED files — skips node_modules entirely.
 #  Remote runs npm install + prisma + pm2 restart on the VPS side.
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-REMOTE_DIR="/var/www/raaghas_new"
+REMOTE_DIR="/var/www/atlas_new"
 SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=30"
 
-echo "💎 RAAGHAS MASTER DEPLOYMENT v9.0 (rsync mode)"
+echo "💎 ATLAS MASTER DEPLOYMENT v9.0 (rsync mode)"
 echo "════════════════════════════════════════════════"
 
 # ── 1. LOCAL BUILD ─────────────────────────────────────────────────────────────
 echo "🏗️  Building locally..."
-npm install --legacy-peer-deps --quiet
-# ⚠️  CRITICAL: Only build the 3 app packages — NEVER include @raaghas/database
+# npm install --legacy-peer-deps --quiet
+# ⚠️  CRITICAL: Only build the 3 app packages — NEVER include @atlas/database
 # The database package is a library (Prisma client wrapper), not a runnable service.
 # Passing --force without --filter causes npm to propagate start:prod to ALL workspaces.
-npx turbo build --filter=raaghas-api --filter=admin --filter=storefront
+npx turbo build --filter=atlas-api --filter=admin --filter=storefront
 echo "✅ Local build complete"
 
 # ── 2. RSYNC (only changed files, no node_modules, no .git, no cache) ─────────
@@ -53,7 +53,7 @@ echo ""
 echo "🛠️  Running remote activation..."
 ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
   set -euo pipefail
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
 
   # ── Sync production .env (single source of truth) ────────────────────────────
   cp apps/api/.env.production apps/api/.env
@@ -82,16 +82,16 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
 
   # ── Ensure shared uploads symlink is intact ───────────────────────────────────
   echo "📁 Verifying shared uploads directory..."
-  mkdir -p /var/www/raaghas_new/shared/uploads
-  chmod -R 775 /var/www/raaghas_new/shared/uploads
-  chown -R root:www-data /var/www/raaghas_new/shared/uploads
+  mkdir -p /var/www/atlas_new/shared/uploads
+  chmod -R 775 /var/www/atlas_new/shared/uploads
+  chown -R root:www-data /var/www/atlas_new/shared/uploads
 
   # Re-create the symlink inside each app's dist if it was overwritten by rsync
   for app_dir in apps/api apps/storefront apps/admin; do
     if [ -d "$app_dir" ] && [ ! -L "$app_dir/uploads" ]; then
       echo "  🔗 Re-linking uploads for $app_dir..."
       rm -rf "$app_dir/uploads"
-      ln -sfn /var/www/raaghas_new/shared/uploads "$app_dir/uploads"
+      ln -sfn /var/www/atlas_new/shared/uploads "$app_dir/uploads"
     fi
   done
   echo "✅ Uploads directory verified"
@@ -117,24 +117,24 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
   echo "🚀 Reloading PM2 services for zero downtime..."
   
   # API
-  if pm2 describe raaghas-api > /dev/null 2>&1; then
-    NODE_ENV=production PORT=6005 pm2 reload raaghas-api --update-env
+  if pm2 describe atlas-api > /dev/null 2>&1; then
+    NODE_ENV=production PORT=6005 pm2 reload atlas-api --update-env
   else
-    NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api --node-args="--max-old-space-size=512"
+    NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api --node-args="--max-old-space-size=512"
   fi
 
   # Admin
-  if pm2 describe raaghas-admin > /dev/null 2>&1; then
-    NODE_ENV=production PORT=6010 pm2 reload raaghas-admin --update-env
+  if pm2 describe atlas-admin > /dev/null 2>&1; then
+    NODE_ENV=production PORT=6010 pm2 reload atlas-admin --update-env
   else
-    NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin --node-args="--max-old-space-size=512"
+    NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin --node-args="--max-old-space-size=512"
   fi
 
   # Storefront
-  if pm2 describe raaghas-storefront > /dev/null 2>&1; then
-    NODE_ENV=production PORT=6009 pm2 reload raaghas-storefront --update-env
+  if pm2 describe atlas-storefront > /dev/null 2>&1; then
+    NODE_ENV=production PORT=6009 pm2 reload atlas-storefront --update-env
   else
-    NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront --node-args="--max-old-space-size=512"
+    NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront --node-args="--max-old-space-size=512"
   fi
 
   pm2 save
@@ -143,23 +143,23 @@ ssh $SSH_OPTS root@$VPS_IP << 'REMOTE_SCRIPT'
 
   # ── Deploy Nginx config ───────────────────────────────────────────────────────
   echo "🌐 Deploying Nginx configuration..."
-  cp /var/www/raaghas_new/raaghas_nginx.conf /etc/nginx/sites-available/raaghas
+  cp /var/www/atlas_new/atlas_nginx.conf /etc/nginx/sites-available/atlas
   # Remove stale duplicate symlinks that cause limit_req_zone conflicts
-  rm -f /etc/nginx/sites-enabled/raaghas.conf /etc/nginx/sites-enabled/admin.raaghas.in
-  ln -sf /etc/nginx/sites-available/raaghas /etc/nginx/sites-enabled/raaghas
+  rm -f /etc/nginx/sites-enabled/atlas.conf /etc/nginx/sites-enabled/admin.atlas.in
+  ln -sf /etc/nginx/sites-available/atlas /etc/nginx/sites-enabled/atlas
   nginx -t && systemctl reload nginx && echo "✅ Nginx reloaded" || echo "⚠️  Nginx reload failed — check: nginx -t"
 
   # ── Health check ─────────────────────────────────────────────────────────────
   echo "🔍 Health check in 5 seconds..."
   sleep 5
   nginx -t
-  curl -sf http://localhost:6005/api/v1/health && echo "✅ API HEALTHY" || echo "❌ API HEALTH CHECK FAILED — check: pm2 logs raaghas-api --lines 30"
+  curl -sf http://localhost:6005/api/v1/health && echo "✅ API HEALTHY" || echo "❌ API HEALTH CHECK FAILED — check: pm2 logs atlas-api --lines 30"
 
   echo ""
   echo "🏁 ═══════════════════════════════════════════════════════"
   echo "   DEPLOYMENT COMPLETE"
-  echo "   Storefront : https://raaghas.in"
-  echo "   Admin      : https://admin.raaghas.in"
-  echo "   API Health : https://api.raaghas.in/api/v1/health"
+  echo "   Storefront : https://atlas.in"
+  echo "   Admin      : https://admin.atlas.in"
+  echo "   API Health : https://api.atlas.in/api/v1/health"
   echo "═══════════════════════════════════════════════════════════"
 REMOTE_SCRIPT

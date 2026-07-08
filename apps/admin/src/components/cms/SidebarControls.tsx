@@ -54,7 +54,7 @@ export function SidebarControls({
   const getSavedTemplates = () => {
     if (typeof window === 'undefined') return [];
     try {
-      const data = localStorage.getItem('raaghas_saved_sections');
+      const data = localStorage.getItem('atlas_saved_sections');
       if (!data) return [];
       const parsed = JSON.parse(data);
       return Array.isArray(parsed) ? parsed : [];
@@ -69,7 +69,7 @@ export function SidebarControls({
   const deleteSavedTemplate = (tplId: string) => {
     const updated = savedTemplates.filter((t: any) => t.id !== tplId);
     setSavedTemplates(updated);
-    localStorage.setItem('raaghas_saved_sections', JSON.stringify(updated));
+    localStorage.setItem('atlas_saved_sections', JSON.stringify(updated));
   };
 
   return (
@@ -301,7 +301,7 @@ export function SidebarControls({
             <div className="p-4 border-t border-gray-100 bg-gray-50 flex gap-2">
                <button 
                   onClick={() => {
-                    const saved = JSON.parse(localStorage.getItem('raaghas_saved_sections') || '[]');
+                    const saved = JSON.parse(localStorage.getItem('atlas_saved_sections') || '[]');
                     const tpl = {
                       id: Math.random().toString(36).substring(7),
                       name: `${activeSection.type} Template`,
@@ -310,7 +310,7 @@ export function SidebarControls({
                       style: activeSection.style,
                       settings: activeSection.settings
                     };
-                    localStorage.setItem('raaghas_saved_sections', JSON.stringify([...saved, tpl]));
+                    localStorage.setItem('atlas_saved_sections', JSON.stringify([...saved, tpl]));
                     alert('Template saved to library!');
                   }}
                   className="flex-1 py-3 border border-wine/20 text-wine bg-wine/5 hover:bg-wine text-white transition-all text-[10px] font-bold uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 group hover:text-white"
@@ -1717,10 +1717,10 @@ function EditorContent({ section, activeTab, onUpdate }: { section: Section; act
 
 // ─── ChatGPT Prompt + Guide for Custom HTML blocks ───────────────────────────
 
-const CHATGPT_PROMPT = `CONTEXT — Raaghas Website Design System
+const CHATGPT_PROMPT = `CONTEXT — Atlas Website Design System
 =================================================
 
-I am creating custom HTML content blocks for the Raaghas website.
+I am creating custom HTML content blocks for the Atlas website.
 The site supports light and dark mode. You MUST use the CSS classes and rules below
 so that all content automatically adapts to both themes. NEVER use hardcoded
 colors like #ffffff, white, black, #1a1a1a, or Tailwind utility classes.

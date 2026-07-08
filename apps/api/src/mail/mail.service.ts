@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class MailService {
   private readonly logger = new Logger(MailService.name);
   private readonly apiKey = process.env.RESEND_API_KEY;
-  private readonly fromEmail = process.env.EMAIL_FROM || 'noreply@raaghas.in';
+  private readonly fromEmail = process.env.EMAIL_FROM || 'noreply@atlas.in';
   private readonly CC_EMAIL = 'raaghaclothing@gmail.com';
 
   constructor(private prisma: PrismaService) {}
@@ -22,10 +22,10 @@ export class MailService {
     if (content.includes('<!DOCTYPE html>')) return content;
     
     const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
-    const storeName = settings?.storeName || 'Raaghas Pvt Ltd';
+    const storeName = settings?.storeName || 'Atlas Pvt Ltd';
     const address = settings?.businessAddress || 'Salem, India';
-    const supportEmail = settings?.supportEmail || 'care@raaghas.in';
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in';
+    const supportEmail = settings?.supportEmail || 'care@atlas.in';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in';
     const logoUrl = settings?.logoUrl || `${appUrl}/logo-dark.svg`;
 
     return `<!DOCTYPE html>
@@ -99,7 +99,7 @@ export class MailService {
   async sendInvoiceEmail(to: string, buyerName: string, invoiceNumber: string, amount: number) {
     const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'INVOICE' } });
 
-    let subject = `Invoice ${invoiceNumber} | Raaghas`;
+    let subject = `Invoice ${invoiceNumber} | Atlas`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Formal Invoice</p>
@@ -112,7 +112,7 @@ export class MailService {
               <h2 style="margin: 15px 0 0; font-size: 36px;">₹${amount.toLocaleString()}</h2>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Dashboard</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Dashboard</a>
           </div>
     `;
 
@@ -129,7 +129,7 @@ export class MailService {
       if (transporter) {
         this.logger.log(`Sending invoice email via SMTP to ${to}`);
         await transporter.sendMail({
-          from: `"Raaghas Wholesale" <${this.fromEmail}>`,
+          from: `"Atlas Wholesale" <${this.fromEmail}>`,
           to,
           
           subject,
@@ -151,7 +151,7 @@ export class MailService {
           Authorization: `Bearer ${this.apiKey}`,
         },
         body: JSON.stringify({
-          from: `Raaghas Wholesale <${this.fromEmail}>`,
+          from: `Atlas Wholesale <${this.fromEmail}>`,
           to: [to],
           
           subject,
@@ -190,7 +190,7 @@ export class MailService {
 
     const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'ORDER_PLACED' } });
 
-    let subject = `Order Confirmed: #${orderId.slice(-6).toUpperCase()} | Raaghas`;
+    let subject = `Order Confirmed: #${orderId.slice(-6).toUpperCase()} | Atlas`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Order Confirmation</p>
@@ -218,7 +218,7 @@ export class MailService {
             </table>
 
             <div style="margin-top: 60px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">Track Order</a>
+              <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">Track Order</a>
             </div>
           </div>
     `;
@@ -237,7 +237,7 @@ export class MailService {
         this.logger.log(`Sending order confirmation email via SMTP to ${to}`);
         await Promise.race([
           transporter.sendMail({
-            from: `"Raaghas" <${this.fromEmail}>`,
+            from: `"Atlas" <${this.fromEmail}>`,
             to,
             cc: this.CC_EMAIL,
             subject,
@@ -264,7 +264,7 @@ export class MailService {
             Authorization: `Bearer ${this.apiKey}`,
           },
           body: JSON.stringify({
-            from: `Raaghas <${this.fromEmail}>`,
+            from: `Atlas <${this.fromEmail}>`,
             to: [to],
             cc: [this.CC_EMAIL],
             subject,
@@ -290,7 +290,7 @@ export class MailService {
   }
 
   async sendOtpEmail(to: string, code: string) {
-    const subject = `${code} is your Raaghas access code`;
+    const subject = `${code} is your Atlas access code`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Client Authentication</p>
@@ -317,7 +317,7 @@ export class MailService {
         // Wrap SMTP in a timeout race
         await Promise.race([
           transporter.sendMail({
-            from: `"Raaghas" <${this.fromEmail}>`,
+            from: `"Atlas" <${this.fromEmail}>`,
             to,
             subject,
             html,
@@ -340,7 +340,7 @@ export class MailService {
           'Authorization': `Bearer ${this.apiKey}`,
         },
         body: JSON.stringify({
-          from: `Raaghas <${this.fromEmail}>`,
+          from: `Atlas <${this.fromEmail}>`,
           to: [to],
           subject,
           html,
@@ -363,14 +363,14 @@ export class MailService {
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
-    const resetUrl = `https://admin.raaghas.in/reset-password?token=${token}`;
-    const subject = `Reset your Raaghas Admin Password`;
+    const resetUrl = `https://admin.atlas.in/reset-password?token=${token}`;
+    const subject = `Reset your Atlas Admin Password`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Admin Security</p>
             <h1 style="font-size: 28px; margin: 0 0 30px 0;">Password Reset</h1>
             
-            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">A request has been made to reset your Raaghas Administrator password. If you initiated this, please proceed below.</p>
+            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">A request has been made to reset your Atlas Administrator password. If you initiated this, please proceed below.</p>
             
             <a href="${resetUrl}" class="button-premium">Set New Password</a>
             
@@ -387,7 +387,7 @@ export class MailService {
       if (transporter) {
         await Promise.race([
           transporter.sendMail({
-            from: `"Raaghas Admin" <${this.fromEmail}>`,
+            from: `"Atlas Admin" <${this.fromEmail}>`,
             to,
             subject,
             html,
@@ -405,7 +405,7 @@ export class MailService {
             'Authorization': `Bearer ${this.apiKey}`,
           },
           body: JSON.stringify({
-            from: `Raaghas Admin <${this.fromEmail}>`,
+            from: `Atlas Admin <${this.fromEmail}>`,
             to: [to],
             subject,
             html,
@@ -430,7 +430,7 @@ export class MailService {
     try {
       if (transporter) {
         await transporter.sendMail({
-          from: `"Raaghas" <${this.fromEmail}>`,
+          from: `"Atlas" <${this.fromEmail}>`,
           to,
           
           subject,
@@ -447,7 +447,7 @@ export class MailService {
             'Authorization': `Bearer ${this.apiKey}`,
           },
           body: JSON.stringify({
-            from: `Raaghas <${this.fromEmail}>`,
+            from: `Atlas <${this.fromEmail}>`,
             to: [to],
             
             subject,
@@ -465,7 +465,7 @@ export class MailService {
   }
 
   async sendTrackingEmail(to: string, buyerName: string, orderId: string, trackingId: string, carrierName: string) {
-    const subject = `Your Raaghas order #${orderId.slice(-6).toUpperCase()} has shipped!`;
+    const subject = `Your Atlas order #${orderId.slice(-6).toUpperCase()} has shipped!`;
     const html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Dispatch Notice</p>
@@ -481,7 +481,7 @@ export class MailService {
               <p style="margin: 0; font-size: 18px; color: #111111; font-family: monospace; letter-spacing: 2px;">${trackingId}</p>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">Track Shipment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">Track Shipment</a>
           </div>
     `;
     return this.sendCustomEmail(to, subject, html);
@@ -495,7 +495,7 @@ export class MailService {
     try {
       if (transporter) {
         await transporter.sendMail({
-          from: `"Raaghas" <${from}>`,
+          from: `"Atlas" <${from}>`,
           to,
           
           subject,
@@ -531,7 +531,7 @@ export class MailService {
     try {
       if (transporter) {
         await transporter.sendMail({
-          from: `"Raaghas Accounts" <${this.fromEmail}>`,
+          from: `"Atlas Accounts" <${this.fromEmail}>`,
           to,
           
           subject,
@@ -566,7 +566,7 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Rest assured, your selections have been reserved. Please retry your payment to complete the acquisition.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/checkout" class="button-premium">Retry Payment</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/checkout" class="button-premium">Retry Payment</a>
           </div>
     `;
 
@@ -583,7 +583,7 @@ export class MailService {
       if (transporter) {
         this.logger.log(`Sending failed payment email via SMTP to ${to}`);
         await transporter.sendMail({
-          from: `"Raaghas" <${this.fromEmail}>`,
+          from: `"Atlas" <${this.fromEmail}>`,
           to,
           
           subject,
@@ -601,7 +601,7 @@ export class MailService {
             Authorization: `Bearer ${this.apiKey}`,
           },
           body: JSON.stringify({
-            from: `Raaghas <${this.fromEmail}>`,
+            from: `Atlas <${this.fromEmail}>`,
             to: [to],
             
             subject,
@@ -630,7 +630,7 @@ export class MailService {
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Referral Alert</p>
             <h1 style="font-size: 32px; margin: 0 0 30px 0;">Reward Unlocked</h1>
             
-            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">Dear ${userName},<br/><br/>Someone just used your referral code. As a token of our appreciation, we have credited a reward to your Raaghas Wallet.</p>
+            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">Dear ${userName},<br/><br/>Someone just used your referral code. As a token of our appreciation, we have credited a reward to your Atlas Wallet.</p>
             
             <div style="border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; padding: 40px 0; margin: 50px 0;">
               <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #888888;">Reward Amount</p>
@@ -639,7 +639,7 @@ export class MailService {
             
             <p style="font-size: 11px; color: #888888; font-style: italic; margin-bottom: 40px;">You can use this balance towards your next luxury acquisition.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Wallet</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Wallet</a>
           </div>
     `;
 
@@ -656,20 +656,20 @@ export class MailService {
   async sendWalletAlertEmail(to: string, userName: string, amount: number, isCredit: boolean, reason: string) {
     const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'WALLET_ALERT' } });
 
-    let subject = `Raaghas Wallet Update: ₹${amount.toLocaleString('en-IN')} ${isCredit ? 'Credited' : 'Debited'}`;
+    let subject = `Atlas Wallet Update: ₹${amount.toLocaleString('en-IN')} ${isCredit ? 'Credited' : 'Debited'}`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Wallet Update</p>
             <h1 style="font-size: 32px; margin: 0 0 30px 0;">Balance ${isCredit ? 'Added' : 'Deducted'}</h1>
             
-            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">Dear ${userName},<br/><br/>Your Raaghas Wallet balance has been updated for: <strong>${reason}</strong>.</p>
+            <p style="font-size: 13px; font-weight: 300; margin-bottom: 40px;">Dear ${userName},<br/><br/>Your Atlas Wallet balance has been updated for: <strong>${reason}</strong>.</p>
             
             <div style="border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; padding: 40px 0; margin: 50px 0;">
               <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #888888;">Transaction Amount</p>
               <h2 style="margin: 15px 0 0; font-size: 36px;">${isCredit ? '+' : '-'}₹${amount.toLocaleString('en-IN')}</h2>
             </div>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Ledger</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Ledger</a>
           </div>
     `;
 
@@ -686,7 +686,7 @@ export class MailService {
   async sendAbandonedCartEmail(to: string, buyerName: string, orderId: string, checkoutUrl: string) {
     const dbTemplate = await (this.prisma as any).emailTemplate.findUnique({ where: { type: 'CART_ABANDONED_REMINDER' } });
 
-    let subject = `You left something behind in your atelier... | Raaghas`;
+    let subject = `You left something behind in your atelier... | Atlas`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Pending Curation</p>
@@ -704,7 +704,7 @@ export class MailService {
       html = this.compileTemplate(dbTemplate.body, vars);
       
       // Also inject the checkoutUrl properly since the default template uses /cart
-      html = html.replace(`href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/cart"`, `href="${checkoutUrl}"`);
+      html = html.replace(`href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/cart"`, `href="${checkoutUrl}"`);
     }
 
     html = await this.wrapEmailHtml(html);
@@ -712,7 +712,7 @@ export class MailService {
   }
 
   async sendRefundInitiatedEmail(to: string, customerName: string, orderId: string, refundAmount: number) {
-    const subject = `Refund Initiated: Order #${orderId.slice(-6).toUpperCase()} | Raaghas`;
+    const subject = `Refund Initiated: Order #${orderId.slice(-6).toUpperCase()} | Atlas`;
     let html = `
           <div style="text-align: center;">
             <p style="font-size: 10px; letter-spacing: 3px; color: #888888; text-transform: uppercase; margin-bottom: 15px;">Refund Notice</p>
@@ -727,7 +727,7 @@ export class MailService {
             
             <p style="font-size: 12px; color: #888888; font-style: italic; margin-bottom: 40px;">Please allow 5-7 business days for the amount to reflect in your original payment method.</p>
             
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/account" class="button-premium">View Account</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/account" class="button-premium">View Account</a>
           </div>
     `;
 

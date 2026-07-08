@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { API_URL } from '@/lib/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://raaghas.in';
+  const baseUrl = 'https://atlas.in';
   
   // Base routes
   const staticRoutes = [

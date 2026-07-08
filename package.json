@@ -1,5 +1,5 @@
 {
-  "name": "raaghas-ecommerce",
+  "name": "atlas-ecommerce",
   "private": true,
   "scripts": {
     "build": "turbo build",

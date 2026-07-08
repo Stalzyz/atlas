@@ -1,26 +1,26 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS PRODUCTION SHIELD v14.0 — NUCLEAR CLEAN RELEASE
+#  ATLAS PRODUCTION SHIELD v14.0 — NUCLEAR CLEAN RELEASE
 #  Strategy: Nuclear Purge | Reclaim 20GB+ | Atomic Launch
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$APP_ROOT/releases/$RELEASE_NAME"
 SHARED_ENV="$APP_ROOT/shared/.env"
 
-echo "🛡️  RAAGHAS NUCLEAR CLEAN SHIELD v14.0 — $TIMESTAMP"
+echo "🛡️  ATLAS NUCLEAR CLEAN SHIELD v14.0 — $TIMESTAMP"
 
 # ── PHASE 1: Nuclear Disk Purge ───────────────────────────────────────────────
 echo "☢️  PHASE 1: Nuclear Disk Purge (Total Reclaim)..."
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'NUCLEAR_PURGE'
-  CURRENT_RELEASE=$(readlink -f /var/www/raaghas_new/current 2>/dev/null || echo "none")
+  CURRENT_RELEASE=$(readlink -f /var/www/atlas_new/current 2>/dev/null || echo "none")
   
   echo "  [1/3] Nuking all inactive releases..."
-  cd /var/www/raaghas_new/releases
+  cd /var/www/atlas_new/releases
   for d in release_*; do
     if [ "$(readlink -f "$d")" != "$CURRENT_RELEASE" ]; then
       rm -rf "$d"
@@ -78,10 +78,10 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE_BUILD
   echo "🚀  Safely pushing schema to DB (No data loss allowed)..."
   npx prisma db push --schema=packages/database/prisma/schema.prisma
   
-  echo "🔨 Compiling @raaghas/database..."
+  echo "🔨 Compiling @atlas/database..."
   (cd packages/database && npm run build)
   
-  echo "🔨 Compiling raaghas-api..."
+  echo "🔨 Compiling atlas-api..."
   (cd apps/api && NODE_OPTIONS="--max-old-space-size=2048" npx nest build)
   
   echo "🔨 Compiling admin..."
@@ -109,7 +109,7 @@ REMOTE_BUILD
 echo "🚀 PHASE 5: Atomic Swap & Launch..."
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE_LAUNCH'
   set -euo pipefail
-  APP_ROOT="/var/www/raaghas_new"
+  APP_ROOT="/var/www/atlas_new"
   CURRENT_LINK="$APP_ROOT/current"
   NEW_RELEASE=$(ls -td $APP_ROOT/releases/release_* | head -1)
   
@@ -117,24 +117,24 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE_LAUNCH'
   ln -sfn "$NEW_RELEASE" "$CURRENT_LINK"
   
   echo "🛑 Terminating zombie processes..."
-  pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+  pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
   fuser -k 6005/tcp 6009/tcp 6010/tcp 2>/dev/null || true
   
   echo "🚀 Launching Production Services..."
   cd "$CURRENT_LINK"
   
   PRISMA_CLIENT_ENGINE_TYPE=library NODE_ENV=production PORT=6005 \
-    pm2 start apps/api/dist/src/main.js --name raaghas-api -i max
+    pm2 start apps/api/dist/src/main.js --name atlas-api -i max
   NODE_ENV=production PORT=6010 \
-    pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin
+    pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin
   NODE_ENV=production PORT=6009 \
-    pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront
+    pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront
     
   pm2 save
   pm2 list
   
   echo "🔧 Syncing nginx static asset paths to current release..."
-  # The nginx config uses /var/www/raaghas_new/current/ symlink, which already resolves
+  # The nginx config uses /var/www/atlas_new/current/ symlink, which already resolves
   # correctly after the ln -sfn above. But nginx has a cached path, so we reload.
   nginx -s reload && echo "✅ Nginx reloaded — static assets now served from $NEW_RELEASE"
 REMOTE_LAUNCH

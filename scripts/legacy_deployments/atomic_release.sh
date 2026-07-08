@@ -1,12 +1,12 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS ATOMIC RELEASE v3.0 — LOCAL-TO-VPS PUSH
+#  ATLAS ATOMIC RELEASE v3.0 — LOCAL-TO-VPS PUSH
 #  Strategy: Bundle Local → Upload → Remote Build → Atomic Swap
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 BUNDLE_NAME="deploy_$TIMESTAMP.tar.gz"
@@ -80,7 +80,7 @@ ssh root@$VPS_IP bash << REMOTE
   set -a
   source .env
   set +a
-  npx turbo build --filter=raaghas-api --filter=admin --filter=storefront
+  npx turbo build --filter=atlas-api --filter=admin --filter=storefront
   
   # Next.js Standalone assets injection
   echo "🛠️  Injecting static assets..."
@@ -109,10 +109,10 @@ ssh root@$VPS_IP bash << REMOTE
   
   # Restart PM2
   echo "🚀 Restarting services..."
-  pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
-  NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api
-  NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin
-  NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront
+  pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
+  NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api
+  NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin
+  NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront
   pm2 save
 
   # Cleanup old releases (keep last 3)

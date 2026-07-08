@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, Query, BadRequestException, Header } from '@nestjs/common';
 import { MarketingService } from './marketing.service';
-import { LeadStatus } from '@raaghas/database';
+import { LeadStatus } from '@atlas/database';
 import { Public } from '../auth/public.decorator';
 
 @Controller('marketing')

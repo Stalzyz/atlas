@@ -39,7 +39,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       message = typeof res === 'string' ? res : res.message || message;
     } else if (exception.code?.startsWith('P')) {
       // Prisma errors (P2002 etc)
-      message = 'A database integrity error occurred.';
+      message = 'We encountered a temporary issue processing your request. Please try again.';
       if (process.env.NODE_ENV !== 'production') detail = exception.message;
     }
 

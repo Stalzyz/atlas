@@ -47,7 +47,7 @@ export default function MetaPixel({ pixelId }: { pixelId: string | null }) {
       if (!anchor) return;
       const href = anchor.getAttribute("href");
       if (!href) return;
-      if (href.startsWith("http") && !href.includes("raaghas.in")) {
+      if (href.startsWith("http") && !href.includes("atlas.in")) {
         trackMetaEvent("LinkClick", { content_name: href });
       }
     };

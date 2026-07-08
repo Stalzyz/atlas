@@ -335,7 +335,7 @@ export class ProductService {
     // BUG-9 FIX: Normalize image URLs — relative /uploads/ paths get absolute URL
     const publicApiBase = process.env.API_URL 
       ? process.env.API_URL.replace(/\/api\/v1\/?$/, '').replace(/\/$/, '')
-      : (process.env.NODE_ENV === 'production' ? 'https://api.raaghas.in' : 'http://localhost:6005');
+      : (process.env.NODE_ENV === 'production' ? 'https://api.atlas.in' : 'http://localhost:6005');
 
     const normalizeImageUrl = (url: string | null | undefined): string | null => {
       if (!url || !url.trim()) return null;
@@ -499,7 +499,7 @@ export class ProductService {
             description: (firstRow.Description || firstRow.Long_Description || firstRow['Body (HTML)'] || '').toString(),
             category: (firstRow.Category || firstRow['Product Category'] || firstRow['Product Type'] || firstRow.Type || firstRow.Product_Type || 'General').toString().trim(),
             subCategory: firstRow.Sub_Category?.toString().trim() || '',
-            brand: (firstRow.Brand || firstRow.Vendor || 'Raaghas').toString().trim(),
+            brand: (firstRow.Brand || firstRow.Vendor || 'Atlas').toString().trim(),
             collection: firstRow.Collection?.toString().trim() || '',
             productType: (firstRow.Product_Type || firstRow.Type || 'Apparel').toString().trim(),
             gender: firstRow.Gender?.toString().trim() || 'Unisex',

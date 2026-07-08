@@ -34,7 +34,7 @@ export class SupportService {
 
     try {
       const settings = await (this.prisma as any).storeSettings.findUnique({ where: { id: 'global' } });
-      const supportEmail = settings?.supportEmail || 'support@raaghas.in';
+      const supportEmail = settings?.supportEmail || 'support@atlas.in';
 
       // Send email to store owner/support
       const adminHtml = `
@@ -55,10 +55,10 @@ export class SupportService {
       const customerHtml = `
         <div style="text-align: center;">
           <h1 style="font-size: 28px; margin: 0 0 30px 0;">We've received your inquiry</h1>
-          <p style="font-size: 13px; font-weight: 300; margin-bottom: 30px;">Dear ${data.name},<br/><br/>Thank you for contacting Raaghas. Our concierge team has received your message regarding "<strong>${data.subject}</strong>" and will respond within 24 hours.</p>
+          <p style="font-size: 13px; font-weight: 300; margin-bottom: 30px;">Dear ${data.name},<br/><br/>Thank you for contacting Atlas. Our concierge team has received your message regarding "<strong>${data.subject}</strong>" and will respond within 24 hours.</p>
         </div>
       `;
-      this.mailService.sendCustomEmail(data.email, `We've received your inquiry | Raaghas`, customerHtml).catch(console.error);
+      this.mailService.sendCustomEmail(data.email, `We've received your inquiry | Atlas`, customerHtml).catch(console.error);
     } catch (e) {
       console.error('Failed to send support email:', e);
     }

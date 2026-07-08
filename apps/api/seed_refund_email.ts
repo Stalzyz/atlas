@@ -9,7 +9,7 @@ async function run() {
       type: 'REFUND_INITIATED',
       subject: 'Refund Initiated for Order #{{order.id}}',
       body: `<div style="font-family: serif; max-width: 600px; margin: auto; padding: 40px; border: 1px solid #eee; border-radius: 20px;">
-  <h1 style="color: #701A31; text-align: center;">{{storeSettings.storeName}}</h1>
+  <h1 style="color: #28104E; text-align: center;">{{storeSettings.storeName}}</h1>
   <p>Dear {{customer.name}},</p>
   <p>A refund has been initiated for your order <strong>#{{order.id}}</strong>.</p>
   <div style="background: #fdfbf7; padding: 20px; border-radius: 10px; margin: 20px 0;">

@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 async function main() {
-  const client = new Client({ connectionString: 'postgresql://postgres@localhost/raaghas_cert?host=/tmp' });
+  const client = new Client({ connectionString: 'postgresql://postgres@localhost/atlas_cert?host=/tmp' });
   await client.connect();
   const res = await client.query('SELECT count(*) FROM "Product";');
   console.log("Products in /tmp:", res.rows[0]);

@@ -37,7 +37,7 @@ test.describe('E2E E-commerce Purchase Pipeline', () => {
     // Simulating login bypass for E2E purposes without real OTP:
     // We inject a dummy token into localStorage and cookies
     await page.evaluate(() => {
-      localStorage.setItem('user', JSON.stringify({ id: 'test-qa', email: 'qa@raaghas.in', role: 'USER' }));
+      localStorage.setItem('user', JSON.stringify({ id: 'test-qa', email: 'qa@atlas.in', role: 'USER' }));
       document.cookie = 'auth_token=fake_test_token; path=/';
     });
     
@@ -48,7 +48,7 @@ test.describe('E2E E-commerce Purchase Pipeline', () => {
     // Phase 4: Address Flow
     await page.fill('input[name="firstName"]', 'QA');
     await page.fill('input[name="lastName"]', 'Tester');
-    await page.fill('input[name="email"]', 'qa@raaghas.in');
+    await page.fill('input[name="email"]', 'qa@atlas.in');
     await page.fill('input[name="phone"]', '9999999999');
     await page.fill('input[name="address"]', '123 QA Automation St');
     await page.fill('input[name="city"]', 'Tech City');

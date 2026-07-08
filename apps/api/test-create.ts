@@ -10,7 +10,7 @@ async function testCreate() {
       shortDescription: "",
       category: "New Arrivals",
       subCategory: "",
-      brand: "Raaghas",
+      brand: "Atlas",
       vendor: "",
       productType: "Apparel",
       gender: "Unisex",

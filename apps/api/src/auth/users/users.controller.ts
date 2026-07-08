@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Unauthorize
 import { PrismaService } from '../../prisma/prisma.service';
 import { AuthGuard } from '../auth.guard';
 import { RequirePermission } from '../permissions.decorator';
-import { UserRole } from '@raaghas/database';
+import { UserRole } from '@atlas/database';
 const bcrypt = require('bcryptjs');
 
 @Controller('auth/users')
@@ -59,7 +59,7 @@ export class UsersController {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(data.password || 'Raaghas@123', 10);
+    const hashedPassword = await bcrypt.hash(data.password || 'Atlas@123', 10);
     return this.prisma.user.create({
       data: {
         email,

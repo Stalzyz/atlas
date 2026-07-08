@@ -17,7 +17,7 @@ export function NewsletterSection({ content }: NewsletterSectionProps) {
     <section className="py-32 px-6 sm:px-12 bg-wine text-theme-bg overflow-hidden relative">
       {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif opacity-5 select-none pointer-events-none whitespace-nowrap">
-        RAAGHAS EXCLUSIVE
+        ATLAS EXCLUSIVE
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">

@@ -165,7 +165,7 @@ export default function PagesManager() {
                   <td className="px-8 py-5 text-right">
                     <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <a 
-                        href={`https://raaghas.in/pages/${page.handle}`} 
+                        href={`https://atlas.in/pages/${page.handle}`} 
                         target="_blank" 
                         className="p-2 text-gray-400 hover:text-wine hover:bg-wine/5 rounded-lg transition-all"
                         title="View Live"

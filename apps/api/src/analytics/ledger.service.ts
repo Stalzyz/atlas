@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { UserRole, LedgerType } from '@raaghas/database';
-import { Prisma } from '@raaghas/database';
+import { UserRole, LedgerType } from '@atlas/database';
+import { Prisma } from '@atlas/database';
 const { Decimal } = Prisma;
 
 @Injectable()

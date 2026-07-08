@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const serverFile = '/var/www/raaghas_new/apps/admin/.next/server/app/logistics/fulfillment/page.js';
-const chunkDir = '/var/www/raaghas_new/apps/admin/.next/static/chunks/app/logistics/fulfillment/';
+const serverFile = '/var/www/atlas_new/apps/admin/.next/server/app/logistics/fulfillment/page.js';
+const chunkDir = '/var/www/atlas_new/apps/admin/.next/static/chunks/app/logistics/fulfillment/';
 
 function patchFile(filePath) {
     if (!fs.existsSync(filePath)) {
@@ -42,7 +42,7 @@ function patchFile(filePath) {
                   </div>
                 </div>
                 <div style="flex: 1; text-align: right;">
-                  <h1 style="margin: 0; font-size: 24px; font-weight: normal; color: #333; letter-spacing: 1px;">RAAGHAS CLOTHING</h1>
+                  <h1 style="margin: 0; font-size: 24px; font-weight: normal; color: #333; letter-spacing: 1px;">ATLAS CLOTHING</h1>
                 </div>
               </div>
 
@@ -50,9 +50,9 @@ function patchFile(filePath) {
                 <div style="flex: 1; border-top: 1px solid #000; padding-top: 15px; margin-right: 40px;">
                   <div style="font-size: 14px; line-height: 1.5; text-align: left; color: #000;">
                     <div>Thank you for shopping with us!</div>
-                    <div>Raaghas Clothing</div>
-                    <div>Salem:636001,Phno 6360664805</div>
-                    <div>www.raaghasclothing.com</div>
+                    <div>Atlas Clothing</div>
+                    <div>Salem:634401,Phno 6360664805</div>
+                    <div>www.atlasclothing.com</div>
                   </div>
                 </div>
                 <div style="text-align: right; font-size: 14px; line-height: 1.5; color: #000;">

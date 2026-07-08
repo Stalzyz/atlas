@@ -87,7 +87,7 @@ export default function InvoiceView() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Raaghas_Proforma_${id.toString().toUpperCase()}.pdf`;
+      a.download = `Atlas_Proforma_${id.toString().toUpperCase()}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -197,7 +197,7 @@ export default function InvoiceView() {
         onClose={() => setShowEmailModal(false)}
         recipientEmail={buyer.email}
         recipientName={buyer.name}
-        subject={`Pro-forma Invoice: ${invoiceNumber} from Raaghas`}
+        subject={`Pro-forma Invoice: ${invoiceNumber} from Atlas`}
         body={`Dear ${buyer.contact || buyer.name},\n\nPlease find attached the Pro-forma Invoice for your recent wholesale order.\n\nTotal Amount Payable: ₹${summary.grandTotal.toLocaleString('en-IN')}\n\nPlease proceed with the payment to initiate processing.`}
         attachmentName={`${invoiceNumber}.pdf`}
         onSend={handleSendEmail}
@@ -209,7 +209,7 @@ export default function InvoiceView() {
         {/* Header */}
         <div className="flex justify-between items-start pb-10 border-b border-gray-100">
           <div>
-            <img src="/logo-dark.svg" alt={seller.name || "Raaghas Logo"} className="h-16 w-auto mb-4 object-contain" />
+            <img src="/logo-dark.svg" alt={seller.name || "Atlas Logo"} className="h-16 w-auto mb-4 object-contain" />
             <p className="text-[10px] text-gray-400 leading-relaxed max-w-[250px] font-medium uppercase tracking-widest">
               {seller.address}<br/>
               {seller.state}<br/>
@@ -325,7 +325,7 @@ export default function InvoiceView() {
 
         {/* Footer info */}
         <div className="mt-20 pt-10 border-t border-gray-100 text-[10px] text-gray-400 uppercase tracking-[0.2em] text-center leading-relaxed">
-           <p className="mb-2">Thank you for choosing Raaghas</p>
+           <p className="mb-2">Thank you for choosing Atlas</p>
            <p>This is a computer generated quote and does not require a physical signature.</p>
         </div>
 

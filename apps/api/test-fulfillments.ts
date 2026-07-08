@@ -26,7 +26,7 @@ async function runTest() {
 
     order = await (prisma as any).order.create({
       data: {
-        id: 'RAAGHAS-TEST-FULFILL-' + Date.now(),
+        id: 'ATLAS-TEST-FULFILL-' + Date.now(),
         customerName: 'Test Fulfillment',
         customerEmail: 'test.fulfillment@example.com',
         customerPhone: '+919999999999',

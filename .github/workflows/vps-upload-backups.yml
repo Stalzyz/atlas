@@ -22,8 +22,8 @@ jobs:
             ls -la /root/*.tar.gz >> /tmp/backups.txt 2>&1 || true
             ls -la /root/backups >> /tmp/backups.txt 2>&1 || true
             echo "--- APP BACKUPS ---" >> /tmp/backups.txt
-            ls -la /var/www/raaghas_new/*.sql >> /tmp/backups.txt 2>&1 || true
-            ls -la /var/www/raaghas_new/shared/*.sql >> /tmp/backups.txt 2>&1 || true
+            ls -la /var/www/atlas_new/*.sql >> /tmp/backups.txt 2>&1 || true
+            ls -la /var/www/atlas_new/shared/*.sql >> /tmp/backups.txt 2>&1 || true
             echo "--- SYSTEM BACKUPS ---" >> /tmp/backups.txt
             ls -la /var/backups/postgresql >> /tmp/backups.txt 2>&1 || true
             ls -la /var/lib/postgresql/*.sql >> /tmp/backups.txt 2>&1 || true

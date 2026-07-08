@@ -83,7 +83,7 @@ export class GraftyService {
       return { success: true, data };
     } catch (error) {
       this.logger.error(`Failed to send WhatsApp nudge to Grafty`, error);
-      // We don't want to throw and break the main Raaghas flow (like checkout) if WhatsApp fails.
+      // We don't want to throw and break the main Atlas flow (like checkout) if WhatsApp fails.
       return { success: false, error: error.message };
     }
   }

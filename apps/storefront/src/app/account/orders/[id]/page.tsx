@@ -99,7 +99,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 <div className="bg-white p-10 rounded-[40px] border border-charcoal/5 shadow-xl space-y-10">
                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-6">
                       <div className="space-y-1">
-                         <span className="text-[10px] font-bold text-wine tracking-widest uppercase">Raaghas Pursuit</span>
+                         <span className="text-[10px] font-bold text-wine tracking-widest uppercase">Atlas Pursuit</span>
                          <h1 className="text-4xl font-bold tracking-tight text-charcoal">
                             {order.formattedOrderNumber || (order.orderNumber != null ? `RGS-${order.orderNumber + 1000}` : order.id.slice(-10).toUpperCase())}
                          </h1>

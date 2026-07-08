@@ -22,10 +22,10 @@ jobs:
             ls -la /root/*.tar.gz || true
             ls -la /root/backups || true
             echo "--- APP BACKUPS ---"
-            ls -la /var/www/raaghas_new/*.sql || true
-            ls -la /var/www/raaghas_new/shared/*.sql || true
+            ls -la /var/www/atlas_new/*.sql || true
+            ls -la /var/www/atlas_new/shared/*.sql || true
             echo "--- SYSTEM BACKUPS ---"
             ls -la /var/backups/postgresql || true
             ls -la /var/lib/postgresql/*.sql || true
             echo "--- RECENT PRISMA MIGRATIONS ---"
-            ls -la /var/www/raaghas_new/current/packages/database/prisma/migrations || true
+            ls -la /var/www/atlas_new/current/packages/database/prisma/migrations || true

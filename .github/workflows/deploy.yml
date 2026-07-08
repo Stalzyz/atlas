@@ -65,7 +65,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           source: "deploy.tar.gz"
-          target: "/var/www/raaghas_new/current/"
+          target: "/var/www/atlas_new/current/"
 
       - name: Restart Server
         uses: appleboy/ssh-action@v1.0.3
@@ -75,14 +75,14 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cd /var/www/raaghas_new/current
+            cd /var/www/atlas_new/current
             tar -xzf deploy.tar.gz
             rm deploy.tar.gz
             pm2 restart all --update-env
 
       - name: Notify success
         if: success()
-        run: echo "🚀 Deployment to Raaghas VPS successful!"
+        run: echo "🚀 Deployment to Atlas VPS successful!"
 
       - name: Notify failure
         if: failure()

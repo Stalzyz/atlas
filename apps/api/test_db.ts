@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@raaghas/database');
+const { PrismaClient } = require('@atlas/database');
 const prisma = new PrismaClient();
 async function main() {
   const zones = await prisma.shippingZone.findMany({ select: { name: true, regions: true } });

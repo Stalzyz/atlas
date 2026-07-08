@@ -1,5 +1,5 @@
 #!/bin/bash
-# Database backup script for Raaghas Enterprise (PostgreSQL)
+# Database backup script for Atlas Enterprise (PostgreSQL)
 # Schedule: every 6 hours via cron: 0 */6 * * * /scripts/backup-db.sh >> /backups/logs/backup.log 2>&1
 # Retention: last 4 x 6h files | 7 daily | 4 weekly | 3 monthly
 
@@ -9,7 +9,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/.env.backup" 2>/dev/null || true
 
-DB_URL="${DATABASE_URL:-postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas}"
+DB_URL="${DATABASE_URL:-postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas}"
 BACKUP_DIR="${BACKUP_DIR:-/backups/db}"
 LOG_FILE="${LOG_FILE:-/backups/logs/backup.log}"
 API_URL="${API_URL:-http://localhost:6005}"

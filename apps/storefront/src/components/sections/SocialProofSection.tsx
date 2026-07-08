@@ -24,7 +24,7 @@ export function SocialProofSection({ content, style: sectionStyle }: { content: 
   const items = (content.items?.length > 0 ? content.items : defaultItems).map((item: any) => {
     const name = item.name && String(item.name).toLowerCase() !== "undefined" && String(item.name).toLowerCase() !== "null" 
       ? item.name 
-      : "Raaghas Client";
+      : "Atlas Client";
     const city = item.city && String(item.city).toLowerCase() !== "undefined" && String(item.city).toLowerCase() !== "null" 
       ? item.city 
       : "India";
@@ -55,7 +55,7 @@ export function SocialProofSection({ content, style: sectionStyle }: { content: 
             </h2>
           </div>
           <p className="text-sm font-sans text-theme-text-muted max-w-xs leading-relaxed md:text-right">
-            {content.subtext || "Tag @raaghas_clothing to be featured in our monthly style edit."}
+            {content.subtext || "Tag @atlas_clothing to be featured in our monthly style edit."}
           </p>
         </div>
 
@@ -101,13 +101,13 @@ export function SocialProofSection({ content, style: sectionStyle }: { content: 
         {/* Instagram Handle */}
         <div className="text-center">
           <a
-            href="https://instagram.com/raaghas_clothing"
+            href="https://instagram.com/atlas_clothing"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-bold text-theme-text-muted hover:text-primary transition-colors duration-300 border-b border-theme-border hover:border-primary pb-1"
           >
             <InstagramIcon size={12} />
-            {content.handleText || "@raaghas_clothing"}
+            {content.handleText || "@atlas_clothing"}
           </a>
         </div>
       </div>

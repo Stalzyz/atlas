@@ -234,7 +234,7 @@ export default function ProductManagement() {
              `"${p.handle || ''}"`,
              isFirstRow ? `"${p.name.replace(/"/g, '""')}"` : `""`,
              isFirstRow ? `"${(p.description || '').replace(/"/g, '""')}"` : `""`,
-             isFirstRow ? `"${(p.vendor || 'Raaghas').replace(/"/g, '""')}"` : `""`,
+             isFirstRow ? `"${(p.vendor || 'Atlas').replace(/"/g, '""')}"` : `""`,
              isFirstRow ? `"${(p.category || '').replace(/"/g, '""')}"` : `""`,
              isFirstRow ? `"${(p.tags || '').replace(/"/g, '""')}"` : `""`,
              isFirstRow ? (p.status === 'Draft' ? "FALSE" : "TRUE") : `""`,
@@ -263,7 +263,7 @@ export default function ProductManagement() {
     
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `raaghas_products_export_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `atlas_products_export_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -311,7 +311,7 @@ export default function ProductManagement() {
       variants: p.variants || [],
       images: p.images || [],
       tags: p.tags || "",
-      vendor: p.vendor || "Raaghas"
+      vendor: p.vendor || "Atlas"
     };
   });
 
@@ -681,7 +681,7 @@ export default function ProductManagement() {
                                   {p.status === 'Draft' ? 'Publish Product' : 'Archive Product'}
                                </button>
                                <a 
-                                 href={`https://raaghas.in/products/${p.handle}`} 
+                                 href={`https://atlas.in/products/${p.handle}`} 
                                  target="_blank" 
                                  className="w-full text-left px-4 py-2 text-xs font-bold text-blue-600 hover:bg-blue-50 flex items-center gap-3 border-t border-gray-50 mt-1"
                                >

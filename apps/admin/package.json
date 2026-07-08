@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run css && next dev -p 6002",
+    "dev": "npm run css && next dev -p 4402 --webpack",
     "build": "npx tailwindcss -i ./src/app/globals.css -o ./public/compiled.css --minify || echo 'Tailwind skipped' && NODE_OPTIONS='--max-old-space-size=4096' next build && cp -r public .next/standalone/apps/admin/ 2>/dev/null || true && cp -r .next/static .next/standalone/apps/admin/.next/ 2>/dev/null || true",
     "css": "npx tailwindcss -i ./src/app/globals.css -o ./public/compiled.css --minify || echo 'Tailwind skipped'",
     "start": "next start -p 7010",

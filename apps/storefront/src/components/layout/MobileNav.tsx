@@ -39,7 +39,7 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
           >
 
             <div className="flex justify-between items-center mb-16">
-              <span className="font-serif text-xl tracking-widest text-theme-text">RAAGHAS</span>
+              <span className="font-serif text-xl tracking-widest text-theme-text">ATLAS</span>
               <button onClick={onClose} className="p-2 bg-theme-text/5 rounded-full text-theme-text">
                 <X size={20} />
               </button>

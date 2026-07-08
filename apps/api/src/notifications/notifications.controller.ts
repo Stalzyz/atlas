@@ -3,7 +3,7 @@ import { NotificationsService } from './notifications.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
-import { UserRole } from '@raaghas/database';
+import { UserRole } from '@atlas/database';
 
 @Controller('notifications')
 @UseGuards(AuthGuard, RolesGuard)

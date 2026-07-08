@@ -1,7 +1,10 @@
-const { PrismaClient } = require('./generated-client');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 async function main() {
-  const p = await prisma.product.findMany({ where: { handle: { contains: 'varnik' } }, include: { variants: true } });
+  const p = await prisma.product.findFirst({
+    where: { handle: 'premium-wear37261' },
+    include: { images: true, variants: true }
+  });
   console.log(JSON.stringify(p, null, 2));
 }
 main().catch(console.error).finally(() => prisma.$disconnect());

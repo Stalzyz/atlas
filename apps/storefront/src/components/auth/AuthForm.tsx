@@ -70,7 +70,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Invalid OTP");
 
-      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.raaghas.in' } : {};
+      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.in' } : {};
       Cookies.set("auth_token", data.access_token, { expires: 30, path: '/', ...domainOpt });
       localStorage.setItem("user", JSON.stringify(data.user));
       
@@ -104,7 +104,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       if (!res.ok) throw new Error(data.message || "Google login failed");
 
       console.log("✅ Google Auth Successful, saving session...");
-      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.raaghas.in' } : {};
+      const domainOpt = typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? { domain: '.atlas.in' } : {};
       Cookies.set("auth_token", data.access_token, { expires: 30, path: '/', ...domainOpt });
       localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -127,7 +127,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       <div className="bg-theme-glass backdrop-blur-xl border border-theme-glass-border rounded-[32px] p-8 md:p-12 shadow-2xl shadow-black/5">
         <div className="text-center mb-10">
           <div className="mb-8">
-            <img src="/logo-dark.svg" alt="RAAGHAS" className="h-12 mx-auto object-contain mb-4" />
+            <img src="/logo-dark.svg" alt="ATLAS" className="h-12 mx-auto object-contain mb-4" />
           </div>
           <h1 className="text-3xl font-serif text-theme-text mb-3 tracking-tight">
             {step === "email" ? "Welcome" : "Check your email"}

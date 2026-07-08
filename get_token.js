@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@raaghas/database');
+const { PrismaClient } = require('@atlas/database');
 const jwt = require('jsonwebtoken');
 const prisma = new PrismaClient();
 async function run() {

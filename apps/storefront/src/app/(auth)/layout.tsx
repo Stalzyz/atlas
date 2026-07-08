@@ -16,7 +16,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         
         <div className="z-10 text-center space-y-8 max-w-md animate-in fade-in slide-in-from-bottom-10 duration-1000">
            <Link href="/" className="block mb-12">
-             <img src="/logo-light.svg" alt="RAAGHAS" className="h-16 mx-auto object-contain" />
+             <img src="/logo-light.svg" alt="ATLAS" className="h-16 mx-auto object-contain" />
            </Link>
            <div className="h-px w-24 bg-white/30 mx-auto"></div>
            <p className="text-white/90 font-serif italic text-2xl leading-relaxed">
@@ -45,7 +45,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
            </div>
 
            <div className="mt-12 text-center text-[10px] font-bold text-theme-text-muted/30 uppercase tracking-widest">
-              &copy; {new Date().getFullYear()} Raaghas Private Limited &bull; Est. 2022
+              &copy; {new Date().getFullYear()} Atlas Private Limited &bull; Est. 2022
            </div>
         </div>
       </div>

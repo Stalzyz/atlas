@@ -99,7 +99,7 @@ async function main() {
   await prisma.page.upsert({
     where: { slug: 'about-us' },
     update: {},
-    create: { title: 'About Us', slug: 'about-us', content: '<p>Welcome to Raaghas.</p>', isPublished: true }
+    create: { title: 'About Us', slug: 'about-us', content: '<p>Welcome to Atlas.</p>', isPublished: true }
   });
   console.log('Created pages');
 

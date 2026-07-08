@@ -124,7 +124,7 @@ function MyOrdersPageContent() {
         
         <div className="mb-12 space-y-2">
            <h1 className="text-4xl font-serif text-charcoal">My Orders</h1>
-           <p className="text-charcoal/50 text-sm">Manage and track your luxury purchases from Raaghas.</p>
+           <p className="text-charcoal/50 text-sm">Manage and track your luxury purchases from Atlas.</p>
         </div>
 
         {orders.length === 0 ? (

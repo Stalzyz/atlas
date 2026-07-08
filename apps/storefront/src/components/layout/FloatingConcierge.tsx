@@ -35,7 +35,7 @@ export function FloatingConcierge() {
 
   const openWhatsApp = () => {
     const phone = supportPhone.replace(/[^0-9]/g, '') || "919000000000";
-    const message = encodeURIComponent("Hello Raaghas Concierge, I'm exploring your collections and need some styling assistance.");
+    const message = encodeURIComponent("Hello Atlas Concierge, I'm exploring your collections and need some styling assistance.");
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
 

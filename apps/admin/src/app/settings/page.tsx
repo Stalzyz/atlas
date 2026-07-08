@@ -221,7 +221,7 @@ export default function SettingsPage() {
                     value={settings.smtpUser || ""}
                     onChange={(e) => setSettings({ ...settings, smtpUser: e.target.value })}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-blue-500 transition-all"
-                    placeholder="notifications@raaghas.in"
+                    placeholder="notifications@atlas.in"
                   />
                 </div>
                 <div>
@@ -299,7 +299,7 @@ export default function SettingsPage() {
                     value={settings.whatsappAppId || ""}
                     onChange={(e) => setSettings({ ...settings, whatsappAppId: e.target.value })}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                    placeholder="raaghas_main_01"
+                    placeholder="atlas_main_01"
                     required
                   />
                 </div>
@@ -368,7 +368,7 @@ export default function SettingsPage() {
                     value={settings.accountName || ""}
                     onChange={(e) => setSettings({ ...settings, accountName: e.target.value })}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                    placeholder="Raaghas Pvt Ltd"
+                    placeholder="Atlas Pvt Ltd"
                   />
                 </div>
                 <div>
@@ -788,7 +788,7 @@ export default function SettingsPage() {
                   value={settings.supportEmail || ""}
                   onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                  placeholder="care@raaghas.com"
+                  placeholder="care@atlas.com"
                 />
               </div>
             </div>
@@ -807,7 +807,7 @@ export default function SettingsPage() {
                   value={settings.storeName || ""}
                   onChange={(e) => setSettings({ ...settings, storeName: e.target.value })}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                  placeholder="Raaghas"
+                  placeholder="Atlas"
                 />
               </div>
 
@@ -829,7 +829,7 @@ export default function SettingsPage() {
                   value={settings.footerCopyright || ""}
                   onChange={(e) => setSettings({ ...settings, footerCopyright: e.target.value })}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                  placeholder="© 2026 Raaghas. All rights reserved."
+                  placeholder="© 2026 Atlas. All rights reserved."
                 />
               </div>
             </div>
@@ -1038,7 +1038,7 @@ export default function SettingsPage() {
                   value={settings.instagramUrl || ""}
                   onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                  placeholder="instagram.com/raaghas"
+                  placeholder="instagram.com/atlas"
                 />
               </div>
 
@@ -1051,7 +1051,7 @@ export default function SettingsPage() {
                   value={settings.facebookUrl || ""}
                   onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-wine transition-all"
-                  placeholder="facebook.com/raaghas"
+                  placeholder="facebook.com/atlas"
                 />
               </div>
             </div>

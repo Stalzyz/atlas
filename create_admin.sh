@@ -1,12 +1,12 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — ADMIN CREATION (Shielded v4)
+#  ATLAS — ADMIN CREATION (Shielded v4)
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-ADMIN_EMAIL="admin@raaghas.in"
-ADMIN_PASS="RaaghasAdmin2024!"
+ADMIN_EMAIL="admin@atlas.in"
+ADMIN_PASS="AtlasAdmin2024!"
 
 echo "👤 PREPARING SHIELDED ADMIN INJECTION..."
 
@@ -20,10 +20,10 @@ SAFE_HASH=$(echo -n "$RAW_HASH" | base64)
 echo "🚀 Injecting into VPS database..."
 
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
   
   # Target Database (Matches Nuclear Sync)
-  DB_URL="postgresql://raaghas_user:Raaghas%40Prod2024@127.0.0.1:5432/raaghas"
+  DB_URL="postgresql://atlas_user:Atlas%40Prod2024@127.0.0.1:5432/atlas"
   # Create the injection script
   # We use a quoted heredoc 'EOF' to prevent ANY expansion
   cat > inject_admin_v5.js << 'EOF'
@@ -75,6 +75,6 @@ REMOTE
 
 echo ""
 echo "🏁 Shielded Injection Complete."
-echo "👉 Login: https://admin.raaghas.in/login"
+echo "👉 Login: https://admin.atlas.in/login"
 echo "👉 User:  $ADMIN_EMAIL"
 echo "👉 Pass:  $ADMIN_PASS"

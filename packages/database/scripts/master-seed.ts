@@ -8,11 +8,11 @@ async function main() {
   // --- PHASE 1: USERS ---
   console.log('👥 Phase 1: Creating Users...');
   await prisma.user.upsert({
-    where: { email: 'admin@raaghas.com' },
+    where: { email: 'admin@atlas.com' },
     update: {},
     create: {
-      email: 'admin@raaghas.com',
-      name: 'Raaghas Admin',
+      email: 'admin@atlas.com',
+      name: 'Atlas Admin',
       phone: '9876543210',
       role: UserRole.ADMIN,
     },
@@ -74,7 +74,7 @@ async function main() {
       data: {
         title: `${template.title} - Ed. ${Math.floor(i / 5) + 1}`,
         handle: `${template.title.toLowerCase().replace(/ /g, '-')}-${i}-${Date.now()}`,
-        description: 'Premium handcrafted luxury ethnic wear from Raaghas.',
+        description: 'Premium handcrafted luxury ethnic wear from Atlas.',
         published: i >= 3,
         status: i < 3 ? 'DRAFT' : 'PUBLISHED',
         hsnCode: template.hsn,

@@ -129,10 +129,10 @@ export default function OrderInvoicePage() {
         {/* Header */}
         <div className="flex justify-between items-start border-b border-gray-100 pb-12">
           <div>
-            <img src={settings?.logoUrl || "/logo-dark.svg"} alt={settings?.storeName || "Raaghas Logo"} className="h-16 w-auto mb-4 object-contain" />
+            <img src={settings?.logoUrl || "/logo-dark.svg"} alt={settings?.storeName || "Atlas Logo"} className="h-16 w-auto mb-4 object-contain" />
             <p className="text-[10px] text-gray-400 leading-relaxed font-bold uppercase tracking-widest">
               {settings?.tagline || "Luxury Women's Ethnic Wear"}<br/>
-              {settings?.storeName || "Raaghas Pvt Ltd"}<br/>
+              {settings?.storeName || "Atlas Pvt Ltd"}<br/>
               {settings?.businessAddress || "Salem, India"}
             </p>
           </div>
@@ -233,11 +233,11 @@ export default function OrderInvoicePage() {
 
         {/* Footer */}
         <div className="mt-24 pt-12 border-t border-gray-100 text-center space-y-4">
-          <p className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em]">Thank you for choosing Raaghas</p>
+          <p className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em]">Thank you for choosing Atlas</p>
           <div className="flex justify-center gap-8 text-[9px] font-bold text-wine/40 uppercase tracking-widest">
-            <span>Instagram: @raaghas.official</span>
-            <span>Web: www.raaghas.in</span>
-            <span>Support: love@raaghas.in</span>
+            <span>Instagram: @atlas.official</span>
+            <span>Web: www.atlas.in</span>
+            <span>Support: love@atlas.in</span>
           </div>
         </div>
 

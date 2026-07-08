@@ -20,7 +20,7 @@ export function TestimonialSliderSection({ content, style: sectionStyle }: { con
       rating: 5 
     },
     { 
-      quote: "I get compliments every single time I wear Raaghas. It has become my everyday uniform for confidence.", 
+      quote: "I get compliments every single time I wear Atlas. It has become my everyday uniform for confidence.", 
       name: "Anjali Mehta", 
       city: "Mumbai",
       rating: 5 

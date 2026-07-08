@@ -14,14 +14,14 @@ const getParsedAddress = (addr: any) =>
 function SlipContent({ order, storeSettings }: { order: any; storeSettings: any }) {
   const shippingAddr = order.shippingAddr || getParsedAddress(order.shippingAddress);
   
-  const fromName = storeSettings?.storeName || 'Raaghas Clothing';
+  const fromName = storeSettings?.storeName || 'Atlas Clothing';
   const fromAddress = storeSettings?.businessAddress || '123 Fashion Street, Silk District';
   const fromCity = storeSettings?.businessCity || 'Chennai';
   const fromState = storeSettings?.businessState || 'Tamil Nadu';
   const fromZip = storeSettings?.businessZip || '600001';
   const fromPhone = storeSettings?.supportPhone || '';
-  const fromEmail = storeSettings?.supportEmail || 'support@raaghas.in';
-  const fromWebsite = storeSettings?.websiteUrl || 'www.raaghas.in';
+  const fromEmail = storeSettings?.supportEmail || 'support@atlas.in';
+  const fromWebsite = storeSettings?.websiteUrl || 'www.atlas.in';
 
   return (
     <div className="slip-container" style={{ width: '15cm', minHeight: '9cm', height: 'auto', boxSizing: 'border-box', padding: '15px', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', color: '#000', fontFamily: 'sans-serif', margin: '0 auto', pageBreakInside: 'avoid' }}>

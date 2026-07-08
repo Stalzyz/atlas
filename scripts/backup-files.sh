@@ -1,5 +1,5 @@
 #!/bin/bash
-# File backup script for Raaghas Enterprise (uploads / media)
+# File backup script for Atlas Enterprise (uploads / media)
 # Schedule: daily at 2 AM via cron: 0 2 * * * /scripts/backup-files.sh >> /backups/logs/backup.log 2>&1
 # Retention: last 4 files | 7 daily | 4 weekly | 3 monthly
 
@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/.env.backup" 2>/dev/null || true
 
 # Source directories — UPLOAD_DIR from env, fallback to api/uploads
-UPLOAD_DIR="${UPLOAD_DIR:-/var/www/raaghas/apps/api/uploads}"
+UPLOAD_DIR="${UPLOAD_DIR:-/var/www/atlas/apps/api/uploads}"
 EXTRA_DIRS="${EXTRA_BACKUP_DIRS:-}"  # space-separated extra dirs
 
 BACKUP_DIR="${BACKUP_DIR:-/backups/files}"

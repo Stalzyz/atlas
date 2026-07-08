@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
-  <!-- Decorative top rule -->
-  <line x1="20" y1="14" x2="260" y2="14" stroke="#6D0F1B" stroke-width="0.5" opacity="0.4"/>
-  <!-- Brand Name -->
-  <text x="140" y="46" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" fill="#6D0F1B" text-anchor="middle" letter-spacing="8">RAAGHAS</text>
-  <!-- Decorative diamond separator -->
-  <text x="140" y="60" font-family="Georgia, serif" font-size="7" fill="#6D0F1B" text-anchor="middle" letter-spacing="2" opacity="0.7">◆ Est. 2022 ◆</text>
-  <!-- Decorative bottom rule -->
-  <line x1="20" y1="68" x2="260" y2="68" stroke="#6D0F1B" stroke-width="0.5" opacity="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 44" fill="none">
+  <!-- A mark -->
+  <path d="M22 4 L36 32 H30 L22 14 L14 32 H8 Z" fill="#DEACF5"/>
+  <path d="M12 26 H32" stroke="#DEACF5" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Wordmark -->
+  <text x="44" y="28" font-family="'Jost', 'DM Sans', sans-serif" font-size="20" font-weight="600" letter-spacing="6" fill="#DEACF5">ATLAS</text>
 </svg>

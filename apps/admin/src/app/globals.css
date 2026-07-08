@@ -1,4 +1,4 @@
-/* ─── Raaghas Admin — Global CSS ──────────────────────────────────────────
+/* ─── Atlas Admin — Global CSS ──────────────────────────────────────────
    Mirrors the storefront CSS variable system so both apps share
    the same brand tokens. Admin is always light-mode (no toggle),
    but variables make future dark-mode adoption trivial.
@@ -7,38 +7,52 @@
 /* ─── Light Mode (Default) ────────────────────────────────────────────── */
 :root {
   /* Brand */
-  --wine:       #6D0F1B;
-  --wine-light: #8C1C2A;
-  --wine-dark:  #4D0A13;
+  --wine:       #28104E;
+  --wine-light: #6237A0;
+  --wine-dark:  #180930;
+  --gold:       #9754CB;
 
-  /* Semantic (matches storefront layout.tsx injection) */
-  --primary:        #6D0F1B;
-  --bg:             #F8F7F6;
+  /* Semantic */
+  --primary:        #28104E;
+  --secondary:      #6237A0;
+  --cta:            #9754CB;
+  --accent-light:   #DEACF5;
+  --bg:             #FAFAFA;
   --surface:        #FFFFFF;
-  --text-primary:   #1A1A1A;
-  --text-secondary: #666666;
-  --border:         #EEEEEE;
-  --glass-bg:       rgba(255, 255, 255, 0.8);
-  --glass-border:   rgba(109, 15, 27, 0.1);
+  --text-primary:   #1A1A2E;
+  --text-secondary: #6B6B8A;
+  --border:         #E8E0F5;
+  --glass-bg:       rgba(222, 172, 245, 0.12);
+  --glass-border:   rgba(98, 55, 160, 0.18);
 
   /* Button */
-  --btn-radius: 0.75rem;
+  --btn-radius: 9999px;
+}
+
+/* ─── Selection Highlight ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(151, 84, 203, 0.3); /* Purple tint */
+  color: inherit;
 }
 
 /* ─── Dark Mode (opt-in, class-based) ─────────────────────────────────── */
 .dark {
-  --wine:       #8C1C2A;
-  --wine-light: #A3293B;
-  --wine-dark:  #6D0F1B;
+  --wine:       #6237A0;
+  --wine-light: #9754CB;
+  --wine-dark:  #28104E;
+  --gold:       #DEACF5;
 
-  --primary:        #8C1C2A;
-  --bg:             #111112;
-  --surface:        #1C1C1E;
-  --text-primary:   #F5F5F5;
-  --text-secondary: #A0A0A0;
-  --border:         #2C2C2E;
-  --glass-bg:       rgba(255, 255, 255, 0.05);
-  --glass-border:   rgba(255, 255, 255, 0.1);
+  --primary:        #6237A0;
+  --secondary:      #9754CB;
+  --cta:            #DEACF5;
+  --accent-light:   #DEACF5;
+  --bg:             #0D0718;
+  --surface:        #160D2A;
+  --text-primary:   #F0EAFF;
+  --text-secondary: #B8A8D8;
+  --border:         #2E1D54;
+  --glass-bg:       rgba(98, 55, 160, 0.15);
+  --glass-border:   rgba(151, 84, 203, 0.25);
 }
 
 @tailwind base;
@@ -53,11 +67,19 @@
 
   body {
     @apply bg-[var(--bg)] text-[var(--text-primary)] antialiased min-h-screen;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     @apply tracking-tight;
+    font-weight: 600;
+  }
+
+  /* Sidebar labels, table headers, badges — Jost */
+  .sidebar-label, th, .admin-badge,
+  [class*="uppercase"][class*="tracking"] {
+    font-family: 'Jost', 'DM Sans', sans-serif;
   }
 }
 
@@ -72,7 +94,7 @@
   /* Primary Action Button */
   .admin-btn-primary {
     @apply px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all active:scale-[0.98];
-    background-color: var(--primary);
+    background: linear-gradient(135deg, var(--secondary), var(--cta));
     color: var(--surface);
   }
   .admin-btn-primary:hover {

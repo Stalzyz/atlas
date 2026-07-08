@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ProcurementService } from './procurement.service';
-import { PurchaseStatus } from '@raaghas/database';
+import { PurchaseStatus } from '@atlas/database';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('procurement')

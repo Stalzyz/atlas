@@ -69,7 +69,7 @@ export default function PurchaseOrderDetails() {
     <div className="space-y-8">
       {/* Print-only Header */}
       <div className="hidden print:flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
-        <img src="/logo-dark.svg" alt="Raaghas Logo" className="h-16 w-auto object-contain" />
+        <img src="/logo-dark.svg" alt="Atlas Logo" className="h-16 w-auto object-contain" />
         <div className="text-right">
           <h2 className="text-2xl font-bold uppercase text-charcoal">Purchase Order</h2>
           <p className="text-gray-500 font-bold">#{displayId}</p>

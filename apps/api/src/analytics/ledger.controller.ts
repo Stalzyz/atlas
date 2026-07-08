@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Query, UseGuards, Req, UnauthorizedExcepti
 import { RolesGuard } from '../auth/roles.guard';
 import { AuthGuard } from '../auth/auth.guard';
 import { Roles } from '../auth/roles.decorator';
-import { UserRole } from '@raaghas/database';
+import { UserRole } from '@atlas/database';
 import { LedgerService } from './ledger.service';
 import { PrismaService } from '../prisma/prisma.service';
 

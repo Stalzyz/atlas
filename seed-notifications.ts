@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,7 @@ const DEFAULT_TEMPLATES = [
           <p>Total: ₹{{order.totalAmount}}</p>
         </div>
         <p>You'll receive another email once your order has shipped.</p>
-        <p>Best regards,<br/>The Raaghas Team</p>
+        <p>Best regards,<br/>The Atlas Team</p>
       </div>
     `,
     isActive: true
@@ -36,7 +36,7 @@ const DEFAULT_TEMPLATES = [
           <p><strong>Carrier:</strong> {{order.carrierName}}</p>
           <a href="{{order.trackingUrl}}" style="display: inline-block; background: #4A0E0E; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-top: 10px;">Track My Order</a>
         </div>
-        <p>Best regards,<br/>The Raaghas Team</p>
+        <p>Best regards,<br/>The Atlas Team</p>
       </div>
     `,
     isActive: true
@@ -58,7 +58,7 @@ const DEFAULT_TEMPLATES = [
           <li>Our courier partner will pick up the package within 2-3 business days.</li>
         </ol>
         <p>Once we receive and inspect the items, we will process your refund.</p>
-        <p>Best regards,<br/>The Raaghas Team</p>
+        <p>Best regards,<br/>The Atlas Team</p>
       </div>
     `,
     isActive: true
@@ -79,7 +79,7 @@ const DEFAULT_TEMPLATES = [
           <li>Our courier partner will pick up the package within 2-3 business days.</li>
         </ol>
         <p>Once we receive and inspect the items, we will process your refund.</p>
-        <p>Best regards,<br/>The Raaghas Team</p>
+        <p>Best regards,<br/>The Atlas Team</p>
       </div>
     `,
     isActive: true

@@ -1,15 +1,15 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — VPS FULL DEPLOY v6
+#  ATLAS — VPS FULL DEPLOY v6
 #  Syncs local code → VPS, rebuilds, restarts all services
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-REMOTE_DIR="/var/www/raaghas_new"
+REMOTE_DIR="/var/www/atlas_new"
 LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "🚀 RAAGHAS FULL DEPLOY v6"
+echo "🚀 ATLAS FULL DEPLOY v6"
 echo "   Local:  $LOCAL_DIR"
 echo "   Remote: root@$VPS_IP:$REMOTE_DIR"
 echo ""
@@ -36,7 +36,7 @@ echo ""
 # ──────────────────────────────────────────────────────────────────────────────
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE'
   set -e
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
 
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   echo "  Step 2: Fix PostgreSQL if needed"
@@ -54,13 +54,13 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE'
   sleep 3
 
   # Ensure DB user + schema exist
-  sudo -u postgres psql -c "ALTER USER raaghas_user WITH PASSWORD 'Raaghas@Prod2024';" 2>/dev/null || \
-  sudo -u postgres psql -c "CREATE USER raaghas_user WITH PASSWORD 'Raaghas@Prod2024';" 2>/dev/null || true
+  sudo -u postgres psql -c "ALTER USER atlas_user WITH PASSWORD 'Atlas@Prod2024';" 2>/dev/null || \
+  sudo -u postgres psql -c "CREATE USER atlas_user WITH PASSWORD 'Atlas@Prod2024';" 2>/dev/null || true
 
-  sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname = 'raaghas_db'" | grep -q 1 || \
-  sudo -u postgres psql -c "CREATE DATABASE raaghas_db OWNER raaghas_user;" || true
+  sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname = 'atlas_db'" | grep -q 1 || \
+  sudo -u postgres psql -c "CREATE DATABASE atlas_db OWNER atlas_user;" || true
 
-  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE raaghas_db TO raaghas_user;" || true
+  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE atlas_db TO atlas_user;" || true
 
   echo "✅ PostgreSQL ready."
 
@@ -68,7 +68,7 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE'
   echo "  Step 3: Prisma schema sync"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  export DATABASE_URL="postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas_db"
+  export DATABASE_URL="postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas_db"
   ./node_modules/.bin/prisma db push \
     --schema=packages/database/prisma/schema.prisma \
     --accept-data-loss
@@ -102,22 +102,22 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE'
   echo "  Step 5: Restart all PM2 services"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+  pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
 
-  DATABASE_URL="postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas_db" \
+  DATABASE_URL="postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas_db" \
   NODE_ENV=production PORT=6005 \
   pm2 start apps/api/dist/src/main.js \
-    --name raaghas-api \
+    --name atlas-api \
     --node-args="--max-old-space-size=512"
 
   NODE_ENV=production PORT=6010 \
   pm2 start apps/admin/.next/standalone/apps/admin/server.js \
-    --name raaghas-admin \
+    --name atlas-admin \
     --node-args="--max-old-space-size=512"
 
   NODE_ENV=production PORT=6009 \
   pm2 start apps/storefront/.next/standalone/apps/storefront/server.js \
-    --name raaghas-storefront \
+    --name atlas-storefront \
     --node-args="--max-old-space-size=512"
 
   pm2 save

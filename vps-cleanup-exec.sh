@@ -20,12 +20,12 @@ echo "✅ Caches cleaned."
 # 3. Clean old heavy backups (Keeping latest ones)
 echo "[3/7] Removing old heavy backups..."
 # Remove specific large files identified in the analysis
-rm -f /root/backups/raaghas/media_20260525_010001.tar.gz
-rm -f /root/backups/raaghas/media_20260524_010001.tar.gz
-rm -f /root/backups/raaghas/media_20260523_010001.tar.gz
-rm -f /root/backups/raaghas/media_20260526_010001.tar.gz # Wait, keep one? The latest was from 26th? Let's leave one if it exists.
+rm -f /root/backups/atlas/media_20260525_010001.tar.gz
+rm -f /root/backups/atlas/media_20260524_010001.tar.gz
+rm -f /root/backups/atlas/media_20260523_010001.tar.gz
+rm -f /root/backups/atlas/media_20260526_010001.tar.gz # Wait, keep one? The latest was from 26th? Let's leave one if it exists.
 # Wait, actually, let's keep the one from today, delete the rest.
-find /root/backups/raaghas -name "*.tar.gz" -mtime +1 -exec rm -f {} \; 2>/dev/null
+find /root/backups/atlas -name "*.tar.gz" -mtime +1 -exec rm -f {} \; 2>/dev/null
 find /var/www/grafty-send/backups/automated -name "*.tar.gz" -mtime +1 -exec rm -f {} \; 2>/dev/null
 rm -f /var/www/grafty-send/grafty_bsp/grafty_deploy_final.zip
 rm -f /root/grafty_bsp/grafty_deploy_final.zip
@@ -38,13 +38,13 @@ echo "✅ Old backups removed."
 
 # 4. Remove orphaned root node_modules
 echo "[4/7] Removing orphaned node_modules..."
-rm -rf /var/www/raaghas_new/node_modules
+rm -rf /var/www/atlas_new/node_modules
 # Intentionally keeping /var/www/grafty-send/node_modules for safety unless we know for sure it's unused.
 echo "✅ Orphaned node_modules removed."
 
-# 5. Prune old Raaghas deployments (Keep latest 2)
-echo "[5/7] Pruning old Raaghas deployments (keeping latest 2)..."
-cd /var/www/raaghas_new/releases/ 2>/dev/null && ls -t | tail -n +3 | xargs -I {} rm -rf {}
+# 5. Prune old Atlas deployments (Keep latest 2)
+echo "[5/7] Pruning old Atlas deployments (keeping latest 2)..."
+cd /var/www/atlas_new/releases/ 2>/dev/null && ls -t | tail -n +3 | xargs -I {} rm -rf {}
 echo "✅ Old deployments pruned."
 
 # 6. Clean broken symlinks

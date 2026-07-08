@@ -1,10 +1,10 @@
-const { PrismaClient } = require('@raaghas/database');
+const { PrismaClient } = require('@atlas/database');
 const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = 'admin@raaghas.in';
+  const email = 'admin@atlas.in';
   const newPass = 'admin123';
   const hashedPassword = await bcrypt.hash(newPass, 10);
   
@@ -18,7 +18,7 @@ async function main() {
       email,
       password: hashedPassword,
       role: 'SUPER_ADMIN',
-      name: 'Raaghas Admin'
+      name: 'Atlas Admin'
     }
   });
   console.log('Done seeding SUPER_ADMIN');

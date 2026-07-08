@@ -18,10 +18,10 @@ jobs:
             echo "=== PM2 STATUS ==="
             pm2 list
             echo "=== PM2 PROCESS INFO ==="
-            pm2 describe raaghas-admin | grep "Script path"
+            pm2 describe atlas-admin | grep "Script path"
             echo "=== CURRENT DIRECTORY ==="
-            ls -la /var/www/raaghas_new/current
+            ls -la /var/www/atlas_new/current
             echo "=== ADMIN NEXT EXPORT ==="
-            ls -la /var/www/raaghas_new/current/apps/admin/.next || echo "No .next"
+            ls -la /var/www/atlas_new/current/apps/admin/.next || echo "No .next"
             echo "=== CHECKING OrderDetailView on VPS ==="
-            grep -C 3 "ArrowRight" /var/www/raaghas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx || echo "Not found"
+            grep -C 3 "ArrowRight" /var/www/atlas_new/current/apps/admin/src/components/orders/OrderDetailView.tsx || echo "Not found"

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -7,8 +7,8 @@ async function main() {
   console.log('🌱 Starting Dummy Content Seeding...');
 
   // 1. Create Dummy Customer
-  const customerEmail = 'tester@raaghas.in';
-  const hashedPass = await bcrypt.hash('RaaghasTest2024!', 10);
+  const customerEmail = 'tester@atlas.in';
+  const hashedPass = await bcrypt.hash('AtlasTest2024!', 10);
   
   const customer = await prisma.user.upsert({
     where: { email: customerEmail },
@@ -61,7 +61,7 @@ async function main() {
         handle: p.handle,
         description: p.description,
         published: true,
-        vendor: 'Raaghas',
+        vendor: 'Atlas',
         variants: {
           create: [{ 
             sku: p.sku, 

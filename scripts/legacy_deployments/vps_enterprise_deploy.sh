@@ -1,19 +1,19 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS VPS-NATIVE ENTERPRISE DEPLOYMENT v3.0
+#  ATLAS VPS-NATIVE ENTERPRISE DEPLOYMENT v3.0
 #  Run this directly on your VPS.
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 RELEASES_DIR="$APP_ROOT/releases"
 CURRENT_LINK="$APP_ROOT/current"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$RELEASES_DIR/$RELEASE_NAME"
-GIT_REPO="https://github.com/raaghas/raaghas-monorepo.git" # Update if private
+GIT_REPO="https://github.com/atlas/atlas-monorepo.git" # Update if private
 
-echo "💎 RAAGHAS ENTERPRISE DEPLOY (VPS-NATIVE) — $TIMESTAMP"
+echo "💎 ATLAS ENTERPRISE DEPLOY (VPS-NATIVE) — $TIMESTAMP"
 
 # 1. Environment Setup
 REMOTE_ENV=""
@@ -48,7 +48,7 @@ cp "$REMOTE_ENV" apps/api/.env
 DATABASE_URL="$DATABASE_URL" ./node_modules/.bin/prisma migrate deploy --schema=packages/database/prisma/schema.prisma
 
 echo "🔨 Building Monorepo..."
-DATABASE_URL="$DATABASE_URL" npx turbo build --filter=raaghas-api --filter=admin --filter=storefront
+DATABASE_URL="$DATABASE_URL" npx turbo build --filter=atlas-api --filter=admin --filter=storefront
 
 echo "🛠️ Asset Injection..."
 cp -r apps/admin/.next/static apps/admin/.next/standalone/apps/admin/.next/static 2>/dev/null || true
@@ -62,11 +62,11 @@ ln -sfn "$RELEASE_PATH" "$CURRENT_LINK"
 
 # 5. Restart Services
 echo "🚀 Restarting PM2..."
-pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
 cd "$CURRENT_LINK"
-NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name raaghas-api
-NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin
-NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront
+NODE_ENV=production PORT=6005 pm2 start apps/api/dist/src/main.js --name atlas-api
+NODE_ENV=production PORT=6010 pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin
+NODE_ENV=production PORT=6009 pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront
 pm2 save
 
 # 6. Cleanup

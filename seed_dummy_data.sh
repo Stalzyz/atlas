@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — NUCLEAR SEED & SYNC (Expert Analyst Version)
+#  ATLAS — NUCLEAR SEED & SYNC (Expert Analyst Version)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 set -euo pipefail
@@ -11,7 +11,7 @@ SCHEMA_PATH="packages/database/prisma/schema.prisma"
 echo "☢️  OVERWRITING VPS SCHEMA WITH LOCAL TRUTH..."
 
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << 'REMOTE_SYNC'
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
   mkdir -p packages/database/prisma
 
   # Overwrite with perfect schema (Injecting full local content)
@@ -339,13 +339,13 @@ model Section {
 
 model ThemeSettings {
   id             String   @id @default("global")
-  storeName      String   @default("Raaghas")
+  storeName      String   @default("Atlas")
   logoLight      String?
   logoDark       String?
   faviconLight   String?
   faviconDark    String?
   defaultThemeMode String  @default("LIGHT")
-  primaryColor   String   @default("#701A31")
+  primaryColor   String   @default("#28104E")
   secondaryColor String   @default("#F4F1ED")
   fontHeading    String   @default("serif")
   fontBody       String   @default("sans")
@@ -505,7 +505,7 @@ model DiscountUsage {
 
 model StoreSettings {
   id              String  @id @default("global")
-  storeName       String  @default("Raaghas")
+  storeName       String  @default("Atlas")
   logoUrl         String?
   supportEmail    String?
   supportPhone    String?
@@ -810,7 +810,7 @@ async function main() {
   console.log('🚀 Starting Seeding Process...');
 
   const customerEmail = 'customer@example.com';
-  const hashedPass = await bcrypt.hash('RaaghasUser2024!', 10);
+  const hashedPass = await bcrypt.hash('AtlasUser2024!', 10);
   
   const customer = await prisma.user.upsert({
     where: { email: customerEmail },
@@ -849,7 +849,7 @@ async function main() {
         title: p.title,
         handle: p.handle,
         published: true,
-        vendor: 'Raaghas',
+        vendor: 'Atlas',
         variants: { create: [{ sku: "SKU-" + p.handle.toUpperCase(), price: p.price, inventory: 50 }] },
         collections: { connect: { id: p.col } }
       }

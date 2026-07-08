@@ -728,16 +728,21 @@ export class OrdersService {
   }, tx?: any) {
     const executeOrderCreation = async (txn: any) => {
       // Resolve user
-      let userId: string | undefined;
-      if ((data as any).userId) {
-        userId = (data as any).userId;
-      } else if (data.clerkId) {
-        const user = await txn.user.findUnique({ where: { clerkId: data.clerkId } });
+      let userId: string | undefined = data.userId;
+      let clerkId: string | undefined = data.clerkId;
+
+      if (userId && userId.startsWith('user_')) {
+        clerkId = userId;
+        userId = undefined;
+      }
+
+      if (!userId && clerkId) {
+        const user = await txn.user.findUnique({ where: { clerkId } });
         if (user) userId = user.id;
       }
 
       if (!userId) {
-        const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.raaghas.in`;
+        const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.in`;
         const email = data.customerEmail ? data.customerEmail.toLowerCase().trim() : fallbackEmail;
         let user = await txn.user.findFirst({ 
           where: { 
@@ -754,6 +759,7 @@ export class OrdersService {
           try {
             user = await txn.user.create({
               data: {
+                clerkId,
                 email,
                 name: data.customerName || 'Guest Customer',
                 phone: data.customerPhone || '',
@@ -800,7 +806,7 @@ export class OrdersService {
         };
       }));
 
-      const generatedOrderId = `RAAGHAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
+      const generatedOrderId = `ATLAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
 
       const order = await txn.order.create({
         data: {
@@ -873,22 +879,30 @@ export class OrdersService {
 
     // 2. USER RESOLUTION
     let userId = data.userId;
+    let clerkId = data.clerkId;
+
+    // If userId looks like a clerkId (e.g. user_2X...), use it for clerkId resolution instead
+    if (userId && userId.startsWith('user_')) {
+      clerkId = userId;
+      userId = undefined;
+    }
+
     if (!userId) {
-      const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.raaghas.in`;
+      const fallbackEmail = `${data.customerPhone.replace(/\\D/g, "")}@guest.atlas.in`;
       const email = data.customerEmail ? data.customerEmail.toLowerCase().trim() : fallbackEmail;
-      if (data.clerkId) {
-        let user = await prisma.user.findUnique({ where: { clerkId: data.clerkId } });
+      if (clerkId) {
+        let user = await prisma.user.findUnique({ where: { clerkId } });
         if (!user && email) {
           user = await prisma.user.findUnique({ where: { email } });
           if (user) {
-            await prisma.user.update({ where: { id: user.id }, data: { clerkId: data.clerkId } });
+            await prisma.user.update({ where: { id: user.id }, data: { clerkId } });
           }
         }
         if (!user) {
           user = await prisma.user.create({
             data: {
-              clerkId: data.clerkId,
-              email: email || data.clerkId,
+              clerkId,
+              email: email || clerkId,
               name: data.customerName || 'Guest Customer',
               phone: data.customerPhone || '',
               role: 'CUSTOMER',
@@ -945,7 +959,7 @@ export class OrdersService {
       country: sa.country || 'India',
     };
 
-    const generatedOrderId = `RAAGHAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
+    const generatedOrderId = `ATLAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
 
     const order = await prisma.order.create({
       data: {
@@ -991,11 +1005,21 @@ export class OrdersService {
     });
     const formatted = `${prefix}${confirmedCount + 1001}${suffix}`;
     
-    return await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: { id: order.id },
       data: { formattedOrderNumber: formatted },
       include: { items: true }
     });
+    
+    // Auto-process loyalty/referral if immediately confirmed (e.g. COD, 100% Wallet)
+    if (updatedOrder.status === 'CONFIRMED' && updatedOrder.userId) {
+      setImmediate(() => {
+        this.growthService.processReferralReward(updatedOrder.userId!, updatedOrder.id).catch(() => {});
+        this.growthService.processLoyaltyPoints(updatedOrder.userId!, updatedOrder.id).catch(() => {});
+      });
+    }
+
+    return updatedOrder;
   }
 
   async sendOrderConfirmationEmail(orderId: string) {
@@ -1028,11 +1052,11 @@ export class OrdersService {
       invoiceNumber: (order.formattedOrderNumber || `INV-${order.id.slice(-6).toUpperCase()}`),
       date: order.createdAt.toISOString(),
       seller: { 
-        name: settings?.storeName || 'Raaghas', 
+        name: settings?.storeName || 'Atlas', 
         address: settings?.businessAddress || 'Salem, India', 
         state: settings?.businessState || 'Telangana', 
         gst: settings?.gstNumber || '33AABCU9603R1ZX', 
-        email: settings?.supportEmail || 'info@raaghas.com' 
+        email: settings?.supportEmail || 'info@atlas.com' 
       },
       buyer: { 
         name: order.customerName, 
@@ -1057,7 +1081,7 @@ export class OrdersService {
       },
       bankDetails: { 
         bankName: 'HDFC Bank', 
-        accountName: 'Raaghas', 
+        accountName: 'Atlas', 
         accountNumber: '50200012345678', 
         ifscCode: 'HDFC0001234' 
       }
@@ -1110,7 +1134,7 @@ export class OrdersService {
       };
     }));
 
-    const generatedOrderId = `RAAGHAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
+    const generatedOrderId = `ATLAS-${Math.floor(Date.now() / 1000).toString(36).toUpperCase()}${Math.floor(Math.random() * 10000).toString(36).toUpperCase()}`;
 
     const order = await this.prisma.$transaction(async (tx) => {
       const newOrder = await tx.order.create({
@@ -1376,7 +1400,7 @@ export class OrdersService {
     for (const order of abandonedOrders) {
       if (!order.customerEmail) continue;
       
-      const checkoutUrl = `${process.env.FRONTEND_URL || 'https://raaghas.in'}/checkout/${order.id}`;
+      const checkoutUrl = `${process.env.FRONTEND_URL || 'https://atlas.in'}/checkout/${order.id}`;
       
       await this.mailService.sendAbandonedCartEmail(
         order.customerEmail,

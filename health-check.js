@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 async function runHealthAudit() {
   console.log('╔══════════════════════════════════════════════════════════════╗');
-  console.log('║  RAAGHAS COMMERCE STATE AUDIT                               ║');
+  console.log('║  ATLAS COMMERCE STATE AUDIT                               ║');
   console.log('╚══════════════════════════════════════════════════════════════╝');
   console.log(`Time: ${new Date().toISOString()}\n`);
 

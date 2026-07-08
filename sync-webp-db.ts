@@ -1,10 +1,10 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 import * as fs from 'fs';
 import * as path from 'path';
 
 const prisma = new PrismaClient();
-const UPLOADS_DIR = '/var/www/raaghas_new/shared/uploads';
-const BASE_URL = 'https://api.raaghas.in/uploads';
+const UPLOADS_DIR = '/var/www/atlas_new/shared/uploads';
+const BASE_URL = 'https://api.atlas.in/uploads';
 
 async function syncMedia() {
   console.log('🔍 Starting Media Database Sync...');

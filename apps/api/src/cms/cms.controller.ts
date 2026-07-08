@@ -21,7 +21,7 @@ const DEFAULT_THEME_CONFIG = {
   fontBody: "sans",
   buttonRadius: "0.5rem",
   light: {
-    primaryColor: "#701A31",
+    primaryColor: "#28104E",
     bg: "#FDFBF7",
     surface: "#FFFFFF",
     textPrimary: "#1A1A1A",
@@ -74,7 +74,7 @@ const DEFAULT_FOOTER_CONFIG = {
   ],
   socials: { show: true },
   bottomBar: {
-    copyright: "© 2024 Raaghas. All rights reserved.",
+    copyright: "© 2024 Atlas. All rights reserved.",
     showPaymentIcons: true
   }
 };
@@ -84,12 +84,12 @@ const POLICY_PAGES = [
   {
     handle: 'privacy-policy',
     title: 'Privacy Policy',
-    metaTitle: 'Privacy Policy | Raaghas Clothing',
-    metaDescription: 'Raaghas Clothing privacy policy – how we collect, use, and protect your personal information.',
+    metaTitle: 'Privacy Policy | Atlas Clothing',
+    metaDescription: 'Atlas Clothing privacy policy – how we collect, use, and protect your personal information.',
     sections: [
       {
         title: 'Introduction',
-        content: '<p>At Raaghas Clothing, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you shop with us, visit our website, or contact our support team.</p>'
+        content: '<p>At Atlas Clothing, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you shop with us, visit our website, or contact our support team.</p>'
       },
       {
         title: '1. Information We Collect',
@@ -117,7 +117,7 @@ const POLICY_PAGES = [
       },
       {
         title: "7. Children's Privacy",
-        content: "<p>Raaghas Clothing does not knowingly collect data from children under 13. If a parent or guardian believes their child has provided information, please contact us immediately.</p>"
+        content: "<p>Atlas Clothing does not knowingly collect data from children under 13. If a parent or guardian believes their child has provided information, please contact us immediately.</p>"
       },
       {
         title: '8. Changes to This Privacy Policy',
@@ -125,23 +125,23 @@ const POLICY_PAGES = [
       },
       {
         title: '9. Contact Us',
-        content: '<p>If you have any questions about our Privacy Policy or how your data is used, feel free to reach out:</p><p>📧 <a href="mailto:contact@raaghas.in">contact@raaghas.in</a><br/>📱 WhatsApp: +91 89460 11689</p><p>We\'re always here to help you.</p>'
+        content: '<p>If you have any questions about our Privacy Policy or how your data is used, feel free to reach out:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📱 WhatsApp: +91 89460 11689</p><p>We\'re always here to help you.</p>'
       }
     ]
   },
   {
     handle: 'terms-and-conditions',
     title: 'Terms & Conditions',
-    metaTitle: 'Terms & Conditions | Raaghas Clothing',
-    metaDescription: 'Read Raaghas Clothing\'s terms and conditions for shopping, payments, shipping, returns, and more.',
+    metaTitle: 'Terms & Conditions | Atlas Clothing',
+    metaDescription: 'Read Atlas Clothing\'s terms and conditions for shopping, payments, shipping, returns, and more.',
     sections: [
       {
         title: 'Welcome',
-        content: '<p>Welcome to Raaghas Clothing. By accessing or using our website, you agree to the following Terms &amp; Conditions. Please read them carefully before making any purchase or using our services.</p><p><em>Last Updated: 04-12-2025</em></p>'
+        content: '<p>Welcome to Atlas Clothing. By accessing or using our website, you agree to the following Terms &amp; Conditions. Please read them carefully before making any purchase or using our services.</p><p><em>Last Updated: 04-12-2025</em></p>'
       },
       {
         title: '1. General',
-        content: '<p>By using this website, you confirm that you are at least 18 years old or using the site under the supervision of a parent/guardian.</p><p>Raaghas Clothing reserves the right to update, modify, or change these terms at any time.</p>'
+        content: '<p>By using this website, you confirm that you are at least 18 years old or using the site under the supervision of a parent/guardian.</p><p>Atlas Clothing reserves the right to update, modify, or change these terms at any time.</p>'
       },
       {
         title: '2. Products & Services',
@@ -149,11 +149,11 @@ const POLICY_PAGES = [
       },
       {
         title: '3. Ordering & Payment',
-        content: '<p>All orders placed on our website are subject to acceptance and availability.</p><p>We accept online payments through trusted payment gateways.</p><p>Raaghas Clothing reserves the right to cancel or refuse any order due to stock issues, payment errors, or suspicious activity.</p>'
+        content: '<p>All orders placed on our website are subject to acceptance and availability.</p><p>We accept online payments through trusted payment gateways.</p><p>Atlas Clothing reserves the right to cancel or refuse any order due to stock issues, payment errors, or suspicious activity.</p>'
       },
       {
         title: '4. Shipping & Delivery',
-        content: '<p>Orders are shipped within the mentioned processing time on the website/product page.</p><p>Delivery timelines may vary based on location, courier delays, or unforeseen events.</p><p>Raaghas Clothing is not responsible for delays caused by courier companies.</p>'
+        content: '<p>Orders are shipped within the mentioned processing time on the website/product page.</p><p>Delivery timelines may vary based on location, courier delays, or unforeseen events.</p><p>Atlas Clothing is not responsible for delays caused by courier companies.</p>'
       },
       {
         title: '5. Returns, Exchanges & Cancellation',
@@ -165,7 +165,7 @@ const POLICY_PAGES = [
       },
       {
         title: '7. Intellectual Property',
-        content: '<p>All content including logos, designs, images, text, and graphics are the property of Raaghas Clothing.</p><p>Any unauthorized copying, use, or distribution is strictly prohibited.</p>'
+        content: '<p>All content including logos, designs, images, text, and graphics are the property of Atlas Clothing.</p><p>Any unauthorized copying, use, or distribution is strictly prohibited.</p>'
       },
       {
         title: '8. User Responsibilities',
@@ -173,7 +173,7 @@ const POLICY_PAGES = [
       },
       {
         title: '9. Limitation of Liability',
-        content: '<p>Raaghas Clothing is not responsible for any direct or indirect damages due to website use, delayed orders, or product issues beyond our control.</p><p>We ensure quality but cannot guarantee that the website will be error-free or uninterrupted.</p>'
+        content: '<p>Atlas Clothing is not responsible for any direct or indirect damages due to website use, delayed orders, or product issues beyond our control.</p><p>We ensure quality but cannot guarantee that the website will be error-free or uninterrupted.</p>'
       },
       {
         title: '10. Third-Party Links',
@@ -185,19 +185,19 @@ const POLICY_PAGES = [
       },
       {
         title: '12. Contact Us',
-        content: '<p>For queries or support:</p><p>📧 <a href="mailto:contact@raaghas.in">contact@raaghas.in</a><br/>📍 Bangalore | Salem</p>'
+        content: '<p>For queries or support:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📍 Bangalore | Salem</p>'
       }
     ]
   },
   {
     handle: 'return-policy',
     title: 'Return & Refund Policy',
-    metaTitle: 'Return & Refund Policy | Raaghas Clothing',
-    metaDescription: 'Raaghas Clothing return and refund policy – learn about our hassle-free return process for luxury ethnic wear.',
+    metaTitle: 'Return & Refund Policy | Atlas Clothing',
+    metaDescription: 'Atlas Clothing return and refund policy – learn about our hassle-free return process for luxury ethnic wear.',
     sections: [
       {
         title: 'Overview',
-        content: '<p>At Raaghas, every piece is crafted with meticulous care. We understand that shopping online can sometimes lead to uncertainty about fit, fabric, or colour. Our return policy is designed to make your experience as smooth and fair as possible.</p>'
+        content: '<p>At Atlas, every piece is crafted with meticulous care. We understand that shopping online can sometimes lead to uncertainty about fit, fabric, or colour. Our return policy is designed to make your experience as smooth and fair as possible.</p>'
       },
       {
         title: 'Eligibility for Returns',
@@ -209,11 +209,11 @@ const POLICY_PAGES = [
       },
       {
         title: 'How to Initiate a Return',
-        content: '<ol><li>Email us at <a href="mailto:contact@raaghas.in">contact@raaghas.in</a> within 7 days of delivery with your order ID, photos of the issue, and reason for return.</li><li>Our team will review your request and respond within 48 business hours.</li><li>Once approved, we\'ll share a return shipping label or schedule a pickup (available in select pincodes).</li><li>Pack the item securely in its original packaging with all tags intact.</li><li>Upon receiving and inspecting the item, we\'ll process your refund or exchange.</li></ol>'
+        content: '<ol><li>Email us at <a href="mailto:contact@atlas.in">contact@atlas.in</a> within 7 days of delivery with your order ID, photos of the issue, and reason for return.</li><li>Our team will review your request and respond within 48 business hours.</li><li>Once approved, we\'ll share a return shipping label or schedule a pickup (available in select pincodes).</li><li>Pack the item securely in its original packaging with all tags intact.</li><li>Upon receiving and inspecting the item, we\'ll process your refund or exchange.</li></ol>'
       },
       {
         title: 'Refunds',
-        content: '<p>Once your return is received and inspected, we will notify you of the approval or rejection of your refund.</p><p>Approved refunds will be processed within <strong>5–7 business days</strong> back to the original payment method. For UPI and wallet payments, refunds are typically credited within 2–3 business days.</p><p>If you paid via Cash on Delivery, the refund will be issued as Raaghas Store Credits usable on future orders.</p>'
+        content: '<p>Once your return is received and inspected, we will notify you of the approval or rejection of your refund.</p><p>Approved refunds will be processed within <strong>5–7 business days</strong> back to the original payment method. For UPI and wallet payments, refunds are typically credited within 2–3 business days.</p><p>If you paid via Cash on Delivery, the refund will be issued as Atlas Store Credits usable on future orders.</p>'
       },
       {
         title: 'Exchanges',
@@ -221,7 +221,7 @@ const POLICY_PAGES = [
       },
       {
         title: 'Contact Us',
-        content: '<p>For any queries regarding returns or refunds, please reach out to us:</p><p>📧 <a href="mailto:contact@raaghas.in">contact@raaghas.in</a><br/>📱 WhatsApp: +91 89460 11689<br/>🕐 Monday – Saturday, 10am – 6pm IST</p>'
+        content: '<p>For any queries regarding returns or refunds, please reach out to us:</p><p>📧 <a href="mailto:contact@atlas.in">contact@atlas.in</a><br/>📱 WhatsApp: +91 89460 11689<br/>🕐 Monday – Saturday, 10am – 6pm IST</p>'
       }
     ]
   }
@@ -253,12 +253,12 @@ export class CmsController {
       return await this.prisma.$transaction(async (tx) => {
         // 2. Update Theme Settings (Global)
         const themeData = {
-          storeName: data.theme.storeName || 'Raaghas',
+          storeName: data.theme.storeName || 'Atlas',
           config: data.theme.config || {},
           footerConfig: data.theme.footerConfig || undefined,
           logoLight: data.theme.config?.logoLight,
           logoDark: data.theme.config?.logoDark,
-          primaryColor: data.theme.config?.light_primaryColor || '#701A31',
+          primaryColor: data.theme.config?.light_primaryColor || '#28104E',
         };
 
         await tx.themeSettings.upsert({
@@ -417,7 +417,7 @@ export class CmsController {
 
   /**
    * Seed or reset the standard policy pages (Privacy, Terms, Returns).
-   * This uses the official policy content as provided by Raaghas Clothing.
+   * This uses the official policy content as provided by Atlas Clothing.
    * Safe to run multiple times — it will delete & recreate to stay idempotent.
    */
   @Post('pages/seed-policies')
@@ -472,13 +472,13 @@ export class CmsController {
     const page = await this.prisma.page.upsert({
       where: { handle },
       update: { 
-        title: 'Raaghas Home', 
+        title: 'Atlas Home', 
         type: 'LANDING',
         status: 'PUBLISHED'
       },
       create: { 
         handle, 
-        title: 'Raaghas Home', 
+        title: 'Atlas Home', 
         type: 'LANDING',
         status: 'PUBLISHED'
       }
@@ -486,79 +486,7 @@ export class CmsController {
 
     await this.prisma.section.deleteMany({ where: { pageId: page.id } });
     
-    const sections = [
-      {
-        type: 'HERO',
-        order: 0,
-        content: {
-          variant: "aesthetic",
-          headline: "Office Elegance.\\nKalamkari Art.",
-          subheadline: "Hand-painted kurtis crafted for the modern workspace. Graceful, breathable, and unmistakably Raaghas.",
-          primaryCta: { text: "Shop Office Wear", link: "/collections/office-wear" },
-          secondaryCta: { text: "View Kalamkari", link: "/collections/kalamkari" },
-          uiElements: [
-            { x: 82, y: 18, size: 1.1, opacity: 0.8, speed: 0.5, iconName: "KalamkariFlower", shape: "circle", text: "OFFICE", subtext: "LUXURY" },
-            { x: 18, y: 78, size: 0.9, opacity: 0.7, speed: 0.3, iconName: "LuxuryHanger", shape: "rounded", text: "10% OFF", subtext: "NEW ORDER" }
-          ],
-          fabrics: [
-            { x: 25, y: 35, opacity: 0.12, speed: 0.2, scale: 1.1 },
-            { x: 72, y: 62, opacity: 0.1, speed: 0.3, scale: 1.3 }
-          ]
-        }
-      },
-      {
-        type: 'TRUST_BAR',
-        order: 1,
-        content: {
-          items: [
-            { icon: "Truck", text: "Free Shipping on First Order" },
-            { icon: "CheckCircle", text: "100% Authentic Kalamkari" },
-            { icon: "Clock", text: "7-Day Easy Exchange" },
-            { icon: "Shield", text: "Safe & Secure Checkout" }
-          ]
-        }
-      },
-      {
-        type: 'PRODUCT_GRID',
-        order: 2,
-        content: {
-          title: "Trending Office Essentials",
-          count: 4,
-          collectionHandle: "office-wear"
-        }
-      },
-      {
-        type: 'DEAL_BANNER',
-        order: 3,
-        content: {
-          headline: "EXCLUSIVE WELCOME OFFER",
-          subtext: "Get Flat 10% OFF on your first purchase. Use Code: RAAGHAS10",
-          ctaText: "Claim My Discount",
-          ctaLink: "/collections/all"
-        }
-      },
-      {
-        type: 'SOCIAL_PROOF',
-        order: 4,
-        content: {
-          headline: "The Raaghas Woman",
-          subtext: "Join thousands of professionals who choose grace for their workday.",
-          items: [
-            { image: "https://images.unsplash.com/photo-1594235412402-b1ed2efaa873?q=80&w=400", name: "Riya", city: "Bangalore" },
-            { image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=400", name: "Ananya", city: "Mumbai" }
-          ]
-        }
-      },
-      {
-        type: 'INSTAGRAM_FEED',
-        order: 5,
-        content: {
-          headline: "Follow Our Story",
-          url: "https://instagram.com/raaghas.official",
-          handleText: "@raaghas.official"
-        }
-      }
-    ];
+    const sections: any[] = [];
 
     await this.prisma.section.createMany({
       data: sections.map(s => ({
@@ -640,7 +568,7 @@ export class CmsController {
       theme = await this.prisma.themeSettings.create({
         data: { 
           id: 'global',
-          storeName: 'Raaghas',
+          storeName: 'Atlas',
           primaryColor: DEFAULT_THEME_CONFIG.light.primaryColor,
           fontHeading: DEFAULT_THEME_CONFIG.fontHeading,
           fontBody: DEFAULT_THEME_CONFIG.fontBody,
@@ -686,7 +614,7 @@ export class CmsController {
     // We store the full config object in the JSON field to never lose data,
     // while also updating the top-level searchable/standard fields.
     const flatData = {
-      storeName: data.storeName || c.storeName || 'Raaghas',
+      storeName: data.storeName || c.storeName || 'Atlas',
       logoLight: c.logoLight,
       logoDark: c.logoDark,
       faviconLight: c.faviconLight,
@@ -695,7 +623,7 @@ export class CmsController {
       fontHeading: c.fontHeading || 'serif',
       fontBody: c.fontBody || 'sans',
       buttonRadius: c.buttonRadius || '0.5rem',
-      primaryColor: c.light_primaryColor || c.light?.primaryColor || '#701A31',
+      primaryColor: c.light_primaryColor || c.light?.primaryColor || '#28104E',
       customFooterHtml: c.customFooterHtml,
       customGlobalCss: c.customGlobalCss,
       config: c, // Save the whole thing!
@@ -779,7 +707,7 @@ export class CmsController {
        throw new BadRequestException('File not uploaded');
     }
      
-    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.raaghas.in");
+    let baseUrl = process.env.API_URL || (process.env.NODE_ENV === 'development' ? "http://localhost:6005" : "https://api.atlas.in");
     baseUrl = baseUrl.replace(/\/$/, "");
     
     // Perform "Monster Level" optimization

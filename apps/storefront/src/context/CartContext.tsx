@@ -40,13 +40,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Load from LocalStorage
   useEffect(() => {
-    const saved = localStorage.getItem("raaghas_cart");
+    const saved = localStorage.getItem("atlas_cart");
     if (saved && saved !== "undefined") {
       try {
         setItems(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse cart", e);
-        localStorage.removeItem("raaghas_cart");
+        localStorage.removeItem("atlas_cart");
       }
     }
     setIsInitialized(true);
@@ -55,7 +55,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Save to LocalStorage
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem("raaghas_cart", JSON.stringify(items));
+      localStorage.setItem("atlas_cart", JSON.stringify(items));
     }
   }, [items, isInitialized]);
 

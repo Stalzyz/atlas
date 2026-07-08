@@ -13,7 +13,7 @@ function walkDir(dir, callback) {
   });
 }
 
-walkDir('/Users/stalinkumar/Documents/Raaghas_website/apps', (filePath) => {
+walkDir('/Users/stalinkumar/Documents/Atlas_website/apps', (filePath) => {
   let content = fs.readFileSync(filePath, 'utf8');
   let original = content;
 

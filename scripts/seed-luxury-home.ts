@@ -1,4 +1,4 @@
-import { PrismaClient } from '@raaghas/database';
+import { PrismaClient } from '@atlas/database';
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,7 @@ async function main() {
       content: {
         variant: "aesthetic",
         headline: "Luxury\\nMeets Modern.",
-        description: "RAAGHAS CURATED 2026",
+        description: "ATLAS CURATED 2026",
         subheadline: "Hand-crafted silks and intricate Kalamkari motifs reimagined for the contemporary woman.",
         image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1200",
         primaryCta: { text: "Discover Collection", link: "/collections/silk" },

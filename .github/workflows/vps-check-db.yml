@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cd /var/www/raaghas_new/current
+            cd /var/www/atlas_new/current
             cat << 'SCRIPT' > check_db.ts
             const { PrismaClient } = require('./packages/database/generated-client');
             const prisma = new PrismaClient();

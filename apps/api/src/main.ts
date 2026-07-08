@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
-import { Prisma } from '@raaghas/database';
+import { Prisma } from '@atlas/database';
 
 // ─── Global Serialization Patch (500% Sure) ──────────────────────────────────
 // Prisma 7 Decimal and BigInt are not JSON-serializable by default.
@@ -72,11 +72,11 @@ async function bootstrap() {
   
   // 1. MUST BE FIRST: Enable CORS with Strict Whitelist
   const whitelist = [
-    'https://raaghas.in',
-    'https://admin.raaghas.in',
-    'https://api.raaghas.in',
-    'http://localhost:6001',
-    'http://localhost:6002',
+    'https://atlas.in',
+    'https://admin.atlas.in',
+    'https://api.atlas.in',
+    'http://localhost:4401',
+    'http://localhost:4402',
     'http://localhost:6005',
   ];
 
@@ -118,9 +118,9 @@ async function bootstrap() {
   
   const startApp = async (retry = true) => {
     try {
-      console.log(`🚀 Raaghas API attempting to bind to port ${port}...`);
+      console.log(`🚀 Atlas API attempting to bind to port ${port}...`);
       await app.listen(port);
-      console.log(`✅ Raaghas API is fully operational on: http://localhost:${port}/api/v1`);
+      console.log(`✅ Atlas API is fully operational on: http://localhost:${port}/api/v1`);
     } catch (err: any) {
       if (retry && err.code === 'EADDRINUSE') {
         console.warn(`⚠️  Port ${port} is occupied. Attempting self-healing...`);

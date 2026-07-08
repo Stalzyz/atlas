@@ -138,7 +138,7 @@ export class NotificationsService {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raaghas</title>
+  <title>Atlas</title>
 </head>
 <body style="margin:0;padding:0;background:#F7F3EF;font-family:'Georgia',serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F3EF;padding:30px 0;">
@@ -148,7 +148,7 @@ export class NotificationsService {
         <!-- HEADER -->
         <tr>
           <td style="background:#ffffff;padding:28px 40px 20px;border-bottom:3px solid #7B1C1C;text-align:center;">
-            <span style="font-family:'Georgia',serif;font-size:28px;font-weight:bold;color:#7B1C1C;letter-spacing:4px;text-transform:uppercase;">RAAGHAS</span>
+            <span style="font-family:'Georgia',serif;font-size:28px;font-weight:bold;color:#7B1C1C;letter-spacing:4px;text-transform:uppercase;">ATLAS</span>
             <div style="font-size:11px;color:#B8860B;letter-spacing:3px;margin-top:4px;text-transform:uppercase;">The Art of Tradition</div>
           </td>
         </tr>
@@ -160,15 +160,15 @@ export class NotificationsService {
         <tr>
           <td style="background:#2C1010;padding:28px 40px;text-align:center;">
             <div style="margin-bottom:16px;">
-              <a href="https://instagram.com/raaghas.in" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Instagram</a>
+              <a href="https://instagram.com/atlas.in" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Instagram</a>
               <span style="color:#7B1C1C;">|</span>
-              <a href="https://facebook.com/raaghas" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Facebook</a>
+              <a href="https://facebook.com/atlas" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">Facebook</a>
               <span style="color:#7B1C1C;">|</span>
               <a href="https://wa.me/919876543210" style="display:inline-block;margin:0 8px;color:#B8860B;font-size:12px;text-decoration:none;letter-spacing:1px;">WhatsApp</a>
             </div>
             <div style="font-size:11px;color:#888;line-height:1.8;">
-              © ${new Date().getFullYear()} Raaghas — All rights reserved<br/>
-              <a href="https://raaghas.in" style="color:#B8860B;text-decoration:none;">raaghas.in</a>
+              © ${new Date().getFullYear()} Atlas — All rights reserved<br/>
+              <a href="https://atlas.in" style="color:#B8860B;text-decoration:none;">atlas.in</a>
             </div>
           </td>
         </tr>
@@ -189,7 +189,7 @@ export class NotificationsService {
     const greeting = (name: string) =>
       `<p style="font-size:16px;color:#3D1515;margin-bottom:8px;">Dear <strong>{{${name}}}</strong>,</p>`;
 
-    const sign = `<p style="font-size:14px;color:#666;margin-top:32px;line-height:1.8;">With warmth,<br/><strong style="color:#7B1C1C;">The Raaghas Team</strong></p>`;
+    const sign = `<p style="font-size:14px;color:#666;margin-top:32px;line-height:1.8;">With warmth,<br/><strong style="color:#7B1C1C;">The Atlas Team</strong></p>`;
 
     const orderBox = (fields: { label: string; value: string }[]) => `
       <div style="background:#FBF7F3;border:1px solid #E8D8C8;border-radius:12px;padding:20px 28px;margin:24px 0;">
@@ -206,15 +206,15 @@ export class NotificationsService {
     const accountConfirmBody = base(`
       <div style="text-align:center;margin-bottom:24px;">
         <div style="font-size:48px;">🌸</div>
-        <h1 style="font-size:24px;color:#7B1C1C;margin:8px 0;letter-spacing:1px;">Welcome to Raaghas!</h1>
+        <h1 style="font-size:24px;color:#7B1C1C;margin:8px 0;letter-spacing:1px;">Welcome to Atlas!</h1>
         <p style="color:#B8860B;font-size:13px;letter-spacing:2px;text-transform:uppercase;">Your account is confirmed</p>
       </div>
       ${greeting('customerName')}
-      <p style="font-size:15px;color:#444;line-height:1.8;">We're so glad you're here. Your Raaghas account has been successfully created. You're now part of a community that celebrates the timeless beauty of Indian luxury fashion.</p>
+      <p style="font-size:15px;color:#444;line-height:1.8;">We're so glad you're here. Your Atlas account has been successfully created. You're now part of a community that celebrates the timeless beauty of Indian luxury fashion.</p>
       <p style="font-size:15px;color:#444;line-height:1.8;">Start exploring our curated collections — from everyday elegance to occasion wear, all crafted with care.</p>
-      ${btn('https://raaghas.in/collections/all', 'Explore Collections')}
+      ${btn('https://atlas.in/collections/all', 'Explore Collections')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">If you didn't create this account, please ignore this email or contact us at <a href="mailto:support@raaghas.in" style="color:#7B1C1C;">support@raaghas.in</a>.</p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">If you didn't create this account, please ignore this email or contact us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a>.</p>
       ${sign}
     `);
 
@@ -235,10 +235,10 @@ export class NotificationsService {
         { label: 'Payment Method', value: '{{order.paymentMethod}}' },
         { label: 'Shipping To', value: '{{order.shippingCity}}' },
       ])}
-      ${btn('https://raaghas.in/account/orders', 'Track My Order')}
+      ${btn('https://atlas.in/account/orders', 'Track My Order')}
       <p style="font-size:13px;color:#888;line-height:1.8;text-align:center;">Estimated delivery: <strong>{{order.estimatedDelivery}}</strong></p>
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">Questions? We're just an email away — <a href="mailto:support@raaghas.in" style="color:#7B1C1C;">support@raaghas.in</a></p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">Questions? We're just an email away — <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a></p>
       ${sign}
     `);
 
@@ -256,9 +256,9 @@ export class NotificationsService {
         { label: 'Reason', value: '{{order.failureReason}}' },
       ])}
       <p style="font-size:15px;color:#444;line-height:1.8;">Your cart has been saved — you can pick up right where you left off.</p>
-      ${btn('https://raaghas.in/cart', 'Return to Cart')}
+      ${btn('https://atlas.in/cart', 'Return to Cart')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">If you continue to face issues, please reach out to us at <a href="mailto:support@raaghas.in" style="color:#7B1C1C;">support@raaghas.in</a> or WhatsApp us and we'll sort it out personally.</p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">If you continue to face issues, please reach out to us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a> or WhatsApp us and we'll sort it out personally.</p>
       ${sign}
     `);
 
@@ -278,9 +278,9 @@ export class NotificationsService {
         { label: 'Failure Reason', value: '{{payment.failureReason}}' },
       ])}
       <p style="font-size:15px;color:#444;line-height:1.8;"><strong>No amount has been deducted.</strong> If you did see a deduction, it will be automatically reversed within 5–7 business days.</p>
-      ${btn('https://raaghas.in/account/orders/{{order.id}}', 'Retry Payment')}
+      ${btn('https://atlas.in/account/orders/{{order.id}}', 'Retry Payment')}
       ${divider}
-      <p style="font-size:13px;color:#888;line-height:1.8;">Need help? Contact us at <a href="mailto:support@raaghas.in" style="color:#7B1C1C;">support@raaghas.in</a></p>
+      <p style="font-size:13px;color:#888;line-height:1.8;">Need help? Contact us at <a href="mailto:support@atlas.in" style="color:#7B1C1C;">support@atlas.in</a></p>
       ${sign}
     `);
 
@@ -299,7 +299,7 @@ export class NotificationsService {
         <p style="margin:0;font-size:14px;color:#444;font-weight:bold;">{{offer.discountLabel}}</p>
         <p style="margin:8px 0 0;font-size:12px;color:#999;">Valid till {{offer.validTill}}</p>
       </div>
-      ${btn('https://raaghas.in/collections/all?coupon={{offer.couponCode}}', '🛍️ Shop Now & Save')}
+      ${btn('https://atlas.in/collections/all?coupon={{offer.couponCode}}', '🛍️ Shop Now & Save')}
       ${divider}
       <p style="font-size:12px;color:#aaa;text-align:center;line-height:1.8;">Terms & conditions apply. Cannot be combined with other offers. Applicable on orders above ₹{{offer.minOrderValue}}.</p>
       ${sign}
@@ -324,7 +324,7 @@ export class NotificationsService {
         {{/each}}
         <div style="text-align:right;margin-top:12px;font-size:15px;color:#2C1010;font-weight:bold;">Total: ₹{{cart.totalAmount}}</div>
       </div>
-      ${btn('https://raaghas.in/cart', 'Complete My Purchase')}
+      ${btn('https://atlas.in/cart', 'Complete My Purchase')}
       ${divider}
       <p style="font-size:13px;color:#888;text-align:center;line-height:1.8;">Need help deciding? WhatsApp us and we'll help you find the perfect fit.</p>
       ${sign}
@@ -343,7 +343,7 @@ export class NotificationsService {
         <h2 style="font-size:30px;color:#7B1C1C;letter-spacing:5px;margin:10px 0;font-family:monospace;">{{cart.couponCode}}</h2>
         <p style="margin:0;font-size:13px;color:#666;">{{cart.discountPercent}}% OFF · Valid for 24 hours only</p>
       </div>
-      ${btn('https://raaghas.in/cart?coupon={{cart.couponCode}}', '🎁 Claim My Discount')}
+      ${btn('https://atlas.in/cart?coupon={{cart.couponCode}}', '🎁 Claim My Discount')}
       ${divider}
       <p style="font-size:12px;color:#aaa;text-align:center;">Cart value: ₹{{cart.totalAmount}} · {{cart.itemCount}} item(s) · Offer valid for 24 hours</p>
       ${sign}
@@ -353,7 +353,7 @@ export class NotificationsService {
       {
         name: 'Account Confirmation',
         type: 'ACCOUNT_CONFIRMED',
-        subject: 'Welcome to Raaghas, {{customerName}}! Your account is ready 🌸',
+        subject: 'Welcome to Atlas, {{customerName}}! Your account is ready 🌸',
         body: accountConfirmBody,
         isActive: true,
       },
@@ -443,14 +443,14 @@ export class NotificationsService {
         body: base(
           '<div style="text-align:center;margin-bottom:24px;"><div style="font-size:48px;">🎁</div>' +
           '<h1 style="font-size:24px;color:#7B1C1C;margin:8px 0;">You earned a reward!</h1>' +
-          '<p style="color:#888;font-size:13px;">Your friend just shopped at Raaghas.</p></div>' +
+          '<p style="color:#888;font-size:13px;">Your friend just shopped at Atlas.</p></div>' +
           greeting('customerName') +
           '<p style="font-size:15px;color:#444;line-height:1.8;">Great news! <strong>{{refereeName}}</strong> completed their first purchase using your referral. We\'ve credited your wallet!</p>' +
           '<div style="background:#FBF7F3;border:2px solid #B8860B;border-radius:12px;padding:28px;text-align:center;margin:28px 0;">' +
           '<p style="margin:0;font-size:12px;color:#888;letter-spacing:3px;text-transform:uppercase;">Wallet Credited</p>' +
           '<h2 style="font-size:36px;color:#7B1C1C;margin:12px 0;">₹{{rewardAmount}}</h2>' +
-          '<p style="margin:0;font-size:14px;color:#666;">added to your Raaghas wallet</p></div>' +
-          btn('https://raaghas.in/account', '💰 View My Wallet') +
+          '<p style="margin:0;font-size:14px;color:#666;">added to your Atlas wallet</p></div>' +
+          btn('https://atlas.in/account', '💰 View My Wallet') +
           divider + sign
         ),
         isActive: true,
@@ -459,20 +459,20 @@ export class NotificationsService {
       {
         name: 'Welcome Offer',
         type: 'WELCOME_OFFER',
-        subject: '🌸 Welcome to Raaghas, {{customerName}}! Here\'s a gift for you',
+        subject: '🌸 Welcome to Atlas, {{customerName}}! Here\'s a gift for you',
         body: base(
           '<div style="background:linear-gradient(135deg,#7B1C1C,#2C1010);border-radius:12px;padding:36px 32px;text-align:center;margin-bottom:32px;">' +
           '<div style="font-size:11px;color:#B8860B;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;">Welcome Gift</div>' +
-          '<h1 style="font-size:28px;color:#ffffff;margin:0;">You\'re officially part of the Raaghas family!</h1>' +
+          '<h1 style="font-size:28px;color:#ffffff;margin:0;">You\'re officially part of the Atlas family!</h1>' +
           '<p style="font-size:14px;color:#E8C8A8;margin:12px 0 0;">Here\'s a special gift to get you started</p></div>' +
           greeting('customerName') +
-          '<p style="font-size:15px;color:#444;line-height:1.8;">Welcome to Raaghas! As a thank-you for joining, here\'s an exclusive discount just for you:</p>' +
+          '<p style="font-size:15px;color:#444;line-height:1.8;">Welcome to Atlas! As a thank-you for joining, here\'s an exclusive discount just for you:</p>' +
           '<div style="background:#FBF7F3;border:2px dashed #B8860B;border-radius:12px;padding:24px;text-align:center;margin:28px 0;">' +
           '<p style="margin:0;font-size:12px;color:#888;letter-spacing:3px;text-transform:uppercase;">Your Welcome Code</p>' +
           '<h2 style="font-size:32px;color:#7B1C1C;letter-spacing:6px;margin:10px 0;font-family:monospace;">{{couponCode}}</h2>' +
           '<p style="margin:0;font-size:14px;color:#444;font-weight:bold;">{{discountValue}} OFF your first order</p>' +
           '<p style="margin:8px 0 0;font-size:12px;color:#999;">Valid for 30 days from today</p></div>' +
-          btn('https://raaghas.in/collections/all', '🛍️ Start Shopping') +
+          btn('https://atlas.in/collections/all', '🛍️ Start Shopping') +
           divider +
           '<p style="font-size:12px;color:#aaa;text-align:center;line-height:1.8;">Valid on orders above ₹499. One-time use only.</p>' +
           sign

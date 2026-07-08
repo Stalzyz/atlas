@@ -1,18 +1,18 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS VPS-NATIVE DEPLOY — Paste this entire script into your VPS console
+#  ATLAS VPS-NATIVE DEPLOY — Paste this entire script into your VPS console
 #  It builds FROM the existing code already on the VPS (no Git, no upload)
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 CURRENT_LINK="$APP_ROOT/current"
 RELEASES_DIR="$APP_ROOT/releases"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$RELEASES_DIR/$RELEASE_NAME"
 
-echo "💎 RAAGHAS VPS-NATIVE BUILD — $TIMESTAMP"
+echo "💎 ATLAS VPS-NATIVE BUILD — $TIMESTAMP"
 
 # ── 1. Locate the environment file ────────────────────────────────────────────
 ENV_SOURCE=""
@@ -69,7 +69,7 @@ DATABASE_URL="$DB_URL" ./node_modules/.bin/prisma generate \
 # ── 5. Build all apps ─────────────────────────────────────────────────────────
 echo "🔨 Building all apps (may take 5-10 minutes)..."
 DATABASE_URL="$DB_URL" npx turbo build \
-  --filter=raaghas-api \
+  --filter=atlas-api \
   --filter=admin \
   --filter=storefront
 
@@ -105,20 +105,20 @@ ln -sfn "$RELEASE_PATH" "$CURRENT_LINK"
 # ── 9. Restart PM2 ───────────────────────────────────────────────────────────
 echo "🚀 Restarting PM2 services..."
 cd "$CURRENT_LINK"
-pm2 delete raaghas-api raaghas-admin raaghas-storefront 2>/dev/null || true
+pm2 delete atlas-api atlas-admin atlas-storefront 2>/dev/null || true
 
 NODE_ENV=production PORT=6005 \
   pm2 start apps/api/dist/src/main.js \
-  --name raaghas-api \
+  --name atlas-api \
   --env production
 
 NODE_ENV=production PORT=6010 \
   pm2 start apps/admin/.next/standalone/apps/admin/server.js \
-  --name raaghas-admin
+  --name atlas-admin
 
 NODE_ENV=production PORT=6009 \
   pm2 start apps/storefront/.next/standalone/apps/storefront/server.js \
-  --name raaghas-storefront
+  --name atlas-storefront
 
 pm2 save
 
@@ -134,14 +134,14 @@ echo ""
 echo "API Response: $HEALTH"
 echo ""
 
-if echo "$HEALTH" | grep -q "RAAGHAS_STABLE"; then
+if echo "$HEALTH" | grep -q "ATLAS_STABLE"; then
   echo "╔══════════════════════════════════════════╗"
   echo "║  ✅ DEPLOYMENT COMPLETE & HEALTHY! 🎉   ║"
   echo "╚══════════════════════════════════════════╝"
 else
   echo "⚠️  Deployment done but health check uncertain."
   echo "📋 Last API logs:"
-  pm2 logs raaghas-api --lines 20 --nostream 2>/dev/null || true
+  pm2 logs atlas-api --lines 20 --nostream 2>/dev/null || true
 fi
 
 pm2 status

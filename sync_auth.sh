@@ -1,21 +1,21 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — GLOBAL AUTH SYNCHRONIZER
+#  ATLAS — GLOBAL AUTH SYNCHRONIZER
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-DB_PASS="Raaghas@Prod2024"
-DB_URL="postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas_db"
+DB_PASS="Atlas@Prod2024"
+DB_URL="postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas_db"
 
 echo "🔄 Synchronizing Production Auth & Database..."
 
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE
   set -e
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
   
   echo "🔑 Step 1: Force-resetting DB password to known state..."
-  sudo -u postgres psql -c "ALTER USER raaghas_user WITH PASSWORD '$DB_PASS';"
+  sudo -u postgres psql -c "ALTER USER atlas_user WITH PASSWORD '$DB_PASS';"
   
   echo "📝 Step 2: Patching all .env files on VPS..."
   # Find all .env and .env.production files and update the DATABASE_URL line
@@ -30,13 +30,13 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE
   
   # Restart API
   cd current
-  PORT=6005 DATABASE_URL="$DB_URL" pm2 start apps/api/dist/src/main.js --name raaghas-api --update-env
+  PORT=6005 DATABASE_URL="$DB_URL" pm2 start apps/api/dist/src/main.js --name atlas-api --update-env
   
   # Restart Admin
-  PORT=6010 DATABASE_URL="$DB_URL" pm2 start apps/admin/.next/standalone/apps/admin/server.js --name raaghas-admin --update-env
+  PORT=6010 DATABASE_URL="$DB_URL" pm2 start apps/admin/.next/standalone/apps/admin/server.js --name atlas-admin --update-env
   
   # Restart Storefront
-  PORT=6009 DATABASE_URL="$DB_URL" pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name raaghas-storefront --update-env
+  PORT=6009 DATABASE_URL="$DB_URL" pm2 start apps/storefront/.next/standalone/apps/storefront/server.js --name atlas-storefront --update-env
   
   pm2 save
   

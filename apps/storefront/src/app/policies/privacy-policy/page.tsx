@@ -10,14 +10,14 @@ export async function generateMetadata() {
     if (res.ok) {
       const page = await res.json();
       return {
-        title: page.metaTitle || "Privacy Policy | Raaghas",
-        description: page.metaDescription || "Raaghas privacy policy – how we collect, use, and protect your personal information.",
+        title: page.metaTitle || "Privacy Policy | Atlas",
+        description: page.metaDescription || "Atlas privacy policy – how we collect, use, and protect your personal information.",
       };
     }
   } catch {}
   return {
-    title: "Privacy Policy | Raaghas",
-    description: "Raaghas privacy policy – how we collect, use, and protect your personal information.",
+    title: "Privacy Policy | Atlas",
+    description: "Atlas privacy policy – how we collect, use, and protect your personal information.",
   };
 }
 

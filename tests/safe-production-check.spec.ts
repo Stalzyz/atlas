@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Safe Production Validation - Frontend & Flow', () => {
-  const STOREFRONT_URL = 'https://raaghas.in';
+  const STOREFRONT_URL = 'https://atlas.in';
 
   test('Homepage loads and key elements are visible', async ({ page }) => {
     const res = await page.goto(STOREFRONT_URL);

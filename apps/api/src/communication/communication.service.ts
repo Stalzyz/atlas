@@ -69,8 +69,8 @@ export class CommunicationService {
       const preferredFrom = settings?.supportEmail;
       const from = (smtpUser && preferredFrom && preferredFrom.split('@')[1] === smtpUser.split('@')[1])
         ? preferredFrom
-        : smtpUser || preferredFrom || process.env.SMTP_FROM || 'no-reply@raaghas.in';
-      const storeName = settings?.storeName || 'Raaghas';
+        : smtpUser || preferredFrom || process.env.SMTP_FROM || 'no-reply@atlas.in';
+      const storeName = settings?.storeName || 'Atlas';
 
       const mailOptions = {
         from: `"${storeName}" <${from}>`,
@@ -92,10 +92,10 @@ export class CommunicationService {
 
   // Pre-configured templates
   async sendInvoiceEmail(invoice: any, pdfBuffer: Buffer) {
-    const subject = `Invoice ${invoice.invoiceNumber} from Raaghas`;
+    const subject = `Invoice ${invoice.invoiceNumber} from Atlas`;
     const body = `
-      <div style="font-family: 'Playfair Display', serif; color: #1A1A1A; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #701A31;">
-        <h1 style="color: #701A31; text-align: center;">Raaghas</h1>
+      <div style="font-family: 'Playfair Display', serif; color: #1A1A1A; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #28104E;">
+        <h1 style="color: #28104E; text-align: center;">Atlas</h1>
         <p>Dear ${invoice.customerName},</p>
         <p>Please find attached the invoice for your recent purchase/transaction.</p>
         <div style="background: #FDFBF7; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -105,7 +105,7 @@ export class CommunicationService {
         </div>
         <p>If you have any questions, please reach out to our concierge.</p>
         <br/>
-        <p style="font-size: 12px; color: #666;">Regards,<br/>Team Raaghas</p>
+        <p style="font-size: 12px; color: #666;">Regards,<br/>Team Atlas</p>
       </div>
     `;
 

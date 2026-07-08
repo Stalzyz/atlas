@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 
 const secret = '87AkYYOOGO2mM8gzBOGVRGjK0Io+0MidlPPZNgdwetU88pzxNwkbQvlemYHcjSb0';
-const token = jwt.sign({ sub: 'cmpnqjocv0000uuu6tb0r8fhj', email: 'admin@raaghas.in', role: 'SUPER_ADMIN', permissions: ['products:write'] }, secret);
+const token = jwt.sign({ sub: 'cmpnqjocv0000uuu6tb0r8fhj', email: 'admin@atlas.in', role: 'SUPER_ADMIN', permissions: ['products:write'] }, secret);
 
 async function testApi() {
   const data = {
@@ -10,7 +10,7 @@ async function testApi() {
     shortDescription: "",
     category: "New Arrivals",
     subCategory: "",
-    brand: "Raaghas",
+    brand: "Atlas",
     vendor: "",
     productType: "Apparel",
     gender: "Unisex",

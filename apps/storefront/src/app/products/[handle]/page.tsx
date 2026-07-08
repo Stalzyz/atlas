@@ -38,19 +38,19 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
   const imageUrl = getAssetUrl(product.images?.[0]?.url);
   
   return {
-    title: `${product.title} | Raaghas`,
-    description: product.description || `Handcrafted high-luxury ethnic wear from Raaghas.`,
+    title: `${product.title} | Atlas`,
+    description: product.description || `Handcrafted high-luxury ethnic wear from Atlas.`,
     openGraph: {
       type: "website",
-      url: `https://raaghas.in/products/${product.handle}`,
-      title: `${product.title} | Raaghas`,
-      description: product.description || `Handcrafted high-luxury ethnic wear from Raaghas.`,
+      url: `https://atlas.in/products/${product.handle}`,
+      title: `${product.title} | Atlas`,
+      description: product.description || `Handcrafted high-luxury ethnic wear from Atlas.`,
       images: imageUrl ? [{ url: imageUrl, width: 1080, height: 1080, alt: product.title }] : [],
     },
     twitter: {
       card: "summary_large_image",
       title: product.title,
-      description: product.description || `Handcrafted high-luxury ethnic wear from Raaghas.`,
+      description: product.description || `Handcrafted high-luxury ethnic wear from Atlas.`,
       images: imageUrl ? [imageUrl] : [],
     }
   };
@@ -82,15 +82,15 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
       "@type": "Product",
       "name": product.title,
       "image": (product.images || []).map((img: any) => img.url),
-      "description": product.description || "Premium ethnic wear from Raaghas, India's leading luxury brand for premium casual and office wear.",
+      "description": product.description || "Premium ethnic wear from Atlas, India's leading luxury brand for premium casual and office wear.",
       "sku": product.variants?.[0]?.sku,
       "brand": {
         "@type": "Brand",
-        "name": "Raaghas"
+        "name": "Atlas"
       },
       "offers": {
         "@type": "Offer",
-        "url": `${process.env.NEXT_PUBLIC_APP_URL || 'https://raaghas.in'}/products/${product.handle}`,
+        "url": `${process.env.NEXT_PUBLIC_APP_URL || 'https://atlas.in'}/products/${product.handle}`,
         "priceCurrency": "INR",
         "price": product.variants?.[0]?.price,
         "availability": (product.variants?.[0]?.availableStock ?? product.variants?.[0]?.inventory ?? 0) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
@@ -161,7 +161,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
           <div className="max-w-4xl mx-auto">
              <div className="text-center mb-16">
                 <h2 className="text-3xl font-serif text-charcoal mb-4">Customer Experience</h2>
-                <p className="text-charcoal/60 font-sans max-w-lg mx-auto">Read authentic reviews from women who have experienced the craftsmanship of Raaghas.</p>
+                <p className="text-charcoal/60 font-sans max-w-lg mx-auto">Read authentic reviews from women who have experienced the craftsmanship of Atlas.</p>
              </div>
              
              <ReviewList productId={product.id} />

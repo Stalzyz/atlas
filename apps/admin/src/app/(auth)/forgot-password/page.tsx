@@ -33,16 +33,16 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen bg-[#FDFCFB] flex items-center justify-center p-6 relative overflow-hidden">
-      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#701A31]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-[#701A31]/5 rounded-full blur-3xl" />
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#28104E]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-[#28104E]/5 rounded-full blur-3xl" />
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-[40px] shadow-2xl shadow-black/5 p-12 border border-[#701A31]/10 relative z-10"
+        className="max-w-md w-full bg-white rounded-[40px] shadow-2xl shadow-black/5 p-12 border border-[#28104E]/10 relative z-10"
       >
         <div className="text-center mb-12">
-          <h1 className="text-[#701A31] text-4xl font-serif tracking-[0.2em] mb-4">RAAGHAS</h1>
+          <h1 className="text-[#28104E] text-4xl font-serif tracking-[0.2em] mb-4">ATLAS</h1>
           <p className="text-gray-400 uppercase tracking-widest text-[10px] font-medium">Recovery Protocol</p>
         </div>
 
@@ -65,28 +65,28 @@ export default function ForgotPasswordPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-[#701A31]/30 transition-all text-sm"
-                placeholder="admin@raaghas.in"
+                className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-[#28104E]/30 transition-all text-sm"
+                placeholder="admin@atlas.in"
               />
             </div>
 
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full bg-[#701A31] text-[#FDFCFB] rounded-2xl py-4 text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#5A1528] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 mt-4 shadow-xl shadow-[#701A31]/20"
+              className="w-full bg-[#28104E] text-[#FDFCFB] rounded-2xl py-4 text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#180930] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 mt-4 shadow-xl shadow-[#28104E]/20"
             >
               {status === 'loading' ? 'Processing...' : 'Send Reset Link'}
             </button>
           </form>
         ) : (
-          <Link href="/login" className="block text-center text-[#701A31] text-[10px] uppercase tracking-[0.2em] font-bold mt-4 hover:underline">
+          <Link href="/login" className="block text-center text-[#28104E] text-[10px] uppercase tracking-[0.2em] font-bold mt-4 hover:underline">
             Back to Login
           </Link>
         )}
 
         <div className="mt-8 text-center">
-          <Link href="/login" className="text-[10px] text-gray-400 uppercase tracking-widest hover:text-[#701A31] transition-colors">
-            Return to Login Sanctuary
+          <Link href="/login" className="text-[10px] text-gray-400 uppercase tracking-widest hover:text-[#28104E] transition-colors">
+            Return to Login
           </Link>
         </div>
       </motion.div>

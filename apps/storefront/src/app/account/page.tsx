@@ -24,7 +24,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
 const TIER_CONFIG: Record<string, any> = {
-  BRONZE: { label: "Bronze Member", icon: <Award className="text-orange-400" />, color: "text-orange-600", bg: "bg-orange-50", desc: "Your journey with Raaghas has begun." },
+  BRONZE: { label: "Bronze Member", icon: <Award className="text-orange-400" />, color: "text-orange-600", bg: "bg-orange-50", desc: "Your journey with Atlas has begun." },
   SILVER: { label: "Silver Elite", icon: <ShieldCheck className="text-gray-400" />, color: "text-gray-600", bg: "bg-gray-50", desc: "Enjoy priority customer support." },
   GOLD: { label: "Gold Sovereign", icon: <Star className="text-yellow-500" />, color: "text-yellow-600", bg: "bg-yellow-50", desc: "Exclusive early access to new collections." },
   PLATINUM: { label: "Platinum Royal", icon: <Award className="text-wine" />, color: "text-wine", bg: "bg-beige", desc: "Complimentary personal styling sessions." },
@@ -145,7 +145,7 @@ function AccountDashboardContent() {
              <div className="flex lg:hidden flex-wrap justify-center gap-6 mt-8 p-6 bg-gradient-to-br from-green-50 to-emerald-100/50 dark:from-green-900/20 dark:to-emerald-900/10 rounded-3xl border-2 border-green-400/50 shadow-[0_0_20px_rgba(74,222,128,0.2)]">
                 <div className="w-full text-center space-y-1 pb-4 border-b border-green-300/30 dark:border-green-700/50">
                    <p className="text-[10px] font-bold text-green-700 dark:text-green-400 uppercase tracking-widest flex items-center justify-center gap-2">
-                     <Award size={14} className="text-green-600 dark:text-green-400 animate-pulse" /> Raaghas Wallet Credit
+                     <Award size={14} className="text-green-600 dark:text-green-400 animate-pulse" /> Atlas Wallet Credit
                    </p>
                    <p className="text-4xl font-extrabold text-green-800 dark:text-green-300 font-sans tracking-tight">₹{(profile?.walletBalance || 0).toLocaleString()}</p>
                    <p className="text-[9px] text-green-600/80 dark:text-green-400/80 uppercase tracking-widest mt-2 font-bold bg-green-200/50 dark:bg-green-800/30 inline-block px-3 py-1 rounded-full">Available for your next order</p>

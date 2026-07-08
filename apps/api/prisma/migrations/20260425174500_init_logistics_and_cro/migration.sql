@@ -211,13 +211,13 @@ CREATE TABLE "Section" (
 -- CreateTable
 CREATE TABLE "ThemeSettings" (
     "id" TEXT NOT NULL DEFAULT 'global',
-    "storeName" TEXT NOT NULL DEFAULT 'Raaghas',
+    "storeName" TEXT NOT NULL DEFAULT 'Atlas',
     "logoLight" TEXT,
     "logoDark" TEXT,
     "faviconLight" TEXT,
     "faviconDark" TEXT,
     "defaultThemeMode" TEXT NOT NULL DEFAULT 'LIGHT',
-    "primaryColor" TEXT NOT NULL DEFAULT '#701A31',
+    "primaryColor" TEXT NOT NULL DEFAULT '#28104E',
     "secondaryColor" TEXT NOT NULL DEFAULT '#F4F1ED',
     "fontHeading" TEXT NOT NULL DEFAULT 'serif',
     "fontBody" TEXT NOT NULL DEFAULT 'sans',
@@ -373,7 +373,7 @@ CREATE TABLE "DiscountUsage" (
 -- CreateTable
 CREATE TABLE "StoreSettings" (
     "id" TEXT NOT NULL DEFAULT 'global',
-    "storeName" TEXT NOT NULL DEFAULT 'Raaghas',
+    "storeName" TEXT NOT NULL DEFAULT 'Atlas',
     "logoUrl" TEXT,
     "supportEmail" TEXT,
     "supportPhone" TEXT,

@@ -1,7 +1,7 @@
 import { PrismaClient } from './generated-client/index.js';
 
 async function main() {
-  process.env.DATABASE_URL = 'postgresql://postgres@127.0.0.1:5432/raaghas_cert';
+  process.env.DATABASE_URL = 'postgresql://postgres@127.0.0.1:5432/atlas_cert';
   const prisma = new PrismaClient({
     datasources: {
       db: {

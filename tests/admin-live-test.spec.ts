@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  RAAGHAS ADMIN — FULL LIVE TEST SUITE
+ *  ATLAS ADMIN — FULL LIVE TEST SUITE
  *  Tests every page, adds dummy content, generates a report
  * ═══════════════════════════════════════════════════════════════
  * Run with:
@@ -10,9 +10,9 @@ import { test, expect, Page } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const BASE_URL  = 'https://admin.raaghas.in';
-const API_URL   = 'https://api.raaghas.in';
-const ADMIN_EMAIL    = 'admin@raaghas.in';
+const BASE_URL  = 'https://admin.atlas.in';
+const API_URL   = 'https://api.atlas.in';
+const ADMIN_EMAIL    = 'admin@atlas.in';
 const ADMIN_PASSWORD = 'Admin@123456';
 
 // ── helpers ────────────────────────────────────────────────────────────────────
@@ -38,7 +38,7 @@ async function checkPageLoads(page: Page, url: string, label: string) {
 
 // ── Login ──────────────────────────────────────────────────────────────────────
 
-test.describe('Raaghas Admin Live Test', () => {
+test.describe('Atlas Admin Live Test', () => {
   let results: Array<{ label: string; url: string; status: string; note?: string }> = [];
 
   test.beforeEach(async ({ page }) => {
@@ -350,7 +350,7 @@ test.describe('Raaghas Admin Live Test', () => {
 
   test.afterAll(async () => {
     console.log('\n\n══════════════════════════════════════════════════════');
-    console.log('   RAAGHAS ADMIN — LIVE TEST REPORT');
+    console.log('   ATLAS ADMIN — LIVE TEST REPORT');
     console.log('══════════════════════════════════════════════════════');
     for (const r of results) {
       console.log(`${r.status.padEnd(12)} | ${r.label.padEnd(30)} | ${r.url}`);

@@ -55,7 +55,7 @@ export function BrandStorySection({ content, style }: { content: any, style?: an
           <div className="relative">
             <div className={`absolute -left-6 top-0 bottom-0 w-1 bg-primary/10 ${textAlign !== 'left' ? 'hidden' : ''}`} />
             <p className="text-xl md:text-2xl font-sans leading-relaxed text-theme-text-muted italic font-light">
-              {content.body || "Raaghas began with a shared passion to weave the luxury of Indian craftsmanship into the modern age. Every stitch carries the legacy of traditional artisans, carefully curated and designed for the contemporary connoisseur of fine ethnic wear."}
+              {content.body || "Atlas began with a shared passion to weave the luxury of Indian craftsmanship into the modern age. Every stitch carries the legacy of traditional artisans, carefully curated and designed for the contemporary connoisseur of fine ethnic wear."}
             </p>
           </div>
           

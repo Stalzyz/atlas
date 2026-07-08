@@ -27,7 +27,7 @@ export function SendEmailModal({
 }: SendEmailModalProps) {
   const [subject, setSubject] = useState(initialSubject);
   const [body, setBody] = useState(initialBody);
-  const [signature, setSignature] = useState("Best regards,\nRaaghas Team");
+  const [signature, setSignature] = useState("Best regards,\nAtlas Team");
   const [isSending, setIsSending] = useState(false);
 
   if (!isOpen) return null;

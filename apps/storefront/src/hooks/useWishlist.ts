@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { API_URL } from "@/lib/api";
 import { useAuth } from "@/components/providers/AuthProvider";
 
-const WISHLIST_LOCAL_STORAGE_KEY = "raaghas_wishlist";
+const WISHLIST_LOCAL_STORAGE_KEY = "atlas_wishlist";
 
 // --- GLOBAL STATE ---
 let globalWishlist: string[] = [];

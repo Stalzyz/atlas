@@ -1,18 +1,18 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS STAGING DEPLOY
+#  ATLAS STAGING DEPLOY
 #  Runs an isolated deployment on ports 7005, 7009, 7010.
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-APP_ROOT="/var/www/raaghas_staging"
+APP_ROOT="/var/www/atlas_staging"
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
 RELEASE_NAME="release_$TIMESTAMP"
 RELEASE_PATH="$APP_ROOT/releases/$RELEASE_NAME"
 PRISMA_VERSION="6.7.0"
 
-echo "🛡️  RAAGHAS STAGING DEPLOY — $TIMESTAMP"
+echo "🛡️  ATLAS STAGING DEPLOY — $TIMESTAMP"
 
 # ── PHASE 1: System Readiness Check ───────────────────────────────────────────
 echo ""

@@ -1,6 +1,6 @@
 # Wallet Architecture Deep Dive
 
-I have analyzed the entire lifecycle of the wallet system in Raaghas. Here is the architectural breakdown of the wallet logic.
+I have analyzed the entire lifecycle of the wallet system in Atlas. Here is the architectural breakdown of the wallet logic.
 
 ## 1. Credit Mechanisms (Safe)
 - **Referrals (`growth.service.ts`):** When a referred user completes an order, the referrer is rewarded with a dynamic percentage of the order total. This runs inside a Prisma `$transaction`, securely increments the balance, and writes a `WalletTransaction` audit log.

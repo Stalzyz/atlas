@@ -1,6 +1,6 @@
 # Restoration Runbook
 
-Step-by-step recovery procedures for the Raaghas Enterprise platform.
+Step-by-step recovery procedures for the Atlas Enterprise platform.
 
 ---
 
@@ -10,7 +10,7 @@ Step-by-step recovery procedures for the Raaghas Enterprise platform.
 2. **Identify the backup to use** — check `/backups/logs/backup.log` for the last `SUCCESS` entry before the incident.
 3. **Take a safety snapshot** — before touching anything, dump the current (broken) state:
    ```bash
-   pg_dump -U raaghas_user -h localhost raaghas | gzip > /tmp/pre-restore-snapshot.sql.gz
+   pg_dump -U atlas_user -h localhost atlas | gzip > /tmp/pre-restore-snapshot.sql.gz
    ```
 4. **Announce downtime** — notify the team; put the storefront in maintenance mode if possible.
 
@@ -25,16 +25,16 @@ Restores the entire PostgreSQL database from a `.sql.gz` backup.
 BACKUP_FILE=/backups/db/2024-01-15_06-00-00.sql.gz
 
 # 2. Drop and recreate the database (requires postgres superuser)
-psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'raaghas';"
-psql -U postgres -c "DROP DATABASE IF EXISTS raaghas;"
-psql -U postgres -c "CREATE DATABASE raaghas OWNER raaghas_user;"
+psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'atlas';"
+psql -U postgres -c "DROP DATABASE IF EXISTS atlas;"
+psql -U postgres -c "CREATE DATABASE atlas OWNER atlas_user;"
 
 # 3. Restore
-zcat "${BACKUP_FILE}" | psql -U raaghas_user -h localhost raaghas
+zcat "${BACKUP_FILE}" | psql -U atlas_user -h localhost atlas
 
 # 4. Verify
-psql -U raaghas_user -h localhost raaghas -c "SELECT COUNT(*) FROM \"Order\";"
-psql -U raaghas_user -h localhost raaghas -c "SELECT COUNT(*) FROM \"Product\";"
+psql -U atlas_user -h localhost atlas -c "SELECT COUNT(*) FROM \"Order\";"
+psql -U atlas_user -h localhost atlas -c "SELECT COUNT(*) FROM \"Product\";"
 ```
 
 **After restore:** Restart the API server so Prisma reconnects cleanly.
@@ -55,17 +55,17 @@ mkdir -p "${WORK_DIR}"
 zcat "${BACKUP_FILE}" | grep -A 1 'COPY public."Order"' > "${WORK_DIR}/orders.sql"
 
 # Or restore to a temp database and query selectively
-psql -U postgres -c "CREATE DATABASE raaghas_restore OWNER raaghas_user;"
-zcat "${BACKUP_FILE}" | psql -U raaghas_user -h localhost raaghas_restore
+psql -U postgres -c "CREATE DATABASE atlas_restore OWNER atlas_user;"
+zcat "${BACKUP_FILE}" | psql -U atlas_user -h localhost atlas_restore
 
 # Find and copy specific orders
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT * FROM \"Order\" WHERE \"createdAt\" >= '2024-01-14' AND \"createdAt\" < '2024-01-15';" \
   > "${WORK_DIR}/orders_to_restore.csv"
 
 # Manually re-insert or compare with current data
 # Clean up temp db when done
-psql -U postgres -c "DROP DATABASE raaghas_restore;"
+psql -U postgres -c "DROP DATABASE atlas_restore;"
 ```
 
 ---
@@ -76,11 +76,11 @@ psql -U postgres -c "DROP DATABASE raaghas_restore;"
 # Same selective restore pattern as Orders
 # Key tables: User, Address, WalletTransaction, LoyaltyTransaction, Referral
 
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT id, name, email, phone, \"createdAt\" FROM \"User\" WHERE \"createdAt\" >= '2024-01-14';"
 
 # To restore a single customer's wallet balance:
-psql -U raaghas_user -h localhost raaghas \
+psql -U atlas_user -h localhost atlas \
   -c "UPDATE \"User\" SET \"walletBalance\" = 500 WHERE id = 'cuid-here';"
 ```
 
@@ -93,11 +93,11 @@ psql -U raaghas_user -h localhost raaghas \
 # Inventory: InventoryItem, StockMovement
 
 # Restore from temp db
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "\COPY (SELECT * FROM \"Product\") TO '/tmp/products.csv' CSV HEADER;"
 
 # Check current vs backup inventory
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT p.name, i.quantity FROM \"InventoryItem\" i JOIN \"ProductVariant\" v ON i.\"variantId\" = v.id JOIN \"Product\" p ON v.\"productId\" = p.id ORDER BY p.name;"
 ```
 
@@ -108,13 +108,13 @@ psql -U raaghas_user -h localhost raaghas_restore \
 ```bash
 # Key tables: Page, NavigationItem, BannerSlide, ThemePreset, SiteContent
 
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT slug, title, \"updatedAt\" FROM \"Page\" ORDER BY \"updatedAt\" DESC;"
 
 # To restore a single page from backup:
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT * FROM \"Page\" WHERE slug = 'about-us';" | \
-  psql -U raaghas_user -h localhost raaghas  # pipe result as INSERT manually
+  psql -U atlas_user -h localhost atlas  # pipe result as INSERT manually
 ```
 
 ---
@@ -125,7 +125,7 @@ Restores uploaded images, banners, and assets from a `.tar.gz` file backup.
 
 ```bash
 BACKUP_FILE=/backups/files/2024-01-15_02-00-00.tar.gz
-UPLOAD_DIR=/var/www/raaghas/apps/api/uploads
+UPLOAD_DIR=/var/www/atlas/apps/api/uploads
 
 # 1. Move current uploads out of the way
 mv "${UPLOAD_DIR}" "${UPLOAD_DIR}.broken-$(date +%s)"
@@ -150,12 +150,12 @@ Invoices are PDF files stored in the database as references plus in the uploads 
 
 ```bash
 # Recover invoice records from DB backup
-psql -U raaghas_user -h localhost raaghas_restore \
+psql -U atlas_user -h localhost atlas_restore \
   -c "SELECT id, \"invoiceNumber\", \"buyerEmail\", \"createdAt\" FROM \"Invoice\" ORDER BY \"createdAt\" DESC LIMIT 50;"
 
 # Recover PDF files — they are in the uploads/invoices/ subdirectory
 # Restore file backup first (Section 6), then verify:
-ls /var/www/raaghas/apps/api/uploads/invoices/ | head -20
+ls /var/www/atlas/apps/api/uploads/invoices/ | head -20
 ```
 
 ---
@@ -177,6 +177,6 @@ ls /var/www/raaghas/apps/api/uploads/invoices/ | head -20
 | Role | Contact |
 |------|---------|
 | Admin email | Configured in Store Settings (`supportEmail`) |
-| Database | `localhost:5432` — `raaghas_user` |
+| Database | `localhost:5432` — `atlas_user` |
 | API Server | `http://localhost:6005` |
 | Backup logs | `/backups/logs/backup.log` |

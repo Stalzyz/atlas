@@ -219,7 +219,7 @@ export function FooterBuilder({ config, onChange }: FooterBuilderProps) {
             value={safeConfig.bottomBar.copyright} 
             onChange={(e) => updateConfig({ bottomBar: { ...safeConfig.bottomBar, copyright: e.target.value } })}
             className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-wine outline-none transition-all shadow-inner"
-            placeholder="© 2024 Raaghas. All rights reserved."
+            placeholder="© 2024 Atlas. All rights reserved."
           />
         </div>
       </div>

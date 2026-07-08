@@ -409,7 +409,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <div className="flex gap-2">
            <input 
             type="text" 
-            placeholder="Enter Code (e.g. RAAGHAS10)" 
+            placeholder="Enter Code (e.g. ATLAS10)" 
             value={coupon}
             onChange={e => setCoupon(e.target.value.toUpperCase())}
             className="flex-1 bg-theme-bg border border-theme-border rounded-xl px-4 py-3 text-xs outline-none focus:border-wine uppercase text-theme-text"
@@ -488,7 +488,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <h3 className="text-lg font-serif italic text-theme-text">Product Details</h3>
         <div 
           className="text-sm font-sans text-theme-text-muted leading-relaxed italic prose prose-sm max-w-none"
-          dangerouslySetInnerHTML={{ __html: product.description || "A masterpiece of artisanal craftsmanship, this piece embodies the timeless elegance of Raaghas." }}
+          dangerouslySetInnerHTML={{ __html: product.description || "A masterpiece of artisanal craftsmanship, this piece embodies the timeless elegance of Atlas." }}
         />
       </div>
 
@@ -507,12 +507,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <input 
               type="text"
               readOnly
-              value={`https://raaghas.in/products/${product.handle}?ref=${referralCode}`}
+              value={`https://atlas.in/products/${product.handle}?ref=${referralCode}`}
               className="flex-1 bg-theme-bg border border-theme-border rounded-xl px-4 py-3 text-xs outline-none text-theme-text opacity-70"
             />
             <button 
               onClick={() => {
-                navigator.clipboard.writeText(`https://raaghas.in/products/${product.handle}?ref=${referralCode}`);
+                navigator.clipboard.writeText(`https://atlas.in/products/${product.handle}?ref=${referralCode}`);
                 setCopiedRef(true);
                 setTimeout(() => setCopiedRef(false), 2000);
               }}

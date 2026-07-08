@@ -197,7 +197,7 @@ export default function InvoiceHistory() {
           onClose={() => setIsEmailModalOpen(false)}
           recipientEmail={selectedInvoice.customerEmail}
           recipientName={selectedInvoice.customerName}
-          subject={`Invoice ${selectedInvoice.invoiceNumber} from Raaghas`}
+          subject={`Invoice ${selectedInvoice.invoiceNumber} from Atlas`}
           body={`Dear ${selectedInvoice.customerName},\n\nPlease find your tax invoice ${selectedInvoice.invoiceNumber} attached for your records.`}
           attachmentName={`Invoice-${selectedInvoice.invoiceNumber}.pdf`}
           onSend={handleSendEmail}

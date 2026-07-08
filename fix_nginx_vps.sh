@@ -1,11 +1,11 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════
-#  RAAGHAS NGINX EMERGENCY REPAIR
+#  ATLAS NGINX EMERGENCY REPAIR
 #  Run this DIRECTLY on the VPS to fix 404 static asset errors
 # ═══════════════════════════════════════════════════════════════
 set -euo pipefail
 
-APP_ROOT="/var/www/raaghas_new"
+APP_ROOT="/var/www/atlas_new"
 RELEASES_DIR="$APP_ROOT/releases"
 CURRENT_LINK="$APP_ROOT/current"
 
@@ -55,24 +55,24 @@ echo "✅ Symlink updated: $CURRENT_LINK -> $RELEASE_PATH"
 
 # --- Step 4: Write the corrected Nginx configuration ---
 echo "📝 Writing corrected Nginx configuration..."
-cat > /etc/nginx/sites-available/raaghas << NGINX_CONF
+cat > /etc/nginx/sites-available/atlas << NGINX_CONF
 map \$http_origin \$cors_origin {
     default "";
-    "~*^https?://(www\\.)?(raaghas\\.in|admin\\.raaghas\\.in)$" \$http_origin;
-    "~*^http://localhost:(6001|6002)$" \$http_origin;
+    "~*^https?://(www\\.)?(atlas\\.in|admin\\.atlas\\.in)$" \$http_origin;
+    "~*^http://localhost:(4401|4402)$" \$http_origin;
 }
 
 server {
     listen 80;
-    server_name raaghas.in www.raaghas.in admin.raaghas.in api.raaghas.in;
+    server_name atlas.in www.atlas.in admin.atlas.in api.atlas.in;
     return 301 https://\$host\$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name api.raaghas.in;
-    ssl_certificate /etc/letsencrypt/live/raaghas/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/raaghas/privkey.pem;
+    server_name api.atlas.in;
+    ssl_certificate /etc/letsencrypt/live/atlas/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/atlas/privkey.pem;
     client_max_body_size 50M;
 
     location / {
@@ -110,9 +110,9 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name admin.raaghas.in;
-    ssl_certificate /etc/letsencrypt/live/raaghas/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/raaghas/privkey.pem;
+    server_name admin.atlas.in;
+    ssl_certificate /etc/letsencrypt/live/atlas/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/atlas/privkey.pem;
 
     # Serve static assets directly from filesystem (bypass Node.js proxy)
     location /_next/static {
@@ -149,9 +149,9 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name raaghas.in www.raaghas.in;
-    ssl_certificate /etc/letsencrypt/live/raaghas/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/raaghas/privkey.pem;
+    server_name atlas.in www.atlas.in;
+    ssl_certificate /etc/letsencrypt/live/atlas/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/atlas/privkey.pem;
 
     location /_next/static {
         alias ${STOREFRONT_STATIC_PATH};
@@ -189,7 +189,7 @@ NGINX_CONF
 echo "✅ Nginx config written"
 
 # --- Step 5: Enable and reload Nginx ---
-ln -sf /etc/nginx/sites-available/raaghas /etc/nginx/sites-enabled/raaghas
+ln -sf /etc/nginx/sites-available/atlas /etc/nginx/sites-enabled/atlas
 echo "🔍 Testing Nginx config..."
 nginx -t
 

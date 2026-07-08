@@ -1,19 +1,19 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — LOGIN LOGIC MIRROR (Diagnostic)
+#  ATLAS — LOGIN LOGIC MIRROR (Diagnostic)
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 VPS_IP="72.61.231.187"
-ADMIN_EMAIL="admin@raaghas.in"
-ADMIN_PASS="RaaghasAdmin2024!"
+ADMIN_EMAIL="admin@atlas.in"
+ADMIN_PASS="AtlasAdmin2024!"
 
 echo "🔍 Mirroring Login Logic on VPS..."
 
 ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
   
-  DB_URL="postgresql://raaghas_user:RaaghasProd2024@127.0.0.1:5432/raaghas_db"
+  DB_URL="postgresql://atlas_user:AtlasProd2024@127.0.0.1:5432/atlas_db"
 
   cat > login_mirror.js << 'EOF'
 const { PrismaClient } = require('./packages/database/generated-client');

@@ -20,14 +20,14 @@ jobs:
             echo "--- PM2 STATUS ---" > /tmp/vps_diag.txt
             pm2 list >> /tmp/vps_diag.txt
             echo "--- PM2 ADMIN DESCRIBE ---" >> /tmp/vps_diag.txt
-            pm2 describe raaghas-admin >> /tmp/vps_diag.txt
+            pm2 describe atlas-admin >> /tmp/vps_diag.txt
             echo "--- CURRENT FOLDER ---" >> /tmp/vps_diag.txt
-            ls -la /var/www/raaghas_new/current >> /tmp/vps_diag.txt
+            ls -la /var/www/atlas_new/current >> /tmp/vps_diag.txt
             echo "--- NEXT CACHE ---" >> /tmp/vps_diag.txt
-            ls -la /var/www/raaghas_new/current/apps/admin/.next >> /tmp/vps_diag.txt 2>&1 || echo "No .next" >> /tmp/vps_diag.txt
+            ls -la /var/www/atlas_new/current/apps/admin/.next >> /tmp/vps_diag.txt 2>&1 || echo "No .next" >> /tmp/vps_diag.txt
             echo "--- ADMIN STANDALONE ---" >> /tmp/vps_diag.txt
-            ls -la /var/www/raaghas_new/current/apps/admin/.next/standalone >> /tmp/vps_diag.txt 2>&1 || echo "No standalone" >> /tmp/vps_diag.txt
+            ls -la /var/www/atlas_new/current/apps/admin/.next/standalone >> /tmp/vps_diag.txt 2>&1 || echo "No standalone" >> /tmp/vps_diag.txt
             echo "--- FILE CHECK ---" >> /tmp/vps_diag.txt
-            grep -C 2 'XXXL' /var/www/raaghas_new/current/apps/admin/src/app/products/new/page.tsx >> /tmp/vps_diag.txt 2>&1 || echo 'No XXXL in admin' >> /tmp/vps_diag.txt
+            grep -C 2 'XXXL' /var/www/atlas_new/current/apps/admin/src/app/products/new/page.tsx >> /tmp/vps_diag.txt 2>&1 || echo 'No XXXL in admin' >> /tmp/vps_diag.txt
             echo "--- UPLOAD ---" >> /tmp/vps_diag.txt
             curl -T /tmp/vps_diag.txt https://bashupload.com/vps_diag_871239.txt

@@ -8,7 +8,7 @@
 
 const { Client } = require('pg');
 
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas';
 
 async function main() {
   const client = new Client({ connectionString: DATABASE_URL });

@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const targetFile = path.join('/Users/stalinkumar/Documents/Raaghas_website/apps/api/src/mail/mail.service.ts');
+const targetFile = path.join('/Users/stalinkumar/Documents/Atlas_website/apps/api/src/mail/mail.service.ts');
 let content = fs.readFileSync(targetFile, 'utf8');
 
 const BRAND_COLOR = '#611c34';
-const LOGO_PLACEHOLDER = 'https://via.placeholder.com/200x60/FDFBF7/611c34?text=RAAGHAS';
+const LOGO_PLACEHOLDER = 'https://via.placeholder.com/200x60/FDFBF7/611c34?text=ATLAS';
 
 function getWrapper(title, preheader, heroImage, bodyContent, includeFooter = true) {
   return `
@@ -14,7 +14,7 @@ function getWrapper(title, preheader, heroImage, bodyContent, includeFooter = tr
         <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
           <!-- Header -->
           <div style="text-align: center; padding: 30px 20px; border-bottom: 1px solid #f0f0f0;">
-            <img src="${LOGO_PLACEHOLDER}" alt="Raaghas" style="height: 40px; display: block; margin: 0 auto;" />
+            <img src="${LOGO_PLACEHOLDER}" alt="Atlas" style="height: 40px; display: block; margin: 0 auto;" />
           </div>
           
           ${heroImage ? `
@@ -32,7 +32,7 @@ function getWrapper(title, preheader, heroImage, bodyContent, includeFooter = tr
           <!-- Footer -->
           <div style="background-color: #fafafa; padding: 30px; text-align: center; border-top: 1px solid #f0f0f0;">
             <p style="margin: 0; font-size: 12px; color: #777777;">
-              <strong>Raaghas Pvt Ltd</strong><br/>
+              <strong>Atlas Pvt Ltd</strong><br/>
               Banjara Hills, Hyderabad, India<br/><br/>
               <a href="#" style="color: ${BRAND_COLOR}; text-decoration: none;">Shop Now</a> | 
               <a href="#" style="color: ${BRAND_COLOR}; text-decoration: none;">Contact Support</a>
@@ -47,7 +47,7 @@ function getWrapper(title, preheader, heroImage, bodyContent, includeFooter = tr
 // 1. Update Invoice Email
 const invoiceBody = `
             <p>Dear \${buyerName},</p>
-            <p>Thank you for choosing Raaghas. Your tax invoice <strong>\${invoiceNumber}</strong> has been successfully generated.</p>
+            <p>Thank you for choosing Atlas. Your tax invoice <strong>\${invoiceNumber}</strong> has been successfully generated.</p>
             
             <div style="background: #FDFBF7; padding: 20px; border-radius: 8px; margin: 30px 0; text-align: center; border: 1px solid #f5ede6;">
               <p style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #777;">Total Amount</p>
@@ -60,14 +60,14 @@ const invoiceBody = `
               <a href="#" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">View Dashboard</a>
             </div>
 `;
-content = content.replace(/let html = \`[\s\S]*?Raaghas Pvt Ltd \| Salem, India[\s\S]*?<\/div>[\s\S]*?<\/div>[\s\S]*?\`;/g, () => {
-  return 'let html = `' + getWrapper('Tax Invoice', 'Your Raaghas invoice is ready.', '', invoiceBody) + '`;';
+content = content.replace(/let html = \`[\s\S]*?Atlas Pvt Ltd \| Salem, India[\s\S]*?<\/div>[\s\S]*?<\/div>[\s\S]*?\`;/g, () => {
+  return 'let html = `' + getWrapper('Tax Invoice', 'Your Atlas invoice is ready.', '', invoiceBody) + '`;';
 });
 
 // 2. Update Order Confirmation
 const orderBody = `
             <p>Dear \${buyerName},</p>
-            <p>Thank you for shopping with Raaghas. We have received your payment and your order <strong>#\${orderId.slice(-6)}</strong> is confirmed.</p>
+            <p>Thank you for shopping with Atlas. We have received your payment and your order <strong>#\${orderId.slice(-6)}</strong> is confirmed.</p>
             
             <table style="width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 14px;">
               <thead>
@@ -92,7 +92,7 @@ const orderHero = 'https://images.unsplash.com/photo-1610030469983-98e550d615e1?
 // Only replace the html block for order confirmation. We will use string manipulation carefully.
 const orderHtmlStart = content.indexOf('let html = `', content.indexOf('async sendOrderConfirmationEmail'));
 const orderHtmlEnd = content.indexOf('`;', orderHtmlStart) + 2;
-content = content.substring(0, orderHtmlStart) + 'let html = `' + getWrapper('Order Confirmed', 'Your Raaghas order has been confirmed.', orderHero, orderBody) + '`;' + content.substring(orderHtmlEnd);
+content = content.substring(0, orderHtmlStart) + 'let html = `' + getWrapper('Order Confirmed', 'Your Atlas order has been confirmed.', orderHero, orderBody) + '`;' + content.substring(orderHtmlEnd);
 
 // 3. Update OTP
 const otpBody = `
@@ -107,20 +107,20 @@ const otpBody = `
 `;
 const otpStart = content.indexOf('const html = `', content.indexOf('async sendOtpEmail'));
 const otpEnd = content.indexOf('`;', otpStart) + 2;
-content = content.substring(0, otpStart) + 'const html = `' + getWrapper('Verification Code', 'Your Raaghas login code.', '', otpBody) + '`;' + content.substring(otpEnd);
+content = content.substring(0, otpStart) + 'const html = `' + getWrapper('Verification Code', 'Your Atlas login code.', '', otpBody) + '`;' + content.substring(otpEnd);
 
 // 4. Update Password Reset
 const resetBody = `
-            <p>We received a request to reset your password for your Raaghas account.</p>
+            <p>We received a request to reset your password for your Atlas account.</p>
             <p>Click the button below to set a new password. This link will expire in 15 minutes.</p>
             <div style="text-align: center; margin: 40px 0;">
-              <a href="https://raaghas.in/reset-password?token=\${token}" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Reset Password</a>
+              <a href="https://atlas.in/reset-password?token=\${token}" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Reset Password</a>
             </div>
             <p style="font-size: 13px; color: #888; text-align: center;">If you didn't request this, you can safely ignore this email.</p>
 `;
 const resetStart = content.indexOf('let html = `', content.indexOf('async sendPasswordResetEmail'));
 const resetEnd = content.indexOf('`;', resetStart) + 2;
-content = content.substring(0, resetStart) + 'let html = `' + getWrapper('Reset Password', 'Reset your Raaghas password.', '', resetBody) + '`;' + content.substring(resetEnd);
+content = content.substring(0, resetStart) + 'let html = `' + getWrapper('Reset Password', 'Reset your Atlas password.', '', resetBody) + '`;' + content.substring(resetEnd);
 
 // 5. Update Payment Failed
 const failedBody = `
@@ -135,7 +135,7 @@ const failedBody = `
             <p style="text-align: center;">Don't worry, your items are still waiting for you. Please click below to retry your payment and complete your order.</p>
             
             <div style="text-align: center; margin-top: 30px;">
-              <a href="https://raaghas.in/checkout" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Retry Payment</a>
+              <a href="https://atlas.in/checkout" style="display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;">Retry Payment</a>
             </div>
 `;
 const failedStart = content.indexOf('let html = `', content.indexOf('async sendPaymentFailedEmail'));

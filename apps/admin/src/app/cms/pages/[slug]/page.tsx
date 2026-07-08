@@ -175,7 +175,7 @@ export default function PageEditor() {
       defaultContent = {
         headline: "Frequently Asked Questions",
         subheadline: "Everything you need to know about our products and services.",
-        faqs: [{ question: "How do I care for my Raaghas pieces?", answer: "We recommend gentle hand wash in cold water with mild detergent." }]
+        faqs: [{ question: "How do I care for my Atlas pieces?", answer: "We recommend gentle hand wash in cold water with mild detergent." }]
       };
     } else if (type === "LOGO_CLOUD") {
       defaultContent = { headline: "Featured In", logos: [{ image: "", alt: "Brand 1" }] };
@@ -191,7 +191,7 @@ export default function PageEditor() {
     } else if (type === "TEXT_BLOCK") {
       defaultContent = {
         headline: "Our Philosophy",
-        body: "At Raaghas, we believe in the beauty of simplicity. Our pieces are crafted with love and attention to detail."
+        body: "At Atlas, we believe in the beauty of simplicity. Our pieces are crafted with love and attention to detail."
       };
     } else if (type === "PRODUCT_GRID") {
       defaultContent = {

@@ -124,7 +124,7 @@ export class WholesaleController {
     
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename=Raaghas_Proforma_${id.slice(0, 8).toUpperCase()}.pdf`,
+      'Content-Disposition': `attachment; filename=Atlas_Proforma_${id.slice(0, 8).toUpperCase()}.pdf`,
       'Content-Length': pdfBuffer.length,
     });
     

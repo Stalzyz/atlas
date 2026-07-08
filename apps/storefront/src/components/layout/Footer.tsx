@@ -13,7 +13,7 @@ export function Footer({
 }) {
   const footerConfig = themeConfig?.footerConfig;
   
-  const storeName = themeConfig?.storeName || settings?.storeName || "RAAGHAS";
+  const storeName = themeConfig?.storeName || settings?.storeName || "ATLAS";
   const tagline = footerConfig?.tagline || themeConfig?.footerTagline || settings?.tagline || "Luxury ethnic wear crafted for the moments that matter most.";
   const copyright = footerConfig?.bottomBar?.copyright || themeConfig?.footerText || settings?.footerCopyright || `© ${new Date().getFullYear()} ${storeName}. All rights reserved.`;
 

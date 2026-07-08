@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const client = new Client({ connectionString: 'postgresql://raaghas_user:Raaghas%40Prod2024@localhost:5432/raaghas' });
+const client = new Client({ connectionString: 'postgresql://atlas_user:Atlas%40Prod2024@localhost:5432/atlas' });
 async function check() {
   await client.connect();
   const res = await client.query('SELECT name, regions FROM "ShippingZone"');

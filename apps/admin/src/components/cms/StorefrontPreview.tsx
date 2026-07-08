@@ -136,7 +136,7 @@ export function StorefrontPreview({
     glassBg: getThemeVal('dark', 'glassBg', "rgba(255, 255, 255, 0.05)"),
     glassBorder: getThemeVal('dark', 'glassBorder', "rgba(255, 255, 255, 0.1)"),
   } : {
-    primary: getThemeVal('light', 'primary', "#701A31"),
+    primary: getThemeVal('light', 'primary', "#28104E"),
     bg: getThemeVal('light', 'bg', "#FDFBF7"),
     surface: getThemeVal('light', 'surface', "#FFFFFF"),
     text: getThemeVal('light', 'textPrimary', "#1A1A1A"),
@@ -196,7 +196,7 @@ export function StorefrontPreview({
                     className={`text-lg tracking-[0.3em] uppercase ${headingFont}`}
                     style={{ color: primaryColor }}
                   >
-                    {theme.storeName || "RAAGHAS"}
+                    {theme.storeName || "ATLAS"}
                   </h1>
               )}
             </div>
@@ -253,7 +253,7 @@ export function StorefrontPreview({
                  {logo ? (
                     <img src={getMediaUrl(logo)} alt="Logo" className="h-6 object-contain opacity-50 grayscale" />
                  ) : (
-                    <h2 className={`text-lg tracking-[0.3em] uppercase opacity-50 ${headingFont}`}>{theme.storeName || "RAAGHAS"}</h2>
+                    <h2 className={`text-lg tracking-[0.3em] uppercase opacity-50 ${headingFont}`}>{theme.storeName || "ATLAS"}</h2>
                  )}
                  
                  {theme.footerTagline && (
@@ -424,7 +424,7 @@ function renderSection(section: Section, theme: ThemeSettings, previewThemeMode:
                 <div className="flex-1 space-y-8">
                    <div className="inline-block px-4 py-1.5 rounded-full mb-4 border border-wine/10 bg-wine/5">
                       <span className="text-[10px] font-bold text-wine uppercase tracking-[0.4em]">
-                         {content.description || "The Raaghas Signature"}
+                         {content.description || "The Atlas Signature"}
                       </span>
                    </div>
 
@@ -604,7 +604,7 @@ function renderSection(section: Section, theme: ThemeSettings, previewThemeMode:
         <div className="py-12 px-6 space-y-6" style={sectionStyle}>
            <div className={`flex flex-col ${textAlignmentClass}`}>
               <h2 className={`text-xl ${headingFont}`}>{content.headline || "Community Styling"}</h2>
-              <p className="text-[10px] opacity-40 uppercase tracking-widest">{content.handleText || "@raaghas"}</p>
+              <p className="text-[10px] opacity-40 uppercase tracking-widest">{content.handleText || "@atlas"}</p>
            </div>
            <div className="grid grid-cols-5 gap-2">
                {[1,2,3,4,5].map(i => (
@@ -1060,7 +1060,7 @@ function renderSection(section: Section, theme: ThemeSettings, previewThemeMode:
             {(Array.isArray(content?.items) && content?.items.length > 0 ? content.items : Array.from({ length: 6 }, () => ({}))).map((item: any, i: number) => {
               const name = item.name && String(item.name).toLowerCase() !== "undefined" && String(item.name).toLowerCase() !== "null" 
                 ? item.name 
-                : "Raaghas Client";
+                : "Atlas Client";
               const city = item.city && String(item.city).toLowerCase() !== "undefined" && String(item.city).toLowerCase() !== "null" 
                 ? item.city 
                 : "India";

@@ -388,7 +388,7 @@ export default function RolesAndUsersPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Email Address</label>
                   <div className="relative">
                     <Mail size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" />
-                    <input type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold outline-none" placeholder="john@raaghas.com" />
+                    <input type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold outline-none" placeholder="john@atlas.com" />
                   </div>
                 </div>
               </div>

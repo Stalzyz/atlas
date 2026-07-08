@@ -15,6 +15,6 @@ export class AppController {
   @Public()
   @Get('health')
   getHealth() {
-    return { status: 'RAAGHAS_STABLE', timestamp: new Date().toISOString() };
+    return { status: 'ATLAS_STABLE', timestamp: new Date().toISOString() };
   }
 }

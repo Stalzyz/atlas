@@ -19,7 +19,7 @@ import { Suspense } from "react";
 import { API_URL } from "@/lib/api";
 
 const MOCK_SETTINGS = {
-  storeName: "RAAGHAS",
+  storeName: "ATLAS",
   logoUrl: null,
   bankName: "HDFC Bank",
   accountNumber: "501002341234",
@@ -61,33 +61,34 @@ const MOCK_HELP_MENU = {
   ],
 };
 
-const fontInter = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-const fontPlayfair = 'Georgia, "Times New Roman", serif';
+const fontCormorant = '"Cormorant Garamond", Georgia, "Times New Roman", serif';
+const fontDMSans    = '"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+const fontJost      = '"Jost", "DM Sans", -apple-system, sans-serif';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://raaghas.in"),
+  metadataBase: new URL("https://atlas.in"),
   title: {
-    default: "Raaghas | India's Leading Premium Casual & Office Wear",
-    template: "%s | Raaghas"
+    default: "Atlas | India's Leading Premium Casual & Office Wear",
+    template: "%s | Atlas"
   },
-  description: "Raaghas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort and elegant evening transitions.",
+  description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort and elegant evening transitions.",
   openGraph: {
     type: "website",
-    url: "https://raaghas.in",
-    title: "Raaghas | Premium Casual & Office Wear",
-    description: "Raaghas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
-    siteName: "Raaghas",
+    url: "https://atlas.in",
+    title: "Atlas | Premium Casual & Office Wear",
+    description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
+    siteName: "Atlas",
     images: [{
       url: "/og-image.jpg",
       width: 1200,
       height: 630,
-      alt: "Raaghas Premium Ethnic Wear"
+      alt: "Atlas Premium Ethnic Wear"
     }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Raaghas | Premium Casual & Office Wear",
-    description: "Raaghas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
+    title: "Atlas | Premium Casual & Office Wear",
+    description: "Atlas is India's leading luxury brand for premium casual and office wear. Discover breathable, handcrafted ethnic wear designed for all-day comfort.",
     images: ["/og-image.jpg"]
   },
   verification: {
@@ -102,7 +103,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#701A31"
+  themeColor: "#28104E"
 };
 
 function cn(...inputs: ClassValue[]) {
@@ -118,14 +119,14 @@ export default async function RootLayout({
 
   // Default theme config (used if API is down)
   const DEFAULT_LIGHT = {
-    primaryColor: "#701A31", bg: "#FDFBF7", surface: "#FFFFFF",
-    textPrimary: "#1A1A1A", textSecondary: "#666666", border: "#EEEEEE",
-    glassBg: "rgba(255, 255, 255, 0.7)", glassBorder: "rgba(255, 255, 255, 0.3)",
+    primaryColor: "#28104E", bg: "#FAFAFA", surface: "#FFFFFF",
+    textPrimary: "#1A1A2E", textSecondary: "#6B6B8A", border: "#E8E0F5",
+    glassBg: "rgba(222, 172, 245, 0.12)", glassBorder: "rgba(98, 55, 160, 0.18)",
   };
   const DEFAULT_DARK = {
-    primaryColor: "#8C1C2A", bg: "#0F0F10", surface: "#1A1A1C",
-    textPrimary: "#F5F5F5", textSecondary: "#B0B0B0", border: "#2A2A2C",
-    glassBg: "rgba(255, 255, 255, 0.05)", glassBorder: "rgba(255, 255, 255, 0.1)",
+    primaryColor: "#6237A0", bg: "#0D0718", surface: "#160D2A",
+    textPrimary: "#F0EAFF", textSecondary: "#B8A8D8", border: "#2E1D54",
+    glassBg: "rgba(98, 55, 160, 0.15)", glassBorder: "rgba(151, 84, 203, 0.25)",
   };
 
   let themeConfig: any = {
@@ -235,8 +236,12 @@ export default async function RootLayout({
   // Sanitize a CSS value to prevent injection
   const sanitize = (v: string) => v ? v.replace(/[;<>{}]/g, '') : '';
 
-  const fontHeading = themeConfig.fontHeading === 'serif' ? fontPlayfair : themeConfig.fontHeading === 'mono' ? 'monospace' : fontInter;
-  const fontBody = themeConfig.fontBody === 'serif' ? fontPlayfair : themeConfig.fontBody === 'mono' ? 'monospace' : fontInter;
+  const fontHeading = themeConfig.fontHeading === 'sans' ? fontDMSans
+    : themeConfig.fontHeading === 'mono' ? 'monospace'
+    : fontCormorant; // default: serif = Cormorant
+  const fontBody = themeConfig.fontBody === 'serif' ? fontCormorant
+    : themeConfig.fontBody === 'mono' ? 'monospace'
+    : fontDMSans; // default: sans = DM Sans
   
   const lt = themeConfig.light;
   const dk = themeConfig.dark;
@@ -249,46 +254,43 @@ export default async function RootLayout({
       --heading-font: ${fontHeading};
       --body-font: ${fontBody};
       --btn-radius: ${sanitize(themeConfig.buttonRadius || "0.5rem")};
-      --primary: ${sanitize(getVal(lt, "primary", "#701A31"))};
-      --bg: ${sanitize(getVal(lt, "bg", "#FDFBF7"))};
+      --primary: ${sanitize(getVal(lt, "primary", "#28104E"))};
+      --bg: ${sanitize(getVal(lt, "bg", "#FAFAFA"))};
       --surface: ${sanitize(getVal(lt, "surface", "#FFFFFF"))};
-      --text-primary: ${sanitize(getVal(lt, "textPrimary", "#1A1A1A"))};
-      --text-secondary: ${sanitize(getVal(lt, "textSecondary", "#666666"))};
-      --border: ${sanitize(getVal(lt, "border", "#EEEEEE"))};
-      --glass-bg: ${sanitize(getVal(lt, "glassBg", "rgba(255, 255, 255, 0.7)"))};
-      --glass-border: ${sanitize(getVal(lt, "glassBorder", "rgba(255, 255, 255, 0.3)"))};
+      --text-primary: ${sanitize(getVal(lt, "textPrimary", "#1A1A2E"))};
+      --text-secondary: ${sanitize(getVal(lt, "textSecondary", "#6B6B8A"))};
+      --border: ${sanitize(getVal(lt, "border", "#E8E0F5"))};
+      --glass-bg: ${sanitize(getVal(lt, "glassBg", "rgba(222, 172, 245, 0.12)"))};
+      --glass-border: ${sanitize(getVal(lt, "glassBorder", "rgba(98, 55, 160, 0.18)"))};
     }
   `;
 
   const darkThemeVariables = `
     .dark body, .dark {
-      --primary: ${sanitize(getVal(dk, "primary", "#8C1C2A"))};
-      --bg: ${sanitize(getVal(dk, "bg", "#0F0F10"))};
-      --surface: ${sanitize(getVal(dk, "surface", "#1A1A1C"))};
-      --text-primary: ${sanitize(getVal(dk, "textPrimary", "#F5F5F5"))};
-      --text-secondary: ${sanitize(getVal(dk, "textSecondary", "#B0B0B0"))};
-      --border: ${sanitize(getVal(dk, "border", "#2A2A2C"))};
-      --glass-bg: ${sanitize(getVal(dk, "glassBg", "rgba(255, 255, 255, 0.05)"))};
-      --glass-border: ${sanitize(getVal(dk, "glassBorder", "rgba(255, 255, 255, 0.1)"))};
+      --primary: ${sanitize(getVal(dk, "primary", "#6237A0"))};
+      --bg: ${sanitize(getVal(dk, "bg", "#0D0718"))};
+      --surface: ${sanitize(getVal(dk, "surface", "#160D2A"))};
+      --text-primary: ${sanitize(getVal(dk, "textPrimary", "#F0EAFF"))};
+      --text-secondary: ${sanitize(getVal(dk, "textSecondary", "#B8A8D8"))};
+      --border: ${sanitize(getVal(dk, "border", "#2E1D54"))};
+      --glass-bg: ${sanitize(getVal(dk, "glassBg", "rgba(98, 55, 160, 0.15)"))};
+      --glass-border: ${sanitize(getVal(dk, "glassBorder", "rgba(151, 84, 203, 0.25)"))};
     }
   `;
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="facebook-domain-verification" content="g949sewk3vuccki5nzi99b6tjmlas8" />
+        {/* Google Fonts — Option 1: Cormorant Garamond + DM Sans + Jost */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Jost:wght@300;400;500;600;700&display=swap"
+        />
         <link rel="manifest" href="/manifest.json" />
         <link rel="stylesheet" href={`/compiled.css?v=${Date.now()}`} />
-        {themeConfig.faviconLight ? (
-          <link rel="icon" href={themeConfig.faviconLight} media="(prefers-color-scheme: light)" />
-        ) : (
-          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        )}
-        {themeConfig.faviconDark ? (
-          <link rel="icon" href={themeConfig.faviconDark} media="(prefers-color-scheme: dark)" />
-        ) : (
-          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        )}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         {settings.customHeadHtml && (
           <script
             dangerouslySetInnerHTML={{
@@ -309,13 +311,13 @@ export default async function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Raaghas",
-              "url": "https://raaghas.in",
-              "logo": "https://raaghas.in/logo.png",
-              "description": "Raaghas is India's leading luxury brand for premium casual and office wear.",
+              "name": "Atlas",
+              "url": "https://atlas.in",
+              "logo": "https://atlas.in/logo.png",
+              "description": "Atlas is India's leading luxury brand for premium casual and office wear.",
               "sameAs": [
-                "https://www.facebook.com/raaghas",
-                "https://www.instagram.com/raaghas"
+                "https://www.facebook.com/atlas",
+                "https://www.instagram.com/atlas"
               ]
             })
           }}

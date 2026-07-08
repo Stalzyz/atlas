@@ -39,7 +39,7 @@
                 <div>
                   <img src="${$?.logoUrl||"/logo-dark.svg"}" alt="Logo" class="h-10 mb-4 object-contain" />
                   <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">From</h3>
-                  <h1 class="font-bold text-gray-900 text-base">${$?.storeName||"Raaghas Clothing"}</h1>
+                  <h1 class="font-bold text-gray-900 text-base">${$?.storeName||"Atlas Clothing"}</h1>
                   <div class="text-sm text-gray-600">
                     <p>${$?.storeAddress||""}</p>
                     <p class="mt-2">Phone: ${$?.supportPhone||""}</p>

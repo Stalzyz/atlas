@@ -5,8 +5,8 @@ import { useAdminAuth } from '@/components/providers/AuthProvider';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@atlas.com');
+  const [password, setPassword] = useState('Atlas1234');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAdminAuth();
@@ -28,16 +28,16 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#FDFCFB] flex items-center justify-center p-6 relative overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#701A31]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-[#701A31]/5 rounded-full blur-3xl" />
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-deep/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-purple-deep/5 rounded-full blur-3xl" />
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-[40px] shadow-2xl shadow-black/5 p-12 border border-[#701A31]/10 relative z-10"
+        className="max-w-md w-full bg-white rounded-[40px] shadow-2xl shadow-black/5 p-12 border border-purple-deep/10 relative z-10"
       >
         <div className="text-center mb-12">
-          <img src="/logo-dark.svg" alt="Raaghas" className="h-14 w-auto mx-auto mb-3 object-contain" />
+          <img src="/logo-dark.svg" alt="Atlas" className="h-14 w-auto mx-auto mb-3 object-contain" />
           <p className="text-gray-400 uppercase tracking-widest text-[10px] font-medium">Control Center · Est. 2022</p>
         </div>
 
@@ -60,8 +60,8 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="username"
-              className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-[#701A31]/30 transition-all text-sm"
-              placeholder="admin@raaghas.in"
+              className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-purple-deep/30 transition-all text-sm"
+              placeholder="admin@atlas.in"
             />
           </div>
 
@@ -73,13 +73,13 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
-              className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-[#701A31]/30 transition-all text-sm"
+              className="w-full bg-[#FDFCFB] border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-purple-deep/30 transition-all text-sm"
               placeholder="••••••••"
             />
             <div className="flex justify-end px-1">
               <a 
                 href="/forgot-password" 
-                className="text-[9px] uppercase tracking-widest font-bold text-[#701A31]/60 hover:text-[#701A31] transition-colors"
+                className="text-[9px] uppercase tracking-widest font-bold text-purple-deep/60 hover:text-purple-deep transition-colors"
               >
                 Forgot Password?
               </a>
@@ -89,13 +89,18 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#701A31] text-[#FDFCFB] rounded-2xl py-4 text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#5A1528] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 mt-4 shadow-xl shadow-[#701A31]/20"
+            className="w-full bg-purple-deep text-white rounded-2xl py-4 text-xs font-bold uppercase tracking-[0.3em] hover:bg-wine-dark active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 mt-4 shadow-xl shadow-purple-deep/20"
           >
-            {isLoading ? 'Authenticating...' : 'Enter Sanctuary'}
+            {isLoading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="mt-12 pt-8 border-top border-gray-50 text-center">
+        <div className="mt-12 pt-8 border-t border-gray-50 text-center space-y-4">
+          <div className="bg-gray-50 rounded-xl p-4 inline-block">
+            <p className="text-xs text-gray-500 font-medium mb-1">Demo Access Credentials</p>
+            <p className="text-sm font-bold text-[#28104E]">admin@atlas.com</p>
+            <p className="text-sm font-bold text-[#28104E]">Atlas1234</p>
+          </div>
           <p className="text-[10px] text-gray-400 uppercase tracking-widest leading-loose">
             Private Access Only<br/>
             Authorized Personnel & Management

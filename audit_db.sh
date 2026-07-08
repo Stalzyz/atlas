@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-#  RAAGHAS — DATABASE AUDITOR
+#  ATLAS — DATABASE AUDITOR
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
@@ -14,7 +14,7 @@ ssh -o StrictHostKeyChecking=no root@$VPS_IP << REMOTE
   
   echo ""
   echo "--- API Environment Check ---"
-  cd /var/www/raaghas_new
+  cd /var/www/atlas_new
   if [ -f "apps/api/.env.production" ]; then
     echo "📄 apps/api/.env.production found:"
     grep "^DATABASE_URL=" apps/api/.env.production | cut -d'@' -f2

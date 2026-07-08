@@ -6,7 +6,6 @@ import { AuthProvider, useAdminAuth } from "@/components/providers/AuthProvider"
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 function AuthGuard({ children, isAuthPage }: { children: React.ReactNode, isAuthPage: boolean }) {
   const { token, isLoading } = useAdminAuth();

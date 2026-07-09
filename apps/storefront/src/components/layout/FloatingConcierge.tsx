@@ -67,11 +67,11 @@ export function FloatingConcierge() {
                 >
                   <button 
                     onClick={() => setShowTooltip(false)}
-                    className="absolute -top-2 -right-2 w-6 h-6 bg-theme-surface border border-theme-border rounded-full flex items-center justify-center text-[10px] hover:bg-wine hover:text-white transition-all shadow-sm"
+                    className="absolute -top-2 -right-2 w-6 h-6 bg-theme-surface border border-theme-border rounded-full flex items-center justify-center text-[10px] hover:bg-primary hover:text-white transition-all shadow-sm"
                   >
                     <X size={10} />
                   </button>
-                  <p className="text-[10px] font-bold text-wine uppercase tracking-[0.2em] mb-1">Style Muse</p>
+                  <p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Atlas Muse</p>
                   <p className="text-[11px] text-theme-text/70 leading-relaxed font-medium">How can I help you discover the perfect ensemble today?</p>
                 </motion.div>
               )}
@@ -80,26 +80,26 @@ export function FloatingConcierge() {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => setShowOffersPanel(!showOffersPanel)}
-                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-wine hover:text-white transition-all duration-700 group"
+                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-primary hover:text-white transition-all duration-700 group"
               >
-                <div className="w-10 h-10 bg-wine text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-wine transition-colors duration-500 shadow-inner">
+                <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-primary transition-colors duration-500 shadow-inner">
                   <MapPin size={20} />
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-wine group-hover:text-white transition-colors">Offers</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary group-hover:text-white transition-colors">Offers</span>
                   <span className="text-[10px] font-medium text-theme-text/60 group-hover:text-white/80 transition-colors">& Shipping</span>
                 </div>
               </button>
 
               <button
                 onClick={openWhatsApp}
-                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-wine hover:text-white transition-all duration-700 group"
+                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-primary hover:text-white transition-all duration-700 group"
               >
-                <div className="w-10 h-10 bg-wine text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-wine transition-colors duration-500 shadow-inner">
+                <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-primary transition-colors duration-500 shadow-inner">
                   <MessageCircle size={20} />
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-wine group-hover:text-white transition-colors">Guide</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary group-hover:text-white transition-colors">Guide</span>
                   <span className="text-[10px] font-medium text-theme-text/60 group-hover:text-white/80 transition-colors">Styling Help</span>
                 </div>
               </button>

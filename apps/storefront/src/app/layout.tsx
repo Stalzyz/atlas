@@ -247,7 +247,7 @@ export default async function RootLayout({
   const dk = themeConfig.dark;
 
   // Map specific keys if they are named differently (e.g., bg vs backgroundColor)
-  const getVal = (obj: any, key: string, fallback: string) => obj[key] || obj[`${key}Color`] || fallback;
+  const getVal = (obj: any, key: string, fallback: string) => (obj && (obj[key] || obj[`${key}Color`])) || fallback;
 
   const hexToRgb = (hex: string) => {
     let c = hex.replace('#', '');

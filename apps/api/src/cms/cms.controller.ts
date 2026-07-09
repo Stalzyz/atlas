@@ -717,7 +717,7 @@ export class CmsController {
       finalFilename = path.basename(optimizedPath);
     }
 
-    const url = `/uploads/${finalFilename}`;
+    const url = `${baseUrl}/uploads/${finalFilename}`;
     const fileType = extname(file.originalname).match(/\.(mp4|webm|ogg)$/i) ? 'video' : 'image';
 
     // Persist to database

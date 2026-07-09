@@ -206,8 +206,8 @@ export default async function RootLayout({
         ...themeConfig,
         ...cfg,
         footerConfig: themeData.footerConfig || cfg.footerConfig,
-        light: { ...DEFAULT_LIGHT, ...mappedLight, ...(cfg.light || {}) },
-        dark: { ...DEFAULT_DARK, ...mappedDark, ...(cfg.dark || {}) },
+        light: { ...DEFAULT_LIGHT, ...(cfg.light || {}), ...mappedLight },
+        dark: { ...DEFAULT_DARK, ...(cfg.dark || {}), ...mappedDark },
       };
     }
 

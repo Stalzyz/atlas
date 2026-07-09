@@ -249,17 +249,34 @@ export default async function RootLayout({
   // Map specific keys if they are named differently (e.g., bg vs backgroundColor)
   const getVal = (obj: any, key: string, fallback: string) => obj[key] || obj[`${key}Color`] || fallback;
 
+  const hexToRgb = (hex: string) => {
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    const r = parseInt(c.substring(0, 2), 16) || 0;
+    const g = parseInt(c.substring(2, 4), 16) || 0;
+    const b = parseInt(c.substring(4, 6), 16) || 0;
+    return `${r} ${g} ${b}`;
+  };
+
+  const getRgb = (val: string) => val.startsWith('#') ? hexToRgb(val) : val;
+
   const lightThemeVariables = `
     body {
       --heading-font: ${fontHeading};
       --body-font: ${fontBody};
       --btn-radius: ${sanitize(themeConfig.buttonRadius || "0.5rem")};
       --primary: ${sanitize(getVal(lt, "primary", "#28104E"))};
+      --primary-rgb: ${getRgb(sanitize(getVal(lt, "primary", "#28104E")))};
       --bg: ${sanitize(getVal(lt, "bg", "#FAFAFA"))};
+      --bg-rgb: ${getRgb(sanitize(getVal(lt, "bg", "#FAFAFA")))};
       --surface: ${sanitize(getVal(lt, "surface", "#FFFFFF"))};
+      --surface-rgb: ${getRgb(sanitize(getVal(lt, "surface", "#FFFFFF")))};
       --text-primary: ${sanitize(getVal(lt, "textPrimary", "#1A1A2E"))};
+      --text-primary-rgb: ${getRgb(sanitize(getVal(lt, "textPrimary", "#1A1A2E")))};
       --text-secondary: ${sanitize(getVal(lt, "textSecondary", "#6B6B8A"))};
+      --text-secondary-rgb: ${getRgb(sanitize(getVal(lt, "textSecondary", "#6B6B8A")))};
       --border: ${sanitize(getVal(lt, "border", "#E8E0F5"))};
+      --border-rgb: ${getRgb(sanitize(getVal(lt, "border", "#E8E0F5")))};
       --glass-bg: ${sanitize(getVal(lt, "glassBg", "rgba(222, 172, 245, 0.12)"))};
       --glass-border: ${sanitize(getVal(lt, "glassBorder", "rgba(98, 55, 160, 0.18)"))};
     }
@@ -268,11 +285,17 @@ export default async function RootLayout({
   const darkThemeVariables = `
     html.dark body, html.dark {
       --primary: ${sanitize(getVal(dk, "primary", "#6237A0"))};
+      --primary-rgb: ${getRgb(sanitize(getVal(dk, "primary", "#6237A0")))};
       --bg: ${sanitize(getVal(dk, "bg", "#0D0718"))};
+      --bg-rgb: ${getRgb(sanitize(getVal(dk, "bg", "#0D0718")))};
       --surface: ${sanitize(getVal(dk, "surface", "#160D2A"))};
+      --surface-rgb: ${getRgb(sanitize(getVal(dk, "surface", "#160D2A")))};
       --text-primary: ${sanitize(getVal(dk, "textPrimary", "#F0EAFF"))};
+      --text-primary-rgb: ${getRgb(sanitize(getVal(dk, "textPrimary", "#F0EAFF")))};
       --text-secondary: ${sanitize(getVal(dk, "textSecondary", "#B8A8D8"))};
+      --text-secondary-rgb: ${getRgb(sanitize(getVal(dk, "textSecondary", "#B8A8D8")))};
       --border: ${sanitize(getVal(dk, "border", "#2E1D54"))};
+      --border-rgb: ${getRgb(sanitize(getVal(dk, "border", "#2E1D54")))};
       --glass-bg: ${sanitize(getVal(dk, "glassBg", "rgba(98, 55, 160, 0.15)"))};
       --glass-border: ${sanitize(getVal(dk, "glassBorder", "rgba(151, 84, 203, 0.25)"))};
     }

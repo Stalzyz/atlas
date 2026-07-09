@@ -9,14 +9,20 @@
 :root {
   /* Semantic tokens — overridden by layout.tsx dynamic injection */
   --primary:        #28104E;
+  --primary-rgb:    40 16 78;
   --secondary:      #6237A0;
   --cta:            #9754CB;
   --accent-light:   #DEACF5;
   --bg:             #FAFAFA;
+  --bg-rgb:         250 250 250;
   --surface:        #FFFFFF;
+  --surface-rgb:    255 255 255;
   --text-primary:   #1A1A2E;
+  --text-primary-rgb: 26 26 46;
   --text-secondary: #6B6B8A;
+  --text-secondary-rgb: 107 107 138;
   --border:         #E8E0F5;
+  --border-rgb:     232 224 245;
   --glass-bg:       rgba(222, 172, 245, 0.12);
   --glass-border:   rgba(98, 55, 160, 0.18);
 
@@ -38,14 +44,20 @@
 /* ─── Dark Mode ─────────────────────────────────────────────────────────── */
 .dark {
   --primary:        #6237A0;
+  --primary-rgb:    98 55 160;
   --secondary:      #9754CB;
   --cta:            #DEACF5;
   --accent-light:   #DEACF5;
   --bg:             #0D0718;
+  --bg-rgb:         13 7 24;
   --surface:        #160D2A;
+  --surface-rgb:    22 13 42;
   --text-primary:   #F0EAFF;
+  --text-primary-rgb: 240 234 255;
   --text-secondary: #B8A8D8;
+  --text-secondary-rgb: 184 168 216;
   --border:         #2E1D54;
+  --border-rgb:     46 29 84;
   --glass-bg:       rgba(98, 55, 160, 0.15);
   --glass-border:   rgba(151, 84, 203, 0.25);
 

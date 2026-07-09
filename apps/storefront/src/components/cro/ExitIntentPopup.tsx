@@ -72,7 +72,7 @@ export function ExitIntentPopup() {
             <div className="w-full md:w-2/3 p-8 md:p-10 text-center space-y-6">
               {!subscribed ? (
                 <>
-                  <div className="mx-auto w-12 h-12 rounded-full bg-wine/10 text-wine flex items-center justify-center">
+                  <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
                     <Gift size={24} />
                   </div>
                   <div className="space-y-2">
@@ -91,12 +91,12 @@ export function ExitIntentPopup() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
-                        className="w-full bg-white border border-charcoal/10 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-wine transition-colors"
+                        className="w-full bg-white border border-charcoal/10 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
                       />
                     </div>
                     <button 
                       type="submit"
-                      className="w-full bg-wine text-ivory font-bold uppercase tracking-widest text-xs py-4 rounded-lg hover:bg-wine-light transition-colors"
+                      className="w-full bg-primary text-ivory font-bold uppercase tracking-widest text-xs py-4 rounded-lg hover:bg-primary transition-colors"
                     >
                       Claim My ₹150 OFF
                     </button>
@@ -110,7 +110,7 @@ export function ExitIntentPopup() {
                   <div className="mx-auto w-16 h-16 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-2xl font-bold">✓</div>
                   <h3 className="text-2xl font-serif text-charcoal">You're on the list!</h3>
                   <p className="text-sm font-sans text-charcoal/60">
-                    Use code <span className="font-bold text-wine">WELCOME150</span> at checkout.
+                    Use code <span className="font-bold text-primary">WELCOME150</span> at checkout.
                   </p>
                 </div>
               )}

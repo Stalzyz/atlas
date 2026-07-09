@@ -138,7 +138,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Badges */}
         {savings > 0 && !product.isOutOfStock && (
           <div className="absolute top-4 left-4 z-20">
-             <span className="bg-wine text-ivory text-[8px] font-bold px-3 py-1.5 uppercase tracking-[0.2em] shadow-2xl">
+             <span className="bg-primary text-ivory text-[8px] font-bold px-3 py-1.5 uppercase tracking-[0.2em] shadow-2xl">
                 -{Math.round((savings/compareAtPrice!)*100)}% Off
              </span>
           </div>
@@ -161,15 +161,15 @@ export default function ProductCard({ product }: ProductCardProps) {
             }}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl backdrop-blur-md border border-white/20 ${
               mounted && isWishlisted 
-                ? "bg-wine text-white" 
-                : "bg-black/60 text-white hover:bg-wine"
+                ? "bg-primary text-white" 
+                : "bg-black/60 text-white hover:bg-primary"
             }`}
           >
             <Heart size={16} fill={mounted && isWishlisted ? "currentColor" : "none"} strokeWidth={2} />
           </button>
           <button 
             onClick={openQuickView}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-black/60 text-white hover:bg-wine shadow-xl backdrop-blur-md border border-white/20"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-black/60 text-white hover:bg-primary shadow-xl backdrop-blur-md border border-white/20"
           >
             <Search size={16} />
           </button>
@@ -183,7 +183,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className={`w-full py-4 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.3em] shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all rounded-xl flex items-center justify-center gap-2 border border-white/20 ${
                 product.isOutOfStock 
                   ? 'bg-gray-900/70 text-gray-400 cursor-not-allowed' 
-                  : 'bg-black/70 text-white hover:bg-wine active:scale-95'
+                  : 'bg-black/70 text-white hover:bg-primary active:scale-95'
               }`}
            >
                {product.isOutOfStock ? (
@@ -202,7 +202,7 @@ export default function ProductCard({ product }: ProductCardProps) {
            {product.category || "Main Collection"}
         </span>
         <h3 className="text-xs font-medium text-theme-text tracking-widest uppercase line-clamp-1 px-4">
-          <Link href={`/products/${product.handle}`} className="hover:text-wine transition-colors underline-offset-4 hover:underline">
+          <Link href={`/products/${product.handle}`} className="hover:text-primary transition-colors underline-offset-4 hover:underline">
             {product.title}
           </Link>
         </h3>
@@ -250,7 +250,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   <div>
                     <h3 className="text-2xl md:text-3xl font-serif text-theme-text leading-tight mb-1">{product.title}</h3>
                     <div className="flex items-baseline gap-3 mt-2">
-                      <span className="text-2xl font-bold text-wine">
+                      <span className="text-2xl font-bold text-primary">
                         ₹{selectedVariant ? Number(selectedVariant.price).toLocaleString() : price.toLocaleString()}
                       </span>
                       {selectedVariant?.compareAtPrice > selectedVariant?.price && (
@@ -304,9 +304,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                                   onClick={() => setSelectedOptions(prev => ({ ...prev, [group.name]: val }))}
                                   className={`relative px-4 py-2 text-xs font-bold rounded-xl border-2 transition-all duration-200 ${
                                     isSelected
-                                      ? 'border-wine bg-wine text-white shadow-lg scale-105'
+                                      ? 'border-primary bg-primary text-white shadow-lg scale-105'
                                       : isAvail
-                                        ? 'border-theme-border text-theme-text hover:border-wine/60 hover:bg-wine/5'
+                                        ? 'border-theme-border text-theme-text hover:border-primary/60 hover:bg-primary/5'
                                         : 'border-theme-border text-theme-text-muted opacity-40 cursor-not-allowed line-through'
                                   }`}
                                   disabled={!isAvail && !isSelected}
@@ -329,7 +329,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     className={`w-full py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center gap-2 transition-all ${
                       !quickViewInStock
                         ? 'bg-theme-bg border border-theme-border text-theme-text-muted cursor-not-allowed'
-                        : 'bg-wine text-white hover:bg-black active:scale-[0.98] shadow-lg hover:shadow-xl'
+                        : 'bg-primary text-white hover:bg-black active:scale-[0.98] shadow-lg hover:shadow-xl'
                     }`}
                   >
                     <ShoppingBag size={16} />
@@ -337,7 +337,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   </button>
                   <Link
                     href={`/products/${product.handle}`}
-                    className="w-full py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center border-2 border-theme-border hover:border-wine text-theme-text transition-colors"
+                    className="w-full py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center border-2 border-theme-border hover:border-primary text-theme-text transition-colors"
                   >
                     View Full Details
                   </Link>

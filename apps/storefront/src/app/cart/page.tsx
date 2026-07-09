@@ -22,7 +22,7 @@ export default function CartPage() {
         
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-charcoal/40 mb-12">
-          <Link href="/" className="hover:text-wine transition-colors">Home</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <ChevronRight size={10} />
           <span className="text-charcoal font-bold">Shopping Bag</span>
         </div>
@@ -54,7 +54,7 @@ export default function CartPage() {
                   </div>
                   <Link 
                     href="/collections/all"
-                    className="inline-block bg-charcoal text-ivory px-10 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-wine transition-all rounded-xl"
+                    className="inline-block bg-charcoal text-ivory px-10 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-all rounded-xl"
                   >
                     Shop Collections
                   </Link>
@@ -84,8 +84,8 @@ export default function CartPage() {
                       <div className="flex-1 space-y-4">
                         <div className="flex justify-between items-start">
                           <div>
-                            <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-wine mb-1 block">Artisan Craft</span>
-                            <h3 className="text-lg font-serif text-charcoal hover:text-wine transition-colors">
+                            <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-primary mb-1 block">Artisan Craft</span>
+                            <h3 className="text-lg font-serif text-charcoal hover:text-primary transition-colors">
                               <Link href={`/products/${item.handle}`}>{item.title}</Link>
                             </h3>
                             {item.size && (
@@ -132,7 +132,7 @@ export default function CartPage() {
               <div className="mt-16 pt-16 border-t border-charcoal/5">
                 <div className="mb-10">
                   <h2 className="text-3xl font-serif text-charcoal">Complete the Look</h2>
-                  <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-wine">AI curated recommendations for your selection</p>
+                  <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-primary">AI curated recommendations for your selection</p>
                 </div>
                 <EnsembleCurator productId={items[0].id} />
               </div>
@@ -159,7 +159,7 @@ export default function CartPage() {
                 <div className="pt-6 border-t border-charcoal/5 flex justify-between items-end">
                   <span className="text-lg font-serif">Estimated Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-wine">₹{cartTotal.toLocaleString()}</p>
+                    <p className="text-2xl font-bold text-primary">₹{cartTotal.toLocaleString()}</p>
                     <p className="text-[9px] uppercase font-bold tracking-widest text-charcoal/30">VAT & Duties inclusive</p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ export default function CartPage() {
                       }
                     });
                   }}
-                  className="w-full bg-charcoal text-ivory py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-wine transition-all shadow-xl group"
+                  className="w-full bg-charcoal text-ivory py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-primary transition-all shadow-xl group"
                 >
                   Continue to Checkout
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -197,15 +197,15 @@ export default function CartPage() {
                 {/* Trust Signals */}
                 <div className="pt-8 grid grid-cols-3 gap-4 border-t border-charcoal/5">
                    <div className="text-center space-y-2">
-                     <ShieldCheck size={16} className="mx-auto text-wine/40" />
+                     <ShieldCheck size={16} className="mx-auto text-primary/40" />
                      <p className="text-[8px] uppercase font-bold tracking-widest opacity-40 leading-tight">Premium Quality</p>
                    </div>
                    <div className="text-center space-y-2">
-                     <Sparkles size={16} className="mx-auto text-wine/40" />
+                     <Sparkles size={16} className="mx-auto text-primary/40" />
                      <p className="text-[8px] uppercase font-bold tracking-widest opacity-40 leading-tight">Trending Styles</p>
                    </div>
                    <div className="text-center space-y-2">
-                     <Tag size={16} className="mx-auto text-wine/40" />
+                     <Tag size={16} className="mx-auto text-primary/40" />
                      <p className="text-[8px] uppercase font-bold tracking-widest opacity-40 leading-tight">Affordable Luxury</p>
                    </div>
                 </div>
@@ -215,7 +215,7 @@ export default function CartPage() {
               <div className="mt-8 p-8 bg-charcoal rounded-[2rem] text-ivory/60 text-center space-y-4">
                  <p className="text-[10px] uppercase font-bold tracking-widest italic">Need Personal Assistance?</p>
                  <p className="text-xs italic leading-relaxed">Our master stylists are available for virtual appointments and styling advice.</p>
-                 <button className="text-ivory text-[10px] uppercase font-bold tracking-widest border-b border-ivory/20 pb-1 hover:text-wine transition-colors">Talk to a Stylist</button>
+                 <button className="text-ivory text-[10px] uppercase font-bold tracking-widest border-b border-ivory/20 pb-1 hover:text-primary transition-colors">Talk to a Stylist</button>
               </div>
             </div>
           )}

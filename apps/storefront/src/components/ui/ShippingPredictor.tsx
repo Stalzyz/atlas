@@ -116,7 +116,7 @@ export function ShippingPredictor() {
   return (
     <div className="bg-theme-surface border border-theme-border rounded-xl p-5 shadow-sm space-y-4">
       <div className="flex items-center gap-2 mb-2">
-        <MapPin size={18} className="text-wine" />
+        <MapPin size={18} className="text-primary" />
         <h3 className="font-bold text-sm text-theme-text uppercase tracking-widest">Delivery & Shipping</h3>
       </div>
 
@@ -129,12 +129,12 @@ export function ShippingPredictor() {
             placeholder="Enter Delivery Pincode"
             value={pincode}
             onChange={(e) => setPincode(e.target.value.replace(/\D/g, ""))}
-            className="w-full bg-theme-bg border border-theme-border rounded-lg pl-4 pr-10 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text"
+            className="w-full bg-theme-bg border border-theme-border rounded-lg pl-4 pr-10 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text"
           />
           <button 
             onClick={handleAutoDetect}
             title="Use current location"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-wine hover:text-wine/70 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-primary hover:text-primary/70 transition-colors"
           >
             <MapPin size={16} />
           </button>
@@ -142,7 +142,7 @@ export function ShippingPredictor() {
         <button
           onClick={checkShipping}
           disabled={isLoading || pincode.length !== 6}
-          className="bg-theme-text text-theme-bg px-4 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-wine hover:text-white transition-colors disabled:opacity-50 flex items-center justify-center min-w-[80px]"
+          className="bg-theme-text text-theme-bg px-4 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-colors disabled:opacity-50 flex items-center justify-center min-w-[80px]"
         >
           {isLoading ? <Loader2 size={16} className="animate-spin" /> : "Check"}
         </button>
@@ -170,7 +170,7 @@ export function ShippingPredictor() {
                   <p className="text-sm font-bold text-theme-text">{option.name}</p>
                   <p className="text-[10px] text-theme-text-muted">{option.description}</p>
                 </div>
-                <span className="text-sm font-bold text-wine">
+                <span className="text-sm font-bold text-primary">
                   {option.cost === 0 ? "FREE" : `₹${option.cost}`}
                 </span>
               </div>

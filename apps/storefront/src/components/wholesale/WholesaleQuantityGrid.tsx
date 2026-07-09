@@ -78,17 +78,17 @@ export default function WholesaleQuantityGrid({ product }: WholesaleQuantityGrid
   if (!isWholesale) return null;
 
   return (
-    <div className="bg-white border-2 border-wine/10 rounded-3xl p-8 space-y-8 shadow-xl">
-      <div className="flex justify-between items-start border-b border-wine/5 pb-6">
+    <div className="bg-white border-2 border-primary/10 rounded-3xl p-8 space-y-8 shadow-xl">
+      <div className="flex justify-between items-start border-b border-primary/5 pb-6">
         <div>
-          <span className="text-[10px] font-bold text-wine tracking-widest uppercase mb-1 block">Boutique Exclusive Pricing</span>
+          <span className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1 block">Boutique Exclusive Pricing</span>
           <h3 className="text-xl font-serif text-charcoal">Bulk Order Matrix</h3>
         </div>
         <div className="text-right">
           <p className="text-[10px] text-charcoal/40 uppercase font-bold tracking-widest">Your Price</p>
           <div className="flex items-center gap-2">
             <span className="text-sm text-charcoal/30 line-through">₹{retailPrice.toLocaleString()}</span>
-            <span className="text-2xl font-bold text-wine">₹{wholesalePrice.toLocaleString()}</span>
+            <span className="text-2xl font-bold text-primary">₹{wholesalePrice.toLocaleString()}</span>
           </div>
           <p className="text-[9px] text-green-600 font-bold uppercase mt-1">{discountPercent}% Curation Discount Applied</p>
         </div>
@@ -102,7 +102,7 @@ export default function WholesaleQuantityGrid({ product }: WholesaleQuantityGrid
               type="number" 
               min="0"
               placeholder="0"
-              className="w-full bg-ivory border border-charcoal/5 rounded-xl py-3 text-center font-bold text-charcoal focus:border-wine/30 transition-all outline-none"
+              className="w-full bg-ivory border border-charcoal/5 rounded-xl py-3 text-center font-bold text-charcoal focus:border-primary/30 transition-all outline-none"
               value={quantities[size] || ""}
               onChange={e => handleQtyChange(size, e.target.value)}
             />
@@ -125,7 +125,7 @@ export default function WholesaleQuantityGrid({ product }: WholesaleQuantityGrid
               <button 
                 onClick={handleBulkAdd}
                 disabled={isAdding || totalQuantity === 0}
-                className="flex-1 md:w-64 bg-charcoal text-white rounded-xl py-4 uppercase font-bold text-[10px] tracking-widest hover:bg-wine transition-all flex items-center justify-center gap-3 disabled:opacity-30 shadow-lg"
+                className="flex-1 md:w-64 bg-charcoal text-white rounded-xl py-4 uppercase font-bold text-[10px] tracking-widest hover:bg-primary transition-all flex items-center justify-center gap-3 disabled:opacity-30 shadow-lg"
               >
                 {isAdding ? <Loader2 className="animate-spin" size={16} /> : <ShoppingBag size={16} />}
                 {isAdding ? "Generating Quote..." : "Add to Wholesale Cart"}
@@ -135,7 +135,7 @@ export default function WholesaleQuantityGrid({ product }: WholesaleQuantityGrid
       </div>
 
       <div className="flex gap-3 text-[9px] text-charcoal/40 font-medium italic">
-        <Info size={12} className="shrink-0 text-wine" />
+        <Info size={12} className="shrink-0 text-primary" />
         <p>Taxes and shipping calculated at proforma generation. Bulk orders are subject to your {retailer?.creditTermDays > 0 ? `Net-${retailer.creditTermDays}` : "Cash on Delivery"} terms.</p>
       </div>
     </div>

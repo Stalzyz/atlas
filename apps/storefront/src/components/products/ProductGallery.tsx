@@ -135,7 +135,7 @@ export default function ProductGallery({ images, product }: ProductGalleryProps)
                       setIsZoomed(false);
                     }
                   }}
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-wine text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-wine/20 whitespace-nowrap"
+                  className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-primary/20 whitespace-nowrap"
                 >
                   <ShoppingBag size={16} /> Quick Add to Bag
                 </button>
@@ -153,7 +153,7 @@ export default function ProductGallery({ images, product }: ProductGalleryProps)
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`relative w-20 h-24 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${
-                currentIndex === idx ? "border-wine scale-95" : "border-transparent opacity-60 hover:opacity-100"
+                currentIndex === idx ? "border-primary scale-95" : "border-transparent opacity-60 hover:opacity-100"
               }`}
             >
               <img src={getImageUrl(image)} alt={image.altText || "Thumbnail"} className="w-full h-full object-cover" />

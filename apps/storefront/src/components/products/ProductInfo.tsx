@@ -199,7 +199,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     <div className="space-y-8">
       {/* Brand & Category */}
       <div className="space-y-2">
-        <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-wine">
+        <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary">
           {product.type || "Collection"}
         </p>
         <h1 className="text-4xl md:text-5xl font-serif text-theme-text leading-tight">
@@ -261,7 +261,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <div className="flex justify-end">
             <button 
               onClick={() => setIsSizeGuideOpen(true)}
-              className="text-wine underline underline-offset-4 text-[10px] font-bold uppercase tracking-widest"
+              className="text-primary underline underline-offset-4 text-[10px] font-bold uppercase tracking-widest"
             >
               Size Guide
             </button>
@@ -275,7 +275,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               {product.sizeGuide && (
                 <button 
                   onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-wine underline underline-offset-4"
+                  className="text-primary underline underline-offset-4"
                 >
                   Size Guide
                 </button>
@@ -363,7 +363,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           id="main-cta"
           onClick={handleAddToBag}
           disabled={isAdding || !selectedVariant || selectedVariant.inventory <= 0}
-          className="flex-1 group relative bg-wine text-white py-5 rounded-2xl text-[10px] uppercase font-bold tracking-[0.3em] overflow-hidden transition-all shadow-xl active:scale-95 disabled:opacity-50"
+          className="flex-1 group relative bg-primary text-white py-5 rounded-2xl text-[10px] uppercase font-bold tracking-[0.3em] overflow-hidden transition-all shadow-xl active:scale-95 disabled:opacity-50"
         >
           <div className="relative z-10 flex items-center justify-center gap-3">
             {isAdding ? (
@@ -380,8 +380,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           onClick={() => toggleWishlist(product.id)}
           className={`p-5 rounded-2xl border transition-colors ${
             mounted && isInWishlist(product.id)
-              ? "bg-wine text-ivory border-wine shadow-lg"
-              : "border-charcoal/10 hover:bg-beige text-wine"
+              ? "bg-primary text-ivory border-primary shadow-lg"
+              : "border-charcoal/10 hover:bg-beige text-primary"
           }`}
         >
           <Heart size={20} fill={mounted && isInWishlist(product.id) ? "currentColor" : "none"} />
@@ -412,12 +412,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             placeholder="Enter Code (e.g. ATLAS10)" 
             value={coupon}
             onChange={e => setCoupon(e.target.value.toUpperCase())}
-            className="flex-1 bg-theme-bg border border-theme-border rounded-xl px-4 py-3 text-xs outline-none focus:border-wine uppercase text-theme-text"
+            className="flex-1 bg-theme-bg border border-theme-border rounded-xl px-4 py-3 text-xs outline-none focus:border-primary uppercase text-theme-text"
            />
            <button 
             onClick={handleApplyCoupon}
             disabled={checkingCoupon || !coupon}
-            className="bg-theme-text text-theme-bg px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-wine hover:text-white transition-all disabled:opacity-50"
+            className="bg-theme-text text-theme-bg px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all disabled:opacity-50"
            >
              {checkingCoupon ? <Loader2 className="animate-spin" size={14} /> : "Apply"}
            </button>
@@ -464,19 +464,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {/* Trust & Delivery Tokens */}
       <div className="grid grid-cols-3 gap-4 pt-8 border-t border-charcoal/5">
         <div className="text-center space-y-2">
-          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-wine">
+          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-primary">
             <ShieldCheck size={18} />
           </div>
           <p className="text-[9px] uppercase font-bold tracking-widest text-charcoal/60">Premium Quality</p>
         </div>
         <div className="text-center space-y-2">
-          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-wine">
+          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-primary">
             <Sparkles size={18} />
           </div>
           <p className="text-[9px] uppercase font-bold tracking-widest text-charcoal/60">Trending Styles</p>
         </div>
         <div className="text-center space-y-2">
-          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-wine">
+          <div className="mx-auto w-10 h-10 bg-ivory rounded-full flex items-center justify-center text-primary">
             <Tag size={18} />
           </div>
           <p className="text-[9px] uppercase font-bold tracking-widest text-charcoal/60">Affordable Luxury</p>
@@ -493,14 +493,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Share & Earn Section */}
-      <div className="bg-gradient-to-r from-wine/10 to-transparent dark:from-wine/30 dark:to-wine/5 p-6 rounded-2xl border border-wine/20 dark:border-wine/50 shadow-sm dark:shadow-wine/10 space-y-4">
+      <div className="bg-gradient-to-r from-primary/10 to-transparent dark:from-primary/30 dark:to-primary/5 p-6 rounded-2xl border border-primary/20 dark:border-primary/50 shadow-sm dark:shadow-primary/10 space-y-4">
         <div className="flex justify-between items-center">
-           <h4 className="text-[10px] uppercase font-bold tracking-widest text-wine dark:text-wine-tint flex items-center gap-2">
+           <h4 className="text-[10px] uppercase font-bold tracking-widest text-primary dark:text-primary-tint flex items-center gap-2">
              <Share2 size={12} /> Share & Earn
            </h4>
         </div>
         <p className="text-xs text-gray-700 dark:text-gray-200 leading-relaxed">
-          Share this product with friends. If they sign up using your link, you'll earn <span className="font-bold text-wine dark:text-wine-tint bg-wine/10 dark:bg-wine/20 px-1.5 py-0.5 rounded">₹100 credits</span>.
+          Share this product with friends. If they sign up using your link, you'll earn <span className="font-bold text-primary dark:text-primary-tint bg-primary/10 dark:bg-primary/20 px-1.5 py-0.5 rounded">₹100 credits</span>.
         </p>
         {referralCode ? (
           <div className="flex gap-2">
@@ -516,7 +516,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 setCopiedRef(true);
                 setTimeout(() => setCopiedRef(false), 2000);
               }}
-              className="bg-wine text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all"
+              className="bg-primary text-white px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all"
             >
               {copiedRef ? "Copied!" : <Copy size={14} />}
             </button>
@@ -524,7 +524,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         ) : (
           <button 
             onClick={() => router.push('/account?tab=referral')}
-            className="text-[10px] uppercase font-bold tracking-widest text-wine border-b border-wine/50 hover:border-wine"
+            className="text-[10px] uppercase font-bold tracking-widest text-primary border-b border-primary/50 hover:border-primary"
           >
             Sign in to get your link
           </button>

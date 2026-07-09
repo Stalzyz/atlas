@@ -39,8 +39,8 @@ export function EditorialSection({ content }: EditorialSectionProps) {
             />
           </motion.div>
           {/* Decorative Elements */}
-          <div className={`absolute -top-10 ${isRight ? "-right-10" : "-left-10"} w-48 h-48 border border-wine/10 -z-0`} />
-          <div className={`absolute -bottom-10 ${isRight ? "-left-10" : "-right-10"} w-48 h-48 bg-wine/5 -z-0`} />
+          <div className={`absolute -top-10 ${isRight ? "-right-10" : "-left-10"} w-48 h-48 border border-primary/10 -z-0`} />
+          <div className={`absolute -bottom-10 ${isRight ? "-left-10" : "-right-10"} w-48 h-48 bg-primary/5 -z-0`} />
         </div>
 
         {/* Text Side */}
@@ -51,7 +51,7 @@ export function EditorialSection({ content }: EditorialSectionProps) {
             transition={{ duration: 0.8 }}
           >
             {content.subtitle && (
-              <span className="text-wine text-[10px] uppercase tracking-[0.5em] font-bold block mb-6">
+              <span className="text-primary text-[10px] uppercase tracking-[0.5em] font-bold block mb-6">
                 {content.subtitle}
               </span>
             )}

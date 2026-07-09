@@ -117,15 +117,15 @@ function ProfilePageContent() {
     setAddresses(addresses.filter(a => a.id !== id));
   };
 
-  if (authLoading || isLoading) return <div className="h-screen flex items-center justify-center bg-[var(--bg)]"><Loader2 className="animate-spin text-wine" size={32} /></div>;
+  if (authLoading || isLoading) return <div className="h-screen flex items-center justify-center bg-[var(--bg)]"><Loader2 className="animate-spin text-primary" size={32} /></div>;
 
   return (
     <div className="min-h-screen bg-[var(--bg)] pt-32 pb-32">
        <div className="max-w-4xl mx-auto px-6">
           
           {/* Navigation */}
-          <Link href="/account" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-wine transition-colors mb-12 group">
-             <div className="p-2 bg-[var(--surface)] rounded-lg border border-[var(--border)] group-hover:border-wine/30 transition-all"><ArrowLeft size={16} className="text-[var(--text-primary)]" /></div>
+          <Link href="/account" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-primary transition-colors mb-12 group">
+             <div className="p-2 bg-[var(--surface)] rounded-lg border border-[var(--border)] group-hover:border-primary/30 transition-all"><ArrowLeft size={16} className="text-[var(--text-primary)]" /></div>
              Back to Account
           </Link>
 
@@ -137,7 +137,7 @@ function ProfilePageContent() {
                 {/* Profile Details */}
                 <div className="bg-[var(--surface)] p-10 rounded-[40px] border border-[var(--border)] shadow-xl space-y-10">
                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-wine/10 rounded-2xl flex items-center justify-center text-wine"><User size={24} /></div>
+                      <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary"><User size={24} /></div>
                       <h2 className="text-2xl font-serif text-[var(--text-primary)]">Profile Details</h2>
                    </div>
 
@@ -149,7 +149,7 @@ function ProfilePageContent() {
                               type="text" 
                               value={name}
                               onChange={(e) => setName(e.target.value)}
-                              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm font-medium text-[var(--text-primary)] focus:border-wine/50 outline-none transition-all placeholder:text-[var(--text-secondary)]"
+                              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm font-medium text-[var(--text-primary)] focus:border-primary/50 outline-none transition-all placeholder:text-[var(--text-secondary)]"
                             />
                          </div>
                          <div className="space-y-2 opacity-60">
@@ -165,7 +165,7 @@ function ProfilePageContent() {
                       <button 
                         disabled={isUpdating}
                         onClick={handleUpdateProfile}
-                        className="bg-wine text-white px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-charcoal transition-all flex items-center gap-2 shadow-lg"
+                        className="bg-primary text-white px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-charcoal transition-all flex items-center gap-2 shadow-lg"
                       >
                          {isUpdating ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />} 
                          Save Changes
@@ -177,12 +177,12 @@ function ProfilePageContent() {
                 <div className="bg-[var(--surface)] p-10 rounded-[40px] border border-[var(--border)] shadow-xl space-y-10">
                    <div className="flex justify-between items-center">
                       <div className="flex items-center gap-4">
-                         <div className="w-12 h-12 bg-wine/10 rounded-2xl flex items-center justify-center text-wine"><MapPin size={24} /></div>
+                         <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary"><MapPin size={24} /></div>
                          <h2 className="text-2xl font-serif text-[var(--text-primary)]">Addresses</h2>
                       </div>
                       <button 
                         onClick={() => setShowAddressModal(true)}
-                        className="p-3 bg-wine text-white rounded-2xl hover:bg-charcoal transition-all shadow-md group"
+                        className="p-3 bg-primary text-white rounded-2xl hover:bg-charcoal transition-all shadow-md group"
                       >
                          <Plus size={20} className="group-hover:rotate-90 transition-transform" />
                       </button>
@@ -190,8 +190,8 @@ function ProfilePageContent() {
 
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {addresses.map((addr: any) => (
-                         <div key={addr.id} className="p-6 rounded-[32px] border border-[var(--border)] bg-[var(--bg)] relative group transition-all hover:bg-[var(--surface)] hover:shadow-lg hover:border-wine/20">
-                            <h4 className="text-[10px] font-bold text-wine uppercase tracking-[0.2em] mb-4">{addr.type || 'Primary Address'}</h4>
+                         <div key={addr.id} className="p-6 rounded-[32px] border border-[var(--border)] bg-[var(--bg)] relative group transition-all hover:bg-[var(--surface)] hover:shadow-lg hover:border-primary/20">
+                            <h4 className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-4">{addr.type || 'Primary Address'}</h4>
                             <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-sans mb-6">
                                {addr.line1}<br />
                                {addr.line2 && <>Landmark: {addr.line2}<br /></>}
@@ -209,7 +209,7 @@ function ProfilePageContent() {
                       {addresses.length === 0 && (
                         <div className="md:col-span-2 py-10 text-center border-2 border-dashed border-[var(--border)] rounded-[32px] space-y-3">
                            <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">No addresses found</p>
-                           <button onClick={() => setShowAddressModal(true)} className="text-wine text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity">Add First Address</button>
+                           <button onClick={() => setShowAddressModal(true)} className="text-primary text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity">Add First Address</button>
                         </div>
                       )}
                    </div>
@@ -219,7 +219,7 @@ function ProfilePageContent() {
 
              {/* Sidebar Info */}
              <div className="space-y-10">
-                <div className="bg-wine text-white p-8 rounded-[40px] shadow-xl space-y-6 relative overflow-hidden">
+                <div className="bg-primary text-white p-8 rounded-[40px] shadow-xl space-y-6 relative overflow-hidden">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
                    <div className="w-10 h-10 bg-white/15 rounded-2xl flex items-center justify-center text-white"><Shield size={20} /></div>
                    <div className="space-y-2">
@@ -264,7 +264,7 @@ function ProfilePageContent() {
 
 export default function ProfilePage() {
   return (
-    <Suspense fallback={<div className="h-screen flex items-center justify-center bg-[var(--bg)]"><Loader2 className="animate-spin text-wine" size={32} /></div>}>
+    <Suspense fallback={<div className="h-screen flex items-center justify-center bg-[var(--bg)]"><Loader2 className="animate-spin text-primary" size={32} /></div>}>
       <ProfilePageContent />
     </Suspense>
   );
@@ -326,19 +326,19 @@ function AddressForm({ onSave, onCancel }: { onSave: (a: any) => void, onCancel:
          <div className="space-y-4">
             <input 
               placeholder="Address Type (Home, Work, etc.)"
-              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-bold uppercase tracking-widest placeholder:text-[var(--text-secondary)]"
+              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-bold uppercase tracking-widest placeholder:text-[var(--text-secondary)]"
               value={formData.type}
               onChange={e => setFormData({ ...formData, type: e.target.value })}
             />
             <input 
               placeholder="Street Address, Area"
-              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
+              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
               value={formData.line1}
               onChange={e => setFormData({ ...formData, line1: e.target.value })}
             />
             <input 
               placeholder="Landmark"
-              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
+              className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
               value={formData.line2}
               onChange={e => setFormData({ ...formData, line2: e.target.value })}
             />
@@ -347,11 +347,11 @@ function AddressForm({ onSave, onCancel }: { onSave: (a: any) => void, onCancel:
                <input 
                  placeholder="PIN Code"
                  maxLength={6}
-                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
+                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
                  value={formData.postalCode}
                  onChange={e => handlePincodeChange(e.target.value)}
                />
-               <div className="flex border border-[var(--border)] rounded-2xl overflow-hidden bg-[var(--bg)] focus-within:border-wine/50">
+               <div className="flex border border-[var(--border)] rounded-2xl overflow-hidden bg-[var(--bg)] focus-within:border-primary/50">
                  <span className="bg-[var(--surface)] px-3 py-4 text-sm text-[var(--text-secondary)] select-none flex items-center border-r border-[var(--border)] font-medium">+91</span>
                  <input 
                    type="tel" 
@@ -367,14 +367,14 @@ function AddressForm({ onSave, onCancel }: { onSave: (a: any) => void, onCancel:
             <div className="grid grid-cols-2 gap-4">
                <input 
                  placeholder="City"
-                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
+                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-medium placeholder:text-[var(--text-secondary)]"
                  value={formData.city}
                  onChange={e => setFormData({ ...formData, city: e.target.value })}
                />
                <select 
                  value={formData.state} 
                  onChange={e => setFormData({ ...formData, state: e.target.value })} 
-                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-wine/50 transition-all font-medium"
+                 className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-2xl px-6 py-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary/50 transition-all font-medium"
                >
                  <option value="">Select State</option>
                  {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -383,10 +383,10 @@ function AddressForm({ onSave, onCancel }: { onSave: (a: any) => void, onCancel:
          </div>
 
          <div className="flex gap-4">
-            <button onClick={onCancel} className="flex-1 py-4 text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] bg-[var(--bg)] border border-[var(--border)] rounded-2xl hover:border-wine/30 transition-colors">Cancel</button>
+            <button onClick={onCancel} className="flex-1 py-4 text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] bg-[var(--bg)] border border-[var(--border)] rounded-2xl hover:border-primary/30 transition-colors">Cancel</button>
             <button 
               onClick={handleSave}
-              className="flex-1 bg-wine text-white px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-charcoal transition-all"
+              className="flex-1 bg-primary text-white px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-charcoal transition-all"
             >
                Save Address
             </button>

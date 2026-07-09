@@ -86,7 +86,7 @@ export default function WholesaleRegisterPage() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-xl w-full bg-theme-surface rounded-[48px] p-12 text-center space-y-8 shadow-2xl border border-theme-border"
         >
-          <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-wine">
+          <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-primary">
              <ShieldCheck size={48} />
           </div>
           <div className="space-y-4">
@@ -96,7 +96,7 @@ export default function WholesaleRegisterPage() {
             </p>
           </div>
           <div className="pt-4">
-             <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-wine hover:opacity-70 transition-opacity">
+             <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary hover:opacity-70 transition-opacity">
                Return to Boutique <ArrowRight size={14} />
              </Link>
           </div>
@@ -112,12 +112,12 @@ export default function WholesaleRegisterPage() {
           {/* Left Side: Brand Value */}
           <div className="lg:col-span-5 space-y-12">
              <div className="space-y-6">
-                <span className="text-[10px] font-bold text-wine tracking-widest uppercase flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 bg-wine rounded-full" /> Elite Partner Program
+                <span className="text-[10px] font-bold text-primary tracking-widest uppercase flex items-center gap-2">
+                   <div className="w-1.5 h-1.5 bg-primary rounded-full" /> Elite Partner Program
                 </span>
                 <h1 className="text-5xl md:text-6xl font-serif text-theme-text leading-[1.1] tracking-tight">
                   Grow Your Boutique <br />
-                  <span className="italic text-wine">With Atlas.</span>
+                  <span className="italic text-primary">With Atlas.</span>
                 </h1>
                 <p className="text-theme-text-muted leading-relaxed max-w-md font-sans">
                   Join our select network of luxury resellers across India. Access exclusive wholesale pricing, advanced inventory reservations, and priority shipping for your clientele.
@@ -131,7 +131,7 @@ export default function WholesaleRegisterPage() {
                    { icon: <FileText size={20} />, title: "GST Compliant", desc: "Full tax transparency with automated proforma and invoicing." }
                 ].map((item, idx) => (
                   <div key={idx} className="flex gap-6 items-start group">
-                     <div className="w-12 h-12 bg-theme-surface rounded-2xl flex items-center justify-center text-theme-text-muted group-hover:bg-primary/10 group-hover:text-wine transition-all shadow-sm">
+                     <div className="w-12 h-12 bg-theme-surface rounded-2xl flex items-center justify-center text-theme-text-muted group-hover:bg-primary/10 group-hover:text-primary transition-all shadow-sm">
                         {item.icon}
                      </div>
                      <div className="space-y-1">
@@ -146,7 +146,7 @@ export default function WholesaleRegisterPage() {
           {/* Right Side: Registration Form */}
           <div className="lg:col-span-7">
              <div className="bg-theme-surface rounded-[40px] p-10 md:p-16 shadow-2xl border border-theme-border relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-wine/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
                 
                 <form onSubmit={handleSubmit} className="space-y-10">
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -157,7 +157,7 @@ export default function WholesaleRegisterPage() {
                             <input 
                               required
                               placeholder="e.g. Silk Traditions Boutique"
-                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none text-theme-text"
+                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none text-theme-text"
                               value={formData.businessName}
                               onChange={e => setFormData({ ...formData, businessName: e.target.value })}
                             />
@@ -170,7 +170,7 @@ export default function WholesaleRegisterPage() {
                             <input 
                               required
                               placeholder="15-digit GSTIN"
-                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none uppercase tracking-widest text-theme-text"
+                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none uppercase tracking-widest text-theme-text"
                               value={formData.gstNumber}
                               onChange={e => setFormData({ ...formData, gstNumber: e.target.value })}
                             />
@@ -183,7 +183,7 @@ export default function WholesaleRegisterPage() {
                             <input 
                               required
                               placeholder="Owner or Manager name"
-                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none text-theme-text"
+                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none text-theme-text"
                               value={formData.contactName}
                               onChange={e => setFormData({ ...formData, contactName: e.target.value })}
                             />
@@ -195,7 +195,7 @@ export default function WholesaleRegisterPage() {
                            required
                            type="tel"
                            placeholder="Mobile or Landline"
-                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none text-theme-text"
+                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none text-theme-text"
                            value={formData.phone}
                            onChange={e => setFormData({ ...formData, phone: e.target.value })}
                          />
@@ -208,7 +208,7 @@ export default function WholesaleRegisterPage() {
                               required
                               rows={3}
                               placeholder="Full registered business address"
-                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none resize-none text-theme-text"
+                              className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl pl-14 pr-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none resize-none text-theme-text"
                               value={formData.address}
                               onChange={e => setFormData({ ...formData, address: e.target.value })}
                             />
@@ -218,7 +218,7 @@ export default function WholesaleRegisterPage() {
                          <label className="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted ml-1">City</label>
                          <input 
                            required
-                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none text-theme-text"
+                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none text-theme-text"
                            value={formData.city}
                            onChange={e => setFormData({ ...formData, city: e.target.value })}
                          />
@@ -227,7 +227,7 @@ export default function WholesaleRegisterPage() {
                          <label className="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted ml-1">State</label>
                          <input 
                            required
-                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-wine/20 transition-all outline-none text-theme-text"
+                           className="w-full bg-theme-bg/50 border border-theme-border rounded-2xl px-6 py-4 text-sm font-medium focus:border-primary/20 transition-all outline-none text-theme-text"
                            value={formData.state}
                            onChange={e => setFormData({ ...formData, state: e.target.value })}
                          />
@@ -239,7 +239,7 @@ export default function WholesaleRegisterPage() {
                    <div className="pt-6">
                       <button 
                         disabled={isLoading || authLoading || !isAuthenticated}
-                        className="w-full bg-theme-text text-theme-bg py-5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-wine hover:text-white transition-all flex items-center justify-center gap-4 shadow-xl disabled:opacity-50"
+                        className="w-full bg-theme-text text-theme-bg py-5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-4 shadow-xl disabled:opacity-50"
                       >
                          {isLoading ? <Loader2 className="animate-spin" /> : "Submit Partner Application"}
                          {!isLoading && <ArrowRight size={14} />}

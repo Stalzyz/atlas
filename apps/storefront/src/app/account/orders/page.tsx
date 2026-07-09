@@ -113,7 +113,7 @@ function MyOrdersPageContent() {
   if (authLoading || isLoading) {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center">
-        <Loader2 className="animate-spin text-wine" size={32} />
+        <Loader2 className="animate-spin text-primary" size={32} />
       </div>
     );
   }
@@ -129,11 +129,11 @@ function MyOrdersPageContent() {
 
         {orders.length === 0 ? (
           <div className="bg-white p-20 rounded-3xl border border-charcoal/5 text-center space-y-6 shadow-sm">
-             <div className="w-16 h-16 bg-beige rounded-full flex items-center justify-center mx-auto text-wine">
+             <div className="w-16 h-16 bg-beige rounded-full flex items-center justify-center mx-auto text-primary">
                 <ShoppingBag size={32} />
              </div>
              <p className="text-lg font-medium text-charcoal/60">You haven't placed any orders yet.</p>
-             <Link href="/collections/all" className="inline-block bg-charcoal text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-wine transition-all">
+             <Link href="/collections/all" className="inline-block bg-charcoal text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-primary transition-all">
                Start Shopping
              </Link>
           </div>
@@ -144,7 +144,7 @@ function MyOrdersPageContent() {
                 key={order.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl border border-charcoal/5 shadow-sm overflow-hidden hover:border-wine/20 transition-all group"
+                className="bg-white rounded-2xl border border-charcoal/5 shadow-sm overflow-hidden hover:border-primary/20 transition-all group"
               >
                 <Link href={`/account/orders/${order.id}`} className="block">
                   <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start md:items-center">
@@ -181,7 +181,7 @@ function MyOrdersPageContent() {
                            </span>
                          )
                        })()}
-                       <span className="text-wine text-xs font-bold uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                       <span className="text-primary text-xs font-bold uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center gap-1">
                           Track Details <ChevronRight size={14} />
                        </span>
                     </div>
@@ -198,7 +198,7 @@ function MyOrdersPageContent() {
 
 export default function MyOrdersPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-ivory flex items-center justify-center"><Loader2 className="animate-spin text-wine" size={32} /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-ivory flex items-center justify-center"><Loader2 className="animate-spin text-primary" size={32} /></div>}>
       <MyOrdersPageContent />
     </Suspense>
   );

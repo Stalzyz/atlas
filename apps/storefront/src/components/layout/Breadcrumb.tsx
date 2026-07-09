@@ -30,7 +30,7 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
             {index === items.length - 1 ? (
               <span className="text-theme-text">{item.label}</span>
             ) : (
-              <Link href={item.href} className="hover:text-wine transition-colors">
+              <Link href={item.href} className="hover:text-primary transition-colors">
                 {item.label}
               </Link>
             )}

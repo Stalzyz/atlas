@@ -93,7 +93,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
   };
 
   if (authLoading || (isAuthenticated && checkingEligibility)) {
-    return <div className="h-64 flex items-center justify-center bg-white rounded-2xl border border-charcoal/5"><Loader2 className="animate-spin text-wine" /></div>;
+    return <div className="h-64 flex items-center justify-center bg-white rounded-2xl border border-charcoal/5"><Loader2 className="animate-spin text-primary" /></div>;
   }
 
   if (!isAuthenticated) {
@@ -101,7 +101,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
       <div className="bg-gray-50 border border-charcoal/5 p-12 text-center rounded-2xl space-y-4">
         <h3 className="text-xl font-serif text-charcoal">Want to share your thoughts?</h3>
         <p className="text-sm text-charcoal/50 max-w-xs mx-auto">Please sign in to leave a review. Only verified buyers can share their experience.</p>
-        <a href="/sign-in" className="inline-block text-wine text-xs font-bold uppercase tracking-widest border-b border-wine pb-1">Sign In to Review</a>
+        <a href="/sign-in" className="inline-block text-primary text-xs font-bold uppercase tracking-widest border-b border-primary pb-1">Sign In to Review</a>
       </div>
     );
   }
@@ -126,7 +126,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
         <div className="flex justify-center text-green-600"><CheckCircle2 size={48} /></div>
         <h3 className="text-2xl font-serif text-charcoal">Thank You!</h3>
         <p className="text-charcoal/60 max-w-sm mx-auto">Your verified review has been submitted for moderation. It will appear on the site shortly.</p>
-        <button onClick={() => { setIsSubmitted(false); setRating(0); setHeadline(""); setContent(""); setImages([]); }} className="text-wine text-xs font-bold uppercase tracking-widest border-b border-wine pb-1">Submit another review</button>
+        <button onClick={() => { setIsSubmitted(false); setRating(0); setHeadline(""); setContent(""); setImages([]); }} className="text-primary text-xs font-bold uppercase tracking-widest border-b border-primary pb-1">Submit another review</button>
       </motion.div>
     );
   }
@@ -134,7 +134,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
   return (
     <div className="bg-white p-8 md:p-12 rounded-2xl border border-charcoal/5 shadow-sm space-y-8">
       <div className="space-y-2">
-        <div className="flex items-center gap-2 text-wine">
+        <div className="flex items-center gap-2 text-primary">
            <ShieldCheck size={18} />
            <span className="text-[10px] uppercase font-bold tracking-[0.2em]">Verified Buyer Exclusive</span>
         </div>
@@ -157,7 +157,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
               >
                 <Star 
                   size={24} 
-                  className={(hoverRating || rating) >= star ? "text-wine fill-wine" : "text-charcoal/10"} 
+                  className={(hoverRating || rating) >= star ? "text-primary fill-primary" : "text-charcoal/10"} 
                 />
               </button>
             ))}
@@ -171,7 +171,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
             <input 
               type="text" required
               placeholder="Ex: Stunning craftsmanship and perfect fit"
-              className="w-full bg-ivory/30 border border-charcoal/5 px-4 py-3 text-sm focus:border-wine outline-none rounded-lg"
+              className="w-full bg-ivory/30 border border-charcoal/5 px-4 py-3 text-sm focus:border-primary outline-none rounded-lg"
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
             />
@@ -181,7 +181,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
             <textarea 
               rows={4}
               placeholder="What did you love about this piece? How was the fit?"
-              className="w-full bg-ivory/30 border border-charcoal/5 px-4 py-3 text-sm focus:border-wine outline-none resize-none rounded-lg"
+              className="w-full bg-ivory/30 border border-charcoal/5 px-4 py-3 text-sm focus:border-primary outline-none resize-none rounded-lg"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
@@ -224,7 +224,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
                  }
                  e.target.value = ''; // Reset file input
                }}
-               className="flex-1 bg-ivory/30 border border-charcoal/5 px-4 py-3 text-xs focus:border-wine outline-none rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-charcoal file:text-white hover:file:bg-wine file:cursor-pointer"
+               className="flex-1 bg-ivory/30 border border-charcoal/5 px-4 py-3 text-xs focus:border-primary outline-none rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-charcoal file:text-white hover:file:bg-primary file:cursor-pointer"
              />
           </div>
           
@@ -243,7 +243,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
         {/* Submit */}
         <button 
           disabled={isSubmitting}
-          className="w-full bg-charcoal text-white py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-wine transition-all flex items-center justify-center gap-2 group rounded-xl"
+          className="w-full bg-charcoal text-white py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary transition-all flex items-center justify-center gap-2 group rounded-xl"
         >
           {isSubmitting ? <Loader2 size={16} className="animate-spin text-white" /> : (
             <>

@@ -54,7 +54,7 @@ export default function SupportPage() {
 
            <div className="space-y-8">
               <div className="flex items-start gap-6 group">
-                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-wine group-hover:text-white transition-all duration-300">
+                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                     <MessageSquare size={24} />
                  </div>
                   <div>
@@ -64,7 +64,7 @@ export default function SupportPage() {
                       const cleanPhone = settings.supportPhone.replace(/\D/g, '');
                       const waPhone = cleanPhone.length <= 10 ? `91${cleanPhone}` : cleanPhone;
                       return (
-                        <a href={`https://wa.me/${waPhone}`} className="text-sm text-wine font-bold hover:underline mt-1 block">
+                        <a href={`https://wa.me/${waPhone}`} className="text-sm text-primary font-bold hover:underline mt-1 block">
                            +{waPhone}
                         </a>
                       );
@@ -73,7 +73,7 @@ export default function SupportPage() {
               </div>
 
               <div className="flex items-start gap-6 group">
-                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-wine group-hover:text-white transition-all duration-300">
+                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                     <Mail size={24} />
                  </div>
                  <div>
@@ -84,7 +84,7 @@ export default function SupportPage() {
               </div>
 
               <div className="flex items-start gap-6 group">
-                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-wine group-hover:text-white transition-all duration-300">
+                 <div className="p-4 bg-gray-50 rounded-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                     <MapPin size={24} />
                  </div>
                  <div>
@@ -108,7 +108,7 @@ export default function SupportPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans"
                         placeholder="Arjun S..."
                       />
                    </div>
@@ -119,7 +119,7 @@ export default function SupportPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans"
                         placeholder="arjun@email.com"
                       />
                    </div>
@@ -129,7 +129,7 @@ export default function SupportPage() {
                    <div className="space-y-2">
                       <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Inquiry Type</label>
                       <select 
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans appearance-none"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans appearance-none"
                         value={formData.type}
                         onChange={(e) => setFormData({...formData, type: e.target.value})}
                       >
@@ -145,7 +145,7 @@ export default function SupportPage() {
                           type="text" 
                           value={formData.orderId}
                           onChange={(e) => setFormData({...formData, orderId: e.target.value})}
-                          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans"
                           placeholder="ord_..."
                         />
                    </div>
@@ -158,7 +158,7 @@ export default function SupportPage() {
                      required
                      value={formData.subject}
                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans"
+                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans"
                      placeholder="Bespoke curation for wedding..."
                    />
                 </div>
@@ -170,7 +170,7 @@ export default function SupportPage() {
                      required
                      value={formData.message}
                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-wine focus:ring-1 focus:ring-wine outline-none transition-all font-sans resize-none"
+                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-sans resize-none"
                      placeholder="Describe your request in detail..."
                    />
                 </div>
@@ -178,14 +178,14 @@ export default function SupportPage() {
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-wine text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-charcoal transition-all shadow-md active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 mt-4"
+                  className="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-charcoal transition-all shadow-md active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 mt-4"
                 >
                    {isSubmitting ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
                    {isSubmitting ? "Transmitting..." : "Submit Inquiry"}
                 </button>
              </form>
            ) : (
-             <div className="bg-wine p-16 rounded-[40px] text-white text-center flex flex-col items-center justify-center space-y-8 shadow-2xl">
+             <div className="bg-primary p-16 rounded-[40px] text-white text-center flex flex-col items-center justify-center space-y-8 shadow-2xl">
                 <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center">
                    <CheckCircle2 size={40} />
                 </div>

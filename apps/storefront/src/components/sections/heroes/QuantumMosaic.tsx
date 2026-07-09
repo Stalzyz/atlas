@@ -154,7 +154,7 @@ export function QuantumMosaic({ content, style: externalStyle, settings }: { con
           variants={panelVariants}
           onMouseEnter={() => setHoveredPanel(5)}
           onMouseLeave={() => setHoveredPanel(null)}
-          className={`relative overflow-hidden bg-wine rounded-3xl flex items-center justify-center ${hoveredPanel === 5 ? 'md:col-span-2 md:col-start-3 md:row-start-3' : 'md:col-span-2'} transition-all duration-700 ease-in-out group`}
+          className={`relative overflow-hidden bg-primary rounded-3xl flex items-center justify-center ${hoveredPanel === 5 ? 'md:col-span-2 md:col-start-3 md:row-start-3' : 'md:col-span-2'} transition-all duration-700 ease-in-out group`}
           style={{ backgroundColor: 'var(--primary)' }}
         >
           <MagneticLink>

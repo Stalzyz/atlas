@@ -43,7 +43,7 @@ export default function WishlistPage() {
     <div className="bg-ivory min-h-screen pb-24">
       {/* Header */}
       <div className="pt-[180px] md:pt-[120px] pb-12 px-6 md:px-12 text-center max-w-4xl mx-auto space-y-4">
-        <div className="inline-flex p-3 bg-wine/10 text-wine rounded-full mb-2">
+        <div className="inline-flex p-3 bg-primary/10 text-primary rounded-full mb-2">
             <Heart size={24} fill="currentColor" />
         </div>
         <h1 className="text-4xl md:text-6xl font-serif text-charcoal">Forgotten Favorites</h1>
@@ -55,7 +55,7 @@ export default function WishlistPage() {
       <div className="px-6 md:px-12 mt-12">
         {isInitializing || isLoadingProducts ? (
           <div className="flex justify-center py-24">
-            <div className="w-8 h-8 border-2 border-wine border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         ) : wishlist.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
@@ -84,7 +84,7 @@ export default function WishlistPage() {
             </div>
             <a 
               href="/collections/all" 
-              className="inline-block bg-wine text-ivory px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-wine-dark transition-all"
+              className="inline-block bg-primary text-ivory px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary transition-all"
             >
               Shop Collections
             </a>

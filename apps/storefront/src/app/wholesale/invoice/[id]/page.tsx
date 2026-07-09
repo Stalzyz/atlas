@@ -26,7 +26,7 @@ export default function InvoicePage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 text-charcoal">
         <div className="text-center space-y-4">
           <p className="font-bold text-red-600">Error loading invoice</p>
-          <Link href="/wholesale/orders" className="text-sm underline hover:text-wine">Return to Orders</Link>
+          <Link href="/wholesale/orders" className="text-sm underline hover:text-primary">Return to Orders</Link>
         </div>
       </div>
     );
@@ -62,14 +62,14 @@ export default function InvoicePage() {
         
         {/* Controls - Hidden when printing */}
         <div className="flex justify-between items-center print:hidden">
-          <Link href="/wholesale/orders" className="flex items-center gap-2 text-sm text-gray-500 hover:text-wine transition-all">
+          <Link href="/wholesale/orders" className="flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-all">
             <ArrowLeft size={16} /> Back to Orders
           </Link>
           <div className="flex gap-4">
-            <button onClick={() => window.print()} className="bg-charcoal text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-wine transition-all shadow-md">
+            <button onClick={() => window.print()} className="bg-charcoal text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-primary transition-all shadow-md">
               <Printer size={16} /> Print
             </button>
-            <button onClick={handleDownload} className="bg-wine text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-charcoal transition-all shadow-md">
+            <button onClick={handleDownload} className="bg-primary text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-charcoal transition-all shadow-md">
               <Download size={16} /> Download PDF
             </button>
           </div>
@@ -81,7 +81,7 @@ export default function InvoicePage() {
           {/* Header */}
           <div className="flex justify-between items-start border-b border-charcoal/10 pb-8 mb-8">
             <div className="space-y-1">
-              <h1 className="text-3xl font-serif tracking-widest text-wine uppercase">{seller.name}</h1>
+              <h1 className="text-3xl font-serif tracking-widest text-primary uppercase">{seller.name}</h1>
               <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Proforma Tax Invoice</p>
             </div>
             <div className="text-right text-sm space-y-1">
@@ -105,7 +105,7 @@ export default function InvoicePage() {
               <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Billed To (Buyer)</h3>
               <div className="text-sm space-y-1.5">
                 <p className="font-bold text-base flex items-center gap-2">
-                  <Building2 size={16} className="text-wine" /> {buyer.name}
+                  <Building2 size={16} className="text-primary" /> {buyer.name}
                 </p>
                 <p className="text-gray-600">{buyer.address}</p>
                 <p className="text-gray-600">GSTIN: <span className="font-mono">{buyer.gst}</span></p>
@@ -147,11 +147,11 @@ export default function InvoicePage() {
             {/* Bank Details */}
             <div className="space-y-4 pt-4 border-t border-charcoal/10">
               <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Payment Wire Details</h3>
-              <div className="bg-wine/5 p-4 rounded-lg border border-wine/10 space-y-2 text-sm font-mono">
-                <p><span className="text-wine font-sans font-bold">Bank:</span> {bankDetails.bankName}</p>
-                <p><span className="text-wine font-sans font-bold">A/C Name:</span> {bankDetails.accountName}</p>
-                <p><span className="text-wine font-sans font-bold">A/C No:</span> {bankDetails.accountNumber}</p>
-                <p><span className="text-wine font-sans font-bold">IFSC:</span> {bankDetails.ifscCode}</p>
+              <div className="bg-primary/5 p-4 rounded-lg border border-primary/10 space-y-2 text-sm font-mono">
+                <p><span className="text-primary font-sans font-bold">Bank:</span> {bankDetails.bankName}</p>
+                <p><span className="text-primary font-sans font-bold">A/C Name:</span> {bankDetails.accountName}</p>
+                <p><span className="text-primary font-sans font-bold">A/C No:</span> {bankDetails.accountNumber}</p>
+                <p><span className="text-primary font-sans font-bold">IFSC:</span> {bankDetails.ifscCode}</p>
               </div>
             </div>
 
@@ -171,7 +171,7 @@ export default function InvoicePage() {
 
               <div className="flex justify-between py-4 mt-2 border-t border-charcoal/10 text-lg font-bold">
                 <span>Grand Total</span>
-                <span className="font-mono text-wine">₹{summary.grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                <span className="font-mono text-primary">₹{summary.grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
               </div>
               <p className="text-[10px] text-gray-400 text-right uppercase tracking-widest">All prices in Indian Rupees (INR)</p>
             </div>

@@ -240,7 +240,7 @@ function ProductCard({ product }: { product: any }) {
             </span>
           )}
           {product.badge && product.badge !== 'Sold Out' && (
-            <span className="text-[8px] uppercase tracking-[0.2em] px-3 py-1.5 bg-wine text-white font-bold shadow-md rounded-full">
+            <span className="text-[8px] uppercase tracking-[0.2em] px-3 py-1.5 bg-primary text-white font-bold shadow-md rounded-full">
               {product.badge}
             </span>
           )}
@@ -255,13 +255,13 @@ function ProductCard({ product }: { product: any }) {
         <div className="absolute top-4 right-4 z-20 flex flex-col gap-2 translate-x-10 group-hover:translate-x-0 transition-transform duration-500">
           <button 
             onClick={(e) => { e.preventDefault(); toggleWishlist(product.id); }}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl backdrop-blur-md border border-white/20 ${mounted && isWishlisted ? 'bg-wine text-white' : 'bg-black/60 text-white hover:bg-wine'}`}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl backdrop-blur-md border border-white/20 ${mounted && isWishlisted ? 'bg-primary text-white' : 'bg-black/60 text-white hover:bg-primary'}`}
           >
             <Heart size={16} fill={mounted && isWishlisted ? "currentColor" : "none"} />
           </button>
           <button 
             onClick={openQuickView}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-black/60 text-white hover:bg-wine shadow-xl backdrop-blur-md border border-white/20"
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-black/60 text-white hover:bg-primary shadow-xl backdrop-blur-md border border-white/20"
           >
             <Search size={16} />
           </button>
@@ -289,7 +289,7 @@ function ProductCard({ product }: { product: any }) {
               className={`w-full py-4 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.3em] shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all rounded-xl flex items-center justify-center gap-2 border border-white/20 ${
                 isOutOfStock 
                   ? 'bg-gray-900/70 text-gray-400 cursor-not-allowed' 
-                  : 'bg-black/70 text-white hover:bg-wine active:scale-95'
+                  : 'bg-black/70 text-white hover:bg-primary active:scale-95'
               }`}
            >
                {isOutOfStock ? (
@@ -358,7 +358,7 @@ function ProductCard({ product }: { product: any }) {
                   <div>
                     <h3 className="text-2xl md:text-3xl font-serif text-[var(--text-primary)] leading-tight mb-1">{product.name}</h3>
                     <div className="flex items-baseline gap-3 mt-2">
-                      <span className="text-2xl font-bold text-wine">
+                      <span className="text-2xl font-bold text-primary">
                         ₹{selectedVariant ? selectedVariant.price.toLocaleString() : product.numericPrice.toLocaleString()}
                       </span>
                       {selectedVariant?.mrp > 0 && selectedVariant.mrp > selectedVariant.price && (
@@ -421,9 +421,9 @@ function ProductCard({ product }: { product: any }) {
                                   onClick={() => setSelectedOptions(prev => ({ ...prev, [group.name]: val }))}
                                   className={`relative px-4 py-2 text-xs font-bold rounded-xl border-2 transition-all duration-200 ${
                                     isSelected
-                                      ? 'border-wine bg-wine text-white shadow-lg scale-105'
+                                      ? 'border-primary bg-primary text-white shadow-lg scale-105'
                                       : isAvail
-                                        ? 'border-[var(--border)] text-[var(--text-primary)] hover:border-wine/60 hover:bg-wine/5'
+                                        ? 'border-[var(--border)] text-[var(--text-primary)] hover:border-primary/60 hover:bg-primary/5'
                                         : 'border-[var(--border)] text-[var(--text-secondary)] opacity-40 cursor-not-allowed line-through'
                                   }`}
                                   disabled={!isAvail && !isSelected}
@@ -447,7 +447,7 @@ function ProductCard({ product }: { product: any }) {
                     className={`w-full py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center gap-2 transition-all ${
                       !quickViewInStock
                         ? 'bg-[var(--border)] text-[var(--text-secondary)] cursor-not-allowed'
-                        : 'bg-wine text-white hover:bg-charcoal active:scale-[0.98] shadow-lg hover:shadow-xl'
+                        : 'bg-primary text-white hover:bg-charcoal active:scale-[0.98] shadow-lg hover:shadow-xl'
                     }`}
                   >
                     <ShoppingBag size={16} />
@@ -455,7 +455,7 @@ function ProductCard({ product }: { product: any }) {
                   </button>
                   <Link
                     href={`/products/${product.handle || product.id}`}
-                    className="w-full py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center border-2 border-[var(--border)] hover:border-wine text-[var(--text-primary)] transition-colors"
+                    className="w-full py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center border-2 border-[var(--border)] hover:border-primary text-[var(--text-primary)] transition-colors"
                   >
                     View Full Details
                   </Link>

@@ -27,7 +27,7 @@ const TIER_CONFIG: Record<string, any> = {
   BRONZE: { label: "Bronze Member", icon: <Award className="text-orange-400" />, color: "text-orange-600", bg: "bg-orange-50", desc: "Your journey with Atlas has begun." },
   SILVER: { label: "Silver Elite", icon: <ShieldCheck className="text-gray-400" />, color: "text-gray-600", bg: "bg-gray-50", desc: "Enjoy priority customer support." },
   GOLD: { label: "Gold Sovereign", icon: <Star className="text-yellow-500" />, color: "text-yellow-600", bg: "bg-yellow-50", desc: "Exclusive early access to new collections." },
-  PLATINUM: { label: "Platinum Royal", icon: <Award className="text-wine" />, color: "text-wine", bg: "bg-beige", desc: "Complimentary personal styling sessions." },
+  PLATINUM: { label: "Platinum Royal", icon: <Award className="text-primary" />, color: "text-primary", bg: "bg-beige", desc: "Complimentary personal styling sessions." },
 };
 
 const MOCK_PROFILE = {
@@ -89,7 +89,7 @@ function AccountDashboardContent() {
 
   if (authLoading || isLoading) return (
     <div className="h-screen flex flex-col items-center justify-center gap-4 bg-[var(--bg)]">
-       <Loader2 className="animate-spin text-wine" size={32} />
+       <Loader2 className="animate-spin text-primary" size={32} />
        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-charcoal/20">Opening your wardrobe...</p>
     </div>
   );
@@ -104,7 +104,7 @@ function AccountDashboardContent() {
        <div className="pb-20 px-6 md:px-12 bg-[var(--surface)] border-b border-[var(--border)]">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
              <div className="flex items-center gap-8">
-                <div className="w-24 h-24 rounded-full border-4 border-ivory shadow-lg overflow-hidden shrink-0 bg-wine flex items-center justify-center text-ivory text-3xl font-serif">
+                <div className="w-24 h-24 rounded-full border-4 border-ivory shadow-lg overflow-hidden shrink-0 bg-primary flex items-center justify-center text-ivory text-3xl font-serif">
                    {authUser?.email?.[0].toUpperCase() || 'P'}
                 </div>
                 <div className="space-y-2 text-center md:text-left">
@@ -133,7 +133,7 @@ function AccountDashboardContent() {
                 </div>
                 <div className="space-y-1">
                    <p className="text-[9px] font-bold text-theme-text/30 uppercase tracking-widest">Points Loyalty</p>
-                   <p className="text-2xl font-bold text-wine font-sans">{profile?.points || 0}</p>
+                   <p className="text-2xl font-bold text-primary font-sans">{profile?.points || 0}</p>
                 </div>
                 <div className="space-y-1 pl-6 border-l border-[var(--border)]">
                    <p className="text-[9px] font-bold text-green-600/70 uppercase tracking-widest">Wallet Credit</p>
@@ -153,7 +153,7 @@ function AccountDashboardContent() {
                 <div className="flex justify-between w-full">
                   <div className="text-center space-y-1 flex-1">
                      <p className="text-[9px] font-bold text-theme-text/50 uppercase tracking-widest">Points</p>
-                     <p className="text-lg font-bold text-wine font-sans">{profile?.points || 0}</p>
+                     <p className="text-lg font-bold text-primary font-sans">{profile?.points || 0}</p>
                   </div>
                   <div className="text-center space-y-1 flex-1 border-l border-green-300/30 dark:border-green-700/50">
                      <p className="text-[9px] font-bold text-theme-text/50 uppercase tracking-widest">Orders</p>
@@ -177,8 +177,8 @@ function AccountDashboardContent() {
                          <div className="flex justify-between items-start">
                             <div className="space-y-1">
                                {order.status !== 'DELIVERED' && order.status !== 'CANCELLED' && (
-                                 <span className="text-[9px] font-bold text-wine tracking-widest uppercase flex items-center gap-2 outline-none mb-2">
-                                    <div className="w-1.5 h-1.5 bg-wine rounded-full animate-ping" /> Active Order
+                                 <span className="text-[9px] font-bold text-primary tracking-widest uppercase flex items-center gap-2 outline-none mb-2">
+                                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" /> Active Order
                                  </span>
                                )}
                                <h3 className="text-2xl font-bold text-theme-text">
@@ -186,7 +186,7 @@ function AccountDashboardContent() {
                                </h3>
                                <p className="text-[10px] text-theme-text/50 font-medium uppercase tracking-widest mt-1">Status: {order.status}</p>
                             </div>
-                            <Link href={`/account/orders/${order.id}`} className="text-[9px] font-bold uppercase tracking-widest text-theme-text/40 hover:text-wine transition-colors flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <Link href={`/account/orders/${order.id}`} className="text-[9px] font-bold uppercase tracking-widest text-theme-text/40 hover:text-primary transition-colors flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                View Details <ChevronRight size={14} />
                             </Link>
                          </div>
@@ -194,7 +194,7 @@ function AccountDashboardContent() {
                          {/* Tracker Visual */}
                          <div className="relative pt-6 pb-2">
                             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-50 -translate-y-1/2" />
-                            <div className="absolute top-1/2 left-0 h-0.5 bg-wine -translate-y-1/2 transition-all duration-1000" style={{ 
+                            <div className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 transition-all duration-1000" style={{ 
                               width: order.status === 'PENDING' ? '12%' :
                                      order.status === 'CONFIRMED' ? '37%' :
                                      order.status === 'SHIPPED' ? '62%' : '100%'
@@ -210,7 +210,7 @@ function AccountDashboardContent() {
                                   const active = order.status === step.key || (idx === 0 && order.status !== 'PENDING') || (idx === 1 && (order.status === 'SHIPPED' || order.status === 'DELIVERED')) || (idx === 2 && order.status === 'DELIVERED');
                                   return (
                                     <div key={idx} className="flex flex-col items-center gap-3">
-                                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${active ? 'bg-wine text-white shadow-lg' : 'bg-[var(--surface)] border text-theme-text/20'}`}>
+                                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${active ? 'bg-primary text-white shadow-lg' : 'bg-[var(--surface)] border text-theme-text/20'}`}>
                                           {step.icon}
                                        </div>
                                        <span className={`text-[8px] font-bold uppercase tracking-widest ${active ? 'text-theme-text' : 'text-theme-text/20'}`}>{step.label}</span>
@@ -240,7 +240,7 @@ function AccountDashboardContent() {
                </div>
              ) : (
                <div className="bg-[var(--surface)] p-12 rounded-[40px] border border-[var(--border)] shadow-sm text-center space-y-6">
-                  <div className="w-16 h-16 bg-beige rounded-3xl flex items-center justify-center mx-auto text-wine rotate-3">
+                  <div className="w-16 h-16 bg-beige rounded-3xl flex items-center justify-center mx-auto text-primary rotate-3">
                      <ShoppingBag size={32} />
                   </div>
                   <div className="space-y-2">
@@ -256,12 +256,12 @@ function AccountDashboardContent() {
              {/* Wardrobe Quick Action Grid */}
              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Link href="/account/orders" className="group">
-                   <div className="bg-[var(--surface)] p-8 rounded-[32px] border border-[var(--border)] hover:border-wine/20 transition-all space-y-6 hover:shadow-xl">
+                   <div className="bg-[var(--surface)] p-8 rounded-[32px] border border-[var(--border)] hover:border-primary/20 transition-all space-y-6 hover:shadow-xl">
                       <div className="flex justify-between items-center">
-                         <div className="w-12 h-12 bg-theme-text/5 rounded-2xl flex items-center justify-center text-theme-text/40 group-hover:text-wine group-hover:bg-wine/5 transition-all">
+                         <div className="w-12 h-12 bg-theme-text/5 rounded-2xl flex items-center justify-center text-theme-text/40 group-hover:text-primary group-hover:bg-primary/5 transition-all">
                             <Clock size={24} />
                          </div>
-                         <ArrowRight size={20} className="text-theme-text/10 group-hover:text-wine group-hover:translate-x-1 transition-all" />
+                         <ArrowRight size={20} className="text-theme-text/10 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                       </div>
                       <div className="space-y-1">
                          <h4 className="text-lg font-bold text-theme-text">Order History</h4>
@@ -271,12 +271,12 @@ function AccountDashboardContent() {
                 </Link>
 
                 <Link href="/wishlist" className="group">
-                   <div className="bg-[var(--surface)] p-8 rounded-[32px] border border-[var(--border)] hover:border-wine/20 transition-all space-y-6 hover:shadow-xl">
+                   <div className="bg-[var(--surface)] p-8 rounded-[32px] border border-[var(--border)] hover:border-primary/20 transition-all space-y-6 hover:shadow-xl">
                       <div className="flex justify-between items-center">
-                         <div className="w-12 h-12 bg-theme-text/5 rounded-2xl flex items-center justify-center text-theme-text/40 group-hover:text-wine group-hover:bg-wine/5 transition-all">
+                         <div className="w-12 h-12 bg-theme-text/5 rounded-2xl flex items-center justify-center text-theme-text/40 group-hover:text-primary group-hover:bg-primary/5 transition-all">
                             <Heart size={24} />
                          </div>
-                         <ArrowRight size={20} className="text-theme-text/10 group-hover:text-wine group-hover:translate-x-1 transition-all" />
+                         <ArrowRight size={20} className="text-theme-text/10 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                       </div>
                       <div className="space-y-1">
                          <h4 className="text-lg font-bold text-theme-text">My Wishlist</h4>
@@ -322,11 +322,11 @@ function AccountDashboardContent() {
                 <h3 className="text-[10px] font-bold uppercase tracking-widest text-theme-text/40">Account Settings</h3>
                 <div className="space-y-4">
                    <Link href="/account/profile" className="flex items-center gap-4 p-4 hover:bg-theme-text/5 rounded-2xl transition-all group">
-                      <Settings size={20} className="text-theme-text/20 group-hover:text-wine group-hover:rotate-45 transition-all" />
+                      <Settings size={20} className="text-theme-text/20 group-hover:text-primary group-hover:rotate-45 transition-all" />
                       <span className="text-sm font-bold text-theme-text">Account Settings</span>
                    </Link>
                    <Link href="/support" className="flex items-center gap-4 p-4 hover:bg-theme-text/5 rounded-2xl transition-all group">
-                      <CheckCircle2 size={20} className="text-theme-text/20 group-hover:text-wine transition-all" />
+                      <CheckCircle2 size={20} className="text-theme-text/20 group-hover:text-primary transition-all" />
                       <span className="text-sm font-bold text-theme-text">Help & Support</span>
                    </Link>
                    <button onClick={logout} className="w-full flex items-center gap-4 p-4 hover:bg-red-500/10 rounded-2xl transition-all group text-left">
@@ -347,7 +347,7 @@ export default function AccountDashboard() {
   return (
     <Suspense fallback={
       <div className="h-screen flex flex-col items-center justify-center gap-4 bg-[var(--bg)]">
-        <Loader2 className="animate-spin text-wine" size={32} />
+        <Loader2 className="animate-spin text-primary" size={32} />
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-charcoal/20">Loading Dashboard...</p>
       </div>
     }>

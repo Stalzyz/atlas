@@ -14,7 +14,7 @@ interface NewsletterSectionProps {
 
 export function NewsletterSection({ content }: NewsletterSectionProps) {
   return (
-    <section className="py-32 px-6 sm:px-12 bg-wine text-theme-bg overflow-hidden relative">
+    <section className="py-32 px-6 sm:px-12 bg-primary text-theme-bg overflow-hidden relative">
       {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif opacity-5 select-none pointer-events-none whitespace-nowrap">
         ATLAS EXCLUSIVE
@@ -39,7 +39,7 @@ export function NewsletterSection({ content }: NewsletterSectionProps) {
               placeholder={content.placeholder || "Enter your email address"}
               className="flex-1 bg-transparent border-b-2 border-theme-bg/30 px-6 py-4 focus:border-theme-bg outline-none transition-colors text-lg placeholder:text-theme-bg/50"
             />
-            <button type="submit" className="px-12 py-4 bg-theme-bg text-wine uppercase tracking-[0.3em] font-bold hover:bg-cream transition-colors duration-300">
+            <button type="submit" className="px-12 py-4 bg-theme-bg text-primary uppercase tracking-[0.3em] font-bold hover:bg-cream transition-colors duration-300">
               {content.buttonText || "Subscribe"}
             </button>
           </form>

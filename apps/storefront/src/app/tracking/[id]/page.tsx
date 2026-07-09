@@ -36,7 +36,7 @@ export default function PublicTrackingPage() {
 
   if (loading) return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-      <Loader2 className="animate-spin text-wine" size={40} />
+      <Loader2 className="animate-spin text-primary" size={40} />
       <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-gray-400">Locating your Atlas shipment...</p>
     </div>
   );
@@ -50,7 +50,7 @@ export default function PublicTrackingPage() {
         <h1 className="text-2xl font-serif text-charcoal">Shipment Not Found</h1>
         <p className="text-sm text-gray-400 mt-2">We couldn't find a shipment with that tracking ID. Please check the ID and try again.</p>
       </div>
-      <Link href="/" className="bg-wine text-ivory px-8 py-4 rounded-xl text-[10px] uppercase font-bold tracking-widest shadow-xl">
+      <Link href="/" className="bg-primary text-ivory px-8 py-4 rounded-xl text-[10px] uppercase font-bold tracking-widest shadow-xl">
         Back to Shopping
       </Link>
     </div>
@@ -59,7 +59,7 @@ export default function PublicTrackingPage() {
   return (
     <div className="min-h-screen bg-ivory/30 pb-24">
       <div className="max-w-2xl mx-auto px-6 py-12 md:py-24 space-y-8">
-        <Link href="/account/orders" className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-charcoal/40 hover:text-wine transition-colors">
+        <Link href="/account/orders" className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-charcoal/40 hover:text-primary transition-colors">
           <ArrowLeft size={14} /> Back to My Orders
         </Link>
 
@@ -70,7 +70,7 @@ export default function PublicTrackingPage() {
               <h1 className="text-3xl font-serif text-charcoal">Track Shipment</h1>
               <p className="text-xs text-charcoal/40 font-bold uppercase tracking-widest">Tracking ID: {shipment.trackingId}</p>
             </div>
-            <div className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-wine text-white`}>
+            <div className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-primary text-white`}>
               {shipment.status}
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function PublicTrackingPage() {
              ]).map((event: any, i: number) => (
                <div key={i} className="relative pl-16 group">
                   {/* Dot */}
-                  <div className={`absolute left-0 top-1 w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-lg transition-all duration-500 z-10 ${i === 0 ? 'bg-wine text-white scale-110' : 'bg-gray-50 text-gray-300'}`}>
+                  <div className={`absolute left-0 top-1 w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-lg transition-all duration-500 z-10 ${i === 0 ? 'bg-primary text-white scale-110' : 'bg-gray-50 text-gray-300'}`}>
                      {event.status === 'CONFIRMED' && <ShieldCheck size={18} />}
                      {event.status === 'PACKED' && <Package size={18} />}
                      {event.status === 'SHIPPED' && <Truck size={18} />}
@@ -96,7 +96,7 @@ export default function PublicTrackingPage() {
                   </div>
                   <div className="space-y-1">
                      <div className="flex justify-between items-center">
-                        <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${i === 0 ? 'text-wine' : 'text-charcoal/30'}`}>
+                        <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${i === 0 ? 'text-primary' : 'text-charcoal/30'}`}>
                            {event.status}
                         </p>
                         <p className="text-[9px] text-charcoal/20 font-bold uppercase tracking-widest">{event.location || 'Hub'}</p>
@@ -139,7 +139,7 @@ export default function PublicTrackingPage() {
               <h3 className="text-lg font-serif">Need assistance with your delivery?</h3>
               <p className="text-xs text-ivory/60 uppercase font-bold tracking-widest">Our Atlas Concierge is here to help.</p>
            </div>
-           <button className="bg-wine text-white px-8 py-4 rounded-xl text-[10px] uppercase font-bold tracking-widest shadow-xl whitespace-nowrap">
+           <button className="bg-primary text-white px-8 py-4 rounded-xl text-[10px] uppercase font-bold tracking-widest shadow-xl whitespace-nowrap">
               Contact Support
            </button>
         </div>

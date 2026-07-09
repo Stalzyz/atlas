@@ -33,7 +33,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
               <div className="space-y-1">
                 <h2 className="text-2xl font-serif text-charcoal flex items-center gap-3">
                   Shopping Bag
-                  <span className="text-[10px] bg-wine text-white px-2 py-0.5 rounded-full font-sans font-bold">
+                  <span className="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full font-sans font-bold">
                     {items.length}
                   </span>
                 </h2>
@@ -41,7 +41,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
               </div>
               <button 
                 onClick={onClose} 
-                className="p-3 hover:rotate-90 hover:bg-wine hover:text-white transition-all duration-500 rounded-full"
+                className="p-3 hover:rotate-90 hover:bg-primary hover:text-white transition-all duration-500 rounded-full"
               >
                 <X size={20} />
               </button>
@@ -70,7 +70,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                         </div>
                         <button 
                           onClick={() => removeItem(item.id)}
-                          className="text-charcoal/20 hover:text-wine transition-colors p-1"
+                          className="text-charcoal/20 hover:text-primary transition-colors p-1"
                         >
                           <Trash2 size={16} />
                         </button>
@@ -88,7 +88,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                             className="text-charcoal/40 hover:text-charcoal transition-colors font-serif"
                            >+</button>
                         </div>
-                        <span className="text-lg font-serif italic text-wine">₹{item.price.toLocaleString()}</span>
+                        <span className="text-lg font-serif italic text-primary">₹{item.price.toLocaleString()}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -98,13 +98,13 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                   <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="p-12 bg-beige rounded-full text-wine/10 relative"
+                    className="p-12 bg-beige rounded-full text-primary/10 relative"
                   >
                     <ShoppingBag size={80} strokeWidth={1} />
                     <motion.div 
                       animate={{ y: [0, -10, 0] }}
                       transition={{ repeat: Infinity, duration: 3 }}
-                      className="absolute -top-2 -right-2 text-wine"
+                      className="absolute -top-2 -right-2 text-primary"
                     >
                       ✨
                     </motion.div>
@@ -115,7 +115,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                   </div>
                   <button 
                     onClick={onClose} 
-                    className="bg-charcoal text-white px-8 py-3.5 text-[10px] uppercase font-bold tracking-[0.2em] hover:bg-wine transition-all shadow-xl"
+                    className="bg-charcoal text-white px-8 py-3.5 text-[10px] uppercase font-bold tracking-[0.2em] hover:bg-primary transition-all shadow-xl"
                   >
                     Start Exploring
                   </button>
@@ -133,16 +133,16 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean; onClo
                   </div>
                   <div className="flex justify-between text-[10px] uppercase font-bold tracking-[0.2em] text-charcoal/40 italic">
                     <span>Shipping estim.</span>
-                    <span className="text-wine">Complimentary</span>
+                    <span className="text-primary">Complimentary</span>
                   </div>
                 </div>
 
                 <div className="p-4 bg-[var(--surface)] border-t border-[var(--border)]">
                    <div className="flex justify-between text-2xl font-serif mb-10 items-baseline">
                       <span className="text-lg font-sans uppercase font-bold tracking-widest text-charcoal/20 leading-none">Total Value</span>
-                      <span className="text-wine text-3xl italic">₹{subtotal.toLocaleString()}</span>
+                      <span className="text-primary text-3xl italic">₹{subtotal.toLocaleString()}</span>
                    </div>
-                   <button className="w-full group relative bg-wine text-white py-5 uppercase font-bold text-xs tracking-[0.3em] overflow-hidden shadow-2xl">
+                   <button className="w-full group relative bg-primary text-white py-5 uppercase font-bold text-xs tracking-[0.3em] overflow-hidden shadow-2xl">
                      <span className="relative z-10 flex items-center justify-center gap-4 group-hover:translate-x-2 transition-transform duration-500">
                        Continue to Checkout
                        <ArrowRight size={18} />

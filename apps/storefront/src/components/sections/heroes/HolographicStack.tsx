@@ -225,7 +225,7 @@ export function HolographicStack({ content, style: externalStyle, settings }: { 
                     style={{ backfaceVisibility: "hidden", rotateY: 180 }}
                     className="absolute inset-0 rounded-xl overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/40 p-10 flex flex-col justify-center items-center text-center shadow-2xl"
                   >
-                     <div className="w-12 h-1 bg-wine/20 rounded-full mb-8" />
+                     <div className="w-12 h-1 bg-primary/20 rounded-full mb-8" />
                      <h3 className="text-2xl font-serif text-charcoal mb-4 uppercase tracking-tight">
                         {content.backTitle || "Behind the Design"}
                      </h3>
@@ -236,7 +236,7 @@ export function HolographicStack({ content, style: externalStyle, settings }: { 
                      {content.backCtaText && (
                        <Link 
                          href={content.backCtaLink || "#"}
-                         className="text-[11px] uppercase font-bold tracking-[0.2em] text-wine border-b-2 border-wine/10 pb-1 hover:border-wine transition-all"
+                         className="text-[11px] uppercase font-bold tracking-[0.2em] text-primary border-b-2 border-primary/10 pb-1 hover:border-primary transition-all"
                        >
                           {content.backCtaText}
                        </Link>

@@ -150,7 +150,7 @@ export function InfiniteCanvas({ content, style: externalStyle, settings }: { co
                  className="absolute bottom-0 w-full h-[0%] bg-current group-hover:h-[100%] transition-all duration-500 ease-out"
                />
                <motion.div 
-                 className="absolute inset-0 bg-wine opacity-0 group-hover:opacity-10 transition-opacity duration-500 mix-blend-overlay"
+                 className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 mix-blend-overlay"
                />
             </Link>
           </MagneticLink>

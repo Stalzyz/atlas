@@ -322,7 +322,7 @@ export default function CheckoutPage() {
   if (!authChecked) {
     return (
       <div className="min-h-screen bg-theme-bg flex items-center justify-center">
-        <Loader2 className="animate-spin text-wine" size={48} />
+        <Loader2 className="animate-spin text-primary" size={48} />
       </div>
     );
   }
@@ -677,7 +677,7 @@ export default function CheckoutPage() {
             ATLAS
           </Link>
           <div className="flex items-center text-[10px] uppercase tracking-widest text-theme-text-muted gap-2">
-            <Link href="/cart" className="hover:text-wine transition-colors">Cart</Link>
+            <Link href="/cart" className="hover:text-primary transition-colors">Cart</Link>
             <ChevronRight size={10} />
             <span className="text-theme-text font-bold">Checkout</span>
           </div>
@@ -691,7 +691,7 @@ export default function CheckoutPage() {
             <input
               type="email"
               placeholder="Email Address"
-              className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text"
+              className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               onBlur={() => syncLead()}
@@ -703,7 +703,7 @@ export default function CheckoutPage() {
             <section className="p-6 bg-theme-surface rounded-2xl border border-theme-border space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-wine/10 rounded-full flex items-center justify-center text-wine">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
                     <IndianRupee size={20} />
                   </div>
                   <div>
@@ -717,19 +717,19 @@ export default function CheckoutPage() {
                 <button
                   onClick={() => setWallet((w) => ({ ...w, use: !w.use }))}
                   className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-                    wallet.use ? "bg-wine text-white" : "bg-theme-bg border border-theme-border text-theme-text"
+                    wallet.use ? "bg-primary text-white" : "bg-theme-bg border border-theme-border text-theme-text"
                   }`}
                 >
                   {wallet.use ? "Applied ✓" : "Apply Credits"}
                 </button>
               </div>
               {wallet.use && (
-                <div className="p-3 bg-wine/5 rounded-xl border border-wine/10">
-                  <p className="text-xs text-wine font-medium">
+                <div className="p-3 bg-primary/5 rounded-xl border border-primary/10">
+                  <p className="text-xs text-primary font-medium">
                     ₹{walletDeduction.toLocaleString()} has been applied to this order.
                   </p>
                   {wallet.balance > walletDeduction && (
-                    <p className="text-[10px] text-wine/70 mt-1">
+                    <p className="text-[10px] text-primary/70 mt-1">
                       (Your remaining ₹{(wallet.balance - walletDeduction).toLocaleString()} can be used on future orders)
                     </p>
                   )}
@@ -759,10 +759,10 @@ export default function CheckoutPage() {
                       fetchShippingOptions(addr.state);
                     }}
                     className={`p-4 border rounded-xl cursor-pointer transition-all ${
-                      selectedSavedAddressId === addr.id ? "border-wine bg-wine/5" : "border-theme-border hover:border-wine/50"
+                      selectedSavedAddressId === addr.id ? "border-primary bg-primary/5" : "border-theme-border hover:border-primary/50"
                     }`}
                   >
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-wine mb-2">{addr.type || "Address"}</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary mb-2">{addr.type || "Address"}</h4>
                     <p className="text-sm text-theme-text-muted">
                       {addr.line1}, {addr.city}, {addr.state} - {addr.postalCode}
                     </p>
@@ -775,7 +775,7 @@ export default function CheckoutPage() {
                     setSelectedSavedAddressId("");
                     setForm(prev => ({...prev, address: "", landmark: "", city: "", state: "", pincode: ""}));
                   }}
-                  className="text-[10px] uppercase font-bold text-theme-text-muted hover:text-wine"
+                  className="text-[10px] uppercase font-bold text-theme-text-muted hover:text-primary"
                 >
                   Clear Selection
                 </button>
@@ -787,10 +787,10 @@ export default function CheckoutPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-serif">{selectedSavedAddressId ? "Review Address" : "Shipping Address"}</h2>
             <div className="grid grid-cols-2 gap-4">
-              <input type="text" placeholder="First Name" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-              <input type="text" placeholder="Last Name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-              <input type="text" placeholder="Street Address" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-              <input type="text" placeholder="Landmark" value={form.landmark} onChange={(e) => setForm({ ...form, landmark: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
+              <input type="text" placeholder="First Name" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+              <input type="text" placeholder="Last Name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+              <input type="text" placeholder="Street Address" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+              <input type="text" placeholder="Landmark" value={form.landmark} onChange={(e) => setForm({ ...form, landmark: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
               
               <input 
                 type="text" 
@@ -798,10 +798,10 @@ export default function CheckoutPage() {
                 maxLength={6}
                 value={form.pincode} 
                 onChange={(e) => handlePincodeChange(e.target.value, false)} 
-                className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" 
+                className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" 
               />
               
-              <div className="flex border border-theme-border rounded-md overflow-hidden bg-theme-bg focus-within:border-wine">
+              <div className="flex border border-theme-border rounded-md overflow-hidden bg-theme-bg focus-within:border-primary">
                 <span className="bg-theme-surface px-3 py-3 text-sm text-theme-text-muted select-none flex items-center border-r border-theme-border font-medium">+91</span>
                 <input 
                   type="tel" 
@@ -814,12 +814,12 @@ export default function CheckoutPage() {
                 />
               </div>
 
-              <input type="text" placeholder="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
+              <input type="text" placeholder="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
               
               <select 
                 value={form.state} 
                 onChange={(e) => setForm({ ...form, state: e.target.value })} 
-                className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text"
+                className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text"
               >
                 <option value="">Select State</option>
                 {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -833,7 +833,7 @@ export default function CheckoutPage() {
                     type="checkbox"
                     checked={saveNewAddress}
                     onChange={() => setSaveNewAddress(!saveNewAddress)}
-                    className="w-4 h-4 rounded border-theme-border text-wine focus:ring-wine"
+                    className="w-4 h-4 rounded border-theme-border text-primary focus:ring-primary"
                   />
                   <span className="text-sm text-theme-text-muted group-hover:text-theme-text transition-colors">
                     Save this address for future use
@@ -848,7 +848,7 @@ export default function CheckoutPage() {
                   type="checkbox"
                   checked={!useDifferentBilling}
                   onChange={() => setUseDifferentBilling(!useDifferentBilling)}
-                  className="w-4 h-4 rounded border-theme-border text-wine focus:ring-wine"
+                  className="w-4 h-4 rounded border-theme-border text-primary focus:ring-primary"
                 />
                 <span className="text-sm text-theme-text-muted group-hover:text-theme-text transition-colors">
                   Billing address same as shipping
@@ -866,10 +866,10 @@ export default function CheckoutPage() {
                 >
                   <h2 className="text-xl font-serif">Billing Address</h2>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First Name" value={form.billingFirstName} onChange={(e) => setForm({ ...form, billingFirstName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-                    <input type="text" placeholder="Last Name" value={form.billingLastName} onChange={(e) => setForm({ ...form, billingLastName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-                    <input type="text" placeholder="Street Address" value={form.billingAddress} onChange={(e) => setForm({ ...form, billingAddress: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
-                    <input type="text" placeholder="Landmark" value={form.billingLandmark} onChange={(e) => setForm({ ...form, billingLandmark: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
+                    <input type="text" placeholder="First Name" value={form.billingFirstName} onChange={(e) => setForm({ ...form, billingFirstName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+                    <input type="text" placeholder="Last Name" value={form.billingLastName} onChange={(e) => setForm({ ...form, billingLastName: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+                    <input type="text" placeholder="Street Address" value={form.billingAddress} onChange={(e) => setForm({ ...form, billingAddress: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
+                    <input type="text" placeholder="Landmark" value={form.billingLandmark} onChange={(e) => setForm({ ...form, billingLandmark: e.target.value })} className="col-span-2 w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
                     
                     <input 
                       type="text" 
@@ -877,10 +877,10 @@ export default function CheckoutPage() {
                       maxLength={6}
                       value={form.billingPincode} 
                       onChange={(e) => handlePincodeChange(e.target.value, true)} 
-                      className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" 
+                      className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" 
                     />
                     
-                    <div className="flex border border-theme-border rounded-md overflow-hidden bg-theme-bg focus-within:border-wine">
+                    <div className="flex border border-theme-border rounded-md overflow-hidden bg-theme-bg focus-within:border-primary">
                       <span className="bg-theme-surface px-3 py-3 text-sm text-theme-text-muted select-none flex items-center border-r border-theme-border font-medium">+91</span>
                       <input 
                         type="tel" 
@@ -892,12 +892,12 @@ export default function CheckoutPage() {
                       />
                     </div>
 
-                    <input type="text" placeholder="City" value={form.billingCity} onChange={(e) => setForm({ ...form, billingCity: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text" />
+                    <input type="text" placeholder="City" value={form.billingCity} onChange={(e) => setForm({ ...form, billingCity: e.target.value })} className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text" />
                     
                     <select 
                       value={form.billingState} 
                       onChange={(e) => setForm({ ...form, billingState: e.target.value })} 
-                      className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text"
+                      className="w-full bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text"
                     >
                       <option value="">Select State</option>
                       {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -945,7 +945,7 @@ export default function CheckoutPage() {
                   ))}
                 </div>
                 {shippingOptions.some((o) => o.isHeavy) && (
-                  <div className="flex items-center gap-2 text-[10px] text-wine font-bold uppercase tracking-widest bg-wine/5 p-3 rounded-lg">
+                  <div className="flex items-center gap-2 text-[10px] text-primary font-bold uppercase tracking-widest bg-primary/5 p-3 rounded-lg">
                     <Zap size={14} /> Atelier Handling Applied for Heavy Items
                   </div>
                 )}
@@ -959,13 +959,13 @@ export default function CheckoutPage() {
 
           {/* Submit */}
           <div className="pt-6 flex justify-between items-center border-t border-theme-border">
-            <Link href="/cart" className="text-sm text-wine flex items-center gap-2 hover:opacity-70">
+            <Link href="/cart" className="text-sm text-primary flex items-center gap-2 hover:opacity-70">
               <ArrowLeft size={16} /> Return to Cart
             </Link>
             <button
               onClick={handlePayment}
               disabled={processing}
-              className="bg-theme-text text-theme-bg px-8 py-4 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-wine hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
+              className="bg-theme-text text-theme-bg px-8 py-4 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
             >
               <Lock size={14} />
               {processing ? "Processing..." : `Pay ₹${netPayable.toLocaleString()}`}
@@ -1008,7 +1008,7 @@ export default function CheckoutPage() {
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                 disabled={promoState.status === "SUCCESS" || promoState.status === "LOADING"}
-                className="flex-1 bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-wine outline-none transition-all text-theme-text"
+                className="flex-1 bg-theme-bg border border-theme-border rounded-md px-4 py-3 text-sm focus:border-primary outline-none transition-all text-theme-text"
               />
               {promoState.status === "SUCCESS" ? (
                 <button onClick={removePromo} className="bg-charcoal text-white px-6 py-3 rounded-md text-sm font-bold">
@@ -1018,7 +1018,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={applyPromo}
                   disabled={!promoCode || promoState.status === "LOADING"}
-                  className="bg-wine text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-wine/90 disabled:opacity-50"
+                  className="bg-primary text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-primary/90 disabled:opacity-50"
                 >
                   {promoState.status === "LOADING" ? <Loader2 className="animate-spin" size={16} /> : "Apply"}
                 </button>
@@ -1056,7 +1056,7 @@ export default function CheckoutPage() {
               </div>
             )}
             {promoState.status === "SUCCESS" && (
-              <div className="flex justify-between text-sm font-bold text-wine">
+              <div className="flex justify-between text-sm font-bold text-primary">
                 <span>Discount ({promoCode})</span><span>− ₹{promoState.amount?.toLocaleString()}</span>
               </div>
             )}
@@ -1066,7 +1066,7 @@ export default function CheckoutPage() {
               </div>
             )}
             {wallet.use && walletDeduction > 0 && (
-              <div className="flex justify-between text-sm font-bold text-wine">
+              <div className="flex justify-between text-sm font-bold text-primary">
                 <span>Wallet Credits</span><span>− ₹{walletDeduction.toLocaleString()}</span>
               </div>
             )}

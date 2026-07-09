@@ -28,7 +28,7 @@ export default function RelatedProducts({ productId }: { productId: string }) {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <Loader2 className="animate-spin text-wine" size={24} />
+        <Loader2 className="animate-spin text-primary" size={24} />
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default function RelatedProducts({ productId }: { productId: string }) {
     <div className="mt-24">
       <div className="flex justify-between items-end mb-12">
         <div>
-          <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-wine">You may also like</span>
+          <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-primary">You may also like</span>
           <h2 className="text-3xl md:text-5xl font-serif text-theme-text mt-4">Related Collections</h2>
         </div>
         <div className="hidden md:block">

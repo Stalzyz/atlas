@@ -27,9 +27,6 @@
   --glass-border:   rgba(98, 55, 160, 0.18);
 
   /* Aliases (kept for legacy component compatibility) */
-  --wine:       #28104E;
-  --wine-light: #6237A0;
-  --wine-dark:  #180930;
 
   /* Button */
   --btn-radius: 9999px;
@@ -62,9 +59,6 @@
   --glass-border:   rgba(151, 84, 203, 0.25);
 
   /* Aliases */
-  --wine:       #6237A0;
-  --wine-light: #9754CB;
-  --wine-dark:  #28104E;
 }
 
 /* Force fix hardcoded colors in Dark Mode to ensure contrast */
@@ -394,7 +388,7 @@
 }
 
 /* Highlighted / wine block */
-.rg-wine-block {
+.rg-primary-block {
   background: var(--primary);
   color: #fff;
   border-radius: 16px;
@@ -417,5 +411,4 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--wine-light);
 }

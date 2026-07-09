@@ -27,7 +27,7 @@ export function CategoryShowcase({ content }: CategoryShowcaseProps) {
           <h2 className="text-4xl sm:text-5xl font-serif text-theme-text mb-4">
             {content.title}
           </h2>
-          <div className="w-24 h-1 bg-wine mx-auto opacity-20" />
+          <div className="w-24 h-1 bg-primary mx-auto opacity-20" />
         </div>
       )}
 
@@ -48,7 +48,7 @@ export function CategoryShowcase({ content }: CategoryShowcaseProps) {
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-wine-dark/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
               
               <div className="absolute bottom-10 left-0 right-0 text-center px-6">
                 <span className="text-theme-bg text-[10px] uppercase tracking-[0.4em] font-bold block mb-2 opacity-80">

@@ -66,7 +66,7 @@ function SearchPageContent() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="What are you looking for today?"
-              className="w-full pl-16 pr-20 py-6 bg-theme-bg border border-theme-border rounded-[2.5rem] text-xl font-serif text-theme-text outline-none focus:ring-4 focus:ring-wine/5 transition-all placeholder:text-theme-text-muted"
+              className="w-full pl-16 pr-20 py-6 bg-theme-bg border border-theme-border rounded-[2.5rem] text-xl font-serif text-theme-text outline-none focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-theme-text-muted"
             />
             {query && (
               <button
@@ -83,7 +83,7 @@ function SearchPageContent() {
       <div className="max-w-7xl mx-auto px-6 mt-12">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 space-y-4">
-            <Loader2 className="animate-spin text-wine" size={40} />
+            <Loader2 className="animate-spin text-primary" size={40} />
             <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-theme-text-muted">Searching our archives...</p>
           </div>
         ) : results.length > 0 ? (
@@ -110,12 +110,12 @@ function SearchPageContent() {
                       alt={product.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-theme-surface/90 backdrop-blur-md rounded-full text-[9px] font-bold uppercase tracking-widest text-wine opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute top-4 right-4 px-3 py-1 bg-theme-surface/90 backdrop-blur-md rounded-full text-[9px] font-bold uppercase tracking-widest text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                       View Details
                     </div>
                   </div>
                   <div className="text-center space-y-1 px-2">
-                    <h3 className="text-sm font-bold tracking-widest uppercase text-theme-text line-clamp-1 group-hover:text-wine transition-colors">{product.title}</h3>
+                    <h3 className="text-sm font-bold tracking-widest uppercase text-theme-text line-clamp-1 group-hover:text-primary transition-colors">{product.title}</h3>
                     <p className="text-sm font-serif italic text-theme-text-muted">₹{product.variants?.[0]?.price ? Number(product.variants[0].price).toLocaleString() : "Price on Request"}</p>
                   </div>
                 </Link>
@@ -144,7 +144,7 @@ function SearchPageContent() {
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="px-6 py-3 bg-theme-surface border border-theme-border rounded-full text-xs font-bold text-theme-text hover:bg-wine hover:text-white hover:border-wine transition-all shadow-sm"
+                    className="px-6 py-3 bg-theme-surface border border-theme-border rounded-full text-xs font-bold text-theme-text hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
                   >
                     {tag}
                   </button>

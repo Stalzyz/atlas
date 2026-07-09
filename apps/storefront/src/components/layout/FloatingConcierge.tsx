@@ -53,7 +53,7 @@ export function FloatingConcierge() {
             <motion.div 
               animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
               transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute -inset-6 bg-wine/20 rounded-full blur-2xl pointer-events-none" 
+              className="absolute -inset-6 bg-primary/20 rounded-full blur-2xl pointer-events-none" 
             />
             
             {/* Tooltip Overlay */}
@@ -104,7 +104,7 @@ export function FloatingConcierge() {
                 >
                   <button 
                     onClick={() => setShowOffersPanel(false)}
-                    className="absolute top-4 right-4 z-10 w-8 h-8 bg-theme-surface border border-theme-border rounded-full flex items-center justify-center hover:bg-wine hover:text-white transition-all shadow-sm"
+                    className="absolute top-4 right-4 z-10 w-8 h-8 bg-theme-surface border border-theme-border rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm"
                   >
                     <X size={14} />
                   </button>

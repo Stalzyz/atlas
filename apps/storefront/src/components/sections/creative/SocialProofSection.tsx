@@ -28,7 +28,7 @@ export function SocialProofSection({ content }: SocialProofProps) {
           </h2>
           <div className="flex justify-center gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-4 h-4 fill-wine text-wine" />
+              <Star key={i} className="w-4 h-4 fill-primary text-primary" />
             ))}
           </div>
         </div>
@@ -43,14 +43,14 @@ export function SocialProofSection({ content }: SocialProofProps) {
               viewport={{ once: true }}
               className="glass-card p-10 rounded-sm relative"
             >
-              <div className="absolute -top-6 left-10 text-8xl font-serif text-wine/10 pointer-events-none">
+              <div className="absolute -top-6 left-10 text-8xl font-serif text-primary/10 pointer-events-none">
                 “
               </div>
               <p className="text-theme-text/80 font-light italic mb-8 relative z-10 leading-relaxed">
                 {item.content}
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-wine/10 flex items-center justify-center font-serif text-wine text-xl">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-serif text-primary text-xl">
                   {item.name.charAt(0)}
                 </div>
                 <div>

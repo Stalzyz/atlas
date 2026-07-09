@@ -72,7 +72,7 @@ export default function ReviewList({ productId }: { productId: string }) {
           <div className="flex items-center gap-4">
              <span className="text-6xl font-serif text-charcoal">{averageRating.toFixed(1)}</span>
              <div>
-                <div className="flex text-wine mb-1">
+                <div className="flex text-primary mb-1">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star key={i} size={20} fill={i <= Math.round(averageRating) ? "currentColor" : "none"} strokeWidth={2} />
                   ))}
@@ -93,7 +93,7 @@ export default function ReviewList({ productId }: { productId: string }) {
             className="pt-10 space-y-6"
           >
             <div className="flex justify-between items-center">
-               <div className="flex gap-0.5 text-wine">
+               <div className="flex gap-0.5 text-primary">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star key={i} size={14} fill={i <= review.rating ? "currentColor" : "none"} strokeWidth={2} />
                   ))}
@@ -125,7 +125,7 @@ export default function ReviewList({ productId }: { productId: string }) {
             )}
             
             <div className="flex items-center gap-3 pt-4">
-               <div className="w-8 h-8 bg-beige rounded-xl flex items-center justify-center text-xs font-bold text-wine uppercase shadow-sm">
+               <div className="w-8 h-8 bg-beige rounded-xl flex items-center justify-center text-xs font-bold text-primary uppercase shadow-sm">
                  {review.user.name.charAt(0)}
                </div>
                <div className="flex flex-col">

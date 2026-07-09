@@ -47,7 +47,7 @@ export function FloatingGlassHero({ content }: FloatingGlassHeroProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="text-wine text-[10px] uppercase tracking-[0.5em] font-bold block mb-6 animate-pulse">
+          <span className="text-primary text-[10px] uppercase tracking-[0.5em] font-bold block mb-6 animate-pulse">
             Premium Collection 2024
           </span>
           <h1 className="text-6xl sm:text-8xl font-serif text-theme-text mb-8 leading-[1.1]">
@@ -81,7 +81,7 @@ export function FloatingGlassHero({ content }: FloatingGlassHeroProps) {
                 className="object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-wine text-theme-bg p-6 shadow-2xl">
+            <div className="absolute -bottom-6 -left-6 bg-primary text-theme-bg p-6 shadow-2xl">
               <span className="text-[10px] uppercase tracking-widest font-bold">New Arrival</span>
               <h3 className="font-serif text-xl">Handpicked Silk</h3>
             </div>
@@ -107,7 +107,7 @@ export function FloatingGlassHero({ content }: FloatingGlassHeroProps) {
               x: [0, 20, 0]
             }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-wine/5 border border-wine/10 blur-xl" 
+            className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-primary/5 border border-primary/10 blur-xl" 
           />
         </div>
       </div>
@@ -120,7 +120,7 @@ export function FloatingGlassHero({ content }: FloatingGlassHeroProps) {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
         <span className="text-[10px] uppercase tracking-[0.3em] text-theme-text/40">Scroll</span>
-        <div className="w-px h-16 bg-gradient-to-b from-wine to-transparent" />
+        <div className="w-px h-16 bg-gradient-to-b from-primary to-transparent" />
       </motion.div>
     </section>
   );

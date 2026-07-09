@@ -189,7 +189,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
               <div className="space-y-3">
                  <Link
                    href={`/collections/all`}
-                   className={`block text-[11px] font-bold uppercase tracking-widest transition-colors ${handle === 'all' ? 'text-wine' : 'text-theme-text-muted hover:text-theme-text'}`}
+                   className={`block text-[11px] font-bold uppercase tracking-widest transition-colors ${handle === 'all' ? 'text-primary' : 'text-theme-text-muted hover:text-theme-text'}`}
                  >
                    All Collections
                  </Link>
@@ -197,7 +197,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                    <Link
                      key={col.id}
                      href={`/collections/${col.handle}`}
-                     className={`block text-[11px] font-bold uppercase tracking-widest transition-colors ${handle === col.handle ? 'text-wine' : 'text-theme-text-muted hover:text-theme-text'}`}
+                     className={`block text-[11px] font-bold uppercase tracking-widest transition-colors ${handle === col.handle ? 'text-primary' : 'text-theme-text-muted hover:text-theme-text'}`}
                    >
                      {col.title} <span className="opacity-40 ml-1">({col._count?.products || 0})</span>
                    </Link>
@@ -212,7 +212,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                    type="range" min="0" max="10000" step="100"
                    value={maxPrice}
                    onChange={(e) => setMaxPrice(Number(e.target.value))}
-                   className="w-full accent-wine h-1 bg-theme-border rounded-lg appearance-none cursor-pointer"
+                   className="w-full accent-primary h-1 bg-theme-border rounded-lg appearance-none cursor-pointer"
                  />
                  <div className="flex items-center gap-4">
                     <div className="flex-1">
@@ -221,7 +221,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                          type="number" min="0" max={maxPrice}
                          value={minPrice}
                          onChange={(e) => setMinPrice(Number(e.target.value))}
-                         className="w-full bg-transparent border border-theme-border/20 rounded text-[11px] p-2 outline-none focus:border-wine"
+                         className="w-full bg-transparent border border-theme-border/20 rounded text-[11px] p-2 outline-none focus:border-primary"
                        />
                     </div>
                     <div className="flex-1">
@@ -230,7 +230,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                          type="number" min={minPrice} max="10000"
                          value={maxPrice}
                          onChange={(e) => setMaxPrice(Number(e.target.value))}
-                         className="w-full bg-transparent border border-theme-border/20 rounded text-[11px] p-2 outline-none focus:border-wine"
+                         className="w-full bg-transparent border border-theme-border/20 rounded text-[11px] p-2 outline-none focus:border-primary"
                        />
                     </div>
                  </div>
@@ -245,7 +245,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                    <button
                      key={size}
                      onClick={() => toggleSize(size)}
-                     className={`px-3 py-1.5 border rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${selectedSizes.includes(size) ? 'bg-theme-text text-theme-bg border-theme-text' : 'border-theme-border text-theme-text-muted hover:border-wine hover:text-wine'}`}
+                     className={`px-3 py-1.5 border rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${selectedSizes.includes(size) ? 'bg-theme-text text-theme-bg border-theme-text' : 'border-theme-border text-theme-text-muted hover:border-primary hover:text-primary'}`}
                    >
                       {size}
                    </button>
@@ -258,7 +258,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
               <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">Availability & Type</h3>
               <div className="flex flex-col gap-4 mt-2">
                  <label className="flex items-center gap-3 cursor-pointer group">
-                   <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${inStockOnly ? 'bg-wine border-wine text-white' : 'border-theme-border bg-transparent'}`}>
+                   <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${inStockOnly ? 'bg-primary border-primary text-white' : 'border-theme-border bg-transparent'}`}>
                      {inStockOnly && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3 h-3"><polyline points="20 6 9 17 4 12"></polyline></svg>}
                    </div>
                    <span className="text-[10px] font-bold text-theme-text-muted group-hover:text-theme-text uppercase tracking-widest">In Stock Only</span>
@@ -266,7 +266,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                  </label>
 
                  <label className="flex items-center gap-3 cursor-pointer group">
-                   <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${showCombo ? 'bg-wine border-wine text-white' : 'border-theme-border bg-transparent'}`}>
+                   <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${showCombo ? 'bg-primary border-primary text-white' : 'border-theme-border bg-transparent'}`}>
                      {showCombo && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3 h-3"><polyline points="20 6 9 17 4 12"></polyline></svg>}
                    </div>
                    <span className="text-[10px] font-bold text-theme-text-muted group-hover:text-theme-text uppercase tracking-widest">Combo Packs</span>
@@ -316,7 +316,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
           <div className="min-h-[400px]">
             {isLoading ? (
               <div className="py-32 flex flex-col items-center justify-center gap-4">
-                 <Loader2 className="animate-spin text-wine" size={32} />
+                 <Loader2 className="animate-spin text-primary" size={32} />
                  <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-theme-text-muted/20">Hydrating the lookbook...</p>
               </div>
             ) : products.length > 0 ? (
@@ -343,7 +343,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                      <button
                        disabled={page === 1}
                        onClick={() => setPage(Math.max(1, page - 1))}
-                       className="p-2 md:px-6 md:py-3 border border-theme-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-wine hover:text-white transition-all disabled:opacity-20"
+                       className="p-2 md:px-6 md:py-3 border border-theme-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all disabled:opacity-20"
                      >
                        <span className="hidden md:inline">Previous</span>
                        <span className="md:hidden">&lt;</span>
@@ -365,7 +365,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                                onClick={() => setPage(p)}
                                className={`w-8 h-8 flex items-center justify-center rounded-lg text-[10px] font-bold transition-all ${
                                  page === p
-                                   ? 'bg-wine text-white shadow-md'
+                                   ? 'bg-primary text-white shadow-md'
                                    : 'hover:bg-theme-border/50 text-theme-text-muted'
                                }`}
                              >
@@ -382,7 +382,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                      <button
                        disabled={page === totalPages}
                        onClick={() => setPage(page + 1)}
-                       className="p-2 md:px-6 md:py-3 border border-theme-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-wine hover:text-white transition-all disabled:opacity-20"
+                       className="p-2 md:px-6 md:py-3 border border-theme-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all disabled:opacity-20"
                      >
                        <span className="hidden md:inline">Next</span>
                        <span className="md:hidden">&gt;</span>
@@ -431,7 +431,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
               {/* Header */}
               <div className="flex justify-between items-center p-6 pb-4 border-b border-theme-border/10 bg-theme-surface z-20">
                  <h2 className="text-xl font-bold font-serif text-theme-text">Filters</h2>
-                 <button onClick={() => setShowFilters(false)} className="p-2 bg-theme-bg rounded-full text-theme-text-muted hover:text-wine hover:bg-wine/10 transition-colors"><X size={18} /></button>
+                 <button onClick={() => setShowFilters(false)} className="p-2 bg-theme-bg rounded-full text-theme-text-muted hover:text-primary hover:bg-primary/10 transition-colors"><X size={18} /></button>
               </div>
 
               {/* Split Body */}
@@ -447,12 +447,12 @@ function CollectionPageContent({ handle }: { handle: string }) {
                        <button
                          key={tab.id}
                          onClick={() => setActiveFilterTab(tab.id as any)}
-                         className={`w-full text-left px-4 py-5 text-xs font-bold transition-colors border-l-4 ${activeFilterTab === tab.id ? 'bg-wine/5 border-wine text-wine' : 'border-transparent text-theme-text-muted hover:bg-theme-bg/80 hover:text-theme-text'}`}
+                         className={`w-full text-left px-4 py-5 text-xs font-bold transition-colors border-l-4 ${activeFilterTab === tab.id ? 'bg-primary/5 border-primary text-primary' : 'border-transparent text-theme-text-muted hover:bg-theme-bg/80 hover:text-theme-text'}`}
                        >
                          {tab.label}
-                         {tab.id === 'size' && selectedSizes.length > 0 && <span className="inline-block w-2 h-2 rounded-full bg-wine ml-2" />}
-                         {tab.id === 'availability' && (inStockOnly || showCombo) && <span className="inline-block w-2 h-2 rounded-full bg-wine ml-2" />}
-                         {tab.id === 'price' && (maxPrice < 10000 || minPrice > 0) && <span className="inline-block w-2 h-2 rounded-full bg-wine ml-2" />}
+                         {tab.id === 'size' && selectedSizes.length > 0 && <span className="inline-block w-2 h-2 rounded-full bg-primary ml-2" />}
+                         {tab.id === 'availability' && (inStockOnly || showCombo) && <span className="inline-block w-2 h-2 rounded-full bg-primary ml-2" />}
+                         {tab.id === 'price' && (maxPrice < 10000 || minPrice > 0) && <span className="inline-block w-2 h-2 rounded-full bg-primary ml-2" />}
                        </button>
                     ))}
                  </div>
@@ -464,20 +464,20 @@ function CollectionPageContent({ handle }: { handle: string }) {
                           <Link
                             href={`/collections/all`}
                             onClick={() => setShowFilters(false)}
-                            className={`flex items-center justify-between text-xs font-bold transition-colors py-2 ${handle === 'all' ? 'text-wine' : 'text-theme-text'}`}
+                            className={`flex items-center justify-between text-xs font-bold transition-colors py-2 ${handle === 'all' ? 'text-primary' : 'text-theme-text'}`}
                           >
                             All Collections
-                            {handle === 'all' && <div className="w-2 h-2 bg-wine rounded-full" />}
+                            {handle === 'all' && <div className="w-2 h-2 bg-primary rounded-full" />}
                           </Link>
                           {collections.map(col => (
                             <Link
                               key={col.id}
                               href={`/collections/${col.handle}`}
                               onClick={() => setShowFilters(false)}
-                              className={`flex items-center justify-between text-xs font-bold transition-colors py-2 ${handle === col.handle ? 'text-wine' : 'text-theme-text'}`}
+                              className={`flex items-center justify-between text-xs font-bold transition-colors py-2 ${handle === col.handle ? 'text-primary' : 'text-theme-text'}`}
                             >
                               {col.title}
-                              {handle === col.handle && <div className="w-2 h-2 bg-wine rounded-full" />}
+                              {handle === col.handle && <div className="w-2 h-2 bg-primary rounded-full" />}
                             </Link>
                           ))}
                        </div>
@@ -487,8 +487,8 @@ function CollectionPageContent({ handle }: { handle: string }) {
                        <div className="flex flex-col gap-4">
                           {["XS", "S", "M", "L", "XL", "XXL", "XXXL", "Free Size"].map(size => (
                             <label key={size} className="flex items-center justify-between cursor-pointer group py-2">
-                              <span className={`text-xs font-bold ${selectedSizes.includes(size) ? 'text-wine' : 'text-theme-text'}`}>{size}</span>
-                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${selectedSizes.includes(size) ? 'bg-wine border-wine text-white' : 'border-theme-border bg-transparent'}`}>
+                              <span className={`text-xs font-bold ${selectedSizes.includes(size) ? 'text-primary' : 'text-theme-text'}`}>{size}</span>
+                              <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${selectedSizes.includes(size) ? 'bg-primary border-primary text-white' : 'border-theme-border bg-transparent'}`}>
                                 {selectedSizes.includes(size) && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3 h-3"><polyline points="20 6 9 17 4 12"></polyline></svg>}
                               </div>
                               <input type="checkbox" className="hidden" checked={selectedSizes.includes(size)} onChange={() => toggleSize(size)} />
@@ -500,16 +500,16 @@ function CollectionPageContent({ handle }: { handle: string }) {
                     {activeFilterTab === "availability" && (
                        <div className="flex flex-col gap-4">
                           <label className="flex items-center justify-between cursor-pointer group py-2">
-                            <span className={`text-xs font-bold ${inStockOnly ? 'text-wine' : 'text-theme-text'}`}>In Stock Only</span>
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${inStockOnly ? 'bg-wine border-wine text-white' : 'border-theme-border bg-transparent'}`}>
+                            <span className={`text-xs font-bold ${inStockOnly ? 'text-primary' : 'text-theme-text'}`}>In Stock Only</span>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${inStockOnly ? 'bg-primary border-primary text-white' : 'border-theme-border bg-transparent'}`}>
                               {inStockOnly && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3 h-3"><polyline points="20 6 9 17 4 12"></polyline></svg>}
                             </div>
                             <input type="checkbox" className="hidden" checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.checked)} />
                           </label>
 
                           <label className="flex items-center justify-between cursor-pointer group py-2">
-                            <span className={`text-xs font-bold ${showCombo ? 'text-wine' : 'text-theme-text'}`}>Combo Packs</span>
-                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${showCombo ? 'bg-wine border-wine text-white' : 'border-theme-border bg-transparent'}`}>
+                            <span className={`text-xs font-bold ${showCombo ? 'text-primary' : 'text-theme-text'}`}>Combo Packs</span>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${showCombo ? 'bg-primary border-primary text-white' : 'border-theme-border bg-transparent'}`}>
                               {showCombo && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3 h-3"><polyline points="20 6 9 17 4 12"></polyline></svg>}
                             </div>
                             <input type="checkbox" className="hidden" checked={showCombo} onChange={(e) => setShowCombo(e.target.checked)} />
@@ -520,13 +520,13 @@ function CollectionPageContent({ handle }: { handle: string }) {
                     {activeFilterTab === "price" && (
                        <div className="space-y-6 pt-4">
                           <div className="text-center pb-4">
-                             <span className="text-2xl font-bold font-serif text-wine">₹{minPrice.toLocaleString()} - ₹{maxPrice.toLocaleString()}</span>
+                             <span className="text-2xl font-bold font-serif text-primary">₹{minPrice.toLocaleString()} - ₹{maxPrice.toLocaleString()}</span>
                           </div>
                           <input
                             type="range" min="0" max="10000" step="100"
                             value={maxPrice}
                             onChange={(e) => setMaxPrice(Number(e.target.value))}
-                            className="w-full accent-wine h-2 bg-theme-border rounded-lg appearance-none cursor-pointer"
+                            className="w-full accent-primary h-2 bg-theme-border rounded-lg appearance-none cursor-pointer"
                           />
                           <div className="flex items-center gap-4 mt-6">
                             <div className="flex-1">
@@ -535,7 +535,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                                 type="number" min="0" max={maxPrice}
                                 value={minPrice}
                                 onChange={(e) => setMinPrice(Number(e.target.value))}
-                                className="w-full bg-theme-bg border border-theme-border/20 rounded-lg text-sm p-3 outline-none focus:border-wine"
+                                className="w-full bg-theme-bg border border-theme-border/20 rounded-lg text-sm p-3 outline-none focus:border-primary"
                               />
                             </div>
                             <div className="flex-1">
@@ -544,7 +544,7 @@ function CollectionPageContent({ handle }: { handle: string }) {
                                 type="number" min={minPrice} max="10000"
                                 value={maxPrice}
                                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                                className="w-full bg-theme-bg border border-theme-border/20 rounded-lg text-sm p-3 outline-none focus:border-wine"
+                                className="w-full bg-theme-bg border border-theme-border/20 rounded-lg text-sm p-3 outline-none focus:border-primary"
                               />
                             </div>
                           </div>
@@ -560,13 +560,13 @@ function CollectionPageContent({ handle }: { handle: string }) {
                      setMinPrice(0); setMaxPrice(10000);
                      updateParams({ sizes: [], inStock: null, combo: null, minPrice: null, maxPrice: null, page: "1" });
                    }}
-                   className="flex-1 bg-white border border-theme-border text-wine py-4 text-xs font-bold hover:bg-theme-bg transition-all rounded-xl shadow-sm"
+                   className="flex-1 bg-white border border-theme-border text-primary py-4 text-xs font-bold hover:bg-theme-bg transition-all rounded-xl shadow-sm"
                  >
                     Clear all
                  </button>
                  <button
                    onClick={() => setShowFilters(false)}
-                   className="flex-[1.5] bg-wine text-white py-4 text-xs font-bold hover:bg-wine/90 transition-all rounded-xl shadow-lg"
+                   className="flex-[1.5] bg-primary text-white py-4 text-xs font-bold hover:bg-primary/90 transition-all rounded-xl shadow-lg"
                  >
                     {isLoading ? "Loading..." : `Show Products`}
                  </button>

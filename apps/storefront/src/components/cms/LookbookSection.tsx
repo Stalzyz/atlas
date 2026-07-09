@@ -148,7 +148,7 @@ export default function LookbookSection({ scenes }: LookbookSectionProps) {
                            </div>
                            <div className="space-y-1">
                              <h4 className="text-sm font-bold text-charcoal font-serif leading-tight">{spot.productName}</h4>
-                             <p className="text-wine text-xs font-bold font-sans">₹{spot.price.toLocaleString()}</p>
+                             <p className="text-primary text-xs font-bold font-sans">₹{spot.price.toLocaleString()}</p>
                            </div>
                         </div>
                         <div className="flex gap-2 pt-2">
@@ -160,7 +160,7 @@ export default function LookbookSection({ scenes }: LookbookSectionProps) {
                            </Link>
                            <button 
                             onClick={(e) => { e.stopPropagation(); handleAddToBag(spot); }}
-                            className="flex-[2] bg-charcoal text-[9px] text-white py-3 uppercase font-bold tracking-[0.2em] hover:bg-wine transition-all flex items-center justify-center gap-2"
+                            className="flex-[2] bg-charcoal text-[9px] text-white py-3 uppercase font-bold tracking-[0.2em] hover:bg-primary transition-all flex items-center justify-center gap-2"
                            >
                               Add to Bag
                               <ShoppingBag size={12} />

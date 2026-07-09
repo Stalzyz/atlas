@@ -68,7 +68,7 @@ export default function BundleBuilder({ mainProduct, bundleProducts }: BundleBui
            <button 
             onClick={handleAddAll}
             disabled={isAdding || added}
-            className="bg-wine text-white px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-charcoal transition-all shadow-lg active:scale-95 disabled:bg-green-600"
+            className="bg-primary text-white px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-charcoal transition-all shadow-lg active:scale-95 disabled:bg-green-600"
            >
              {isAdding ? (
                <Loader2 className="animate-spin" size={18} />

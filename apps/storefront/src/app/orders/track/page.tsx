@@ -48,7 +48,7 @@ export default function GuestTrackingPage() {
            <motion.div 
              initial={{ scale: 0.8, opacity: 0 }}
              animate={{ scale: 1, opacity: 1 }}
-             className="w-20 h-20 bg-wine/5 rounded-full flex items-center justify-center mx-auto text-wine border border-wine/10 mb-8"
+             className="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mx-auto text-primary border border-primary/10 mb-8"
            >
               <Package size={32} strokeWidth={1} />
            </motion.div>
@@ -60,13 +60,13 @@ export default function GuestTrackingPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-3">
               <label className="text-[10px] uppercase font-bold tracking-[0.25em] text-charcoal/30 flex items-center gap-2">
-                Order Identification <Sparkles size={10} className="text-wine/40" />
+                Order Identification <Sparkles size={10} className="text-primary/40" />
               </label>
               <input 
                 type="text" 
                 placeholder="RAG-XXXXX"
                 required
-                className="w-full bg-transparent border-b border-charcoal/10 px-0 py-4 text-sm font-medium focus:border-wine outline-none transition-colors placeholder:text-charcoal/10"
+                className="w-full bg-transparent border-b border-charcoal/10 px-0 py-4 text-sm font-medium focus:border-primary outline-none transition-colors placeholder:text-charcoal/10"
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
               />
@@ -78,7 +78,7 @@ export default function GuestTrackingPage() {
                 type="email" 
                 placeholder="artisan@atlas.com"
                 required
-                className="w-full bg-transparent border-b border-charcoal/10 px-0 py-4 text-sm font-medium focus:border-wine outline-none transition-colors placeholder:text-charcoal/10"
+                className="w-full bg-transparent border-b border-charcoal/10 px-0 py-4 text-sm font-medium focus:border-primary outline-none transition-colors placeholder:text-charcoal/10"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -89,7 +89,7 @@ export default function GuestTrackingPage() {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-wine/5 text-wine text-[10px] uppercase font-bold tracking-widest p-4 rounded-2xl flex items-center gap-3 border border-wine/10 shadow-sm"
+              className="bg-primary/5 text-primary text-[10px] uppercase font-bold tracking-widest p-4 rounded-2xl flex items-center gap-3 border border-primary/10 shadow-sm"
             >
                <AlertCircle size={14} /> {error}
             </motion.div>
@@ -99,7 +99,7 @@ export default function GuestTrackingPage() {
             <MagneticLink>
               <button 
                 disabled={isLoading}
-                className="w-full bg-charcoal text-white py-6 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-wine transition-all flex items-center justify-center gap-4 disabled:opacity-50 shadow-2xl group"
+                className="w-full bg-charcoal text-white py-6 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all flex items-center justify-center gap-4 disabled:opacity-50 shadow-2xl group"
               >
                 {isLoading ? (
                   <Loader2 size={18} className="animate-spin" />
@@ -116,7 +116,7 @@ export default function GuestTrackingPage() {
 
         <div className="pt-8 text-center space-y-6">
           <p className="text-[10px] text-charcoal/30 uppercase font-bold tracking-[0.25em]">
-             Need Assistance? <a href="/support" className="text-wine border-b border-wine/20 pb-0.5 ml-2 hover:text-charcoal transition-colors">Digital Concierge</a>
+             Need Assistance? <a href="/support" className="text-primary border-b border-primary/20 pb-0.5 ml-2 hover:text-charcoal transition-colors">Digital Concierge</a>
           </p>
         </div>
       </div>

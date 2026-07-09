@@ -9,7 +9,7 @@ export default function SignUpPage() {
         <div className="text-center mt-8">
           <p className="text-sm text-gray-400">
             Already have an account?{" "}
-            <a href="/sign-in" className="text-wine font-bold font-serif italic text-sm hover:underline">
+            <a href="/sign-in" className="text-primary font-bold font-serif italic text-sm hover:underline">
               Sign In
             </a>
           </p>

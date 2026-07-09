@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-theme-bg flex flex-col md:flex-row overflow-hidden relative">
       
       {/* Visual Side (Luxury) */}
-      <div className="hidden md:flex w-1/2 bg-wine items-center justify-center p-20 relative overflow-hidden">
+      <div className="hidden md:flex w-1/2 bg-primary items-center justify-center p-20 relative overflow-hidden">
         {/* Subtle Luxury Pattern Overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px]"></div>
@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="flex-1 flex flex-col items-center justify-center p-8 bg-theme-bg relative">
         {/* Floating elements */}
         <div className="absolute top-8 left-8 z-50">
-          <Link href="/" className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-theme-text-muted hover:text-wine transition-colors group">
+          <Link href="/" className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-theme-text-muted hover:text-primary transition-colors group">
             <MoveLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             Back
           </Link>

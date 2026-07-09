@@ -72,7 +72,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
 
   if (authLoading || isLoading) return (
     <div className="h-screen flex items-center justify-center bg-ivory">
-       <Loader2 className="animate-spin text-wine" size={32} />
+       <Loader2 className="animate-spin text-primary" size={32} />
     </div>
   );
 
@@ -85,8 +85,8 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
        <div className="max-w-5xl mx-auto px-6">
           
           {/* Navigation */}
-          <Link href="/account" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-charcoal/40 hover:text-wine transition-colors mb-12 group">
-             <div className="p-2 bg-white rounded-lg border border-charcoal/5 group-hover:border-wine/20 transition-all"><ArrowLeft size={16} /></div>
+          <Link href="/account" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-charcoal/40 hover:text-primary transition-colors mb-12 group">
+             <div className="p-2 bg-white rounded-lg border border-charcoal/5 group-hover:border-primary/20 transition-all"><ArrowLeft size={16} /></div>
              Back to Wardrobe
           </Link>
 
@@ -99,7 +99,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 <div className="bg-white p-10 rounded-[40px] border border-charcoal/5 shadow-xl space-y-10">
                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-6">
                       <div className="space-y-1">
-                         <span className="text-[10px] font-bold text-wine tracking-widest uppercase">Atlas Pursuit</span>
+                         <span className="text-[10px] font-bold text-primary tracking-widest uppercase">Atlas Pursuit</span>
                          <h1 className="text-4xl font-bold tracking-tight text-charcoal">
                             {order.formattedOrderNumber || (order.orderNumber != null ? `RGS-${order.orderNumber + 1000}` : order.id.slice(-10).toUpperCase())}
                          </h1>
@@ -124,7 +124,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                    {/* Journey Timeline */}
                    <div className="relative py-8">
                       <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-50 -translate-y-1/2" />
-                      <div className="absolute top-1/2 left-0 h-0.5 bg-wine -translate-y-1/2 transition-all duration-1000" style={{ 
+                      <div className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 transition-all duration-1000" style={{ 
                         width: order.status === 'PENDING' ? '16.5%' :
                                (order.status === 'CONFIRMED' || order.status === 'PROCESSING') ? '50%' :
                                (order.status === 'SHIPPED' || order.status === 'DELIVERED') ? '100%' : '0%'
@@ -143,12 +143,12 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                                            (idx === 2 && (order.status === 'SHIPPED' || order.status === 'DELIVERED'));
                             return (
                                <div key={idx} className="flex flex-col items-center text-center gap-3 bg-white px-2">
-                                  <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all z-10 ${active ? 'bg-wine text-white shadow-xl' : 'bg-white border text-gray-200'}`}>
+                                  <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all z-10 ${active ? 'bg-primary text-white shadow-xl' : 'bg-white border text-gray-200'}`}>
                                      {step.icon}
                                   </div>
                                   <div className="space-y-0.5">
                                      <p className={`text-[10px] font-bold uppercase tracking-widest ${active ? 'text-charcoal' : 'text-gray-300'}`}>{step.label}</p>
-                                     <p className={`text-[8px] uppercase font-bold tracking-[0.2em] font-sans ${active ? 'text-wine' : 'text-gray-200'}`}>{step.desc}</p>
+                                     <p className={`text-[8px] uppercase font-bold tracking-[0.2em] font-sans ${active ? 'text-primary' : 'text-gray-200'}`}>{step.desc}</p>
                                   </div>
                                </div>
                             )
@@ -172,7 +172,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                            href={`https://www.google.com/search?q=${order.carrierName}+tracking+${order.trackingId}`}
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="flex items-center gap-2 px-6 py-3 bg-charcoal text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-wine transition-all"
+                           className="flex items-center gap-2 px-6 py-3 bg-charcoal text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-all"
                          >
                             <ExternalLink size={14} /> Track via {order.carrierName}
                          </a>
@@ -187,16 +187,16 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 {order.fulfillments?.[0]?.shipments?.[0]?.trackingHistory && (
                   <div className="bg-white p-10 rounded-[40px] border border-charcoal/5 shadow-xl space-y-10 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
-                       <Truck size={140} className="text-wine rotate-12" />
+                       <Truck size={140} className="text-primary rotate-12" />
                     </div>
                     
                     <div className="flex items-center justify-between relative z-10">
                       <h3 className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40 flex items-center gap-2">
-                        <Clock size={14} className="text-wine" /> Journey Milestones
+                        <Clock size={14} className="text-primary" /> Journey Milestones
                       </h3>
                       <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-[10px] font-bold text-wine uppercase tracking-[0.2em]">Real-time Sync</span>
+                        <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Real-time Sync</span>
                       </div>
                     </div>
                     
@@ -206,14 +206,14 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                       
                       {(order.fulfillments[0].shipments[0].trackingHistory as any[]).slice().reverse().map((event, idx) => (
                         <div key={idx} className="flex gap-8 relative">
-                          <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 z-10 transition-all ${idx === 0 ? 'bg-wine text-white shadow-lg' : 'bg-white border border-charcoal/5 text-charcoal/20'}`}>
+                          <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 z-10 transition-all ${idx === 0 ? 'bg-primary text-white shadow-lg' : 'bg-white border border-charcoal/5 text-charcoal/20'}`}>
                             {idx === 0 ? <CheckCircle2 size={16} /> : <div className="w-1.5 h-1.5 rounded-full bg-current" />}
                           </div>
                           <div className="space-y-2 pt-1">
                             <div className="flex flex-wrap items-center gap-3">
                               <p className={`text-sm font-bold tracking-tight ${idx === 0 ? 'text-charcoal' : 'text-charcoal/50'}`}>{event.message || event.status}</p>
                               {event.location && (
-                                <span className="text-[9px] font-bold text-wine uppercase tracking-widest bg-wine/5 px-2 py-0.5 rounded-md border border-wine/10">
+                                <span className="text-[9px] font-bold text-primary uppercase tracking-widest bg-primary/5 px-2 py-0.5 rounded-md border border-primary/10">
                                   {event.location}
                                 </span>
                               )}
@@ -234,7 +234,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 <div className="bg-white rounded-[40px] border border-charcoal/5 shadow-sm overflow-hidden">
                    <div className="p-10 border-b border-charcoal/5 flex justify-between items-center">
                       <h3 className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40">Inventory Summary</h3>
-                      <span className="text-[10px] font-bold text-wine uppercase tracking-[0.2em]">{order.items.length} Elements</span>
+                      <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">{order.items.length} Elements</span>
                    </div>
                    <div className="divide-y divide-charcoal/5">
                       {order.items.map((item: any, idx: number) => (
@@ -243,7 +243,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                               <img src={item.variant?.product?.images?.[0]?.url} alt="" className="w-full h-full object-cover" />
                            </div>
                            <div className="flex-1 space-y-1">
-                              <h4 className="text-lg font-serif text-charcoal group-hover:text-wine transition-colors">{item.variant?.product?.title || "Product Unavailable"}</h4>
+                              <h4 className="text-lg font-serif text-charcoal group-hover:text-primary transition-colors">{item.variant?.product?.title || "Product Unavailable"}</h4>
                               <p className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40">SKU: {item.variant?.sku || "N/A"} · Size: {item.variant?.option1Value || "N/A"}</p>
                            </div>
                            <div className="text-right space-y-1">
@@ -279,7 +279,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 {/* Consignee Card */}
                 <div className="bg-white p-8 rounded-[40px] border border-charcoal/5 shadow-sm space-y-6">
                    <div className="space-y-2">
-                      <div className="w-10 h-10 bg-beige rounded-2xl flex items-center justify-center text-wine"><MapPin size={20} /></div>
+                      <div className="w-10 h-10 bg-beige rounded-2xl flex items-center justify-center text-primary"><MapPin size={20} /></div>
                       <h3 className="text-[10px] font-bold uppercase tracking-widest text-charcoal/40">Consignee Destination</h3>
                    </div>
                    <div className="space-y-1">
@@ -292,10 +292,10 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                       </p>
                    </div>
                    <div className="pt-6 border-t border-charcoal/5 space-y-3">
-                      <div className="flex items-center gap-3 text-charcoal/60 hover:text-wine transition-colors cursor-pointer text-xs font-sans">
+                      <div className="flex items-center gap-3 text-charcoal/60 hover:text-primary transition-colors cursor-pointer text-xs font-sans">
                          <Phone size={14} /> {order.customerPhone}
                       </div>
-                      <div className="flex items-center gap-3 text-charcoal/60 hover:text-wine transition-colors cursor-pointer text-xs font-sans truncate">
+                      <div className="flex items-center gap-3 text-charcoal/60 hover:text-primary transition-colors cursor-pointer text-xs font-sans truncate">
                          <Mail size={14} /> {order.customerEmail}
                       </div>
                    </div>
@@ -303,9 +303,9 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
 
                 {/* Settle Status Card */}
                 <div className="bg-charcoal text-white p-8 rounded-[40px] shadow-xl space-y-6 relative overflow-hidden">
-                   <div className="absolute top-0 right-0 w-24 h-24 bg-wine/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
+                   <div className="absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
                    <div className="space-y-2">
-                      <div className="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center text-wine"><CreditCard size={20} /></div>
+                      <div className="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center text-primary"><CreditCard size={20} /></div>
                       <h3 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Settle Status</h3>
                    </div>
                    <div className="space-y-4">
@@ -315,8 +315,8 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                       </div>
                       <div className="flex justify-between items-center">
                          <span className="text-xs font-medium text-white/60">Status</span>
-                         <span className="text-[9px] font-bold uppercase tracking-widest text-wine flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 bg-wine rounded-full" /> Authorized
+                         <span className="text-[9px] font-bold uppercase tracking-widest text-primary flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full" /> Authorized
                          </span>
                       </div>
                    </div>
@@ -325,7 +325,7 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
                 {/* Support Card */}
                 <div className="p-8 border border-charcoal/10 border-dashed rounded-[40px] text-center space-y-4">
                    <p className="text-[9px] font-bold text-charcoal/40 uppercase tracking-widest">Need Concierge Assist?</p>
-                   <Link href="/support" className="inline-flex items-center gap-2 text-xs font-bold text-wine uppercase tracking-[0.2em] hover:opacity-70 transition-opacity">
+                   <Link href="/support" className="inline-flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-[0.2em] hover:opacity-70 transition-opacity">
                       Contact Stylist <ChevronRight size={14} />
                    </Link>
                 </div>

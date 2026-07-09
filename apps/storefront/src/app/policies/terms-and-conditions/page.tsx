@@ -39,7 +39,7 @@ export default async function TermsPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-wine mb-4">Legal</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary mb-4">Legal</p>
           <h1 className="text-5xl font-serif text-theme-text mb-4">Terms &amp; Conditions</h1>
           {cmsContent?.lastUpdated && (
             <p className="text-theme-text-muted text-sm">Last updated: {cmsContent.lastUpdated}</p>
@@ -55,8 +55,8 @@ export default async function TermsPage() {
         )}
 
         <div className="mt-12 flex justify-center gap-8">
-          <Link href="/policies/return-policy" className="text-xs text-wine hover:underline uppercase tracking-widest font-bold">← Return Policy</Link>
-          <Link href="/policies/privacy-policy" className="text-xs text-wine hover:underline uppercase tracking-widest font-bold">Privacy Policy →</Link>
+          <Link href="/policies/return-policy" className="text-xs text-primary hover:underline uppercase tracking-widest font-bold">← Return Policy</Link>
+          <Link href="/policies/privacy-policy" className="text-xs text-primary hover:underline uppercase tracking-widest font-bold">Privacy Policy →</Link>
         </div>
       </div>
     </div>

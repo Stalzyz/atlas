@@ -111,7 +111,7 @@ const MODULES = [
 
 export default function EnterpriseLandingPage() {
   return (
-    <main className="min-h-screen text-white relative font-[family-name:var(--body-font)] pb-24" style={{ background: "linear-gradient(135deg, var(--wine), var(--wine-dark))" }}>
+    <main className="min-h-screen text-white relative font-[family-name:var(--body-font)] pb-24 bg-gradient-to-br from-primary to-primary/80">
       
       {/* ─── Background Noise ─────────────────────────────────────────── */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }}></div>

@@ -63,7 +63,7 @@ export function StickyAddToCart({ product, isVisible }: { product: any, isVisibl
           </div>
           
           <div className="flex-1 min-w-0">
-            <p className="text-[9px] uppercase font-bold tracking-[0.3em] text-wine mb-1">In your sights</p>
+            <p className="text-[9px] uppercase font-bold tracking-[0.3em] text-primary mb-1">In your sights</p>
             <p className="text-sm font-serif text-theme-text truncate leading-tight">{product?.name || "Product Name"}</p>
             <p className="text-xs font-mono text-theme-text-muted mt-1">{product?.price || "₹8,990"}</p>
           </div>
@@ -72,7 +72,7 @@ export function StickyAddToCart({ product, isVisible }: { product: any, isVisibl
             onClick={handleAdd}
             disabled={isAdding || product.isOutOfStock}
             className={`shrink-0 px-6 py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl active:scale-95 disabled:opacity-50 transition-all relative overflow-hidden ${
-              product.isOutOfStock ? "bg-zinc-200 text-zinc-400" : "bg-wine text-ivory"
+              product.isOutOfStock ? "bg-zinc-200 text-zinc-400" : "bg-primary text-ivory"
             }`}
           >
             <AnimatePresence mode="wait">

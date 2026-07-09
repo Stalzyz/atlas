@@ -39,10 +39,10 @@ export default function ReferAndEarn() {
   if (!user) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center space-y-6">
-        <Gift size={64} className="text-wine opacity-20" />
+        <Gift size={64} className="text-primary opacity-20" />
         <h2 className="text-3xl font-serif text-charcoal">Join the Atlas Family</h2>
         <p className="text-gray-500 max-w-sm">Sign in to unlock your unique referral link and start earning store credits.</p>
-        <button className="bg-wine text-white px-8 py-3 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-charcoal transition-all">Sign In to Continue</button>
+        <button className="bg-primary text-white px-8 py-3 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-charcoal transition-all">Sign In to Continue</button>
       </div>
     );
   }
@@ -51,25 +51,25 @@ export default function ReferAndEarn() {
     <div className="max-w-4xl mx-auto py-12 px-6 md:py-20 space-y-12">
       
       <div className="text-center space-y-4">
-        <h2 className="text-[10px] uppercase font-bold tracking-[0.4em] text-wine">Growth Engine</h2>
+        <h2 className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary">Growth Engine</h2>
         <h1 className="text-4xl md:text-5xl font-serif text-charcoal tracking-tight">Refer & Earn Luxury Credits</h1>
         <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
-          Invite your friends to experience Atlas. They get a discount on their first purchase, and you earn <span className="text-wine font-bold">₹100 credits</span> for every successful referral.
+          Invite your friends to experience Atlas. They get a discount on their first purchase, and you earn <span className="text-primary font-bold">₹100 credits</span> for every successful referral.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Share Card */}
-        <div className="bg-[var(--surface)] border border-wine/10 rounded-[2.5rem] p-8 md:p-12 space-y-8 shadow-sm">
+        <div className="bg-[var(--surface)] border border-primary/10 rounded-[2.5rem] p-8 md:p-12 space-y-8 shadow-sm">
           <div className="space-y-2">
             <h3 className="text-sm font-bold uppercase tracking-widest text-charcoal">Your Referral Link</h3>
             <div className="flex gap-2">
-              <div className="flex-1 bg-[var(--surface)] border border-wine/10 rounded-xl px-4 py-3 text-xs font-medium text-gray-400 truncate">
+              <div className="flex-1 bg-[var(--surface)] border border-primary/10 rounded-xl px-4 py-3 text-xs font-medium text-gray-400 truncate">
                 {loading ? "Generating..." : shareUrl}
               </div>
               <button 
                 onClick={copyToClipboard}
-                className="bg-wine text-white p-3 rounded-xl hover:bg-charcoal transition-all active:scale-95"
+                className="bg-primary text-white p-3 rounded-xl hover:bg-charcoal transition-all active:scale-95"
               >
                 {copied ? <CheckCircle size={18} /> : <Copy size={18} />}
               </button>
@@ -95,21 +95,21 @@ export default function ReferAndEarn() {
         {/* How it works */}
         <div className="space-y-6 flex flex-col justify-center">
            <div className="flex gap-6">
-              <div className="w-12 h-12 bg-wine text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">1</div>
+              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">1</div>
               <div className="space-y-1">
                  <h4 className="font-bold text-charcoal">Share your link</h4>
                  <p className="text-sm text-gray-500">Send your unique code to friends and family.</p>
               </div>
            </div>
            <div className="flex gap-6">
-              <div className="w-12 h-12 bg-wine text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">2</div>
+              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">2</div>
               <div className="space-y-1">
                  <h4 className="font-bold text-charcoal">They shop at Atlas</h4>
                  <p className="text-sm text-gray-500">Your friends get an automatic discount at checkout.</p>
               </div>
            </div>
            <div className="flex gap-6">
-              <div className="w-12 h-12 bg-wine text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">3</div>
+              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg">3</div>
               <div className="space-y-1">
                  <h4 className="font-bold text-charcoal">You get rewarded</h4>
                  <p className="text-sm text-gray-500">Receive ₹100 store credit in your wallet for every first order.</p>
@@ -134,7 +134,7 @@ export default function ReferAndEarn() {
                <p className="text-4xl font-bold font-serif flex items-center justify-center">₹0</p>
             </div>
          </div>
-         <button className="bg-wine px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-ivory hover:text-wine transition-all">
+         <button className="bg-primary px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-ivory hover:text-primary transition-all">
             Redeem at Checkout
          </button>
       </div>

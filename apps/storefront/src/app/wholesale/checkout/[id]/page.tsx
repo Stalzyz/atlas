@@ -57,8 +57,8 @@ export default function WholesaleCheckoutPage() {
         </div>
 
         <div className="space-y-6 max-w-lg">
-          <div className="bg-wine/5 border border-wine/10 p-6 rounded-xl flex gap-4">
-             <div className="bg-wine w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0">
+          <div className="bg-primary/5 border border-primary/10 p-6 rounded-xl flex gap-4">
+             <div className="bg-primary w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0">
                <Building2 size={20} />
              </div>
              <div>
@@ -83,7 +83,7 @@ export default function WholesaleCheckoutPage() {
             <button
               onClick={handleConfirmOrder}
               disabled={processing}
-              className="w-full bg-charcoal text-white px-8 py-5 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-wine transition-all disabled:opacity-70 flex items-center justify-center gap-3"
+              className="w-full bg-charcoal text-white px-8 py-5 rounded-md text-sm font-bold uppercase tracking-widest hover:bg-primary transition-all disabled:opacity-70 flex items-center justify-center gap-3"
             >
               {processing ? (
                 <><Loader2 size={18} className="animate-spin" /> Finalizing Invoice...</>
@@ -129,7 +129,7 @@ export default function WholesaleCheckoutPage() {
              </div>
              <div className="flex justify-between border-t border-gray-100 pt-3 mt-1 font-bold text-lg">
                <span>Grand Total</span>
-               <span className="font-mono text-wine">₹{netPayable.toLocaleString()}</span>
+               <span className="font-mono text-primary">₹{netPayable.toLocaleString()}</span>
              </div>
           </div>
 

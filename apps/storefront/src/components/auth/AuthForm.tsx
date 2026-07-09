@@ -152,14 +152,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
                    Email Address
                 </label>
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-theme-text-muted/30 group-focus-within:text-wine transition-colors" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-theme-text-muted/30 group-focus-within:text-primary transition-colors" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full bg-theme-bg border border-theme-border focus:border-wine focus:ring-0 rounded-2xl pl-12 pr-4 py-4 text-sm font-medium transition-all text-theme-text"
+                    className="w-full bg-theme-bg border border-theme-border focus:border-primary focus:ring-0 rounded-2xl pl-12 pr-4 py-4 text-sm font-medium transition-all text-theme-text"
                   />
                 </div>
               </div>
@@ -208,7 +208,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                     placeholder="0000"
-                    className="w-32 text-center tracking-[12px] text-2xl font-bold bg-theme-bg border border-theme-border focus:border-wine focus:ring-0 rounded-2xl py-4 transition-all text-theme-text"
+                    className="w-32 text-center tracking-[12px] text-2xl font-bold bg-theme-bg border border-theme-border focus:border-primary focus:ring-0 rounded-2xl py-4 transition-all text-theme-text"
                   />
                 </div>
               </div>

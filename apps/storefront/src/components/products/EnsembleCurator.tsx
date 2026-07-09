@@ -72,7 +72,7 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
 
   if (loading) return (
     <div className="py-20 flex flex-col items-center justify-center text-theme-text/20">
-      <Loader2 className="animate-spin text-wine mb-4" size={40} />
+      <Loader2 className="animate-spin text-primary mb-4" size={40} />
       <p className="text-[10px] uppercase font-bold tracking-[0.2em]">Our AI Stylist is curating your ensemble...</p>
     </div>
   );
@@ -84,7 +84,7 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
       <div className="bg-theme-surface border border-theme-border rounded-3xl p-8 md:p-12 shadow-sm relative overflow-hidden">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 p-8 opacity-5">
-          <Sparkles size={120} className="text-wine rotate-12" />
+          <Sparkles size={120} className="text-primary rotate-12" />
         </div>
 
         <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12 items-start">
@@ -121,13 +121,13 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
                   </Link>
                   
                   <div className="mt-4 space-y-1">
-                    <p className="text-[9px] uppercase tracking-widest text-wine font-bold">{product.type}</p>
+                    <p className="text-[9px] uppercase tracking-widest text-primary font-bold">{product.type}</p>
                     <h4 className="text-sm font-bold text-theme-text truncate">{product.title}</h4>
                     <p className="text-xs font-bold text-theme-text-muted">₹{product?.variants?.[0]?.price ? product.variants[0].price.toLocaleString() : "---"}</p>
                     
                     {/* Stylist Note */}
                     <div className="pt-2 flex gap-2 items-start">
-                      <div className="p-1 bg-wine/10 text-wine rounded-md shrink-0">
+                      <div className="p-1 bg-primary/10 text-primary rounded-md shrink-0">
                         <Info size={10} />
                       </div>
                       <p className="text-[10px] text-theme-text-muted italic leading-tight">{product.stylistNote}</p>
@@ -141,7 +141,7 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
           {/* Action Box */}
           <div className="lg:sticky lg:top-4 bg-theme-text text-theme-bg rounded-2xl p-8 space-y-6 shadow-2xl">
             <div className="space-y-2 text-center pb-4 border-b border-theme-bg/10">
-              <Sparkles className="mx-auto text-wine" size={32} />
+              <Sparkles className="mx-auto text-primary" size={32} />
               <h4 className="text-lg font-serif">Buy the Ensemble</h4>
               <p className="text-[10px] uppercase font-bold tracking-widest text-theme-bg/40">3 Expert-Matched Items</p>
             </div>
@@ -159,7 +159,7 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
                   <span className="text-[9px] text-green-400 uppercase font-bold tracking-widest">Includes 5% Set Reward</span>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-xl font-bold text-wine">
+                  <span className="text-xl font-bold text-primary">
                     ₹{Math.floor(data.ensemble.reduce((acc, p) => acc + (p.variants[0]?.price || 0), 0) * 0.95).toLocaleString()}
                   </span>
                   <span className="text-[10px] text-theme-bg/30 line-through">
@@ -172,7 +172,7 @@ export default function EnsembleCurator({ productId }: { productId: string }) {
             <button
               onClick={addEnsembleToCart}
               disabled={addingAll}
-              className="w-full bg-wine text-white py-4 rounded-xl uppercase font-bold text-xs tracking-[0.2em] hover:bg-theme-bg hover:text-wine transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
+              className="w-full bg-primary text-white py-4 rounded-xl uppercase font-bold text-xs tracking-[0.2em] hover:bg-theme-bg hover:text-primary transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
             >
               {addingAll ? (
                 <>

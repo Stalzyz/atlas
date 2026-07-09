@@ -74,7 +74,7 @@ export function OffersProgress() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Gift className={isUnlocked ? "text-green-500" : "text-wine"} size={20} />
+          <Gift className={isUnlocked ? "text-green-500" : "text-primary"} size={20} />
           <h3 className="font-serif font-bold text-lg text-theme-text">
             {isUnlocked ? "Benefits Unlocked!" : "Unlock Free Shipping"}
           </h3>
@@ -103,7 +103,7 @@ export function OffersProgress() {
           initial={{ width: 0 }}
           animate={{ width: `${progressPercentage}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className={`absolute top-0 left-0 h-full ${isUnlocked ? "bg-green-500" : "bg-wine"}`}
+          className={`absolute top-0 left-0 h-full ${isUnlocked ? "bg-green-500" : "bg-primary"}`}
         />
         {/* Sparkles effect if unlocked */}
         <AnimatePresence>
@@ -126,7 +126,7 @@ export function OffersProgress() {
           className="pt-4 border-t border-theme-border"
         >
           <p className="text-xs font-bold uppercase tracking-widest text-theme-text-muted mb-3 flex items-center gap-2">
-            <Sparkles size={12} className="text-wine"/> Quick Add to Unlock
+            <Sparkles size={12} className="text-primary"/> Quick Add to Unlock
           </p>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {visibleRecommendations.map((item) => (
@@ -142,7 +142,7 @@ export function OffersProgress() {
                   <p className="text-[10px] font-bold text-theme-text line-clamp-2 leading-tight">{item.title}</p>
                 </div>
                 <div className="mt-2">
-                  <p className="text-xs font-bold text-wine mb-1">₹{item.price}</p>
+                  <p className="text-xs font-bold text-primary mb-1">₹{item.price}</p>
                   <button 
                     onClick={() => {
                       addItem({
@@ -159,7 +159,7 @@ export function OffersProgress() {
                       });
                       toggleDrawer(true);
                     }}
-                    className="w-full text-[9px] uppercase tracking-wider bg-theme-surface border border-theme-border px-2 py-1 rounded block hover:bg-wine hover:text-white transition-colors"
+                    className="w-full text-[9px] uppercase tracking-wider bg-theme-surface border border-theme-border px-2 py-1 rounded block hover:bg-primary hover:text-white transition-colors"
                   >
                     Add
                   </button>

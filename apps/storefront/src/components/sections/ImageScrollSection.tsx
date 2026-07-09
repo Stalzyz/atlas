@@ -54,7 +54,7 @@ export function ImageScrollSection({ content, settings }: { content: any; settin
               )}
             </div>
             {img.title && (
-              <span className="text-sm font-bold uppercase tracking-widest text-charcoal group-hover:text-wine transition-colors">
+              <span className="text-sm font-bold uppercase tracking-widest text-charcoal group-hover:text-primary transition-colors">
                 {img.title}
               </span>
             )}

@@ -57,7 +57,7 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
                     <div>
                       <button
                         onClick={() => setOpenItem(openItem === item.id ? null : item.id)}
-                        className="w-full flex justify-between items-center text-2xl font-serif text-theme-text hover:text-wine transition-colors"
+                        className="w-full flex justify-between items-center text-2xl font-serif text-theme-text hover:text-primary transition-colors"
                       >
                         <span>{item.label}</span>
                         <ChevronRight
@@ -80,7 +80,7 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
                                   key={child.id || child.url}
                                   href={child.url}
                                   onClick={onClose}
-                                  className="block text-base font-serif text-theme-text-muted hover:text-wine transition-colors"
+                                  className="block text-base font-serif text-theme-text-muted hover:text-primary transition-colors"
                                 >
                                   {child.label}
                                 </Link>
@@ -95,7 +95,7 @@ export default function MobileNav({ isOpen, onClose, menuItems }: MobileNavProps
                       <Link
                         href={item.url}
                         onClick={onClose}
-                        className="group flex justify-between items-center text-2xl font-serif text-theme-text hover:text-wine transition-colors"
+                        className="group flex justify-between items-center text-2xl font-serif text-theme-text hover:text-primary transition-colors"
                       >
                         <span>{item.label}</span>
                         <ChevronRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />

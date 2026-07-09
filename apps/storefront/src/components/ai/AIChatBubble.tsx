@@ -94,9 +94,9 @@ export function AIChatBubble() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-[140px] right-6 md:bottom-12 md:right-12 z-[9999] w-14 h-14 bg-primary text-ivory rounded-xl shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300"
+        className="fixed bottom-[140px] right-6 md:bottom-12 md:right-12 z-[9999] w-14 h-14 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
       >
-        <Sparkles size={24} />
+        <Sparkles size={28} className="text-primary drop-shadow-lg group-hover:text-primary/80 transition-colors" />
       </button>
 
       {/* Chat Window */}

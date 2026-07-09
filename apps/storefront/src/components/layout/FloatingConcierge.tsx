@@ -80,16 +80,16 @@ export function FloatingConcierge() {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => setShowOffersPanel(!showOffersPanel)}
-                className="relative w-14 h-14 bg-theme-surface border border-theme-border rounded-xl shadow-2xl flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 group"
+                className="relative w-14 h-14 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
               >
-                <MapPin size={24} className="text-primary group-hover:text-white transition-colors" />
+                <MapPin size={28} className="text-primary drop-shadow-lg group-hover:text-primary/80 transition-colors" />
               </button>
 
               <button
                 onClick={openWhatsApp}
-                className="relative w-14 h-14 bg-theme-surface border border-theme-border rounded-xl shadow-2xl flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 group"
+                className="relative w-14 h-14 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
               >
-                <MessageCircle size={24} className="text-primary group-hover:text-white transition-colors" />
+                <MessageCircle size={28} className="text-primary drop-shadow-lg group-hover:text-primary/80 transition-colors" />
               </button>
             </div>
 

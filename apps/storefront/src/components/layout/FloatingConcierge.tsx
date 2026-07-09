@@ -80,28 +80,16 @@ export function FloatingConcierge() {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => setShowOffersPanel(!showOffersPanel)}
-                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-primary hover:text-white transition-all duration-700 group"
+                className="relative w-14 h-14 bg-theme-surface border border-theme-border rounded-xl shadow-2xl flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 group"
               >
-                <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-primary transition-colors duration-500 shadow-inner">
-                  <MapPin size={20} />
-                </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary group-hover:text-white transition-colors">Offers</span>
-                  <span className="text-[10px] font-medium text-theme-text/60 group-hover:text-white/80 transition-colors">& Shipping</span>
-                </div>
+                <MapPin size={24} className="text-primary group-hover:text-white transition-colors" />
               </button>
 
               <button
                 onClick={openWhatsApp}
-                className="relative flex items-center gap-3 bg-theme-surface border border-theme-border pl-4 pr-6 py-3 rounded-full shadow-2xl hover:bg-primary hover:text-white transition-all duration-700 group"
+                className="relative w-14 h-14 bg-theme-surface border border-theme-border rounded-xl shadow-2xl flex items-center justify-center hover:bg-primary hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 group"
               >
-                <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-theme-surface group-hover:text-primary transition-colors duration-500 shadow-inner">
-                  <MessageCircle size={20} />
-                </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary group-hover:text-white transition-colors">Guide</span>
-                  <span className="text-[10px] font-medium text-theme-text/60 group-hover:text-white/80 transition-colors">Styling Help</span>
-                </div>
+                <MessageCircle size={24} className="text-primary group-hover:text-white transition-colors" />
               </button>
             </div>
 

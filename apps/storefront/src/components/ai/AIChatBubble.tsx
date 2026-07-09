@@ -94,7 +94,7 @@ export function AIChatBubble() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-[140px] right-6 md:bottom-12 md:right-12 z-[9999] w-14 h-14 bg-primary text-ivory rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300"
+        className="fixed bottom-[140px] right-6 md:bottom-12 md:right-12 z-[9999] w-14 h-14 bg-primary text-ivory rounded-xl shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300"
       >
         <Sparkles size={24} />
       </button>

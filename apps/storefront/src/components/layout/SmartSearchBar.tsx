@@ -74,7 +74,7 @@ export default function SmartSearchBar({ onClose }: { onClose?: () => void }) {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
           placeholder="Ask our AI Stylist (e.g., 'Show me red silk kurtis under ₹5000')"
-          className="w-full bg-theme-surface/80 backdrop-blur-md border border-primary/20 text-theme-text rounded-full py-4 pl-12 pr-12 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg transition-all"
+          className="w-full bg-theme-surface/80 backdrop-blur-md border border-primary/20 text-theme-text rounded-xl py-4 pl-12 pr-12 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg transition-all"
         />
         <div className="absolute right-4 text-gray-400">
           {isSearching ? (

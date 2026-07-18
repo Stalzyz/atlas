@@ -425,7 +425,7 @@ export default function AddProductPage() {
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">2. Textile & Style Attributes</h3>
             
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div>
                 <label className="text-xs font-bold text-charcoal block mb-1">Fabric</label>
                 <input type="text" value={form.fabric} onChange={e => setForm({...form, fabric: e.target.value})} placeholder="e.g. Dupion Silk" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-wine" />
@@ -486,7 +486,7 @@ export default function AddProductPage() {
               </button>
             </div>
             
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {/* Upload Button */}
                 <div 
                   onClick={() => document.getElementById('product-image-upload')?.click()}

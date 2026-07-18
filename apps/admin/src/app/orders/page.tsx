@@ -350,20 +350,20 @@ export default function OrdersPage() {
         </div>
 
         {/* Quick Stats Strip */}
-        <div className="grid grid-cols-4 gap-6 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-4 md:mt-8">
           {[
             { label: "Total Orders", value: stats.total, icon: ShoppingBag, color: "text-blue-600", bg: "bg-blue-50" },
             { label: "Revenue", value: `₹${stats.revenue.toLocaleString()}`, icon: CreditCard, color: "text-green-600", bg: "bg-green-50" },
-            { label: "Awaiting Fulfillment", value: stats.unfulfilled, icon: Package, color: "text-amber-600", bg: "bg-amber-50" },
-            { label: "High Risk Alerts", value: stats.highRisk, icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50" },
+            { label: "Awaiting", value: stats.unfulfilled, icon: Package, color: "text-amber-600", bg: "bg-amber-50" },
+            { label: "High Risk", value: stats.highRisk, icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50" },
           ].map((stat, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/50">
-              <div className={`${stat.bg} ${stat.color} p-2.5 rounded-lg`}>
+            <div key={i} className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-2 md:gap-4 p-3 md:p-4 rounded-xl border border-gray-100 bg-gray-50/50">
+              <div className={`${stat.bg} ${stat.color} p-2 md:p-2.5 rounded-lg flex-shrink-0`}>
                 <stat.icon size={20} />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</p>
-                <p className="text-lg font-bold text-gray-900">{stat.value}</p>
+                <p className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-tight md:leading-normal">{stat.label}</p>
+                <p className="text-base md:text-lg font-bold text-gray-900">{stat.value}</p>
               </div>
             </div>
           ))}
@@ -374,7 +374,7 @@ export default function OrdersPage() {
       <div className="flex-1 flex overflow-hidden">
         
         {/* Table Area */}
-        <main className={`flex-1 overflow-auto p-8 relative transition-all duration-300 w-full`}>
+        <main className={`flex-1 overflow-auto p-4 md:p-8 relative transition-all duration-300 w-full`}>
           
           {/* Tabs & Search */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
@@ -410,8 +410,8 @@ export default function OrdersPage() {
               </div>
             </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto">
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-gray-50/50 border-b border-gray-100">
@@ -440,7 +440,7 @@ export default function OrdersPage() {
                 <tbody className="divide-y divide-gray-50">
                   {isLoading ? (
                     <tr>
-                      <td colSpan={10} className="py-32 text-center">
+                      <td colSpan={13} className="py-32 text-center">
                         <div className="flex flex-col items-center gap-4">
                           <Loader2 className="animate-spin text-wine" size={32} />
                           <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">Sychronizing Global Orders...</p>
@@ -598,6 +598,89 @@ export default function OrdersPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* Mobile Cards View */}
+            <div className="md:hidden flex flex-col gap-4 p-4 bg-gray-50/30">
+              {isLoading ? (
+                <div className="py-20 text-center flex flex-col items-center gap-4">
+                  <Loader2 className="animate-spin text-wine" size={32} />
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Sychronizing...</p>
+                </div>
+              ) : orders.map((order) => {
+                const smartStatus = getSmartStatus(order);
+                return (
+                  <div 
+                    key={order.id} 
+                    onClick={() => router.push(`/orders/${order.id}`)}
+                    className={`bg-white border rounded-xl p-4 flex flex-col gap-4 shadow-sm relative transition-all active:scale-[0.98] ${selectedIds.includes(order.id) ? 'border-wine ring-1 ring-wine/20' : 'border-gray-200'}`}
+                  >
+                    {/* Header Row */}
+                    <div className="flex justify-between items-start border-b border-gray-100 pb-3">
+                      <div className="flex items-start gap-3">
+                        <div onClick={e => e.stopPropagation()} className="pt-0.5">
+                          <input 
+                            type="checkbox" 
+                            className="rounded border-gray-300 text-wine focus:ring-wine w-4 h-4"
+                            checked={selectedIds.includes(order.id)}
+                            onChange={() => setSelectedIds(prev => prev.includes(order.id) ? prev.filter(id => id !== order.id) : [...prev, order.id])}
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          {order.status === 'CANCELLED' ? (
+                            <span className="text-sm font-bold text-gray-400 tracking-widest uppercase line-through">{order.id.slice(-8).toUpperCase()}</span>
+                          ) : (
+                            <span className="text-sm font-bold text-gray-900 tracking-widest uppercase">#{order.formattedOrderNumber || (order.orderNumber != null ? String(order.orderNumber + 1000) : order.id.slice(-8).toUpperCase())}</span>
+                          )}
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">{order.source} &bull; {format(new Date(order.createdAt), "MMM dd")}</span>
+                        </div>
+                      </div>
+                      <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-widest border ${STATUS_CONFIG[smartStatus]?.color || 'bg-gray-50 text-gray-500'}`}>
+                        {STATUS_CONFIG[smartStatus]?.label || smartStatus}
+                      </span>
+                    </div>
+
+                    {/* Customer & Price */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-gray-900">{order.customerName}</span>
+                        <span className="text-xs text-gray-500">{order.customerEmail}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-lg font-bold text-gray-900">₹{Number(order.totalAmount).toLocaleString()}</span>
+                        <div className="flex items-center gap-1 justify-end mt-1">
+                          <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border ${order.financialStatus === 'paid' ? 'bg-green-50 text-green-600 border-green-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>
+                            {order.financialStatus}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100" onClick={e => e.stopPropagation()}>
+                      <span className="text-xs font-bold text-gray-500 flex items-center gap-1">
+                        <Package size={14} /> {order.items?.length || 0} Items
+                      </span>
+                      {order.status !== 'CANCELLED' && (
+                        <div className="flex gap-2">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setPackingSlipOrders([order]); setIsPackingSlipOpen(true); }}
+                            className="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition-all"
+                          >
+                            <Printer size={16} />
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setSelectedOrderForInvoice(order); setIsInvoiceModalOpen(true); }}
+                            className="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition-all"
+                          >
+                            <FileText size={16} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           
           {/* Floating Bulk Action Bar */}
@@ -607,20 +690,20 @@ export default function OrdersPage() {
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 100, opacity: 0 }}
-                className="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-8 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-8"
+                className="fixed bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 w-[95%] md:w-auto bg-gray-900 text-white px-4 md:px-8 py-3 md:py-4 rounded-2xl shadow-2xl z-50 flex flex-col md:flex-row items-center gap-2 md:gap-8 max-h-[80vh] overflow-y-auto"
               >
-                <div className="flex flex-col border-r border-white/10 pr-8">
+                <div className="flex flex-col md:border-r border-white/10 md:pr-8 w-full md:w-auto text-center md:text-left border-b md:border-b-0 pb-2 md:pb-0">
                   <span className="text-xl font-bold">{selectedIds.length}</span>
                   <span className="text-[9px] uppercase tracking-widest font-bold text-white/40">Orders Selected</span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <button onClick={() => handleBulkAction('fulfill')} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all">
+                <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 w-full md:w-auto">
+                  <button onClick={() => handleBulkAction('fulfill')} className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all">
                     <Truck size={14} /> Fulfill
                   </button>
-                  <button onClick={() => handleBulkAction('tag')} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all">
+                  <button onClick={() => handleBulkAction('tag')} className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all">
                     <TagIcon size={14} /> Tag
                   </button>
-                  <button onClick={() => handleBulkAction('assign')} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all">
+                  <button onClick={() => handleBulkAction('assign')} className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all">
                     <Users size={14} /> Assign
                   </button>
                   <button
@@ -629,13 +712,13 @@ export default function OrdersPage() {
                       setPackingSlipOrders(selected);
                       setIsPackingSlipOpen(true);
                     }}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold uppercase tracking-widest transition-all"
+                    className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all"
                   >
-                    <Printer size={14} /> Packing Slips
+                    <Printer size={14} /> Slips
                   </button>
                   <button
                     onClick={() => setSelectedIds([])}
-                    className="ml-4 text-[10px] uppercase font-bold text-white/40 hover:text-white transition-colors"
+                    className="ml-0 md:ml-4 mt-1 md:mt-0 w-full md:w-auto text-[10px] uppercase font-bold text-white/40 hover:text-white transition-colors"
                   >
                     Cancel
                   </button>

@@ -14,6 +14,9 @@ export default function LandingLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/logo-short.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/logo-short.svg" />
+        <link rel="apple-touch-icon" href="/logo-short.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

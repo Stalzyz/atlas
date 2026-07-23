@@ -180,29 +180,19 @@ export default function HeroSection() {
       <header className="container mx-auto px-4 relative z-20 mb-8 lg:mb-12">
         <nav className="flex items-center justify-between py-4 px-6 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
-              <ShoppingCart className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900">
-              Grekam<span className="text-blue-600">Visuals</span>
-            </span>
+            <img 
+              src="/logo.svg" 
+              alt="Grekam Visuals Logo" 
+              className="h-9 sm:h-10 w-auto"
+            />
           </div>
 
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-            <a href="#platforms" className="hover:text-blue-600 transition-colors">Platforms</a>
-            <a href="#roi-calculator" className="hover:text-blue-600 transition-colors">ROI Calculator</a>
-            <a href="#pricing" className="hover:text-blue-600 transition-colors">Pricing</a>
-            <a href="#faqs" className="hover:text-blue-600 transition-colors">FAQs</a>
+          <div className="flex items-center gap-6 sm:gap-8 text-sm font-semibold text-slate-700">
+            <a href="#platforms" className="hover:text-emerald-600 transition-colors">Platforms</a>
+            <a href="#roi-calculator" className="hover:text-emerald-600 transition-colors">ROI Calculator</a>
+            <a href="#pricing" className="hover:text-emerald-600 transition-colors">Pricing</a>
+            <a href="#faqs" className="hover:text-emerald-600 transition-colors">FAQs</a>
           </div>
-
-          <a 
-            href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20get%20a%20free%20consultation%20for%20building%20my%20online%20store." 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-md shadow-blue-600/20 hover:scale-105"
-          >
-            Chat on WhatsApp
-          </a>
         </nav>
       </header>
 
@@ -453,7 +443,7 @@ export default function HeroSection() {
                 href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20launch%20my%20online%20store." 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-xl text-base text-center transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-500/25 flex items-center justify-center gap-3 overflow-hidden"
+                className="group relative bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl text-base text-center transition-all duration-300 hover:scale-105 shadow-xl shadow-emerald-600/25 flex items-center justify-center gap-3 overflow-hidden"
               >
                 <span>Launch Your Store on WhatsApp</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

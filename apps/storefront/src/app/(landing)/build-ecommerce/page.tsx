@@ -10,20 +10,27 @@ import TrustIndicators from '@/components/ecommerce-landing/TrustIndicators';
 import InteractivePlatformFinder from '@/components/ecommerce-landing/InteractivePlatformFinder';
 import PricingCalculator from '@/components/ecommerce-landing/PricingCalculator';
 import RoiCalculator from '@/components/ecommerce-landing/RoiCalculator';
+import LandingFooter from '@/components/ecommerce-landing/LandingFooter';
+import WhatsAppFab from '@/components/ecommerce-landing/WhatsAppFab';
 
 export const metadata: Metadata = {
   title: 'Build an Online Store That Sells 24x7 | Grekam Visuals',
   description: 'We create online shopping experiences that help businesses sell more. Choose between Shopify, WooCommerce, and Atlas CMS.',
+  icons: {
+    icon: '/logo-short.svg',
+    shortcut: '/logo-short.svg',
+    apple: '/logo-short.svg',
+  },
 };
 
 export default function EcommerceLandingPage() {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+    <div className="min-h-screen bg-white text-slate-900">
       <HeroSection />
       <BenefitsSection />
       
       {/* Interactive Tools Section */}
-      <section className="py-20 bg-white dark:bg-slate-900">
+      <section className="py-20 bg-slate-50 dark:bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">See What eCommerce Can Do For You</h2>
@@ -56,23 +63,29 @@ export default function EcommerceLandingPage() {
       <TrustIndicators />
       <FaqSection />
       
-      {/* Final CTA */}
-      <section className="py-24 bg-blue-600 dark:bg-blue-700 text-white text-center">
+      {/* Final CTA in Logo Emerald Green */}
+      <section className="py-24 bg-emerald-600 text-white text-center">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">Ready to Start Selling Online?</h2>
-          <p className="text-xl md:text-2xl mb-12 opacity-90">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">Ready to Start Selling Online?</h2>
+          <p className="text-xl md:text-2xl mb-12 opacity-95 font-light">
             Whether you're launching your first online store or upgrading an existing one, Grekam Visuals will help you choose the right platform and build a website that grows with your business.
           </p>
           <a 
             href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20build%20an%20online%20store%20for%20my%20business." 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-block bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-full text-xl transition-all hover:scale-105 shadow-xl hover:shadow-2xl"
+            className="inline-block bg-white text-emerald-800 hover:bg-slate-100 font-extrabold py-4 px-10 rounded-full text-xl transition-all hover:scale-105 shadow-2xl"
           >
             Chat on WhatsApp for Free Consultation
           </a>
         </div>
       </section>
+
+      {/* Footer with Logo */}
+      <LandingFooter />
+
+      {/* Fixed Bottom-Right WhatsApp Floating Action Button */}
+      <WhatsAppFab />
     </div>
   );
 }

@@ -12,12 +12,9 @@ import {
   ExternalLink,
   Zap,
   TrendingUp,
-  Monitor,
-  Smartphone,
-  Lock,
-  ShieldCheck,
   CreditCard,
-  Check
+  Wifi,
+  Battery
 } from 'lucide-react';
 
 export default function HeroSection() {
@@ -229,19 +226,19 @@ export default function HeroSection() {
       <div className="container mx-auto px-4 relative z-10 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* CAROUSEL DUAL-SCREEN CONTAINER: ORDER-1 ON MOBILE, ORDER-2 ON DESKTOP */}
+          {/* MACBOOK & IPHONE MOCKUP SHOWCASE: ORDER-1 ON MOBILE, ORDER-2 ON DESKTOP */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-1 lg:order-2 lg:col-span-6 relative flex flex-col items-center justify-center"
           >
-            {/* Interactive Dual-Screen Outer Frame with Parallax Shift */}
+            {/* Interactive Device Frames with Magnetic Parallax */}
             <div 
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-xl min-h-[380px] sm:min-h-[440px] flex items-center justify-center perspective-1000"
+              className="relative w-full max-w-xl min-h-[400px] sm:min-h-[460px] flex items-center justify-center perspective-1000"
             >
               <AnimatePresence mode="wait">
                 <motion.div 
@@ -254,81 +251,81 @@ export default function HeroSection() {
                   className="relative w-full flex items-center justify-center"
                 >
                   
-                  {/* SCREEN 1: DESKTOP BROWSER WINDOW (Back/Main Layer) */}
-                  <div className="w-full max-w-md sm:max-w-lg rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl shadow-blue-950/80 overflow-hidden transform transition-transform duration-500">
+                  {/* DEVICE 1: REALISTIC MACBOOK PRO MOCKUP (Desktop Store Preview) */}
+                  <div className="w-full max-w-md sm:max-w-lg relative flex flex-col items-center drop-shadow-2xl">
                     
-                    {/* Browser Navigation Bar */}
-                    <div className="bg-slate-950 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                        <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                        <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                      </div>
-                      <div className="flex items-center gap-2 px-3 py-1 bg-slate-800/80 rounded-md text-[11px] text-slate-400 font-mono">
-                        <Lock className="w-3 h-3 text-emerald-400" />
-                        <span>yourbrand.com</span>
-                      </div>
-                      <Monitor className="w-4 h-4 text-slate-500" />
-                    </div>
-
-                    {/* Desktop Screen HD Image Content */}
-                    <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-950">
-                      <motion.img 
-                        src={currentStore.desktopImage} 
-                        alt={`${currentStore.title} Desktop View`}
-                        style={{ x: parallaxX, y: parallaxY }}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                    {/* MacBook Display Lid & Screen Frame */}
+                    <div className="w-full rounded-t-2xl bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 p-2.5 sm:p-3 border border-slate-600/80 shadow-2xl relative">
                       
-                      {/* Top Desktop Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                        <span className="bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-blue-300 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                          🖥️ Desktop Store
-                        </span>
-                        <span className="bg-emerald-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                          {currentStore.metric}
-                        </span>
+                      {/* Web Camera Dot */}
+                      <div className="w-2 h-2 rounded-full bg-slate-950 border border-slate-700 mx-auto mb-2 relative z-10" />
+
+                      {/* Display Screen Screen Surface */}
+                      <div className="relative h-56 sm:h-64 w-full rounded-lg overflow-hidden bg-slate-950 border border-slate-800">
+                        <motion.img 
+                          src={currentStore.desktopImage} 
+                          alt={`${currentStore.title} MacBook View`}
+                          style={{ x: parallaxX, y: parallaxY }}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                        
+                        {/* Top Store Info Tag */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+                          <span className="bg-slate-950/85 backdrop-blur-md border border-slate-700/80 text-blue-300 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                            💻 MacBook Pro Storefront
+                          </span>
+                          <span className="bg-emerald-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+                            {currentStore.metric}
+                          </span>
+                        </div>
+
+                        {/* Title Bar overlay */}
+                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs z-10">
+                          <span className="font-bold text-white text-sm drop-shadow-md truncate max-w-[200px]">
+                            {currentStore.title}
+                          </span>
+                          <span className="bg-blue-600/90 text-white font-semibold text-[10px] px-2.5 py-1 rounded-md backdrop-blur-md">
+                            {currentStore.platform}
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Store Title Bar overlay */}
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs z-10">
-                        <span className="font-bold text-white text-sm drop-shadow-md truncate max-w-[200px]">
-                          {currentStore.title}
-                        </span>
-                        <span className="bg-blue-600/90 text-white font-semibold text-[10px] px-2.5 py-1 rounded-md backdrop-blur-md">
-                          {currentStore.platform}
-                        </span>
-                      </div>
                     </div>
 
+                    {/* MacBook Aluminum Base / Trackpad Deck */}
+                    <div className="w-[108%] h-4 sm:h-5 bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 rounded-b-2xl border-t border-slate-500/80 shadow-2xl relative flex justify-center">
+                      <div className="w-16 sm:w-20 h-1.5 bg-slate-800 rounded-b-md" />
+                    </div>
                   </div>
 
-                  {/* SCREEN 2: MOBILE SMARTPHONE WINDOW (Front Overlapping Floating Layer) */}
+                  {/* DEVICE 2: REALISTIC IPHONE 15 PRO MOCKUP (Floating Mobile Preview) */}
                   <motion.div 
                     initial={{ x: 30, y: 30, opacity: 0 }}
                     animate={{ x: 0, y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="absolute right-[-10px] sm:right-[-25px] bottom-[-20px] sm:bottom-[-25px] w-48 sm:w-56 rounded-3xl bg-slate-950 border-2 border-slate-700/90 shadow-2xl p-2.5 z-20 backdrop-blur-xl"
+                    className="absolute right-[-10px] sm:right-[-25px] bottom-[-15px] sm:bottom-[-20px] w-44 sm:w-52 rounded-[36px] bg-slate-950 border-4 border-slate-700 shadow-2xl p-2.5 z-30 backdrop-blur-xl ring-1 ring-slate-600/50"
                   >
-                    {/* Phone Notch */}
-                    <div className="w-14 h-2.5 bg-slate-800 rounded-full mx-auto mb-2" />
+                    {/* iPhone Dynamic Island */}
+                    <div className="w-14 h-3.5 bg-black rounded-full mx-auto mb-2 flex items-center justify-end px-1.5 gap-1 shadow-inner">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-900" />
+                    </div>
 
-                    {/* Mobile App Screen Content */}
-                    <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 space-y-2">
-                      <div className="relative h-28 w-full bg-slate-950 overflow-hidden">
+                    {/* iPhone Screen Surface */}
+                    <div className="bg-slate-900 rounded-[24px] overflow-hidden border border-slate-800 space-y-2">
+                      <div className="relative h-28 sm:h-32 w-full bg-slate-950 overflow-hidden">
                         <img 
                           src={currentStore.mobileImage} 
-                          alt={`${currentStore.title} Mobile View`}
+                          alt={`${currentStore.title} iPhone View`}
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                        <div className="absolute top-2 left-2 bg-emerald-500/90 text-slate-950 font-bold text-[9px] px-2 py-0.5 rounded-full">
-                          📱 Mobile App
+                        <div className="absolute top-2 left-2 bg-emerald-500/90 text-slate-950 font-bold text-[9px] px-2 py-0.5 rounded-full shadow">
+                          📱 iPhone View
                         </div>
                       </div>
 
-                      {/* 1-Click Mobile Checkout Banner */}
+                      {/* 1-Click Mobile Checkout Section */}
                       <div className="p-2 space-y-1.5 bg-slate-900 text-[10px]">
                         <div className="flex justify-between items-center text-slate-300 font-medium">
                           <span>1-Click UPI Checkout</span>
@@ -340,13 +337,16 @@ export default function HeroSection() {
                         </div>
                       </div>
                     </div>
+
+                    {/* iPhone Home Bar */}
+                    <div className="w-14 h-1 bg-slate-400/50 rounded-full mx-auto mt-2" />
                   </motion.div>
 
-                  {/* Floating Micro-Badge: Speed */}
+                  {/* Floating Micro-Badge */}
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    className="absolute -top-4 -left-4 bg-slate-900/90 border border-blue-500/40 px-3.5 py-2 rounded-xl shadow-xl backdrop-blur-md flex items-center gap-2 z-30"
+                    className="absolute -top-4 -left-4 bg-slate-900/90 border border-blue-500/40 px-3.5 py-2 rounded-xl shadow-xl backdrop-blur-md flex items-center gap-2 z-40"
                   >
                     <Zap className="w-4 h-4 text-blue-400" />
                     <span className="text-xs font-bold text-white">0.6s Page Speed</span>
@@ -356,17 +356,17 @@ export default function HeroSection() {
               </AnimatePresence>
             </div>
 
-            {/* Carousel Navigation Controls */}
-            <div className="flex items-center gap-4 mt-8 z-30">
+            {/* Carousel Controls */}
+            <div className="flex items-center gap-4 mt-6 z-30">
               <button 
                 onClick={handlePrev} 
                 className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 hover:border-slate-500 flex items-center justify-center transition-all shadow-lg active:scale-95"
-                aria-label="Previous Store Showcase"
+                aria-label="Previous Showcase"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
 
-              {/* Dots Indicators */}
+              {/* Dots */}
               <div className="flex items-center gap-1.5">
                 {showcaseStores.map((_, i) => (
                   <button
@@ -381,7 +381,7 @@ export default function HeroSection() {
               <button 
                 onClick={handleNext} 
                 className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 hover:border-slate-500 flex items-center justify-center transition-all shadow-lg active:scale-95"
-                aria-label="Next Store Showcase"
+                aria-label="Next Showcase"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

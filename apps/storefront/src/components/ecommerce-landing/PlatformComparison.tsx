@@ -205,9 +205,9 @@ export default function PlatformComparison() {
             <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
               <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
                 <td className="p-4 font-medium">Easy to Use</td>
-                <td className="p-4 flex gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></td>
-                <td className="p-4 flex gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></td>
-                <td className="p-4 flex gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></td>
+                <td className="p-4"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></div></td>
+                <td className="p-4"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></div></td>
+                <td className="p-4"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/><Star className="w-4 h-4 fill-amber-400 text-amber-400"/></div></td>
               </tr>
               <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
                 <td className="p-4 font-medium">Monthly Subscription</td>

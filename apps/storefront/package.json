@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run css && next dev -p 4401 --webpack",
     "build": "npm run css && NODE_OPTIONS='--max-old-space-size=4096' next build --webpack && cp -r public .next/standalone/apps/storefront/public",
-    "css": "tailwindcss -i ./src/app/\\(storefront\\)/globals.css -o ./public/compiled.css --minify || true",
+    "css": "tailwindcss -i ./src/app/\\(storefront\\)/globals.css -o ./public/compiled.css --minify && tailwindcss -i ./src/app/\\(landing\\)/landing.css -o ./public/compiled-landing.css --minify || true",
     "start": "next start -p 7009",
     "lint": "next lint"
   },

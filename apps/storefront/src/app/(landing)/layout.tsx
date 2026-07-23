@@ -20,6 +20,7 @@ export default function LandingLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         />
+        <link rel="stylesheet" href={`/compiled-landing.css?v=${Date.now()}`} />
       </head>
       <body className="antialiased bg-slate-950 text-slate-50 font-sans min-h-screen">
         {children}

@@ -1,4 +1,4 @@
-import React, from 'react';
+import React from 'react';
 import { useShopifyCalculator, PLAN_PRICING, GATEWAY_FEES, THEME_PRICING, DEVELOPER_PRICING } from '@/hooks/useShopifyCalculator';
 import { Plus, X, Check } from 'lucide-react';
 

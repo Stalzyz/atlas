@@ -118,10 +118,12 @@ export default function PricingSection() {
               </ul>
 
               <a 
-                href="#consultation" 
+                href={`https://wa.me/919843199556?text=${encodeURIComponent(`Hi Grekam Visuals, I am interested in the ${plan.name} plan (Rs ${plan.price}).`)}`} 
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`w-full py-4 rounded-xl font-bold text-center transition-all ${plan.button}`}
               >
-                Get Started
+                Chat on WhatsApp
               </a>
             </motion.div>
           ))}

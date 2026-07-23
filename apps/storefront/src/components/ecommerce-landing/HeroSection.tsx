@@ -196,10 +196,12 @@ export default function HeroSection() {
           </div>
 
           <a 
-            href="#consultation" 
+            href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20get%20a%20free%20consultation%20for%20building%20my%20online%20store." 
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-md shadow-blue-600/30 hover:scale-105"
           >
-            Get Free Consultation
+            Chat on WhatsApp
           </a>
         </nav>
       </header>
@@ -448,10 +450,12 @@ export default function HeroSection() {
             {/* CTA Group */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
               <a 
-                href="#consultation" 
+                href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20launch%20my%20online%20store." 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold px-8 py-4 rounded-xl text-base text-center transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-600/30 flex items-center justify-center gap-3 overflow-hidden"
               >
-                <span>Launch Your Store</span>
+                <span>Launch Your Store on WhatsApp</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
 

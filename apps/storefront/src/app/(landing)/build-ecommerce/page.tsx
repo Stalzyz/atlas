@@ -63,8 +63,13 @@ export default function EcommerceLandingPage() {
           <p className="text-xl md:text-2xl mb-12 opacity-90">
             Whether you're launching your first online store or upgrading an existing one, Grekam Visuals will help you choose the right platform and build a website that grows with your business.
           </p>
-          <a href="#contact" className="inline-block bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-full text-xl transition-all hover:scale-105 shadow-xl hover:shadow-2xl">
-            Book a Free Consultation Today
+          <a 
+            href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20want%20to%20build%20an%20online%20store%20for%20my%20business." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-full text-xl transition-all hover:scale-105 shadow-xl hover:shadow-2xl"
+          >
+            Chat on WhatsApp for Free Consultation
           </a>
         </div>
       </section>

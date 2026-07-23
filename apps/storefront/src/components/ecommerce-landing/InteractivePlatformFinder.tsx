@@ -145,10 +145,12 @@ export default function InteractivePlatformFinder() {
                   <RotateCcw className="w-4 h-4" /> Retake Quiz
                 </button>
                 <a 
-                  href="#consultation" 
-                  className="flex-1 flex justify-center items-center px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-colors font-medium"
+                  href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20completed%20the%20platform%20quiz%20on%20your%20website%20and%20would%20like%20a%20quote." 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex justify-center items-center px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-colors font-medium text-center"
                 >
-                  Get Quote
+                  Get Quote on WhatsApp
                 </a>
               </div>
             </motion.div>

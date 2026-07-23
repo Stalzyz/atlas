@@ -151,8 +151,13 @@ export default function PricingCalculator() {
           </p>
         </div>
         
-        <a href="#consultation" className="w-full block text-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-4 rounded-xl hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-colors">
-          Get Exact Quote
+        <a 
+          href="https://wa.me/919843199556?text=Hi%20Grekam%20Visuals%2C%20I%20calculated%20my%20project%20estimate%20on%20your%20website%20and%20would%20like%20an%20exact%20quote." 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full block text-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-4 rounded-xl hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-colors"
+        >
+          Get Exact Quote on WhatsApp
         </a>
       </div>
 

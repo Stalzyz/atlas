@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
-VPS_IP="72.61.231.187"
+VPS_IP="200.97.163.236"
 REMOTE_DIR="/var/www/atlas_new"
 SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=30"
 

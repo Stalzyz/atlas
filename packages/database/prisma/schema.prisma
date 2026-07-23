@@ -95,7 +95,7 @@ enum UserRole {
 model User {
   id             String         @id @default(cuid())
   clerkId        String?        @unique
-  email          String         @unique
+  email          String?        @unique
   phone          String?        @unique
   name           String?
   password       String?
@@ -726,6 +726,16 @@ model StoreSettings {
   // Order Formatting
   orderPrefix             String?
   orderSuffix             String?
+
+  // Firebase Authentication Settings
+  firebaseProjectId         String?
+  firebaseClientEmail       String?
+  firebasePrivateKey        String?
+  firebaseApiKey            String?
+  firebaseAuthDomain        String?
+  firebaseStorageBucket     String?
+  firebaseMessagingSenderId String?
+  firebaseAppId             String?
 
   updatedAt DateTime @updatedAt
 }

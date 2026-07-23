@@ -6,6 +6,8 @@ import { MailService } from '../mail/mail.service';
 import { AuthOtpService } from './auth-otp.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import * as crypto from 'crypto';
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
 const bcrypt = require('bcryptjs');
 
 @Injectable()
@@ -21,6 +23,8 @@ export class AuthService {
     private eventEmitter: EventEmitter2,
   ) {
     this.googleClient = new OAuth2Client();
+    
+    // Firebase Admin is initialized dynamically in firebaseLogin
   }
 
   async login(email: string, pass: string) {
@@ -239,6 +243,65 @@ export class AuthService {
       throw new UnauthorizedException(`Google authentication failed: ${error.message}`);
     }
   }
+  async firebaseLogin(idToken: string, referredByCode?: string) {
+    this.logger.log('Firebase Phone Auth verification started...');
+    
+    try {
+      // 1. Fetch settings from DB
+      const settings = await this.prisma.storeSettings.findUnique({
+        where: { id: 'global' },
+      });
+
+      if (!settings?.firebaseProjectId || !settings?.firebaseClientEmail || !settings?.firebasePrivateKey) {
+        throw new Error('Firebase credentials are not configured in the Admin settings.');
+      }
+
+      // 2. Initialize or re-initialize Firebase if needed
+      if (!getApps().length) {
+        initializeApp({
+          credential: cert({
+            projectId: settings.firebaseProjectId,
+            clientEmail: settings.firebaseClientEmail,
+            privateKey: settings.firebasePrivateKey.replace(/\\n/g, '\n'),
+          }),
+        });
+      }
+
+      // Verify the ID token sent from the client
+      const decodedToken = await getAuth().verifyIdToken(idToken);
+      const phoneNumber = decodedToken.phone_number;
+
+      if (!phoneNumber) {
+        throw new UnauthorizedException('Phone number is missing in the Firebase token');
+      }
+
+      this.logger.log(`✅ Firebase Token Verified for phone: ${phoneNumber}`);
+
+      // Upsert user based on phone number
+      let user = await this.prisma.user.findUnique({
+        where: { phone: phoneNumber },
+      });
+
+      if (!user) {
+        user = await this.prisma.user.create({
+          data: {
+            phone: phoneNumber,
+            role: 'CUSTOMER',
+            // Default name for phone users
+            name: `User ${phoneNumber.slice(-4)}`,
+          },
+        });
+        this.eventEmitter.emit('user.created', { ...user, referredByCode });
+        this.logger.log(`🆕 Created new user via Firebase Phone Auth: ${phoneNumber}`);
+      }
+
+      return this.generateToken(user);
+    } catch (error) {
+      this.logger.error(`❌ Firebase Login Error: ${error.message}`);
+      throw new UnauthorizedException(`Firebase authentication failed: ${error.message}`);
+    }
+  }
+
   async syncUserWithClerk(user: any) { return { success: true }; }
   async setAdminRole(id: string) { return { success: true }; }
 

@@ -7,8 +7,9 @@ import {
   ShoppingCart, Users, Star, Ticket, CreditCard, Share2, Megaphone, 
   Palette, FileText, Truck, PackagePlus, Store, Tag, PackageSearch, 
   MapPin, RefreshCcw, Settings, BarChart3, Receipt, FileSpreadsheet, 
-  Calculator, ShieldCheck, Mail, Database, Globe, Factory, Target, Box, ChartBar, MessageCircle
+  Calculator, ShieldCheck, Mail, Database, Globe, Factory, Target, Box, ChartBar, MessageCircle, ArrowRight
 } from "lucide-react";
+import { ShopifyCostCalculator } from "@/components/calculator/ShopifyCostCalculator";
 
 const MODULES = [
   {
@@ -153,6 +154,37 @@ export default function EnterpriseLandingPage() {
             >
               Get Pricing
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Shopify Cost Calculator Module ─────────────────────────────── */}
+      <section className="relative z-10 bg-gray-50 rounded-[3rem] mx-4 sm:mx-6 lg:mx-8 mb-12 overflow-hidden shadow-2xl border border-gray-200">
+        <ShopifyCostCalculator />
+      </section>
+
+      {/* ─── App Bloat Scanner CTA ──────────────────────────────────────── */}
+      <section className="relative z-10 mx-4 sm:mx-6 lg:mx-8 mb-24">
+        <div className="bg-gradient-to-r from-red-900/40 to-black border border-red-500/30 rounded-[3rem] p-8 md:p-12 backdrop-blur-md shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="absolute top-0 right-0 p-8 opacity-10">
+            <Layers size={120} />
+          </div>
+          <div className="relative z-10 text-left max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-widest mb-4">
+              <RefreshCcw size={14} /> New Free Tool
+            </div>
+            <h3 className="text-3xl md:text-4xl font-black text-white mb-4">How much are you losing to "App Bloat"?</h3>
+            <p className="text-white/70 text-lg">
+              Most brands pay ₹15,000+ per month just for basic third-party apps (Reviews, Subscriptions, Wholesale). Use our free App Bloat Scanner to see how many of your apps are already built into Atlas.
+            </p>
+          </div>
+          <div className="relative z-10 shrink-0 w-full md:w-auto">
+            <Link 
+              href="/app-bloat-scanner" 
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-[0_0_30px_rgba(220,38,38,0.3)] hover:scale-105"
+            >
+              Scan My App Stack <ArrowRight size={20} />
+            </Link>
           </div>
         </div>
       </section>
@@ -365,6 +397,8 @@ export default function EnterpriseLandingPage() {
           </div>
         </div>
       </section>
+
+
 
       {/* ─── Final CTA ──────────────────────────────────────────────── */}
       <section className="py-32 text-center relative z-10 border-t border-white/10">

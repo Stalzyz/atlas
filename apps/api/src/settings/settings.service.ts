@@ -45,6 +45,12 @@ export class SettingsService {
       shippingRules: settings.customRules,
       aiAssistantEnabled: settings.aiAssistantEnabled,
       maxCreditUsagePercent: settings.maxCreditUsagePercent ? Number(settings.maxCreditUsagePercent) : 50,
+      firebaseApiKey: settings.firebaseApiKey,
+      firebaseAuthDomain: settings.firebaseAuthDomain,
+      firebaseProjectId: settings.firebaseProjectId,
+      firebaseStorageBucket: settings.firebaseStorageBucket,
+      firebaseMessagingSenderId: settings.firebaseMessagingSenderId,
+      firebaseAppId: settings.firebaseAppId,
     };
   }
 

@@ -254,4 +254,37 @@ export class UpdateSettingsDto {
   @IsBoolean()
   @IsOptional()
   aiAssistantEnabled?: boolean;
+
+  // Firebase
+  @IsString()
+  @IsOptional()
+  firebaseProjectId?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseClientEmail?: string;
+
+  @IsString()
+  @IsOptional()
+  firebasePrivateKey?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseApiKey?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseAuthDomain?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseStorageBucket?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseMessagingSenderId?: string;
+
+  @IsString()
+  @IsOptional()
+  firebaseAppId?: string;
 }

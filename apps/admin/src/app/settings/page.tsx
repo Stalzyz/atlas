@@ -66,7 +66,16 @@ export default function SettingsPage() {
     smtpSecure: false,
     // Order Formatting
     orderPrefix: "RGH-",
-    orderSuffix: ""
+    orderSuffix: "",
+    // Firebase
+    firebaseProjectId: "",
+    firebaseClientEmail: "",
+    firebasePrivateKey: "",
+    firebaseApiKey: "",
+    firebaseAuthDomain: "",
+    firebaseStorageBucket: "",
+    firebaseMessagingSenderId: "",
+    firebaseAppId: ""
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -81,6 +90,7 @@ export default function SettingsPage() {
   const [showDelhiveryToken, setShowDelhiveryToken] = useState(false);
   const [showSmtpPass, setShowSmtpPass] = useState(false);
   const [showOpenAiKey, setShowOpenAiKey] = useState(false);
+  const [showFirebaseKey, setShowFirebaseKey] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -261,6 +271,119 @@ export default function SettingsPage() {
                     className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                    />
                    <label htmlFor="smtpSecure" className="text-[10px] font-bold text-blue-800 uppercase tracking-widest">Use SSL/TLS</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Firebase Authentication Configuration */}
+          <div className="bg-white p-8 rounded-3xl border-2 border-orange-500/10 shadow-sm space-y-8 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+               <Shield size={120} className="text-orange-500 rotate-12" />
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-bold text-orange-600 uppercase tracking-widest flex items-center gap-2 mb-1">
+                <Shield size={16} /> Firebase Phone Authentication
+              </h3>
+              <p className="text-[11px] text-gray-500 font-medium">Configure your Firebase Service Account and Client SDK keys for mobile OTP logins.</p>
+            </div>
+            
+            <div className="space-y-6 relative z-10">
+              <div className="grid grid-cols-1 gap-6">
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Project ID</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseProjectId || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseProjectId: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="your-project-id"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Client Email</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseClientEmail || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseClientEmail: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="firebase-adminsdk-...@your-project-id.iam.gserviceaccount.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Private Key (Admin SDK)</label>
+                  <div className="relative">
+                    <textarea 
+                      rows={4}
+                      value={settings.firebasePrivateKey || ""}
+                      onChange={(e) => setSettings({ ...settings, firebasePrivateKey: e.target.value })}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-mono outline-none focus:border-orange-500 transition-all"
+                      placeholder="-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBg...\n-----END PRIVATE KEY-----\n"
+                      style={{ filter: showFirebaseKey ? 'none' : 'blur(4px)' }}
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => setShowFirebaseKey(!showFirebaseKey)}
+                      className="absolute right-4 top-4 text-gray-400 hover:text-orange-500 transition-colors z-20"
+                    >
+                      {showFirebaseKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="h-px w-full bg-gray-100 my-4"></div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Web API Key</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseApiKey || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseApiKey: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="AIzaSyB..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Auth Domain</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseAuthDomain || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseAuthDomain: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="your-project.firebaseapp.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Storage Bucket</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseStorageBucket || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseStorageBucket: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="your-project.appspot.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Messaging Sender ID</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseMessagingSenderId || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseMessagingSenderId: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="123456789"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">App ID</label>
+                  <input 
+                    type="text" 
+                    value={settings.firebaseAppId || ""}
+                    onChange={(e) => setSettings({ ...settings, firebaseAppId: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-sans outline-none focus:border-orange-500 transition-all"
+                    placeholder="1:123456:web:..."
+                  />
                 </div>
               </div>
             </div>

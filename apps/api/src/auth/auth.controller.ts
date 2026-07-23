@@ -54,6 +54,16 @@ export class AuthController {
 
   @Public()
   @Throttle({ default: { limit: 10, ttl: 60000 } })
+  @Post('firebase-login')
+  async firebaseLogin(@Body() body: { token: string; referredByCode?: string }, @Res({ passthrough: true }) res: Response) {
+    this.logger.log(`Firebase Phone login attempt`);
+    const data = await this.authService.firebaseLogin(body.token, body.referredByCode);
+    this.setTokenCookie(res, data.access_token);
+    return data;
+  }
+
+  @Public()
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('login')
   async login(@Body() body: { email: string; pass: string }, @Res({ passthrough: true }) res: Response) {
     this.logger.log(`Credential login attempt for ${body.email}`);

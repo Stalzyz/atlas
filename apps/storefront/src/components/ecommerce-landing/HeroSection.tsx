@@ -13,8 +13,10 @@ import {
   Zap,
   TrendingUp,
   CreditCard,
-  Wifi,
-  Battery
+  CheckSquare,
+  Lock,
+  Smartphone,
+  Monitor
 } from 'lucide-react';
 
 export default function HeroSection() {
@@ -25,132 +27,112 @@ export default function HeroSection() {
     'Zero Technical Hassle',
   ];
 
-  // 10 Curated HD Showcase Stores with both Desktop & Mobile previews
+  // 10 Curated HD Showcase Stores matching the reference composition
   const showcaseStores = [
     {
       id: 1,
-      title: 'Silk & Ethnic Wear Boutique',
-      category: 'Fashion & Luxury',
+      title: 'Ethnic Fashion Store',
+      subtitle: 'Luxury Apparel & Silk Sarees',
+      category: 'Fashion & Apparel',
       platform: 'Shopify Plus',
-      metric: '₹14.2L / mo',
-      desktopImage: 'https://images.unsplash.com/photo-1610030469983-98e55041d03c?auto=format&fit=crop&w=1200&q=80',
+      metric: '₹14.2L / Month',
+      checkmarks: ['Mobile Optimized', 'Instant UPI Pay', 'Automated Shipping', 'Fast 0.5s Speed'],
+      gridImages: [
+        'https://images.unsplash.com/photo-1610030469983-98e55041d03c?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80',
+      ],
       mobileImage: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80',
       badge: 'Fashion',
       price: '₹3,499.00',
     },
     {
       id: 2,
-      title: 'Smart Tech & Wireless Audio',
+      title: 'Smart Audio & Tech',
+      subtitle: 'Wireless Headphones & Gear',
       category: 'Electronics',
       platform: 'Atlas CMS',
       metric: '0.5s Load Time',
-      desktopImage: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=1200&q=80',
+      checkmarks: ['Built-in CRM', 'Zero Monthly Fees', 'High Speed', 'Custom Admin'],
+      gridImages: [
+        'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80',
+      ],
       mobileImage: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
       badge: 'Electronics',
       price: '₹8,999.00',
     },
     {
       id: 3,
-      title: 'Diamond & Gold Fine Jewellery',
+      title: 'Diamond & Gold Gems',
+      subtitle: 'Fine Heritage Jewellery',
       category: 'Jewelry Boutique',
       platform: 'WooCommerce',
       metric: '3.4x Conv. Rate',
-      desktopImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80',
+      checkmarks: ['Complete Control', 'SEO Optimized', 'WordPress Base', 'Custom Themes'],
+      gridImages: [
+        'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80',
+      ],
       mobileImage: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80',
       badge: 'Jewelry',
       price: '₹24,500.00',
     },
     {
       id: 4,
-      title: 'Organic Skincare & Glow Botanicals',
-      category: 'Beauty & Wellness',
+      title: 'Organic Glow Botanicals',
+      subtitle: 'Natural Skincare & Serums',
+      category: 'Beauty & Skincare',
       platform: 'Shopify',
       metric: '99.9% Uptime',
-      desktopImage: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80',
+      checkmarks: ['Easy Setup', 'Reliable Host', 'App Ecosystem', '1-Click Pay'],
+      gridImages: [
+        'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1608248597261-8131e4e32235?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
+      ],
       mobileImage: 'https://images.unsplash.com/photo-1608248597261-8131e4e32235?auto=format&fit=crop&w=600&q=80',
       badge: 'Beauty',
       price: '₹1,299.00',
     },
     {
       id: 5,
-      title: 'Handcrafted Minimalist Home Decor',
+      title: 'Minimalist Living Space',
+      subtitle: 'Modern Ceramic & Furniture',
       category: 'Home & Living',
       platform: 'Atlas CMS',
       metric: 'WhatsApp Orders',
-      desktopImage: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
+      checkmarks: ['Direct WhatsApp', 'Multi-user Access', 'Role Management', 'No Plugins'],
+      gridImages: [
+        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=600&q=80',
+      ],
       mobileImage: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80',
       badge: 'Decor',
       price: '₹4,200.00',
-    },
-    {
-      id: 6,
-      title: 'Urban Hypebeast Sneaker Kicks',
-      category: 'Footwear & Apparel',
-      platform: 'Shopify',
-      metric: '₹8.9L / mo',
-      desktopImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1200&q=80',
-      mobileImage: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80',
-      badge: 'Sneakers',
-      price: '₹11,499.00',
-    },
-    {
-      id: 7,
-      title: 'Artisanal Single-Origin Coffee',
-      category: 'Food & Beverage',
-      platform: 'WooCommerce',
-      metric: '1-Click Checkout',
-      desktopImage: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80',
-      mobileImage: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
-      badge: 'Gourmet',
-      price: '₹890.00',
-    },
-    {
-      id: 8,
-      title: 'Active Sports Performance Supplements',
-      category: 'Fitness & Health',
-      platform: 'Atlas CMS',
-      metric: 'Auto-Inventory Sync',
-      desktopImage: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=80',
-      mobileImage: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80',
-      badge: 'Fitness',
-      price: '₹2,699.00',
-    },
-    {
-      id: 9,
-      title: 'Swiss Precision Luxury Watches',
-      category: 'Accessories',
-      platform: 'Shopify Plus',
-      metric: '₹22.5L / mo',
-      desktopImage: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80',
-      mobileImage: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80',
-      badge: 'Luxury',
-      price: '₹48,990.00',
-    },
-    {
-      id: 10,
-      title: 'Handloom Kanjivaram Saree Weaves',
-      category: 'Heritage Craft',
-      platform: 'Atlas CMS',
-      metric: 'Direct UPI Pay',
-      desktopImage: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80',
-      mobileImage: 'https://images.unsplash.com/photo-1610030469983-98e55041d03c?auto=format&fit=crop&w=600&q=80',
-      badge: 'Heritage',
-      price: '₹12,800.00',
     },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Parallax Mouse Motion Values for smooth 3D depth
+  // Parallax Mouse Motion Values for 3D depth tilt
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const springConfig = { damping: 25, stiffness: 180 };
   const parallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
   const parallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-12, 12]), springConfig);
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -166,7 +148,7 @@ export default function HeroSection() {
     mouseY.set(0);
   };
 
-  // Auto-cycle carousel every 4.5 seconds
+  // Auto-cycle carousel
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % showcaseStores.length);
@@ -222,131 +204,169 @@ export default function HeroSection() {
         </nav>
       </header>
 
-      {/* Hero Content: On Mobile, Carousel (order-1) comes FIRST, Text (order-2) comes BELOW */}
+      {/* Hero Content: On Mobile order-1 (Carousel top), order-2 (Copy below) */}
       <div className="container mx-auto px-4 relative z-10 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* MACBOOK & IPHONE MOCKUP SHOWCASE: ORDER-1 ON MOBILE, ORDER-2 ON DESKTOP */}
+          {/* MOCKUP CAROUSEL COLUMN: MATCHING REFERENCE IMAGE PROPORTIONS */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-1 lg:order-2 lg:col-span-6 relative flex flex-col items-center justify-center"
           >
-            {/* Interactive Device Frames with Magnetic Parallax */}
+            {/* Interactive Scene Container with Magnetic Parallax */}
             <div 
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-xl min-h-[400px] sm:min-h-[460px] flex items-center justify-center perspective-1000"
+              className="relative w-full max-w-xl sm:max-w-2xl min-h-[420px] sm:min-h-[480px] flex items-center justify-center perspective-1000"
             >
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={currentStore.id}
                   style={{ rotateX, rotateY }}
-                  initial={{ opacity: 0, scale: 0.94, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.94, y: -20 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="relative w-full flex items-center justify-center"
                 >
                   
-                  {/* DEVICE 1: REALISTIC MACBOOK PRO MOCKUP (Desktop Store Preview) */}
-                  <div className="w-full max-w-md sm:max-w-lg relative flex flex-col items-center drop-shadow-2xl">
+                  {/* DEVICE 1: LAPTOP SCREEN MOCKUP (Background / Main 16:10 Ratio) */}
+                  <div className="w-full max-w-md sm:max-w-xl relative flex flex-col items-center drop-shadow-2xl">
                     
-                    {/* MacBook Display Lid & Screen Frame */}
-                    <div className="w-full rounded-t-2xl bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 p-2.5 sm:p-3 border border-slate-600/80 shadow-2xl relative">
+                    {/* Laptop Screen Bezel */}
+                    <div className="w-full rounded-t-2xl bg-slate-900 border-2 border-slate-700/90 p-2 sm:p-3 shadow-2xl relative overflow-hidden">
                       
-                      {/* Web Camera Dot */}
+                      {/* Laptop Camera Dot */}
                       <div className="w-2 h-2 rounded-full bg-slate-950 border border-slate-700 mx-auto mb-2 relative z-10" />
 
-                      {/* Display Screen Screen Surface */}
-                      <div className="relative h-56 sm:h-64 w-full rounded-lg overflow-hidden bg-slate-950 border border-slate-800">
-                        <motion.img 
-                          src={currentStore.desktopImage} 
-                          alt={`${currentStore.title} MacBook View`}
-                          style={{ x: parallaxX, y: parallaxY }}
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                      {/* Laptop Display Content Layout (Split Left Info + Right 2x2 Image Grid) */}
+                      <div className="relative h-60 sm:h-72 w-full rounded-lg overflow-hidden bg-white text-slate-900 grid grid-cols-12 border border-slate-200">
                         
-                        {/* Top Store Info Tag */}
-                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                          <span className="bg-slate-950/85 backdrop-blur-md border border-slate-700/80 text-blue-300 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                            💻 MacBook Pro Storefront
-                          </span>
-                          <span className="bg-emerald-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                            {currentStore.metric}
-                          </span>
+                        {/* Laptop Left Side: Info & Features List */}
+                        <div className="col-span-6 p-4 sm:p-5 flex flex-col justify-between bg-slate-50 border-r border-slate-200">
+                          <div>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                                {currentStore.badge}
+                              </span>
+                              <span className="text-[10px] font-semibold text-slate-500">
+                                {currentStore.platform}
+                              </span>
+                            </div>
+                            <h3 className="text-base sm:text-xl font-extrabold text-slate-900 leading-tight mb-1">
+                              {currentStore.title}
+                            </h3>
+                            <p className="text-[10px] sm:text-xs text-slate-500 mb-3 font-medium">
+                              {currentStore.subtitle}
+                            </p>
+
+                            {/* Checklist matching reference screen design */}
+                            <div className="space-y-1.5 text-[10px] sm:text-xs text-slate-700">
+                              {currentStore.checkmarks.map((chk, i) => (
+                                <div key={i} className="flex items-center gap-1.5 font-medium">
+                                  <CheckSquare className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                                  <span>{chk}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                            <span className="text-[10px] text-slate-500">Est. Sales:</span>
+                            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                              {currentStore.metric}
+                            </span>
+                          </div>
                         </div>
 
-                        {/* Title Bar overlay */}
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs z-10">
-                          <span className="font-bold text-white text-sm drop-shadow-md truncate max-w-[200px]">
-                            {currentStore.title}
-                          </span>
-                          <span className="bg-blue-600/90 text-white font-semibold text-[10px] px-2.5 py-1 rounded-md backdrop-blur-md">
-                            {currentStore.platform}
-                          </span>
+                        {/* Laptop Right Side: 2x2 HD Product Photo Collage */}
+                        <div className="col-span-6 grid grid-cols-2 gap-1 p-1 bg-slate-200">
+                          {currentStore.gridImages.map((imgUrl, i) => (
+                            <div key={i} className="relative h-full min-h-[110px] overflow-hidden rounded bg-slate-300">
+                              <motion.img 
+                                src={imgUrl} 
+                                alt={`${currentStore.title} preview ${i+1}`}
+                                style={{ x: parallaxX, y: parallaxY }}
+                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                              />
+                            </div>
+                          ))}
                         </div>
+
                       </div>
 
                     </div>
 
-                    {/* MacBook Aluminum Base / Trackpad Deck */}
-                    <div className="w-[108%] h-4 sm:h-5 bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 rounded-b-2xl border-t border-slate-500/80 shadow-2xl relative flex justify-center">
-                      <div className="w-16 sm:w-20 h-1.5 bg-slate-800 rounded-b-md" />
+                    {/* Laptop Aluminum Keyboard Base (Silver Deck as per reference image) */}
+                    <div className="w-[106%] h-5 sm:h-6 bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 rounded-b-2xl border-t border-slate-100 shadow-2xl relative flex flex-col items-center justify-start pt-1">
+                      {/* Dark Keybed Slot */}
+                      <div className="w-[88%] h-2.5 sm:h-3 bg-slate-800/90 rounded-sm" />
+                      {/* Trackpad Line */}
+                      <div className="w-20 h-1.5 bg-slate-400/80 rounded-b-md mt-0.5" />
                     </div>
                   </div>
 
-                  {/* DEVICE 2: REALISTIC IPHONE 15 PRO MOCKUP (Floating Mobile Preview) */}
+                  {/* DEVICE 2: SMARTPHONE MOCKUP (Foreground Bottom-Left Overlay as per reference) */}
                   <motion.div 
-                    initial={{ x: 30, y: 30, opacity: 0 }}
+                    initial={{ x: -20, y: 30, opacity: 0 }}
                     animate={{ x: 0, y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="absolute right-[-10px] sm:right-[-25px] bottom-[-15px] sm:bottom-[-20px] w-44 sm:w-52 rounded-[36px] bg-slate-950 border-4 border-slate-700 shadow-2xl p-2.5 z-30 backdrop-blur-xl ring-1 ring-slate-600/50"
+                    className="absolute left-[-10px] sm:left-[-20px] bottom-[-10px] sm:bottom-[-15px] w-36 sm:w-48 rounded-[32px] sm:rounded-[40px] bg-slate-950 border-4 border-slate-800 shadow-2xl p-2 sm:p-2.5 z-30 backdrop-blur-xl ring-1 ring-slate-700/80"
                   >
-                    {/* iPhone Dynamic Island */}
-                    <div className="w-14 h-3.5 bg-black rounded-full mx-auto mb-2 flex items-center justify-end px-1.5 gap-1 shadow-inner">
+                    {/* iPhone Top Speaker Notch */}
+                    <div className="w-12 sm:w-14 h-3 bg-black rounded-full mx-auto mb-2 flex items-center justify-center gap-1 shadow-inner">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-900" />
                     </div>
 
-                    {/* iPhone Screen Surface */}
-                    <div className="bg-slate-900 rounded-[24px] overflow-hidden border border-slate-800 space-y-2">
-                      <div className="relative h-28 sm:h-32 w-full bg-slate-950 overflow-hidden">
+                    {/* Smartphone Screen Content (Matching reference tall blue gradient banner + 1-Click Pay) */}
+                    <div className="bg-slate-900 rounded-[22px] overflow-hidden border border-slate-800 space-y-2">
+                      
+                      {/* Smartphone Screen Visual */}
+                      <div className="relative h-32 sm:h-40 w-full bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 p-3 flex flex-col justify-between text-white overflow-hidden">
                         <img 
                           src={currentStore.mobileImage} 
-                          alt={`${currentStore.title} iPhone View`}
-                          className="w-full h-full object-cover"
+                          alt={`${currentStore.title} Smartphone View`}
+                          className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-                        <div className="absolute top-2 left-2 bg-emerald-500/90 text-slate-950 font-bold text-[9px] px-2 py-0.5 rounded-full shadow">
-                          📱 iPhone View
+                        <div className="relative z-10">
+                          <span className="text-[9px] bg-emerald-500 text-slate-950 font-bold px-2 py-0.5 rounded-full">
+                            SMARTPHONE
+                          </span>
+                          <h4 className="text-xs sm:text-sm font-extrabold mt-2 leading-tight uppercase tracking-wider text-white">
+                            1-Click UPI <br /> Checkout
+                          </h4>
+                        </div>
+                        <div className="relative z-10 text-[9px] text-blue-200 font-semibold">
+                          Fast • Mobile • Secure
                         </div>
                       </div>
 
-                      {/* 1-Click Mobile Checkout Section */}
-                      <div className="p-2 space-y-1.5 bg-slate-900 text-[10px]">
-                        <div className="flex justify-between items-center text-slate-300 font-medium">
-                          <span>1-Click UPI Checkout</span>
-                          <span className="font-bold text-white">{currentStore.price}</span>
+                      {/* Mobile Pay Button */}
+                      <div className="p-2 bg-slate-900 text-[10px] space-y-1">
+                        <div className="flex justify-between text-slate-300 font-medium">
+                          <span>Pay Total:</span>
+                          <span className="font-bold text-emerald-400">{currentStore.price}</span>
                         </div>
                         <div className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-1.5 rounded-lg text-center text-[10px] flex items-center justify-center gap-1 shadow-md">
                           <CreditCard className="w-3 h-3" />
-                          <span>Pay with GPay / PhonePe</span>
+                          <span>Pay via GPay</span>
                         </div>
                       </div>
+
                     </div>
 
-                    {/* iPhone Home Bar */}
-                    <div className="w-14 h-1 bg-slate-400/50 rounded-full mx-auto mt-2" />
+                    {/* Smartphone Home Indicator Bar */}
+                    <div className="w-12 h-1 bg-slate-400/50 rounded-full mx-auto mt-2" />
                   </motion.div>
 
                   {/* Floating Micro-Badge */}
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    className="absolute -top-4 -left-4 bg-slate-900/90 border border-blue-500/40 px-3.5 py-2 rounded-xl shadow-xl backdrop-blur-md flex items-center gap-2 z-40"
+                    className="absolute -top-4 -right-4 bg-slate-900/90 border border-blue-500/40 px-3.5 py-2 rounded-xl shadow-xl backdrop-blur-md flex items-center gap-2 z-40"
                   >
                     <Zap className="w-4 h-4 text-blue-400" />
                     <span className="text-xs font-bold text-white">0.6s Page Speed</span>
@@ -356,7 +376,7 @@ export default function HeroSection() {
               </AnimatePresence>
             </div>
 
-            {/* Carousel Controls */}
+            {/* Carousel Navigation Controls */}
             <div className="flex items-center gap-4 mt-6 z-30">
               <button 
                 onClick={handlePrev} 

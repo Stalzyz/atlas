@@ -178,16 +178,17 @@ export default function HeroSection() {
 
       {/* Top Navbar */}
       <header className="container mx-auto px-4 relative z-20 mb-8 lg:mb-12">
-        <nav className="flex items-center justify-between py-4 px-6 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-sm">
-          <div className="flex items-center gap-3">
+        <nav className="flex items-center justify-between py-3.5 sm:py-4 px-5 sm:px-6 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-sm">
+          <div className="flex items-center justify-between w-full md:w-auto">
             <img 
               src="/logo.svg" 
               alt="Grekam Visuals Logo" 
-              className="h-9 sm:h-10 w-auto"
+              className="h-8 sm:h-10 w-auto max-w-[180px] sm:max-w-none"
             />
           </div>
 
-          <div className="flex items-center gap-6 sm:gap-8 text-sm font-semibold text-slate-700">
+          {/* Menu links hidden on mobile screen, visible on desktop */}
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
             <a href="#platforms" className="hover:text-emerald-600 transition-colors">Platforms</a>
             <a href="#roi-calculator" className="hover:text-emerald-600 transition-colors">ROI Calculator</a>
             <a href="#pricing" className="hover:text-emerald-600 transition-colors">Pricing</a>

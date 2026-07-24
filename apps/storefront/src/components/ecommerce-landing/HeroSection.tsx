@@ -122,39 +122,17 @@ export default function HeroSection() {
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Parallax Mouse Motion Values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 180 };
-  const parallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
-  const parallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-12, 12]), springConfig);
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
+  // Paused state for auto-cycle
+  const [isHovered, setIsHovered] = useState(false);
 
   // Auto-cycle carousel
   useEffect(() => {
+    if (isHovered) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % showcaseStores.length);
     }, 4500);
     return () => clearInterval(timer);
-  }, [showcaseStores.length]);
+  }, [showcaseStores.length, isHovered]);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % showcaseStores.length);
@@ -208,169 +186,94 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-1 lg:order-2 lg:col-span-6 relative flex flex-col items-center justify-center"
           >
-            {/* Scene Container with Magnetic Parallax */}
+            {/* 3D Swipe Carousel Container */}
             <div 
-              ref={containerRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-xl sm:max-w-2xl min-h-[420px] sm:min-h-[480px] flex items-center justify-center perspective-1000"
+              className="relative w-full h-[400px] sm:h-[500px] flex items-center justify-center perspective-1000 overflow-visible"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <AnimatePresence>
-                <motion.div 
-                  key={currentStore.id}
-                  style={{ rotateX, rotateY }}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.85 }}
-                  transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-0 w-full h-full flex items-center justify-center"
-                >
-                  
-                  {/* DEVICE 1: LAPTOP SCREEN MOCKUP (Background / Main 16:10 Ratio) */}
-                  <div className="w-full max-w-md sm:max-w-xl relative flex flex-col items-center drop-shadow-2xl">
-                    
-                    {/* Laptop Screen Bezel */}
-                    <div className="w-full rounded-t-2xl bg-slate-900 border-2 border-slate-800 p-2 sm:p-3 shadow-2xl relative overflow-hidden">
-                      
-                      {/* Laptop Camera Dot */}
-                      <div className="w-2 h-2 rounded-full bg-slate-950 border border-slate-700 mx-auto mb-2 relative z-10" />
+              <AnimatePresence initial={false}>
+                {showcaseStores.map((store, i) => {
+                  // Calculate relative offset based on active index
+                  // Handle wrap-around for infinite carousel effect
+                  let offset = i - activeIndex;
+                  const total = showcaseStores.length;
+                  if (offset < -Math.floor(total / 2)) offset += total;
+                  if (offset > Math.floor(total / 2)) offset -= total;
 
-                      {/* Laptop Display Content Layout */}
-                      <div className="relative h-60 sm:h-72 w-full rounded-lg overflow-hidden bg-white text-slate-900 grid grid-cols-12 border border-slate-200 shadow-inner">
+                  // Only render if it's within -2 to 2 offset (visible range)
+                  if (Math.abs(offset) > 2) return null;
+
+                  // 3D Coverflow properties
+                  const isCenter = offset === 0;
+                  const x = offset * 50; // 50px shift per index
+                  const scale = isCenter ? 1 : Math.max(0.7, 1 - Math.abs(offset) * 0.15);
+                  const rotateY = offset * -25; // Rotate slightly towards center
+                  const zIndex = 10 - Math.abs(offset);
+                  const opacity = isCenter ? 1 : Math.max(0, 0.8 - Math.abs(offset) * 0.3);
+
+                  return (
+                    <motion.div
+                      key={store.id}
+                      className="absolute top-0 bottom-0 flex items-center justify-center cursor-grab active:cursor-grabbing w-[260px] sm:w-[320px]"
+                      initial={false}
+                      animate={{
+                        x: `${x}%`,
+                        scale,
+                        rotateY,
+                        zIndex,
+                        opacity,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(_, info) => {
+                        if (info.offset.x > 50) {
+                          handlePrev();
+                        } else if (info.offset.x < -50) {
+                          handleNext();
+                        }
+                      }}
+                      onClick={() => !isCenter && setActiveIndex(i)}
+                    >
+                      {/* Image Card */}
+                      <div className="w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/50 bg-white relative pointer-events-none">
+                        <img 
+                          src={store.mobileImage} 
+                          alt={store.title}
+                          className="w-full h-full object-cover"
+                        />
                         
-                        {/* Laptop Left Side: Info & Features List */}
-                        <div className="col-span-6 p-4 sm:p-5 flex flex-col justify-between bg-slate-50 border-r border-slate-200">
-                          <div>
+                        {/* Overlay details on active center card */}
+                        {isCenter && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent p-6 pt-16 text-white"
+                          >
                             <div className="flex items-center gap-2 mb-2">
                               <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">
-                                {currentStore.badge}
+                                {store.badge}
                               </span>
-                              <span className="text-[10px] font-semibold text-slate-500">
-                                {currentStore.platform}
+                              <span className="text-[10px] font-semibold text-slate-300">
+                                {store.platform}
                               </span>
                             </div>
-                            <h3 className="text-base sm:text-xl font-extrabold text-slate-900 leading-tight mb-1">
-                              {currentStore.title}
-                            </h3>
-                            <p className="text-[10px] sm:text-xs text-slate-500 mb-3 font-medium">
-                              {currentStore.subtitle}
-                            </p>
-
-                            {/* Checklist matching reference screen design */}
-                            <div className="space-y-1.5 text-[10px] sm:text-xs text-slate-700">
-                              {currentStore.checkmarks.map((chk, i) => (
-                                <div key={i} className="flex items-center gap-1.5 font-medium">
-                                  <CheckSquare className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
-                                  <span>{chk}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                            <span className="text-[10px] text-slate-500">Est. Sales:</span>
-                            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                              {currentStore.metric}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Laptop Right Side: 2x2 HD Product Photo Collage */}
-                        <div className="col-span-6 grid grid-cols-2 gap-1 p-1 bg-slate-200">
-                          {currentStore.gridImages.map((imgUrl, i) => (
-                            <div key={i} className="relative h-full min-h-[110px] overflow-hidden rounded bg-slate-300">
-                              <motion.img 
-                                src={imgUrl} 
-                                alt={`${currentStore.title} preview ${i+1}`}
-                                style={{ x: parallaxX, y: parallaxY }}
-                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                              />
-                            </div>
-                          ))}
-                        </div>
-
+                            <h3 className="text-lg sm:text-xl font-bold leading-tight mb-1">{store.title}</h3>
+                            <p className="text-xs text-slate-300 font-medium">{store.subtitle}</p>
+                          </motion.div>
+                        )}
                       </div>
-
-                    </div>
-
-                    {/* Laptop Aluminum Keyboard Base (Silver Deck matching reference) */}
-                    <div className="w-[106%] h-5 sm:h-6 bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 rounded-b-2xl border-t border-slate-100 shadow-2xl relative flex flex-col items-center justify-start pt-1">
-                      {/* Dark Keybed Slot */}
-                      <div className="w-[88%] h-2.5 sm:h-3 bg-slate-800 rounded-sm" />
-                      {/* Trackpad Line */}
-                      <div className="w-20 h-1.5 bg-slate-400/80 rounded-b-md mt-0.5" />
-                    </div>
-                  </div>
-
-                  {/* DEVICE 2: SMARTPHONE MOCKUP (Foreground Bottom-Left Overlay) */}
-                  <motion.div 
-                    initial={{ x: -20, y: 30, opacity: 0 }}
-                    animate={{ x: 0, y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="absolute left-[-10px] sm:left-[-20px] bottom-[-10px] sm:bottom-[-15px] w-36 sm:w-48 rounded-[32px] sm:rounded-[40px] bg-slate-950 border-4 border-slate-800 shadow-2xl p-2 sm:p-2.5 z-30 backdrop-blur-xl ring-1 ring-slate-700/80"
-                  >
-                    {/* iPhone Top Speaker Notch */}
-                    <div className="w-12 sm:w-14 h-3 bg-black rounded-full mx-auto mb-2 flex items-center justify-center gap-1 shadow-inner">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-900" />
-                    </div>
-
-                    {/* Smartphone Screen Content */}
-                    <div className="bg-slate-900 rounded-[22px] overflow-hidden border border-slate-800 space-y-2">
-                      
-                      {/* Smartphone Screen Visual */}
-                      <div className="relative h-32 sm:h-40 w-full bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 p-3 flex flex-col justify-between text-white overflow-hidden">
-                        <img 
-                          src={currentStore.mobileImage} 
-                          alt={`${currentStore.title} Smartphone View`}
-                          className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
-                        />
-                        <div className="relative z-10">
-                          <span className="text-[9px] bg-emerald-500 text-slate-950 font-bold px-2 py-0.5 rounded-full">
-                            SMARTPHONE
-                          </span>
-                          <h4 className="text-xs sm:text-sm font-extrabold mt-2 leading-tight uppercase tracking-wider text-white">
-                            1-Click UPI <br /> Checkout
-                          </h4>
-                        </div>
-                        <div className="relative z-10 text-[9px] text-blue-200 font-semibold">
-                          Fast • Mobile • Secure
-                        </div>
-                      </div>
-
-                      {/* Mobile Pay Button */}
-                      <div className="p-2 bg-slate-900 text-[10px] space-y-1">
-                        <div className="flex justify-between text-slate-300 font-medium">
-                          <span>Pay Total:</span>
-                          <span className="font-bold text-emerald-400">{currentStore.price}</span>
-                        </div>
-                        <div className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-1.5 rounded-lg text-center text-[10px] flex items-center justify-center gap-1 shadow-md">
-                          <CreditCard className="w-3 h-3" />
-                          <span>Pay via GPay</span>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* Smartphone Home Indicator Bar */}
-                    <div className="w-12 h-1 bg-slate-400/50 rounded-full mx-auto mt-2" />
-                  </motion.div>
-
-                  {/* Floating Badge */}
-                  <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    className="absolute -top-4 -right-4 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2 z-40 text-slate-900"
-                  >
-                    <Zap className="w-4 h-4 text-blue-600" />
-                    <span className="text-xs font-bold">0.6s Page Speed</span>
-                  </motion.div>
-
-                </motion.div>
+                    </motion.div>
+                  );
+                })}
               </AnimatePresence>
             </div>
 
             {/* Carousel Navigation Controls */}
-            <div className="flex items-center gap-4 mt-6 z-30">
+            <div className="flex items-center gap-4 mt-8 z-30">
               <button 
                 onClick={handlePrev} 
                 className="w-10 h-10 rounded-full bg-white border border-slate-300 text-slate-700 hover:text-blue-600 hover:bg-slate-50 hover:border-blue-300 flex items-center justify-center transition-all shadow-md active:scale-95"

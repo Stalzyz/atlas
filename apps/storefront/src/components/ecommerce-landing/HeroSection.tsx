@@ -222,7 +222,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.85 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25, mass: 1 }}
+                  transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
                   className="absolute inset-0 w-full h-full flex items-center justify-center"
                 >
                   

@@ -11,7 +11,7 @@ import InteractivePlatformFinder from '@/components/ecommerce-landing/Interactiv
 import PricingCalculator from '@/components/ecommerce-landing/PricingCalculator';
 import RoiCalculator from '@/components/ecommerce-landing/RoiCalculator';
 import LandingFooter from '@/components/ecommerce-landing/LandingFooter';
-import WhatsAppFab from '@/components/ecommerce-landing/WhatsAppFab';
+import BottomStickyCta from '@/components/ecommerce-landing/BottomStickyCta';
 
 export const metadata: Metadata = {
   title: 'Build an Online Store That Sells 24x7 | Grekam Visuals',
@@ -84,8 +84,8 @@ export default function EcommerceLandingPage() {
       {/* Footer with Logo */}
       <LandingFooter />
 
-      {/* Fixed Bottom-Right WhatsApp Floating Action Button */}
-      <WhatsAppFab />
+      {/* Fixed Bottom Static CTA */}
+      <BottomStickyCta />
     </div>
   );
 }

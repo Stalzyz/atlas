@@ -215,15 +215,15 @@ export default function HeroSection() {
               onMouseLeave={handleMouseLeave}
               className="relative w-full max-w-xl sm:max-w-2xl min-h-[420px] sm:min-h-[480px] flex items-center justify-center perspective-1000"
             >
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.div 
                   key={currentStore.id}
                   style={{ rotateX, rotateY }}
-                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -15 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-full flex items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25, mass: 1 }}
+                  className="absolute inset-0 w-full h-full flex items-center justify-center"
                 >
                   
                   {/* DEVICE 1: LAPTOP SCREEN MOCKUP (Background / Main 16:10 Ratio) */}

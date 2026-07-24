@@ -224,7 +224,8 @@ export default function HeroSection() {
                         zIndex,
                         opacity,
                       }}
-                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      style={{ willChange: "transform" }}
+                      transition={{ type: "tween", duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}
                       dragElastic={0.2}
@@ -241,30 +242,9 @@ export default function HeroSection() {
                       <div className="w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/50 bg-white relative pointer-events-none">
                         <img 
                           src={store.mobileImage} 
-                          alt={store.title}
+                          alt={`Store ${i + 1}`}
                           className="w-full h-full object-cover"
                         />
-                        
-                        {/* Overlay details on active center card */}
-                        {isCenter && (
-                          <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent p-6 pt-16 text-white"
-                          >
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">
-                                {store.badge}
-                              </span>
-                              <span className="text-[10px] font-semibold text-slate-300">
-                                {store.platform}
-                              </span>
-                            </div>
-                            <h3 className="text-lg sm:text-xl font-bold leading-tight mb-1">{store.title}</h3>
-                            <p className="text-xs text-slate-300 font-medium">{store.subtitle}</p>
-                          </motion.div>
-                        )}
                       </div>
                     </motion.div>
                   );
